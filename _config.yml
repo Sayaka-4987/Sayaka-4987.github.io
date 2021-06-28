@@ -86,18 +86,17 @@ service-worker: true
 
 
 # Friends
-friends: [
-    {
-        title: "WY",
-        href: "http://zhengwuyang.com"
+friends: [{
+        title: "我的Gitee主页\n",
+        href: "https://gitee.com/yxwang2023"
     },{
-        title: "简书·BY",
-        href: "http://www.jianshu.com/u/e71990ada2fd"
+        title: "该博客参照的搭建教程\n",
+        href: "https://github.com/qiubaiying/qiubaiying.github.io/wiki/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B"
     },{
-        title: "Apple",
+        title: "北京交通大学信息门户(MIS)\n",
+        href: "https://mis.bjtu.edu.cn/home/"
+    },{
+        title: "这里等待几个朋友放友情链接\n",
         href: "https://apple.com"
-    },{
-        title: "Apple Developer",
-        href: "https://developer.apple.com/"
-    }
+    },
 ]
