@@ -12,7 +12,7 @@ github_repo: "https://github.com/Sayaka-4987/Sayaka-4987.github.io/" # you code 
 
 # Sidebar settings
 sidebar: true                       # whether or not using Sidebar.
-sidebar-about-description: "\"我曾对一个人许下这个誓言。一个对我来说最神圣的誓言。\""
+sidebar-about-description: "YX Wang \n\"我曾对一个人许下这个誓言。一个对我来说最神圣的誓言。\""
 sidebar-avatar: /img/avatar_kazusa.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
