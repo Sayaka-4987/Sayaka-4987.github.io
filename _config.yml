@@ -87,16 +87,22 @@ service-worker: true
 
 # Friends
 friends: [{
-        title: "我的Gitee主页\n",
+        title: "我的Gitee主页",
         href: "https://gitee.com/yxwang2023"
     },{
-        title: "该博客参照的搭建教程\n",
+        title: "该博客参照的搭建教程",
         href: "https://github.com/qiubaiying/qiubaiying.github.io/wiki/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B"
     },{
-        title: "北京交通大学信息门户(MIS)\n",
-        href: "https://mis.bjtu.edu.cn/home/"
+        title: "多喝岩浆xx的博客",
+        href: "https://blog.csdn.net/weixin_45774615"
     },{
-        title: "这里等待几个朋友放友情链接\n",
-        href: "https://apple.com"
+        title: "ZXの花哨小玩意儿",
+        href: "http://zxxx.cf/"
+    },{
+        title: "这里等待几个朋友放友情链接",
+        href: "https://www.baidu.com/"
+    },{
+        title: "北京交通大学信息门户(MIS)",
+        href: "https://mis.bjtu.edu.cn/home/"
     },
 ]
