@@ -6,6 +6,8 @@ email: 19281171@bjtu.edu.cn (Educational)
 description: "这里以后会有一些简单的介绍"
 keyword: "BJTU, C++初学者, Java初学者, 期末火葬场生存大师, 当代菜鸡大学生"
 url: "https://Sayaka-4987.github.io"          # your host, for absolute URL
+plugins:
+  - jekyll-sitemap
 baseurl: ""                                   # for example, '/blog' if your blog hosted on 'host/blog'
 github_repo: "https://github.com/Sayaka-4987/Sayaka-4987.github.io/" # you code repository
 
@@ -32,7 +34,8 @@ anchorjs: true                          # if you want to customize anchor. check
 
 # Gems
 # from PR#40, to support local preview for Jekyll 3.0
-gems: [jekyll-paginate]
+gems: 
+    - jekyll-sitemap
 
 
 
