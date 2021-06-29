@@ -53,7 +53,7 @@ kramdown:
 
 # Gitalk
 gitalk:
-  enable: true    #是否开启Gitalk评论
+  enable: true                                               # 是否开启Gitalk评论
   clientID: 2dc7f04faf1b1ea0a03d                             # 生成的clientID
   clientSecret: bbe6b336a3ddfb563dd36e034992590171dfb436     # 生成的clientSecret
   repo: Sayaka-4987.github.io                                # 仓库名称
@@ -75,7 +75,7 @@ gitalk:
 
 # Featured Tags
 featured-tags: true                     # 是否使用首页标签
-featured-condition-size: 1              # 相同标签数量大于这个数，才会出现在首页
+featured-condition-size: 0              # 相同标签数量大于这个数，才会出现在首页
 
 
 
@@ -89,6 +89,9 @@ service-worker: true
 friends: [{
         title: "我的Gitee主页",
         href: "https://gitee.com/yxwang2023"
+    },{
+        title: "我的CSDN主页",
+        href: "https://blog.csdn.net/qq_45711827"
     },{
         title: "该博客参照的搭建教程",
         href: "https://github.com/qiubaiying/qiubaiying.github.io/wiki/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B"
