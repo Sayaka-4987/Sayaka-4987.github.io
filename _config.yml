@@ -13,7 +13,7 @@ github_repo: "https://github.com/Sayaka-4987/Sayaka-4987.github.io/" # you code 
 
 
 # Sidebar settings
-sidebar: true                       # whether or not using Sidebar.
+sidebar: true                               # whether or not using Sidebar.
 sidebar-about-description: "username = YX Wang <br>\"我曾对一个人许下这个誓言。一个对我来说最神圣的誓言。\""
 sidebar-avatar: /img/avatar_kazusa.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
@@ -44,9 +44,14 @@ gems:
 # although redcarpet can auto highlight code, the lack of header-id make the catalog impossible, so I switch to kramdown
 # document: http://jekyllrb.com/docs/configuration/#kramdown
 markdown: kramdown
-highlighter: rouge
 kramdown:
   input: GFM                            # use Github Flavored Markdown !important
+  syntax_highlighter_opts:
+    span:
+      line_numbers: false
+    block:
+      line_numbers: true
+      start_line: 1
 
 
 
@@ -78,7 +83,7 @@ gitalk:
 
 # Featured Tags
 featured-tags: true                     # 是否使用首页标签
-featured-condition-size: 0              # 相同标签数量大于这个数，才会出现在首页
+featured-condition-size: 1              # 相同标签数量大于这个数，才会出现在首页
 
 
 
@@ -110,5 +115,5 @@ friends: [{
     },{
         title: "北京交通大学信息门户(MIS)",
         href: "https://mis.bjtu.edu.cn/home/"
-    },
+    }
 ]
