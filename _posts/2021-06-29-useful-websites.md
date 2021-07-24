@@ -15,7 +15,7 @@ tags:								    # 标签
 
 ### 编程学习
 
-- [清华大学开源软件镜像站 | Tsinghua Open Source Mirror](https://mirrors.tuna.tsinghua.edu.cn/) 
+- [清华大学开源软件镜像站\_Tsinghua Open Source Mirror](https://mirrors.tuna.tsinghua.edu.cn/) 
 
 - [谷歌编程之夏 GSoC](https://summerofcode.withgoogle.com/) 
 
