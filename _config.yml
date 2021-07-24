@@ -1,6 +1,6 @@
 # Site settings
 title: Schnap5idee
-SEOTitle: 一些无用的想法 | Blog by YX_Wang
+SEOTitle: 一些无用的想法 | Blog by YX
 header-img: img/post-bg-desk.jpg
 email: 19281171@bjtu.edu.cn (Educational)
 description: "这里以后会有一些简单的介绍"
@@ -103,10 +103,10 @@ friends: [{
         title: "ipLee的博客",
         href: "https://iplee.blog.luogu.org/"
     },{
-        title: "不知名仙女的博客",
+        title: "不知名仙(xin)女(xin)的博客",
         href: "https://rainajung.github.io/"
     },{
-        title: "这里等待几个朋友放友情链接",
+        title: "为想放友链的朋友留位",
         href: "https://www.baidu.com/"
     },{
         title: "北京交通大学信息门户(MIS)",
