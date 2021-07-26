@@ -240,7 +240,7 @@ class MainActivity : AppCompatActivity(), Impl {}
 ```
 
 ```kotlin
-注意这里 AppCompatActivity 后面没有 '()'
+// 注意这里 AppCompatActivity 后面没有 '()'
 class MainActivity : AppCompatActivity {
     constructor() {
     }
@@ -270,7 +270,7 @@ class MainActivity : AppCompatActivity {
 4.  `override` 变成了关键字，且有遗传性，但 Kotlin 抛弃了 `protected` 关键字；
 5.  Kotlin 的类默认是 final 的，需要加一个 `open` 关键字才能使它可被继承； 
 6.  依然有 `abstract` 关键字
-7.   Kotlin 实例化一个类不需要 `new`关键字，直接这么写即可：
+7.  Kotlin 实例化一个类不需要 `new` 关键字，直接这么写即可：
 
 ```kotlin
 fun main() {
@@ -278,9 +278,8 @@ fun main() {
 }
 ```
 
-8.  Kotlin 可以使用 `is` 关键字代替 Java 的 `instanceof` 关键字进行类型判断，还可以使用 `as` 关键字直接强行类型转换；
+8.  Kotlin 可以使用 `is` 关键字代替 Java 的 `instanceof` 关键字进行类型判断，还可以使用 `as` 关键字直接强行类型转换；但更推荐使用 `as?` 安全强转：
 
-   但更推荐使用 `as?` 安全强转：
 
 ```kotlin
 fun main() {
@@ -329,13 +328,14 @@ class User constructor(name: String) {
 
 注意事项：
 
-一个类最多只有 1 个主构造函数；
+1. 一个类最多只有 1 个主构造函数；
 
-主构造函数应该是最基本、最通用的构造函数；
+2. 主构造函数应该是最基本、最通用的构造函数；
 
-一旦类中存在主构造函数，那么其他的次构造函数都需要通过 `this` 关键字直接或间接地调用主构造函数，称为 `必须性` 和 `第一性` ；
+3. 一旦类中存在主构造函数，那么其他的次构造函数都需要通过 `this` 关键字直接或间接地调用主构造函数，称为 **必须性** 和 **第一性** ；
 
-当一个类存在多个次构造函数时怎么调用：
+4. 当一个类存在多个次构造函数时怎么调用：
+
 
 ```kotlin
 class User constructor(var name: String) {
@@ -553,7 +553,7 @@ A.c
 
 ```kotlin
 class Sample {
-    companion object {、
+    companion object {
         const val CONST_NUMBER = 1
     }
 }
