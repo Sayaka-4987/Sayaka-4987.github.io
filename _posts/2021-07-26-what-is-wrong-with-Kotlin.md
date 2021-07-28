@@ -697,6 +697,51 @@ intArray.flatMap { i ->
 
 
 
+### any()、none()、all()
+
+直接看代码：
+
+```kotlin
+/* any()：是否至少有一个符合条件的元素 */
+private fun any() {
+	// 判断集合元素，如果集合为空，返回 false, 集合中存有一个或多个元素时返回 true
+	val mList1 = arrayListOf(1, 2, 3, 4, 5)
+	val mList2: ArrayList<Int> = arrayListOf()
+	println(mList1.any())	//	true
+	println(mList2.any())	//	false
+
+	// 判断集合元素，如果集合为空或者没有符号条件的元素返回 false，
+    // 			   集合中存有一个或多个元素符合条件时返回 true
+	val mList = arrayListOf(1, 2, 2, 3, 4, 5)
+	println(mList.any { it == 2 })	//	true
+}
+
+/* none()：是否都不符合条件 */
+private fun none() { 
+    // 如果集合中没有元素，则返回 true，否则返回 false
+    val mList1 = arrayListOf(0, 1, 2, 3, 4)
+    println(mList1.none())	//	false
+
+    // 如果集合中没有符合匹配条件的元素，返回 true，否则返回 false
+    val mList2 = arrayListOf(0, 1, 2, 3, 4)
+    println(mList2.none { it == 5 })	//	true
+}
+
+/* all()：是否都符合条件 */
+private fun all() {
+    // 当且仅当该集合中所有元素都满足条件时，返回 true；否则返回 false
+    val mList1 = arrayListOf(0, 2, 4, 6, 8)
+    println(mList1.all { it % 2 == 0 })	//	true
+
+    val mList2 = arrayListOf(0, 1, 2, 3, 4)
+    println(mList2.all { it % 2 == 0 })	//	false
+}
+```
+
+
+
+
+
 ## Kotlin 的 `Sequence` 容器
 
 功能：`Sequence ` 和 `Iterable` 一样用来遍历一组数据，并可以对每个元素进行特定的处理；
@@ -1042,6 +1087,10 @@ for (i in 0..10) {
     println(i)
 }
 ```
+
+
+
+# 
 
 
 
