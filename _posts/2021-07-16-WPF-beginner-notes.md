@@ -3,7 +3,7 @@
 layout:     post   				        # 使用的布局（不需要改）
 title:      WPF学习笔记					# 标题 
 subtitle:   随时弃坑						# 副标题
-date:       2021-08-17 				    # 时间
+date:       2021-07-16 				    # 时间
 author:     YXWang 					    # 作者
 header-img: img/post-bg-keybord.jpg	 	# 这篇文章的标题背景图片
 catalog: true 						    # 是否归档
@@ -15,9 +15,9 @@ tags:								    # 标签
 
 # WPF不深入理解笔记
 
-课件来自 [WPF深入讲解合集-bilibili](https://www.bilibili.com/video/BV1HC4y1b76v) 和 [WPF入门基础教程合集-bilibili](https://www.bilibili.com/video/BV1mJ411F7zG?p=5)
+课件来自 [WPF深入讲解合集-bilibili](https://www.bilibili.com/video/BV1HC4y1b76v)
 
-参考项目源代码：[https://github.com/HenJigg/Microsoft-ToDo-Video](https://github.com/HenJigg/Microsoft-ToDo-Video)
+项目源代码：[https://github.com/HenJigg/Microsoft-ToDo-Video](https://github.com/HenJigg/Microsoft-ToDo-Video)
 
 ## 开篇入门
 
@@ -39,9 +39,7 @@ tags:								    # 标签
 
 这里课件是用 [dnSpy](https://github.com/dnSpy/) 反编译读 .dll 文件得出该结论，还反编译了虎牙直播的图标资源作为示例，看起来不错（？）
 
-## 布局
-
-布局主要控制了显示内容如何分隔行列，跨行跨列，垂直/水平方向分布；
+## 布局和控件
 
 小技巧：VS 用 `Ctrl+K` （先按）和 `Ctrl+C` （后按）快捷键可以快速注释掉多行代码
 
@@ -122,8 +120,6 @@ tags:								    # 标签
 
 ### 控件结构
 
-基础控件包括：文本框、输入框、按钮、进度条、日期、下拉、选择框、取值、显示、基本属性；
-
 #### WPF控件图示 
 
 不需要死记硬背所有控件，但需要记住控件所在的**命名空间**
@@ -161,8 +157,6 @@ public string Text { get; set; }
 5. `Content` 由于是 `object` 类型，所以对于常用的 `Button`, `CheckBox` 等类型控件，不仅可以接收字符串类型，也可以接受各种复杂的对象类型
 
 ### 样式
-
-样式决定控件的显示效果；
 
 WPF中的各类控件元素都可以自由的设置样式，诸如：字体(FontFamily)、字体大小(FontSize)、背景颜色(Background)、字体颜色(Foreground)、边距(Margin)、水平位置(HorizontalAlignment)、垂直位置(VerticalAlignment)等，而样式是组织和重用的重要工具；
 
@@ -592,53 +586,7 @@ namespace WpfApp1
 
 <img src="media\image-20210718224223447.webp" alt="image-20210718231828640" style="zoom:50%;" />
 
-
-
-#### 例：DataGrid 实现学生管理数据库的完整项目
-
-[WPF入门基础教程合集_p9_](https://www.bilibili.com/video/BV1mJ411F7zG?p=9)
-
-这个暂时没整理，回头自己照着抄一遍
-
-
-
 ### 理解绑定
-
-把某个显示元素和界面其他元素绑定，或者与后台代码相关联；
-
-#### 数据绑定
-
-直接使用 ElementName 属性
-
-```xaml
-<Grid>
-    <StackPanel>
-        <TextBox x:Name="textblock" Text="我也是一个广door人"></TextBox>
-        <TextBox Text="{Binding ElementName=textblock, Path=Text}"></TextBox>
-    </StackPanel>
-</Grid>    
-```
-
-
-
-#### 设置数据的上下文
-
-表示该窗口可以访问 MainViewModel 中的公开属性方法，此处该界面的文本绑定了 MainViewModel 中一个名为 MessageFromMain 的变量
-
-```xaml
-<Windows.DataContext>
-    <local: MainViewModel>
-</Windows.DataContext>
-
-<Grid>
-    <StackPanel>
-        <TextBox x:Name="textblock" Text="我也是一个广door人"></TextBox>
-        <TextBox Text="{Binding MessageFromMain}"></TextBox>
-    </StackPanel>
-</Grid>  
-```
-
-
 
 
 
