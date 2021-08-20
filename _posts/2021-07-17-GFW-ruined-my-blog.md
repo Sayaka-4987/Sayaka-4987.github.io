@@ -7,7 +7,7 @@ author:     YXWang 					    # 作者
 header-img: img/post-bg-BW.jpg	 	    # 这篇文章的标题背景图片
 catalog: true 						    # 是否归档
 tags:								    # 标签
-    - 待填坑
+    - 博客公告
 ---
 
 # 关于暂时放弃修复博客看图功能的公告

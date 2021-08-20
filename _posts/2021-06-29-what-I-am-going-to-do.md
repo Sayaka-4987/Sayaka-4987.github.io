@@ -7,14 +7,13 @@ author:     YXWang 					    # 作者
 header-img: img/post-bg-coffee.jpeg 	# 这篇文章的标题背景图片
 catalog: true 						    # 是否归档
 tags:								    # 标签
-    - 待填坑
-    - 今后安排
+    - 博客公告排
 ---
 
 ### 关于打算用这个博客做什么
 - ##### debug过程和解决方案
 
-  基本没这个能力，顶多是把CSDN搜到的办法再讲一遍（
+  基本没这个能力，顶多是把 CSDN 搜到的办法再讲一遍（
 
   
 
@@ -38,7 +37,7 @@ tags:								    # 标签
   
   [pixiv](https://www.pixiv.net/users/4766436)
   
-  （注意：这两个链接所含内容都属于 **<u>Explicit</u>** 分级，可能包括BL/BG/GL各种取向，阅读视为您自愿阅读，被雷作者概不负责）
+  （注意：这两个链接所含内容都属于 **<u>Explicit</u>** 分级，可能包括 BL/BG/GL 各种取向，阅读视为您自愿阅读，被雷作者概不负责）
   
   
   
