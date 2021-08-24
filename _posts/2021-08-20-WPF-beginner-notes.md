@@ -71,7 +71,7 @@ tags:								    # 标签
 
 #### 例：Grid分隔2行2列表格：
 
-```xaml
+```xml
 <Grid ShowGridLines="True">
     <Grid.RowDefinitions>
         <RowDefinition> </RowDefinition>
@@ -86,7 +86,7 @@ tags:								    # 标签
 
 #### 例：Orientation="Horizontal"
 
-```xaml
+```xml
 <StackPanel Orientation="Horizontal">
     <!-- 在未指定时, WrapPanel默认状态是Orientation="Horizontal", 
 		 StackPanel默认Orientation="Horizontal"-->
