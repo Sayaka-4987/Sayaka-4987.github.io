@@ -13,4 +13,38 @@ tags:								    # 标签
 ### Hello World! 
 >这是我的第一篇博客。
 
-进入博客主页，新的文章将会出现在主页上.
+进入博客主页，新的文章将会出现在主页上。
+
+这篇文章也被用于测试代码高亮
+
+
+
+```c++
+FILE *fp = fopen("conf.ini","w");
+
+fprintf(fp,"%s\n",conf.filesavepath);
+fprintf(fp,"%s\n",conf.filename);
+fprintf(fp,"%d\n",conf.maxvalue1);
+fprintf(fp,"%d\n",conf.minvalue1);
+fprintf(fp,"%d\n",conf.maxvalue2);
+fprintf(fp,"%d\n",conf.minvalue2);
+fprintf(fp,"%d\n",conf.recordcount1);
+fprintf(fp,"%d\n",conf.recordcount2);
+```
+
+
+
+{% highlight c %}
+
+FILE *fp = fopen("conf.ini","w");
+
+fprintf(fp,"%s\n",conf.filesavepath);
+fprintf(fp,"%s\n",conf.filename);
+fprintf(fp,"%d\n",conf.maxvalue1);
+fprintf(fp,"%d\n",conf.minvalue1);
+fprintf(fp,"%d\n",conf.maxvalue2);
+fprintf(fp,"%d\n",conf.minvalue2);
+fprintf(fp,"%d\n",conf.recordcount1);
+fprintf(fp,"%d\n",conf.recordcount2);
+
+ {% endhighlight %}
