@@ -100,7 +100,7 @@ tags:								    # 标签
 
 #### 例：DockPanel
 
-```xaml
+```xml
 <DockPanel>
     <Button DockPanel.Dock="Bottom" Width="100" Height="30"></Button>
     <Button DockPanel.Dock="Left" Width="100" Height="30"></Button>
@@ -111,7 +111,7 @@ tags:								    # 标签
 
 #### 例：UniformGrid
 
-```xaml
+```xml
 <UniformGrid Columns="3" Rows="4">
     <Button Width="100" Height="30"></Button>
     <Button Width="100" Height="30"></Button>
@@ -175,7 +175,7 @@ WPF中的各类控件元素都可以自由的设置样式，诸如：字体(Font
 
 #### 样式的定义和使用
 
-```xaml
+```xml
 <Window.Resources>
     <Style x:Key="BaseStyle" TargetType="Button">
         <Setter Property="Width" Value="100"></Setter>
@@ -222,7 +222,7 @@ WPF中的各类控件元素都可以自由的设置样式，诸如：字体(Font
 
 #### 例：条件触发-改变按钮样式
 
-```xaml
+```xml
 <Window.Resources>
     <Style x:Key="BaseStyle" TargetType="Button">
         <Setter Property="Width" Value="100"></Setter>
@@ -285,7 +285,7 @@ WPF中的各类控件元素都可以自由的设置样式，诸如：字体(Font
 
 ~~你已经学了那么多东西了，快来做个 MicrosoftToDo 吧~~
 
-```xaml
+```xml
 <Window
     x:Class="MicrosoftToDO.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -424,7 +424,7 @@ WPF中的各类控件元素都可以自由的设置样式，诸如：字体(Font
 
 只有在模板中 `xxx =""{TemplateBinding xxx}"` 预留了自定义的功能，才允许下面的xaml修改生效；
 
-```xaml
+```xml
 <!-- .xaml文件 -->
 <Window x:Class="WpfApp1.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -523,7 +523,7 @@ namespace WpfApp1
 
 ### 数据模板
 
-```xaml
+```xml
 <Window x:Class="WpfApp1.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
