@@ -34,7 +34,7 @@ fprintf(fp,"%d\n",conf.recordcount2);
 
 
 
-{% highlight c %}
+{% highlight cpp %}
 
 FILE *fp = fopen("conf.ini","w");
 
