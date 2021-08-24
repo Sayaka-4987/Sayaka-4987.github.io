@@ -146,6 +146,7 @@ public object Content { get; set; }
     [CustomCategoryAttribute("Content")]
 ```
 
+
 ```C#
 public string Text { get; set; }
 // 摘要:
@@ -410,6 +411,8 @@ WPF中的各类控件元素都可以自由的设置样式，诸如：字体(Font
 </Window>
 ```
 
+
+
 ### 控件模板
 
 控件模板用于来定义控件的外观、样式，还可通过 `控件模板的触发器(ControlTemplate.Triggers)` 修改控件的行为、响应动画等。
@@ -417,6 +420,8 @@ WPF中的各类控件元素都可以自由的设置样式，诸如：字体(Font
 - 在 WPF 中，每个控件都是无外观的，这意味着我们可以完全自定义其可视元素的外观，但是不能修改其内部的行为，因为控件的行为已经被固定在控件的具体类中。
 - 在 Winform 中，控件的外观与行为都被固定在控件的具体类中，若想修改按钮的的边框弧度、或者修改控件本身一些细节，必须需要在修改外观的同时，把原来具备的所有行为重写一遍，我们大多数称之为自定义控件。
 - ~~不过这和也没学过 Winform 的我有什么关系呢~~
+
+
 
 #### 模板绑定
 
@@ -521,6 +526,8 @@ namespace WpfApp1
 
 <img src="media\image-20210718133532055.webp" alt="image-20210718133532055" style="zoom:50%;" />
 
+
+
 ### 数据模板
 
 ```xml
@@ -552,6 +559,7 @@ namespace WpfApp1
 
 </Window>
 ```
+
 
 ```C#
 using System;
@@ -608,7 +616,7 @@ namespace WpfApp1
 
 ~~这个暂时没整理，回头自己照着抄一遍；~~
 
-仿写该项目的过程时发现要注意给 DataGrid 设置 AutoGenerateColumns 属性为 "False" ，不然你有几个 public 变量它就给你整出多余的几列；
+仿写该项目的过程时发现要注意给 `DataGrid` 设置 `AutoGenerateColumns` 属性为 "False" ，不然你有几个 public 变量它就给你整出多余的几列；
 
 
 
@@ -616,11 +624,13 @@ namespace WpfApp1
 
 把某个显示元素和界面其他元素绑定，或者与后台代码相关联；
 
+
+
 #### 数据绑定
 
 直接使用 ElementName 属性
 
-```
+```xml
 <Grid>
     <StackPanel>
         <TextBox x:Name="textblock" Text="我也是一个广door人"></TextBox>
@@ -629,11 +639,13 @@ namespace WpfApp1
 </Grid>    
 ```
 
+
+
 #### 设置数据的上下文
 
 表示该窗口可以访问 MainViewModel 中的公开属性方法，此处该界面的文本绑定了 MainViewModel 中一个名为 MessageFromMain 的变量
 
-```
+```xml
 <Windows.DataContext>
     <local: MainViewModel>
 </Windows.DataContext>

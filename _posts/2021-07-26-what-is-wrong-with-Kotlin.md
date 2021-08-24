@@ -73,8 +73,8 @@ view!!.setBackgroundColor(Color.RED)
 
 ```kotlin
 lateinit var view: View
-override fun onCreate(...) {
-    ...
+override fun onCreate(……) {
+    ……
     view = findViewById(R.id.tvContent)
 }
 ```
@@ -101,7 +101,7 @@ var name = "Mike"
 
 ```java
 Food cook(String name) {
-    ...
+    ……
 }
 ```
 
@@ -109,7 +109,7 @@ Food cook(String name) {
 
 ```kotlin
 fun cook(name: String): Food {
-    ...
+    ……
 }
 ```
 
@@ -208,7 +208,7 @@ Kotlin 在语言层面简化了 Java 中的 `int` 基本数据类型 和 `Intege
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) 
     {
-        ...
+        ……
     }
 }
 ```
@@ -219,7 +219,7 @@ class MainActivity : AppCompatActivity() {
 public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        ...
+        ……
     }
 }
 ```
@@ -251,18 +251,18 @@ class MainActivity : AppCompatActivity {
 
 ```kotlin
 class MainActivity : AppCompatActivity() {
-    ...
+    ……
 }
    
 // 实际等价于：
 class MainActivity constructor() : AppCompatActivity() {
-	...
+	……
 }
    
 // 也可以写成：注意这里 AppCompatActivity 后面没有 '()'
 class MainActivity : AppCompatActivity {
     constructor() {
-       ...
+       ……
     }
 }
 ```
@@ -391,7 +391,7 @@ class User(val name: String, val id: String) {
 ```kotlin
 class User(val name: String, val id: String) {
     init {
-        ...
+        ……
     }
 }
 ```
@@ -401,7 +401,7 @@ class User(val name: String, val id: String) {
 ```kotlin
 class User(val name: String, val id: String) {
     init {
-        ...
+        ……
     }
     constructor(person: Person) : this(person.name, person.id) {
     }
@@ -580,7 +580,7 @@ Kotlin 中有四种可见性修饰符：
 
 ### 数组（Array）
 
-Kotlin 为数组准备了一个 Array 类，对基本类型元素还有 intArray, byteArray ... 等特别的数组类型；
+Kotlin 为数组准备了一个 Array 类，对基本类型元素还有 intArray, byteArray …… 等特别的数组类型；
 
 Array 是一个泛型的类，创建函数也是泛型函数，和集合数据类型一样；
 
@@ -798,7 +798,7 @@ val range: IntRange = 0 until 1000
 
 ```kotlin
 val range = 0..1000
-// 默认步长 step 为 1，输出：0, 1, 2, 3, 4, 5, 6, 7....1000,
+// 默认步长 step 为 1，输出：0, 1, 2, 3, 4, 5, 6, 7 …… 1000,
 for (i in range) {
     print("$i, ")
 }
@@ -808,7 +808,7 @@ for (i in range) {
 
 ```kotlin
 val range = 0..1000
-// 设置步长为 2，输出：0, 2, 4, 6, 8, 10,....1000,
+// 设置步长为 2，输出：0, 2, 4, 6, 8, 10, …… 1000,
 for (i in range step 2) {
     print("$i, ")
 }
@@ -924,7 +924,7 @@ fun sayHi(name: String) = println("Hi " + name)
 
 ```kotlin
 fun sayHi(name: String = "world", age: Int) {
-    ...
+    ……
 }
 
 // 错误写法：希望给 age 赋值 10 
@@ -943,7 +943,7 @@ sayHi(age = 21)
 
 ```kotlin
 fun sayHi(name: String = "world", age: Int, isStudent: Boolean = true, isFat: Boolean = true, isTall: Boolean = true) {
-    ...
+    ……
 }
 
 // 能跑，但可读性不够好
@@ -959,7 +959,7 @@ sayHi(name = "wo", age = 21, isStudent = false, isFat = true, isTall = false)
 
 ```kotlin
 fun sayHi(name: String = "world", age: Int) {
-    ...
+    ……
 }
 
 // 错误写法，IDE 将报错 Mixing named and positioned arguments is not allowed（不允许混用位置和命名参数）：
@@ -997,7 +997,7 @@ fun login(user: String, password: String, illegalStr: String) {
             throw IllegalArgumentException(illegalStr)
         }
     }
-    ...
+    ……
 }
 ```
 
@@ -1079,7 +1079,7 @@ when {
 ```kotlin
 val array = intArrayOf(1, 2, 3, 4)
 for (item in array) {
-    ...
+    ……
 }
 
 // 等效于 for (int i = 0; i <= 10; i++)
@@ -1087,12 +1087,6 @@ for (i in 0..10) {
     println(i)
 }
 ```
-
-
-
-# 
-
-
 
 
 
@@ -1179,7 +1173,7 @@ My name is kotlin.
 
 
 
-## 未完待续中 ... 后续又发现什么有用的会更新在前面的
+## 未完待续中 …… 后续又发现什么有用的会更新在前面的
 
 没人给我校对，如果发现有啥问题欢迎评论区或者私聊告诉我！
 
