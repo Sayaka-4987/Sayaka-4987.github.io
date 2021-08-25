@@ -122,16 +122,16 @@ private async void SearchButton_Click(object sender, RoutedEventArgs e)
 ```c#
 public partial class MainWindow : Window
 {
-	MainViewModel viewModel;	// 定义 ViewModel 成员
+    MainViewModel viewModel;	// 定义 ViewModel 成员
 
-	public MainWindow()
-	{
-		InitializeComponent();
+    public MainWindow()
+    {
+        InitializeComponent();
         viewModel = new MainViewModel();	// 初始化 ViewModel 成员
         DataContext = viewModel;			// 设定数据上下文为 ViewModel 
     }
 
-	private async void SearchButton_Click(object sender, RoutedEventArgs e)
+    private async void SearchButton_Click(object sender, RoutedEventArgs e)
     {
         viewModel.SearchKeyword();			// 调用 ViewModel 提供搜索的方法
     }
@@ -181,7 +181,7 @@ async 这种简单的异步函数的具体行为是，程序跑到标志了 awai
 ```c#
 private async void SearchButton_Click(object sender, RoutedEventArgs e)
 {
-	await Task.Run(viewModel.SearchKeyword);
+    await Task.Run(viewModel.SearchKeyword);
     // 等到完成查找过程，再显示查找结果
     SearchResultWindow resultWindow = new SearchResultWindow();	
     resultWindow.DataContext = viewModel;
