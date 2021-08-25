@@ -1,18 +1,17 @@
 ---
 
 layout:     post   				        # 使用的布局（不需要改）
-title:      WPF学习笔记					# 标题 
-subtitle:   随时弃坑						# 副标题
+title:      WPF 不深入理解笔记			# 标题 
+subtitle:   写界面主要是为了开心			# 副标题
 date:       2021-08-20 				    # 时间
 author:     YXWang 					    # 作者
 header-img: img/post-bg-keybord.jpg	 	# 这篇文章的标题背景图片
 catalog: true 						    # 是否归档
 tags:								    # 标签
     - WPF
-    - 施工中
 ---
 
-# WPF不深入理解笔记
+# WPF 不深入理解笔记
 
 课件主要来自 [WPF入门基础教程合集-bilibili](https://www.bilibili.com/video/BV1mJ411F7zG) 和 [WPF深入讲解合集-bilibili](https://www.bilibili.com/video/BV1HC4y1b76v) 
 
