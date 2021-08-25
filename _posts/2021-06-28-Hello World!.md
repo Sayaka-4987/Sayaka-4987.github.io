@@ -90,8 +90,8 @@ class MainActivity : AppCompatActivity() {
 
 
 
-```
-// 什么也不选，或 Rouge 不支持的高亮类型
+```html
+// 什么也不选就完全没颜色，这里试一下 html 
 asdfghjkl;''
 ```
 
