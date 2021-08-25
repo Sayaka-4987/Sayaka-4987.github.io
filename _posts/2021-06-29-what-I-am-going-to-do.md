@@ -7,7 +7,7 @@ author:     YXWang 					    # 作者
 header-img: img/post-bg-coffee.jpeg 	# 这篇文章的标题背景图片
 catalog: true 						    # 是否归档
 tags:								    # 标签
-    - 博客公告排
+    - 博客公告
 ---
 
 ### 关于打算用这个博客做什么
