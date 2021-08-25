@@ -90,8 +90,8 @@ class MainActivity : AppCompatActivity() {
 
 
 
-```html
-// 什么也不选就完全没颜色，这里试一下 html 
+```c
+// 什么也不选就完全没颜色，这里试一下用c放纯文本
 asdfghjkl;''
 ```
 
