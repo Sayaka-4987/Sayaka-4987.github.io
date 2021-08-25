@@ -17,9 +17,8 @@ tags:								    # 标签
 
 这篇文章也被用于测试代码高亮
 
-
-
 ```c++
+// C++
 FILE *fp = fopen("conf.ini","w");
 
 fprintf(fp,"%s\n",conf.filesavepath);
@@ -34,17 +33,67 @@ fprintf(fp,"%d\n",conf.recordcount2);
 
 
 
-{% highlight cpp %}
+```xml
+<!-- Rouge 不支持 xaml，这里先用 xml 高亮 -->
+<DockPanel>
+    <Button DockPanel.Dock="Bottom" Width="100" Height="30"></Button>
+    <Button DockPanel.Dock="Left" Width="100" Height="30"></Button>
+    <Button DockPanel.Dock="Right" Width="100" Height="30"></Button>
+    <Button DockPanel.Dock="Top" Width="100" Height="30"></Button>
+</DockPanel> 
+```
 
-FILE *fp = fopen("conf.ini","w");
 
-fprintf(fp,"%s\n",conf.filesavepath);
-fprintf(fp,"%s\n",conf.filename);
-fprintf(fp,"%d\n",conf.maxvalue1);
-fprintf(fp,"%d\n",conf.minvalue1);
-fprintf(fp,"%d\n",conf.maxvalue2);
-fprintf(fp,"%d\n",conf.minvalue2);
-fprintf(fp,"%d\n",conf.recordcount1);
-fprintf(fp,"%d\n",conf.recordcount2);
 
- {% endhighlight %}
+```c#
+// C#
+using System;
+using System.Threading.Tasks;
+
+namespace Foo
+{
+	class Bar
+    {
+        
+    }
+}
+```
+
+
+
+```kotlin
+// kotlin
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.platform.AmbientAnimationClock
+import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.unit.dp
+import com.example.sinuswave.ui.SinusWaveTheme
+import kotlin.math.sin
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            SinusWaveTheme(darkTheme = true) {
+                Surface(color = MaterialTheme.colors.background) {
+                    App()
+                }
+            }
+        }
+    }
+}
+```
+
+
+
+```
+// 什么也不选，或 Rouge 不支持的高亮类型
+asdfghjkl;''
+```
+
+
+
