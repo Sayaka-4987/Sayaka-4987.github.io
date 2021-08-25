@@ -1135,10 +1135,8 @@ println(text)
 
 输出结果如下：
 
-```text
-      Hi world!
-    My name is kotlin.\n
-```
+  Hi world!
+My name is kotlin.\n
 
 还可以通过 `trimMargin()` 函数去除每行前面的空格：
 
@@ -1152,10 +1150,8 @@ println(text)
 
 输出结果如下：
 
-```text
 Hi world!
 My name is kotlin.
-```
 
 使用 `trimMargin()` 函数有以下几个注意点：
 
