@@ -1,7 +1,7 @@
 ---
 layout:     post   				        # 使用的布局（不需要改）
-title:      My First Post 			    # 标题 
-subtitle:   Hello World, Hello Blog     # 副标题
+title:      WPF：初探 MVVM 架构 			# 标题 
+subtitle:   啥也没学会但是硬着头皮写了       # 副标题
 date:       2021-08-25 				    # 时间
 author:     YXWang 					    # 作者
 header-img: img/post-bg-debug.png 	    # 这篇文章的标题背景图片
