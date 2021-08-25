@@ -147,7 +147,7 @@ public object Content { get; set; }
 ```
 
 
-```C#
+```c++
 public string Text { get; set; }
 // 摘要:
 // 获取 System.Windows.Documents.TextPointer 到中的内容的末尾 System.Windows.Controls.TextBlock。
