@@ -172,7 +172,7 @@ lock (_itemsLock)
 }
 ```
 
-### 用 async / await 等待耗时操作完成
+### async / await 自动等待耗时操作完成
 
 用 async 关键字声明的函数就会成为异步函数， async 关键字需要配合 await 关键字使用；
 
@@ -190,4 +190,8 @@ private async void SearchButton_Click(object sender, RoutedEventArgs e)
 ```
 
 由 async 声明的异步方法，其返回类型只能是 `void`、`Task`、`Task<TResult>` 之一，此处示例的返回值类型是 void ，主要难点还是需要判断使用这两个关键字来防止耗时操作阻塞当前线程的场合。
+
+
+
+当天晚上更新：费时间的可以全加上 async / await，加就完事了
 
