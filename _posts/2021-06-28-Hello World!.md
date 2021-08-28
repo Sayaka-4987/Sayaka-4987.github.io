@@ -91,7 +91,7 @@ class MainActivity : AppCompatActivity() {
 
 
 ```c
-// 什么也不选就完全没颜色，这里试一下用 c放纯文本
+// 什么也不选就完全没颜色，这里试一下用 c 放纯文本
 asdfghjkl;''
 ```
 
