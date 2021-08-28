@@ -15,7 +15,7 @@ tags:								    # 标签
 
 ### 编程学习
 
-- [C# 文档 - 入门/教程/参考 | Microsoft Docs](https://docs.microsoft.com/zh-cn/dotnet/csharp/)
+- [C# 文档 - 入门/教程/参考](https://docs.microsoft.com/zh-cn/dotnet/csharp/)
 
 - [清华大学开源软件镜像站\_Tsinghua Open Source Mirror](https://mirrors.tuna.tsinghua.edu.cn/) 
 
@@ -42,6 +42,8 @@ tags:								    # 标签
 - [HIT\_操作系统\_中国大学MOOC(慕课) (icourse163.org)](https://www.icourse163.org/course/HIT-1002531008) 
 
 - [HIT\_计算机网络\_中国大学MOOC(慕课) (icourse163.org)](https://www.icourse163.org/course/HIT-154005)
+
+- [中科大郑烇、杨坚全套《计算机网络》课程](https://www.bilibili.com/video/BV1JV411t7ow)
 
 - [菜鸟教程 - 学的不仅是技术，更是梦想！ (runoob.com)](https://www.runoob.com/)
 
