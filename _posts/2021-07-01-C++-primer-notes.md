@@ -1,6 +1,6 @@
 ---
 layout:     post   				        # 使用的布局（不需要改）
-title:      一些C++学习笔记				# 标题 
+title:      一些 C++ 学习笔记				# 标题 
 subtitle:   并不是很全，写的也很菜			# 副标题
 date:       2021-07-01 				    # 时间
 author:     YXWang 					    # 作者
@@ -9,7 +9,6 @@ catalog: true 						    # 是否归档
 tags:								    # 标签
     - C++
     - C++ primer（书籍）
-    - 施工中
 ---
 
 ### 写在最前面：
