@@ -15,6 +15,10 @@ tags:								    # 标签
 
 ### 编程学习
 
+- [彻底搞懂如何使用 Hexo\+GitHubPages 搭建个人博客](https://juejin.cn/post/6844904131266609165)
+
+  (注：我用的是 Jekyll，但我觉得 Hexo 更好)
+
 - [C# 文档 - 入门/教程/参考](https://docs.microsoft.com/zh-cn/dotnet/csharp/)
 
 - [清华大学开源软件镜像站\_Tsinghua Open Source Mirror](https://mirrors.tuna.tsinghua.edu.cn/) 
