@@ -171,6 +171,7 @@ fn main() {
     loop {
         println!("Please input your guess.");
 
+        
         let mut guess = String::new();
 
         io::stdin().read_line(&mut guess)
@@ -180,6 +181,8 @@ fn main() {
             Ok(num) => num,
             Err(_) => continue,
         };  // 忽略非数字，让用户可以继续猜测
+        
+        // 这一段还有一种更精简的处理方式：let guess: u32 = guess.trim().parse()?; 向上层抛错误
 
         println!("You guessed: {}", guess);
 
@@ -466,6 +469,41 @@ vector 类型是标准库提供的一个 **允许增长和缩小长度** 、类�
 
 
 ## 函数
+
+用 `fn` 关键字+函数名称+一对圆括号包裹的含参列表，声明新函数；
+
+**必须声明每个参数的类型**；
+
+Rust 的函数和变量名应当使用 *snake case* 规范风格（全小写，用下划线连接）；
+
+```rust
+fn another_function(x: i32) {
+    println!("The value of x is: {}", x);
+}
+```
+
+
+
+#### 包含语句和表达式的函数体
+
+语句（Statements）：执行一些操作但不返回值的指令
+
+表达式（Expressions）：计算并产生一个返回值，结尾没有分号
+
+Rust 是一门基于表达式（expression-based）的语言；
+
+```rust
+fn main() {
+    let x = 5;	// let 创建变量并绑定值是一个语句
+
+    let y = {
+        let x = 3;
+        x + 1	// 这是个表达式，它返回值为 4，末尾没有分号
+    };
+
+    println!("The value of y is: {}", y);
+}
+```
 
 
 
