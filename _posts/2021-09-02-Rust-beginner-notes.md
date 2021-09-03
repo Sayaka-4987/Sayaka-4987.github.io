@@ -441,8 +441,11 @@ Rust 的数组是固定长度的，一旦声明，它们的长度不能增长或
 ```rust
 fn main() {
     let a = [1, 2, 3, 4, 5];
+    
     let b: [i32; 5] = [1, 2, 3, 4, 5];
+    
     let c = [3; 5];	// 等效于 c = [3, 3, 3, 3, 3]
+    
     let months = ["January", "February", "March", "April", "May", "June", "July",
               "August", "September", "October", "November", "December"];
 }
