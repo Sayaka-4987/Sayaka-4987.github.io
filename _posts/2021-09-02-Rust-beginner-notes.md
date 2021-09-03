@@ -647,6 +647,36 @@ fn main() {
 
 
 
+### 练习：打印圣诞颂歌 “The Twelve Days of Christmas” 的歌词
+
+~~我写了一个最老实的版本发出来丢人~~（想看骚操作可以自行搜索引擎一下
+
+```rust
+fn main() {
+    println!("The Twelve days of Christmas. ");
+
+    let days = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth", "eleventh", "twelfth"];
+    let gifts = ["And a partridge in a pear tree.", "Two turtle doves, ", "Three French hens, ", "Four calling birds, ", "Five golden rings, ", "Six geese a-laying, ", "Seven swans a-swimming, ", "Eight maids a-milking, ", "Nine ladies dancing, ", "Ten lords a-leaping, ", "Eleven pipers piping, ", "Twelve drummers drumming, "];
+
+    for i in 0..12 {
+        print!("On the {} day of Christmas, my true love sent to me: ", days[i]);
+        if i == 0 { println!("A partridge in a pear tree."); continue; }
+        else {
+            let mut j = i;
+            loop {
+                print!("{}", gifts[j]);
+                if j == 0 { println!(); break; }
+                else { j = j-1; }
+            }
+        }
+    }
+}
+```
+
+
+
+
+
 ## 输入输出
 
 ### 命令行输出
