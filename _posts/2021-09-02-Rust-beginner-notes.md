@@ -521,7 +521,129 @@ fn five() -> i32 {
 
 ## 控制流
 
+### if 表达式
 
+和其他高级语言似乎区别不大，以 `if` 关键字开头，后跟一个条件，条件必须是 bool 值：
+
+```rust
+fn main() {
+    let number = 3;
+
+    if number < 5 {
+        println!("condition was true");
+    } else {
+        println!("condition was false");
+    }
+}
+```
+
+
+
+#### 结合 `let` 语句使用 `if` 
+
+```rust
+fn main() {
+    let condition = true;
+    let number = if condition {	// 将 if 表达式的返回值赋给一个变量
+        5
+    } else {
+        6
+    };
+    
+    println!("The value of number is: {}", number);
+}
+```
+
+
+
+### `loop` 循环 
+
+1. loop 循环会反复地执行其中的代码块，直到遇 break; 语句或按 `Ctrl+C` 才退出； 
+2. 可以用来执行需要重复的工作，也可以用来重试可能会失败的工作；
+3. `break` 表达式后面可以接返回值：
+
+```rust
+fn main() {
+    let mut counter = 0;
+
+    let result = loop {
+        counter += 1;
+
+        if counter == 10 {
+            break counter * 2;	// 使用 break 关键字返回 counter * 2 的值
+        }
+    };	// 通过分号结束赋值给 result 的语句
+
+    println!("The result is {}", result);
+}
+```
+
+
+
+#### 指定循环标签
+
+若存在嵌套循环，`break` 和 `continue` 会默认应用于此时最内层的循环；
+
+可以在一个循环上指定一个 **循环标签**，然后将标签与 `break` 或 `continue` 一起使用：
+
+```rust
+fn main() {
+    let mut count = 0;
+    'counting_up: loop {	// 外层循环有一个标签 counting_ up
+        println!("count = {}", count);
+        let mut remaining = 10;
+
+        loop {
+            println!("remaining = {}", remaining);
+            if remaining == 9 {
+                break;
+            }
+            if count == 2 {
+                break 'counting_up;		// 将退出外层循环
+            }
+            remaining -= 1;
+        }
+
+        count += 1;
+    }
+    println!("End count = {}", count);
+}
+```
+
+
+
+### `while` 循环 
+
+和其它高级语言比较类似：
+
+```rust
+while number != 0 {
+    println!("{}!", number);
+    number = number - 1;
+}
+```
+
+
+
+### `for` - `in`循环
+
+Rust 中最常用的循环；
+
+能保证在循环的每次迭代中，索引都在数组的边界内；
+
+```rust
+fn main() {
+    let a = [10, 20, 30, 40, 50];
+
+    for element in a.iter() {
+        println!("the value is: {}", element);
+    }
+    
+    for number in (1..4).rev() {	// rev 方法用于反转 [1,4) 这个 Range
+        println!("{} ", number);	// 输出结果为 3 2 1 
+    }
+}
+```
 
 
 
