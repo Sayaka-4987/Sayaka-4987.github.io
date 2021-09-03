@@ -484,11 +484,11 @@ fn another_function(x: i32) {
 
 
 
-#### 包含语句和表达式的函数体
+### 包含语句和表达式的函数体
 
 语句（Statements）：执行一些操作但不返回值的指令
 
-表达式（Expressions）：计算并产生一个返回值，结尾没有分号
+表达式（Expressions）：计算并产生一个**返回值**，**结尾没有分号**
 
 Rust 是一门基于表达式（expression-based）的语言；
 
@@ -504,6 +504,24 @@ fn main() {
     println!("The value of y is: {}", y);
 }
 ```
+
+
+
+### 函数返回值
+
+这里 five 函数的返回值是 5，返回值类型是 i32 ：
+
+```rust
+fn five() -> i32 {
+    5	// 这里加个分号将会报错 implicitly returns `()` as its body has no tail or `return` expression  - help: consider removing this semicolon
+}
+```
+
+
+
+## 控制流
+
+
 
 
 
