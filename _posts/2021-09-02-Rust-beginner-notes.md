@@ -687,29 +687,395 @@ Rust 不采用垃圾回收机制，而是通过 **所有权系统** 管理内存
 
 | 栈（Stack）                                                  | 堆（Heap）                                                   |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| 栈以放入值的顺序存储值并以相反顺序取出值。这也被称作 **后进先出**。<br>栈中的所有数据都必须占用 **已知且固定的大小**；<br>因为指针的大小是已知并且固定的，所以将数据推入栈中不是分配；<br>入栈比在堆上分配内存要快，因为入栈时操作系统无需为新数据去搜索内存空间，其位置总是在栈顶；<br>调用一个函数时，传递给函数的值（包括可能指向堆上数据的指针）和函数的局部变量会被压入栈中；当函数结束时，这些值被移出栈。<br/> | 编译时大小未知、或大小可能变化的数据，要改为存储在堆上；<br>当向堆放入数据时，要请求一定大小的空间，由操作系统在堆中找到一块足够大的空位，把它标记为已使用，并返回一个 **表示该位置地址的指针** ，这个过程称作 **在堆上分配内存**；<br>访问堆上的数据比访问栈上的数据慢，因为必须通过指针来访问堆中的数据，而现代处理器在内存中跳转越少就越快；<br>出于同样原因，处理器在处理的数据彼此较近的时候（比如在栈上）比较远的时候（比如可能在堆上）能更好的工作；<br> |
+| 栈以放入值的顺序存储值并以相反顺序取出值。这也被称作 **后进先出**。<br>栈中的所有数据都必须占用 **已知且固定的大小**；<br>入栈比在堆上分配内存要快，因为入栈时操作系统无需为新数据去搜索内存空间，其位置总是在栈顶；<br>调用一个函数时，传递给函数的值（包括可能指向堆上数据的指针）和函数的局部变量会被压入栈中；当函数结束时，这些值被移出栈。<br>指针的大小是已知并且固定的，所以将指向堆上数据的指针推入栈中并不是分配；<br> | 编译时大小未知、或大小可能变化的数据，要改为存储在堆上；<br>当向堆放入数据时，要请求一定大小的空间，由操作系统在堆中找到一块足够大的空位，把它标记为已使用，并返回一个 **表示该位置地址的指针** ，这个过程称作 **在堆上分配内存**；<br>访问堆上的数据比访问栈上的数据慢，因为必须通过指针来访问堆中的数据，而现代处理器 **在内存中跳转越少就越快**；<br>出于同样原因，处理器在处理的数据彼此较近的时候（比如在栈上）比较远的时候（比如可能在堆上）能更好的工作；<br> |
 
 
 
+### 所有权的规则 
+
+1. Rust 中的每一个值都有一个被称为其 **所有者** 的变量；
+2. 值在任一时刻 **有且只有** 一个所有者；
+3. 当所有者（变量）**离开作用域**，这个值将被丢弃；
 
 
 
+### 变量作用域
+
+Rust 变量是否有效与作用域的关系类似其他编程语言：
+
+```rust
+{	// s 在这里无效, 它尚未声明
+    let s = "hello";   // 从此处起，s 是有效的
+    
+    ……	// 使用 s
+    
+}	// 此作用域已结束，s 不再有效
+```
 
 
 
+#### 以储存在堆上的 String 类型为例
+
+在 Rust 中 `String` 类型被分配到堆上，所以能够存储在编译时未知大小的文本。可以使用 `from` 函数基于字符串字面值来创建 `String`；
+
+此处两个连用的冒号 `::` 是运算符，允许将特定的 `from` 函数置于 `String` 类型的命名空间下：
+
+```rust
+let s = String::from("hello");
+s.push_str(", world!");		// 允许用 push_str() 在字符串后追加字面值
+println!("{}", s);			// 将打印 `hello, world!`
+```
+
+Rust 采取的内存管理策略是：**内存在拥有它的变量离开作用域后，就被自动释放**。
 
 
 
+### 变量与数据交互的方式
+
+#### 移动
+
+Rust 中的多个变量可以采用一种独特的方式与同一数据交互：
+
+```rust
+let s1 = String::from("hello");
+let s2 = s1;
+
+println!("{}, world!", s1);
+```
+
+以上代码会得到这样的报错信息，Rust 禁止使用无效的引用：
+
+```c
+/* 套这个注释是为了 Rouge 能正常高亮
+
+error[E0382]: borrow of moved value: `s1`
+ --> src\main.rs:7:28
+  |
+4 |     let s1 = String::from("hello");
+  |         -- move occurs because `s1` has type `String`, which does not implement the `Copy` trait
+5 |     let s2 = s1;
+  |              -- value moved here
+6 | 
+7 |     println!("{}, world!", s1);
+  |                            ^^ value borrowed here after move
+  
+*/  
+```
+
+Rust **永远也不会自动创建数据的 “深拷贝”**，这里拷贝指针、长度和容量而不拷贝数据，有些像浅拷贝，但 Rust 同时使第一个变量 `s1` 无效了，因此 `s2 = s1` 这个操作被称为 **移动**，这时只有 `s2` 是有效的变量，此时变量 `s2` 的内存表现如图所示：
+
+<img src="http://120.78.128.153/rustbook/img/trpl04-04.svg" style="zoom: 25%;" />
 
 
 
+#### 克隆
+
+如果我们**确实需要深度复制 `String` 中堆上的数据**，可以使用一个叫做 `clone` 的通用函数：
+
+```rust
+let s1 = String::from("hello");
+let s2 = s1.clone();
+
+println!("s1 = {}, s2 = {}", s1, s2);
+```
+
+当看到 `clone` 调用时，应当充分理解有一些特定的代码被执行，而且这些代码可能相当消耗资源；
 
 
 
+#### 拷贝只在栈上的数据
+
+这里没有调用 `clone`，不过 `x` 依然有效且没有被移动到 `y` 中：
+
+```rust
+let x = 5;
+let y = x;
+
+println!("x = {}, y = {}", x, y);
+```
+
+原因是，像整型这样的 **在编译时已知大小的类型** 被整个存储在 **栈** 上，所以拷贝其实际的值是快速的。这意味着没有理由在创建变量 `y` 后使 `x` 无效；
 
 
 
+#### 补充：`Copy` trait
 
+Rust 有一个叫做 `Copy` trait 的特殊注解，性质如下：
+
+1. 可以用在类似整型这样的存储在栈上的类型上（第十章再详细讲解，待补充）；
+
+2. 若一个类型拥有 `Copy` trait，旧的变量在将其赋值给其他变量后将仍然可用；
+
+3. Rust 不允许实现了 `Drop` trait 的类型使用 `Copy` trait，如果我们对其值离开作用域时需要特殊处理的类型使用 `Copy` 注解，将会出现一个编译时错误；
+
+4. 以下是一些 `Copy` 的类型：
+
+   所有整数类型
+
+   所有浮点数类型
+
+   布尔类型 `bool` 
+
+   字符类型 `char`
+
+   **包含的类型都是 `Copy` 的元组**；
+
+   （举例：`(i32, i32)` 是 `Copy` 的，`(i32, String)` 不是）
+
+
+
+### 所有权与函数
+
+函数可以转移值的所有权：
+
+```rust
+fn main() {
+    let s = String::from("hello");  // s 进入作用域
+
+    println!("{}", s);
+
+    takes_ownership(s);             // s 的值移动到函数里 ...
+
+    // println!("{}", s);   		非法，s 到这里不再有效
+
+    let x = 5;                      // x 进入作用域
+
+    println!("{}", x);
+
+    makes_copy(x);                  // x 应该移动函数里到
+    
+    println!("{}", x);   			// 但 i32 是 Copy 的，所以此处可继续使用 x
+
+} // 这里, x 先移出了作用域，然后是 s。但因为 s 的值已被移走，所以不会有特殊操作
+
+fn takes_ownership(some_string: String) { // some_string 进入作用域
+    println!("{}", some_string);
+} // 这里，some_string 移出作用域并调用 `drop` 方法。占用的内存被释放
+
+fn makes_copy(some_integer: i32) { // some_integer 进入作用域
+    println!("{}", some_integer);
+} // 这里，some_integer 移出作用域。不会有特殊操作
+```
+
+
+
+### 所有权与返回值
+
+返回值也可以转移所有权：
+
+```rust
+fn main() {
+    let s1 = gives_ownership();         // gives_ownership 将返回值移给 s1
+
+    let s2 = String::from("hello");     // s2 进入作用域
+
+    let s3 = takes_and_gives_back(s2);  // s2 被移动到 takes_and_gives_back 中，takes_and_gives_back 也将返回值移给 s3
+} // 这里 s3 移出作用域并被丢弃; s2 也移出作用域，但已被移走，所以什么也不会发生。s1 移出作用域并被丢弃
+
+// gives_ownership 将返回值移动给调用它的函数
+fn gives_ownership() -> String {             
+    let some_string = String::from("hello"); // some_string 进入作用域.
+    some_string                              // 返回 some_string 并移出给调用的函数
+}
+
+// takes_and_gives_back 将传入字符串并返回该值
+fn takes_and_gives_back(a_string: String) -> String {	// a_string 进入作用域
+    a_string  											// 返回 a_string 并移出给调用的函数
+}
+```
+
+默认操作是：变量的所有权会在值赋给另一个变量时移动过去，如果只想用不想转移所有权，请使用引用；
+
+
+
+### 引用与借用
+
+引用：允许你使用一个值，但不获取其所有权，默认情况下**不允许修改引用的值**；
+
+借用：将获取的引用作为函数参数的行为；
+
+#### `&` 运算符引用 
+
+`&s1` 创建一个**指向值 `s1` 的引用**，但是并不拥有它；
+
+因为 `calculate_length` 函数并不拥有这个值，所以引用离开作用域时，其指向的值 s 也不会被丢弃：
+
+```rust
+fn main() {
+    let s1 = String::from("hello");
+    let len = calculate_length(&s1);
+    println!("The length of '{}' is {}.", s1, len);
+}
+
+fn calculate_length(s: &String) -> usize {	// 以 s 的引用作为参数，而不是获取值的所有权
+    s.len()
+}
+```
+
+
+
+#### 可变引用
+
+注意：特定作用域中的特定数据 **只能有一个可变引用**；
+
+不能 **同时** 拥有同一值的多个可变引用；
+
+也不能在拥有不可变引用的 **同时**，拥有可变引用；
+
+写法上，把 `&s` 换成 `&mut s`，函数参数列表处也从 `&String` 换成 `&mut String` 即可：
+
+```rust
+fn main() {
+    let mut s = String::from("hello");
+    change(&mut s);
+}
+
+fn change(some_string: &mut String) {
+    some_string.push_str(", world");
+}
+```
+
+
+
+> #### 数据竞争
+>
+> 数据竞争（*data race*）类似于竞态条件，它可由这三个行为造成：
+>
+> - 两个或更多指针同时访问同一数据。
+> - 至少有一个指针被用来写入数据。
+> - 没有同步数据访问的机制。
+>
+> 数据竞争会导致未定义行为，难以在运行时追踪，并且难以诊断和修复；
+>
+> Rust 完全不会编译存在数据竞争的代码；
+
+
+
+### 切片（Slice）类型
+
+slice 类型没有所有权，该类型允许你引用集合中一段连续的元素序列，而不用引用整个集合；
+
+
+
+这里有一个习题：编写一个函数，该函数接收一个字符串，并返回在该字符串中找到的第一个单词。如果函数在该字符串中并未找到空格，则整个字符串就是一个单词，返回整个字符串：
+
+```rust
+fn first_word(s: &String) -> &str {
+    let bytes = s.as_bytes();	// 用 as_bytes 方法将 String 转化为字节数组
+    for (i, &item) in bytes.iter().enumerate() {
+        // 用 iter 方法在字节数组上创建一个迭代器
+        // 而 enumerate 包装了 iter 的结果
+        // 元组中的 i 是索引，而元组中的 &item 是单个字节
+        if item == b' ' {
+            return &s[0..i];	// 如果找到了一个空格，返回从开头到它的切片
+        }
+    }
+    &s[..]
+}
+```
+
+
+
+#### 字符串切片
+
+以 `String` 为例，取其中一部分值的引用：
+
+```rust
+let s = String::from("hello world");
+
+let hello = &s[0..5];
+let world = &s[6..11];
+```
+
+可以省略上下界：
+
+```rust
+let s = String::from("hello");
+
+let slice1 = &s[..2];	// 等效于 &s[0..2];
+let slice2 = &s[3..];	// = &s[3..len];
+let slice3 = &s[..];	// = &s[0..len];
+```
+
+
+
+字符串字面值就是一个切片；
+
+```rust
+let s = "Hello, world!";
+```
+
+这里 `s` 的类型是 `&str`，`&str` 是一个不可变引用，因此字符串字面值是不可变的；
+
+
+
+## 结构体
+
+一个存储用户账号信息的结构体：
+
+```rust
+struct User {
+    username: String,
+    email: String,
+    sign_in_count: u64,
+    active: bool,
+}
+```
+
+创建结构体实例和使用 `.` 运算符修改字段的值：
+
+```rust
+let mut user1 = User {
+    email: String::from("someone@example.com"),
+    username: String::from("someusername123"),
+    active: true,
+    sign_in_count: 1,
+};
+
+user1.email = String::from("anotheremail@example.com");	
+```
+
+
+
+### 字段初始化简写语法
+
+变量与字段同名时，可以使用 **字段初始化简写语法**：
+
+```rust
+fn build_user(email: String, username: String) -> User {
+    User {
+        email,		// 设置为 build_user 函数 email 参数的值
+        username,	// 设置为 build_user 函数 username 参数的值
+        active: true,
+        sign_in_count: 1,
+    }
+}
+```
+
+
+
+### 从其他实例创建实例
+
+适用场景：想要创建一个新的结构体实例，需要使用旧实例的大部分值，但要改变其中一部分；
+
+```rust
+let user2 = User {
+    email: String::from("another@example.com"),
+    username: String::from("anotherusername567"),
+    active: user1.active,
+    sign_in_count: user1.sign_in_count,
+};
+```
+
+还可以使用 `..` 语法表示剩下的从 user1 中取得：
+
+```rust
+let user2 = User {
+    email: String::from("another@example.com"),
+    username: String::from("anotherusername567"),
+    ..user1
+};
+```
 
 
 
