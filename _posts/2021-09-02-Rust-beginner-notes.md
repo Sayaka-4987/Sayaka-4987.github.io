@@ -1079,6 +1079,117 @@ let user2 = User {
 
 
 
+### 元组结构体
+
+每一个元组结构体有其自己的类型，即使结构体中的字段有着相同的类型；
+
+以此处代码为例，获取 `Color` 类型参数的函数不能接受 `Point` 作为参数：
+
+```rust
+struct Color(i32, i32, i32);
+struct Point(i32, i32, i32);
+
+let black = Color(0, 0, 0);
+let origin = Point(0, 0, 0);
+```
+
+
+
+### 类单元结构体：没有任何字段
+
+**类单元结构体**（*unit-like structs*）类似于 `()`，即 unit 类型；
+
+通常在你想要在某个类型上实现 trait ，但不需要在类型中存储数据时使用；
+
+
+
+#### 通过派生 trait 为结构体增加实用功能
+
+```rust
+#[derive(Debug)]	
+// 跟着编译器报错提示，加上 #[derive(Debug)] 注解显式选择打印调试信息
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+fn main() {
+    let rect1 = Rectangle { width: 30, height: 50 };
+    // 跟着编译器报错提示，在 {} 中加入 :? 指示符告诉 println! 我们想要使用叫做 Debug 的输出格式
+    println!("rect1 is {:?}", rect1);		
+}
+```
+
+
+
+### 方法语法
+
+Rust 中 **方法** 和 **函数** 是两个不同的概念：
+
+| 相同点                                                       | 不同点                                                       |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| 使用 `fn` 关键字和名称声明；<br>可以拥有参数和返回值，同时包含在某处调用该函数 / 方法时会执行的代码；<br> | 方法定义在结构体 / 枚举 / trait 的上下文中；<br>方法的第一个参数总是 `self`，代表调用该方法的实例本身；<br> |
+
+还是以之前的 `Rectangle` 结构体为例，为它增加一个求面积的方法 `area` ：
+
+```rust
+#[derive(Debug)]
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+impl Rectangle {
+    // 因为不需要获取所有权，只需要读结构体内数据，所以采用只读引用
+    fn area(&self) -> u32 {		
+        self.width * self.height
+    }
+    
+    //实现 can_hold 方法，它获取另一个 Rectangle 实例作为参数
+    fn can_hold(&self, other: &Rectangle) -> bool {		
+        self.width > other.width && self.height > other.height
+    }
+}
+
+fn main() {
+    let rect1 = Rectangle { width: 30, height: 50 };
+
+    println!(
+        "The area of the rectangle is {} square pixels.",
+        rect1.area()
+    );
+}
+```
+
+
+
+#### Rust 的自动引用和解引用功能
+
+当使用 `object.something()` 调用方法时，Rust 会自动为 `object` 添加 `&`、`&mut` 或 `*` ，以便使 `object` 与方法签名匹配；
+
+
+
+### 关联函数
+
+关联函数即在 `impl` 块中定义的、**不以 `self` 作为参数的函数**；
+
+经常被用作构造函数；
+
+```rust
+impl Rectangle {
+    fn square(size: u32) -> Rectangle {
+        Rectangle { width: size, height: size }
+    }
+}
+
+// 调用时
+let sq = Rectangle::square(3);
+```
+
+
+
+
+
 ## 输入输出
 
 ### 命令行输出
