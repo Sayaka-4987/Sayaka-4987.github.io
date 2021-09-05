@@ -10,6 +10,7 @@ tags:								    # 标签
     - Rust
     - 施工中
 
+
 ---
 
 # Rust 学习笔记
@@ -418,15 +419,7 @@ fn main() {
 也可以使用点号`.` 后跟值的索引来直接访问它们：
 
 ```rust
-fn main() {
-    let x: (i32, f64, u8) = (500, 6.4, 1);
-
-    let five_hundred = x.0;
-
-    let six_point_four = x.1;
-
-    let one = x.2;
-}
+fn main() {    let x: (i32, f64, u8) = (500, 6.4, 1);    let five_hundred = x.0;    let six_point_four = x.1;    let one = x.2;}
 ```
 
 
@@ -442,16 +435,7 @@ Rust 的数组是固定长度的，一旦声明，它们的长度不能增长或
 数组在栈（stack）上为数据分配空间；
 
 ```rust
-fn main() {
-    let a = [1, 2, 3, 4, 5];
-    
-    let b: [i32; 5] = [1, 2, 3, 4, 5];
-    
-    let c = [3; 5];	// 等效于 c = [3, 3, 3, 3, 3]
-    
-    let months = ["January", "February", "March", "April", "May", "June", "July",
-              "August", "September", "October", "November", "December"];
-}
+fn main() {    let a = [1, 2, 3, 4, 5];        let b: [i32; 5] = [1, 2, 3, 4, 5];        let c = [3; 5];	// 等效于 c = [3, 3, 3, 3, 3]        let months = ["January", "February", "March", "April", "May", "June", "July",              "August", "September", "October", "November", "December"];}
 ```
 
 
@@ -477,9 +461,7 @@ vector 类型是标准库提供的一个 **允许增长和缩小长度** 、类�
 Rust 的函数和变量名应当使用 *snake case* 规范风格（全小写，用下划线连接）；
 
 ```rust
-fn another_function(x: i32) {
-    println!("The value of x is: {}", x);
-}
+fn another_function(x: i32) {    println!("The value of x is: {}", x);}
 ```
 
 
@@ -493,16 +475,7 @@ fn another_function(x: i32) {
 Rust 是一门基于表达式（expression-based）的语言；
 
 ```rust
-fn main() {
-    let x = 5;	// let 创建变量并绑定值是一个语句
-
-    let y = {
-        let x = 3;
-        x + 1	// 这是个表达式，它返回值为 4，末尾没有分号
-    };
-
-    println!("The value of y is: {}", y);
-}
+fn main() {    let x = 5;	// let 创建变量并绑定值是一个语句    let y = {        let x = 3;        x + 1	// 这是个表达式，它返回值为 4，末尾没有分号    };    println!("The value of y is: {}", y);}
 ```
 
 
@@ -512,9 +485,7 @@ fn main() {
 这里 five 函数的返回值是 5，返回值类型是 i32 ：
 
 ```rust
-fn five() -> i32 {
-    5	// 这里加个分号将会报错 implicitly returns `()` as its body has no tail or `return` expression  - help: consider removing this semicolon
-}
+fn five() -> i32 {    5	// 这里加个分号将会报错 implicitly returns `()` as its body has no tail or `return` expression  - help: consider removing this semicolon}
 ```
 
 
@@ -526,15 +497,7 @@ fn five() -> i32 {
 和其他高级语言似乎区别不大，以 `if` 关键字开头，后跟一个条件，条件必须是 bool 值：
 
 ```rust
-fn main() {
-    let number = 3;
-
-    if number < 5 {
-        println!("condition was true");
-    } else {
-        println!("condition was false");
-    }
-}
+fn main() {    let number = 3;    if number < 5 {        println!("condition was true");    } else {        println!("condition was false");    }}
 ```
 
 
@@ -542,16 +505,7 @@ fn main() {
 #### 结合 `let` 语句使用 `if` 
 
 ```rust
-fn main() {
-    let condition = true;
-    let number = if condition {	// 将 if 表达式的返回值赋给一个变量
-        5
-    } else {
-        6
-    };
-    
-    println!("The value of number is: {}", number);
-}
+fn main() {    let condition = true;    let number = if condition {	// 将 if 表达式的返回值赋给一个变量        5    } else {        6    };        println!("The value of number is: {}", number);}
 ```
 
 
@@ -563,19 +517,7 @@ fn main() {
 3. `break` 表达式后面可以接返回值：
 
 ```rust
-fn main() {
-    let mut counter = 0;
-
-    let result = loop {
-        counter += 1;
-
-        if counter == 10 {
-            break counter * 2;	// 使用 break 关键字返回 counter * 2 的值
-        }
-    };	// 通过分号结束赋值给 result 的语句
-
-    println!("The result is {}", result);
-}
+fn main() {    let mut counter = 0;    let result = loop {        counter += 1;        if counter == 10 {            break counter * 2;	// 使用 break 关键字返回 counter * 2 的值        }    };	// 通过分号结束赋值给 result 的语句    println!("The result is {}", result);}
 ```
 
 
@@ -632,17 +574,7 @@ Rust 中最常用的循环；
 能保证在循环的每次迭代中，索引都在数组的边界内；
 
 ```rust
-fn main() {
-    let a = [10, 20, 30, 40, 50];
-
-    for element in a.iter() {
-        println!("the value is: {}", element);
-    }
-    
-    for number in (1..4).rev() {	// rev 方法用于反转 [1,4) 这个 Range
-        println!("{} ", number);	// 输出结果为 3 2 1 
-    }
-}
+fn main() {    let a = [10, 20, 30, 40, 50];    for element in a.iter() {        println!("the value is: {}", element);    }        for number in (1..4).rev() {	// rev 方法用于反转 [1,4) 这个 Range        println!("{} ", number);	// 输出结果为 3 2 1     }}
 ```
 
 
@@ -652,25 +584,7 @@ fn main() {
 ~~我写了一个最老实的版本发出来丢人~~（想看骚操作可以自行搜索引擎一下
 
 ```rust
-fn main() {
-    println!("The Twelve days of Christmas. ");
-
-    let days = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth", "eleventh", "twelfth"];
-    let gifts = ["And a partridge in a pear tree.", "Two turtle doves, ", "Three French hens, ", "Four calling birds, ", "Five golden rings, ", "Six geese a-laying, ", "Seven swans a-swimming, ", "Eight maids a-milking, ", "Nine ladies dancing, ", "Ten lords a-leaping, ", "Eleven pipers piping, ", "Twelve drummers drumming, "];
-
-    for i in 0..12 {
-        print!("On the {} day of Christmas, my true love sent to me: ", days[i]);
-        if i == 0 { println!("A partridge in a pear tree."); continue; }
-        else {
-            let mut j = i;
-            loop {
-                print!("{}", gifts[j]);
-                if j == 0 { println!(); break; }
-                else { j = j-1; }
-            }
-        }
-    }
-}
+fn main() {    println!("The Twelve days of Christmas. ");    let days = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth", "eleventh", "twelfth"];    let gifts = ["And a partridge in a pear tree.", "Two turtle doves, ", "Three French hens, ", "Four calling birds, ", "Five golden rings, ", "Six geese a-laying, ", "Seven swans a-swimming, ", "Eight maids a-milking, ", "Nine ladies dancing, ", "Ten lords a-leaping, ", "Eleven pipers piping, ", "Twelve drummers drumming, "];    for i in 0..12 {        print!("On the {} day of Christmas, my true love sent to me: ", days[i]);        if i == 0 { println!("A partridge in a pear tree."); continue; }        else {            let mut j = i;            loop {                print!("{}", gifts[j]);                if j == 0 { println!(); break; }                else { j = j-1; }            }        }    }}
 ```
 
 
@@ -704,12 +618,7 @@ Rust 不采用垃圾回收机制，而是通过 **所有权系统** 管理内存
 Rust 变量是否有效与作用域的关系类似其他编程语言：
 
 ```rust
-{	// s 在这里无效, 它尚未声明
-    let s = "hello";   // 从此处起，s 是有效的
-    
-    ……	// 使用 s
-    
-}	// 此作用域已结束，s 不再有效
+{	// s 在这里无效, 它尚未声明    let s = "hello";   // 从此处起，s 是有效的        ……	// 使用 s    }	// 此作用域已结束，s 不再有效
 ```
 
 
@@ -721,9 +630,7 @@ Rust 变量是否有效与作用域的关系类似其他编程语言：
 此处两个连用的冒号 `::` 是运算符，允许将特定的 `from` 函数置于 `String` 类型的命名空间下：
 
 ```rust
-let s = String::from("hello");
-s.push_str(", world!");		// 允许用 push_str() 在字符串后追加字面值
-println!("{}", s);			// 将打印 `hello, world!`
+let s = String::from("hello");s.push_str(", world!");		// 允许用 push_str() 在字符串后追加字面值println!("{}", s);			// 将打印 `hello, world!`
 ```
 
 Rust 采取的内存管理策略是：**内存在拥有它的变量离开作用域后，就被自动释放**。
@@ -737,10 +644,7 @@ Rust 采取的内存管理策略是：**内存在拥有它的变量离开作用�
 Rust 中的多个变量可以采用一种独特的方式与同一数据交互：
 
 ```rust
-let s1 = String::from("hello");
-let s2 = s1;
-
-println!("{}, world!", s1);
+let s1 = String::from("hello");let s2 = s1;println!("{}, world!", s1);
 ```
 
 以上代码会得到这样的报错信息，Rust 禁止使用无效的引用：
@@ -773,10 +677,7 @@ Rust **永远也不会自动创建数据的 “深拷贝”**，这里拷贝指�
 如果我们**确实需要深度复制 `String` 中堆上的数据**，可以使用一个叫做 `clone` 的通用函数：
 
 ```rust
-let s1 = String::from("hello");
-let s2 = s1.clone();
-
-println!("s1 = {}, s2 = {}", s1, s2);
+let s1 = String::from("hello");let s2 = s1.clone();println!("s1 = {}, s2 = {}", s1, s2);
 ```
 
 当看到 `clone` 调用时，应当充分理解有一些特定的代码被执行，而且这些代码可能相当消耗资源；
@@ -788,10 +689,7 @@ println!("s1 = {}, s2 = {}", s1, s2);
 这里没有调用 `clone`，不过 `x` 依然有效且没有被移动到 `y` 中：
 
 ```rust
-let x = 5;
-let y = x;
-
-println!("x = {}, y = {}", x, y);
+let x = 5;let y = x;println!("x = {}, y = {}", x, y);
 ```
 
 原因是，像整型这样的 **在编译时已知大小的类型** 被整个存储在 **栈** 上，所以拷贝其实际的值是快速的。这意味着没有理由在创建变量 `y` 后使 `x` 无效；
@@ -901,15 +799,7 @@ fn takes_and_gives_back(a_string: String) -> String {	// a_string 进入作用�
 因为 `calculate_length` 函数并不拥有这个值，所以引用离开作用域时，其指向的值 s 也不会被丢弃：
 
 ```rust
-fn main() {
-    let s1 = String::from("hello");
-    let len = calculate_length(&s1);
-    println!("The length of '{}' is {}.", s1, len);
-}
-
-fn calculate_length(s: &String) -> usize {	// 以 s 的引用作为参数，而不是获取值的所有权
-    s.len()
-}
+fn main() {    let s1 = String::from("hello");    let len = calculate_length(&s1);    println!("The length of '{}' is {}.", s1, len);}fn calculate_length(s: &String) -> usize {	// 以 s 的引用作为参数，而不是获取值的所有权    s.len()}
 ```
 
 
@@ -925,14 +815,7 @@ fn calculate_length(s: &String) -> usize {	// 以 s 的引用作为参数，而�
 写法上，把 `&s` 换成 `&mut s`，函数参数列表处也从 `&String` 换成 `&mut String` 即可：
 
 ```rust
-fn main() {
-    let mut s = String::from("hello");
-    change(&mut s);
-}
-
-fn change(some_string: &mut String) {
-    some_string.push_str(", world");
-}
+fn main() {    let mut s = String::from("hello");    change(&mut s);}fn change(some_string: &mut String) {    some_string.push_str(", world");}
 ```
 
 
@@ -960,18 +843,7 @@ slice 类型没有所有权，该类型允许你引用集合中一段连续的�
 这里有一个习题：编写一个函数，该函数接收一个字符串，并返回在该字符串中找到的第一个单词。如果函数在该字符串中并未找到空格，则整个字符串就是一个单词，返回整个字符串：
 
 ```rust
-fn first_word(s: &String) -> &str {
-    let bytes = s.as_bytes();	// 用 as_bytes 方法将 String 转化为字节数组
-    for (i, &item) in bytes.iter().enumerate() {
-        // 用 iter 方法在字节数组上创建一个迭代器
-        // 而 enumerate 包装了 iter 的结果
-        // 元组中的 i 是索引，而元组中的 &item 是单个字节
-        if item == b' ' {
-            return &s[0..i];	// 如果找到了一个空格，返回从开头到它的切片
-        }
-    }
-    &s[..]
-}
+fn first_word(s: &String) -> &str {    let bytes = s.as_bytes();	// 用 as_bytes 方法将 String 转化为字节数组    for (i, &item) in bytes.iter().enumerate() {        // 用 iter 方法在字节数组上创建一个迭代器        // 而 enumerate 包装了 iter 的结果        // 元组中的 i 是索引，而元组中的 &item 是单个字节        if item == b' ' {            return &s[0..i];	// 如果找到了一个空格，返回从开头到它的切片        }    }    &s[..]}
 ```
 
 
@@ -1025,14 +897,7 @@ struct User {
 创建结构体实例和使用 `.` 运算符修改字段的值：
 
 ```rust
-let mut user1 = User {
-    email: String::from("someone@example.com"),
-    username: String::from("someusername123"),
-    active: true,
-    sign_in_count: 1,
-};
-
-user1.email = String::from("anotheremail@example.com");	
+let mut user1 = User {    email: String::from("someone@example.com"),    username: String::from("someusername123"),    active: true,    sign_in_count: 1,};user1.email = String::from("anotheremail@example.com");	
 ```
 
 
@@ -1042,14 +907,7 @@ user1.email = String::from("anotheremail@example.com");
 变量与字段同名时，可以使用 **字段初始化简写语法**：
 
 ```rust
-fn build_user(email: String, username: String) -> User {
-    User {
-        email,		// 设置为 build_user 函数 email 参数的值
-        username,	// 设置为 build_user 函数 username 参数的值
-        active: true,
-        sign_in_count: 1,
-    }
-}
+fn build_user(email: String, username: String) -> User {    User {        email,		// 设置为 build_user 函数 email 参数的值        username,	// 设置为 build_user 函数 username 参数的值        active: true,        sign_in_count: 1,    }}
 ```
 
 
@@ -1059,22 +917,13 @@ fn build_user(email: String, username: String) -> User {
 适用场景：想要创建一个新的结构体实例，需要使用旧实例的大部分值，但要改变其中一部分；
 
 ```rust
-let user2 = User {
-    email: String::from("another@example.com"),
-    username: String::from("anotherusername567"),
-    active: user1.active,
-    sign_in_count: user1.sign_in_count,
-};
+let user2 = User {    email: String::from("another@example.com"),    username: String::from("anotherusername567"),    active: user1.active,    sign_in_count: user1.sign_in_count,};
 ```
 
 还可以使用 `..` 语法表示剩下的从 user1 中取得：
 
 ```rust
-let user2 = User {
-    email: String::from("another@example.com"),
-    username: String::from("anotherusername567"),
-    ..user1
-};
+let user2 = User {    email: String::from("another@example.com"),    username: String::from("anotherusername567"),    ..user1};
 ```
 
 
@@ -1130,7 +979,11 @@ Rust 中 **方法** 和 **函数** 是两个不同的概念：
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | 使用 `fn` 关键字和名称声明；<br>可以拥有参数和返回值，同时包含在某处调用该函数 / 方法时会执行的代码；<br> | 方法定义在结构体 / 枚举 / trait 的上下文中；<br>方法的第一个参数总是 `self`，代表调用该方法的实例本身；<br> |
 
-还是以之前的 `Rectangle` 结构体为例，为它增加一个求面积的方法 `area` ：
+
+
+#### `impl` 块
+
+还是以之前的 `Rectangle` 结构体为例，为它增加一个求面积的方法 `area` 、和一个比较两 `Rectangle` 大小的方法 `can_hold`：
 
 ```rust
 #[derive(Debug)]
@@ -1185,6 +1038,167 @@ impl Rectangle {
 // 调用时
 let sq = Rectangle::square(3);
 ```
+
+
+
+## 枚举 
+
+### 定义枚举类型
+
+任何一个 IP 地址，要么 IPv4 的、要么是 IPv6 的，而且不能两者都是，因此枚举数据结构非常适合这个场景，可以定义一个 `IpAddrKind` 枚举来表现这个概念并列出可能的 IP 地址类型，`V4` 和 `V6`：
+
+```rust
+enum IpAddrKind {
+    V4,
+    V6,
+}
+
+// 创建对象
+let four = IpAddrKind::V4;
+```
+
+
+
+可以将任意类型的数据放入枚举成员，这样之后就可以把它们放在一起处理：
+
+```rust
+struct Ipv4Addr {
+    // ... 
+}
+
+enum Message {
+    Quit,
+    Move { x: i32, y: i32 },
+    Write(String),
+    ChangeColor(i32, i32, i32),
+    V4(Ipv4Addr)
+}
+```
+
+
+
+### `Option` 枚举
+
+Rust 为限制空值的泛滥，不设 `null` ，而是用 `Option` 枚举类型表达一个值存在或不存在的概念：
+
+```rust
+// <T> 是泛型类型参数
+enum Option<T> {
+    Some(T),	
+    None,
+}
+
+let some_number = Some(5);
+let some_string = Some("a string");
+
+let absent_number: Option<i32> = None;	// 这里需要显式声明这个 Some 成员的类型
+```
+
+
+
+## 模式匹配
+
+### `match` 运算流控制符
+
+功能是将一个值与一系列的 **模式** 相比较，并根据相匹配的模式执行相应代码；
+
+1. 模式可由字面值、变量、通配符和许多其他内容构成；
+2. match 确保**所有可能的情况**都要得到处理，否则将报错 ^ pattern \`...\` not covered；
+3. 每个分支相关联的代码是一个 lambda 表达式；
+
+```rust
+fn value_in_cents(coin: Coin) -> u8 {
+    match coin {
+        Coin::Penny => {
+            println!("Lucky penny!");
+            1
+        },
+        Coin::Nickel => 5,
+        Coin::Dime => 10,
+        Coin::Quarter => 25,
+    }
+}
+```
+
+
+
+#### 用 match 匹配分支绑定值
+
+```rust
+fn value_in_cents(coin: Coin) -> u8 {
+    match coin {
+        Coin::Penny => 1,
+        Coin::Nickel => 5,
+        Coin::Dime => 10,
+        Coin::Quarter(state) => {	// 可以获取 Coin 枚举的 Quarter 成员中内部的州的值。
+            println!("State quarter from {:?}!", state);
+            25
+        },
+    }
+}
+```
+
+
+
+#### 用 match 匹配 Option\<T\>
+
+```rust
+fn plus_one(x: Option<i32>) -> Option<i32> {
+    match x {
+        None => None,
+        Some(i) => Some(i + 1),
+    }
+}
+
+let five = Some(5);			
+let six = plus_one(five);	// 6
+let none = plus_one(None);	// None
+```
+
+
+
+#### `_` 通配符
+
+`_` 模式会匹配所有的值，所以应该将其放置于其他分支之后（类似 C 的 default）
+
+```rust
+let some_u8_value = 0u8;
+match some_u8_value {
+    1 => println!("one"),
+    3 => println!("three"),
+    5 => println!("five"),
+    7 => println!("seven"),
+    _ => (),
+}
+```
+
+
+
+### `if let` 控制流
+
+适用情景：只匹配一个模式的值，忽略其他模式不用处理；
+
+1. 可以认为 `if let` 是 `match` 的一个语法糖；
+2. 可以在 `if let` 后接一个 `else` ，和 `match` 中的 `_` 通配符效果类似；
+
+```rust
+let some_u8_value = Some(0u8);
+
+// 用 match 控制：
+match some_u8_value {
+    Some(3) => println!("three"),
+    _ => (),
+}
+
+// 用 if let 控制：
+if let Some(3) = some_u8_value {
+    println!("three");
+}
+```
+
+
+
+
 
 
 
