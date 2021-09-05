@@ -444,7 +444,8 @@ fn main() {
     let a = [1, 2, 3, 4, 5];        
     let b: [i32; 5] = [1, 2, 3, 4, 5];        
     let c = [3; 5];	// 等效于 c = [3, 3, 3, 3, 3]        
-    let months = ["January", "February", "March", "April", "May", "June", "July",              "August", "September", "October", "November", "December"];
+    let months = ["January", "February", "March", "April", "May", "June", "July", 
+        "August", "September", "October", "November", "December"];
 }
 ```
 
@@ -522,8 +523,7 @@ fn main() {
     let number = 3;    
     if number < 5 {        
         println!("condition was true");    
-    } 
-    else {        
+    } else {        
         println!("condition was false");    
     }
 }
@@ -538,8 +538,7 @@ fn main() {
     let condition = true;    
     let number = if condition {	// 将 if 表达式的返回值赋给一个变量        
         5    
-    } 
-    else {        
+    } else {        
         6    
     };        
     println!("The value of number is: {}", number);
@@ -614,7 +613,7 @@ while number != 0 {
 
 
 
-### `for` - `in`循环
+### `for` - `in` 循环
 
 Rust 中最常用的循环；
 
@@ -641,20 +640,25 @@ fn main() {
 ```rust
 fn main() {    
     println!("The Twelve days of Christmas. ");    
-    let days = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth", "eleventh", "twelfth"];    
-    let gifts = ["And a partridge in a pear tree.", "Two turtle doves, ", "Three French hens, ", "Four calling birds, ", "Five golden rings, ", "Six geese a-laying, ", "Seven swans a-swimming, ", "Eight maids a-milking, ", "Nine ladies dancing, ", "Ten lords a-leaping, ", "Eleven pipers piping, ", "Twelve drummers drumming, "];    
+    let days = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", 
+        "eighth", "ninth", "tenth", "eleventh", "twelfth"];    
+    let gifts = ["And a partridge in a pear tree.", "Two turtle doves, ", 
+        "Three French hens, ", "Four calling birds, ", 
+        "Five golden rings, ", "Six geese a-laying, ", 
+        "Seven swans a-swimming, ", "Eight maids a-milking, ", 
+        "Nine ladies dancing, ", "Ten lords a-leaping, ", 
+        "Eleven pipers piping, ", "Twelve drummers drumming, "];    
     
     for i in 0..12 {        
         print!("On the {} day of Christmas, my true love sent to me: ", days[i]);   
         if i == 0 { 
             println!("A partridge in a pear tree."); continue; 
-        }        
-        else {            
+        } else {            
             let mut j = i;            
             loop {                
                 print!("{}", gifts[j]);                
                 if j == 0 { println!(); break; }                
-                else { j = j-1; }            
+                else { j -= 1; }            
             }        
         }    
     }
@@ -693,10 +697,8 @@ Rust 变量是否有效与作用域的关系类似其他编程语言：
 
 ```rust
 {	// s 在这里无效, 它尚未声明    
-    let s = "hello";   
-    // 从此处起，s 是有效的        
-    ……	
-    // 使用 s    
+    let s = "hello";	// 从此处起，s 是有效的        
+    ……					// 使用 s    
 }	// 此作用域已结束，s 不再有效
 ```
 
@@ -709,10 +711,11 @@ Rust 变量是否有效与作用域的关系类似其他编程语言：
 此处两个连用的冒号 `::` 是运算符，允许将特定的 `from` 函数置于 `String` 类型的命名空间下：
 
 ```rust
-let s = String::from("hello");s.push_str(", world!");		
 // 允许用 push_str() 在字符串后追加字面值
-println!("{}", s);			
+let s = String::from("hello");s.push_str(", world!");		
+
 // 将打印 `hello, world!`
+println!("{}", s);			
 ```
 
 Rust 采取的内存管理策略是：**内存在拥有它的变量离开作用域后，就被自动释放**。

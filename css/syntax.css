@@ -38,9 +38,9 @@
 .highlight .ld { color: #a7b0ff } /* Literal.Date */
 .highlight .m { color: #a7b0ff } /* Literal.Number */
 .highlight .s { color: #ffd000 } /* Literal.String */
-.highlight .na { color: #d6e22e } /* Name.Attribute */
+.highlight .na { color: #ffd000 } /* Name.Attribute */
 .highlight .nb { color: #f8f8f2 } /* Name.Builtin */
-.highlight .nc { color: #f692ff } /* Name.Class */
+.highlight .nc { color: #ffd000 } /* Name.Class */
 .highlight .no { color: #ffd000 } /* Name.Constant */
 .highlight .nd { color: #2ee2ac } /* Name.Decorator */
 .highlight .ni { color: #ff9047 } /* Name.Entity */
