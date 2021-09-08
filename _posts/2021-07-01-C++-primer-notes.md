@@ -17,9 +17,7 @@ tags:								    # 标签
 
    在我的博客这里，因为图太多+ GitHub 图床在大陆访问速度堪忧，预览效果非常烂……
    
-   所以有需要请直接去 [GitHub仓库页](https://github.com/Sayaka-4987/Notes_for_BJTU_Finals) 里看 markdown 格式或 PDF 发布版
-   
-   下不了/打不开就科学上网，或者用油猴插件，再不会你微信找我，我给你传一份
+   所以有需要请直接去 [GitHub仓库页](https://github.com/Sayaka-4987/Notes_for_BJTU_Finals) 里看 markdown 格式或 PDF 发布版，下不了/打不开就科学上网，或者用油猴插件，再不会你微信找我，我给你传一份
    
    
    
