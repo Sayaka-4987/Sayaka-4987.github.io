@@ -15,6 +15,8 @@ tags:								    # 标签
 
 ### 编程学习
 
+- [一个Linux 发行版——YunoHost](https://yunohost.org/en/apps?q=%2Fapps)
+
 - [彻底搞懂如何使用 Hexo\+GitHubPages 搭建个人博客](https://juejin.cn/post/6844904131266609165)
 
   (注：我用的是 Jekyll，但我觉得 Hexo 更好)
