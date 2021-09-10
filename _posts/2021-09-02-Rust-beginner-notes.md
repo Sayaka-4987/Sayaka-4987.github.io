@@ -15,9 +15,13 @@ tags:								    # 标签
 
 # Rust 学习笔记
 
-主要内容来自 [Rust 程序设计语言 简体中文版](http://120.78.128.153/rustbook/) 和 [Rust 教程 \| 菜鸟教程](https://www.runoob.com/rust/rust-tutorial.html) 
+主要内容来自
 
-建议有 C++ / Java 基础再阅读
+-  [Rust 程序设计语言 简体中文版](http://120.78.128.153/rustbook/) 
+-  [Rust 教程 \| 菜鸟教程](https://www.runoob.com/rust/rust-tutorial.html) 
+-  [《Rust 高级编程》译本](https://learnku.com/docs/nomicon/2018/)
+
+建议有 C++ / Java 基础再阅读；
 
 
 
@@ -1348,23 +1352,221 @@ if let Some(3) = some_u8_value {
 
 ### 包和 crate
 
-`crate` 是一个二进制项或者库；
+- `crate` 是一个二进制项或者库；
+- `crate root` 是一个源文件，Rust 编译器以它为起始点，并构成 `crate` 的根模块；
+- `包(package)` 是提供一系列功能的一个或者多个 `crate` ；
+  - 一个包中至多 **只能** 包含一个 库 crate (library crate)；
+  - 包中可以包含任意多个 二进制 crate (binary crate)；
+  - 包中至少包含一个 crate，无论是库的还是二进制的。
 
-`crate root` 是一个源文件，Rust 编译器以它为起始点，并构成 `crate` 的根模块；
-
-`包（package）` 是提供一系列功能的一个或者多个 `crate` ；
-
-
-
-
-
+- 一个 `crate` 会将一个作用域内的相关功能组织在一起，使该功能可以很方便地在多个项目之间共享；
 
 
 
+### Rust 的可见性
+
+1. Rust 中默认所有项都是私有的；
+2. 私有性规则适用于模块、结构体、枚举、函数和方法；
+3. 父模块中的项不能使用子模块中的私有项，但是子模块中的项可以使用他们父模块中的项（子模块可以看到它们定义的上下文）；
+4. 在模块（或结构体）定义前加 `pub` 关键字，这个模块（或结构体）会变成公有的，但是这个模块的内容（或结构体的字段）仍然是私有的，不会让它包含的东西同时变为公有；
 
 
 
+### `mod` 定义模块
 
+特点：
+
+1. 可以将一个 crate 中的代码进行分组，以提高可读性与重用性；
+2. 模块可以控制其中内容的作用域、可见性（public 或 private）；
+3. 用 `mod` 关键字定义一个模块：
+
+```rust
+/* 例：餐厅前台
+crate 
+ └── front_of_house
+     ├── hosting
+     │   ├── add_to_waitlist
+     │   └── seat_at_table
+     └── serving
+         ├── take_order
+         ├── serve_order
+         └── take_payment
+*/
+
+mod front_of_house {
+    mod hosting {
+        fn add_to_waitlist() {}
+        fn seat_at_table() {}
+    }
+
+    mod serving {
+        fn take_order() {}
+        fn server_order() {}
+        fn take_payment() {}
+    }
+}   
+```
+
+
+
+### 路径
+
+Rust 使用路径在模块树中找到一个项的位置：
+
+路径的两种形式：
+
+1. 绝对路径（*absolute path*），从 crate 根开始，以 crate 名或者字面值 `crate` 开头；
+2. 相对路径（*relative path*），从当前模块开始，以 `self`、`super` 或当前模块的标识符开头；
+
+```rust
+mod front_of_house {
+    // 必须加上这两个 pub 关键字使得 add_to_waitlist() 可见
+    pub mod hosting {
+        pub fn add_to_waitlist() {}		
+    }
+}
+
+pub fn eat_at_restaurant() {
+    // 使用绝对路径
+    crate::front_of_house::hosting::add_to_waitlist();
+
+    // 使用相对路径
+    front_of_house::hosting::add_to_waitlist();
+}
+```
+
+
+
+#### 用 `super` 访问父模块开始的相对路径
+
+```rust
+fn serve_order() {}
+
+mod back_of_house {
+    fn fix_incorrect_order() {
+        cook_order();
+        super::serve_order();	//  使用以 super 开头的相对路径从父目录开始调用函数
+    }
+
+    fn cook_order() {}
+}
+```
+
+
+
+#### `use` 关键字将名称引入作用域
+
+```rust
+mod front_of_house {
+    pub mod hosting {
+        pub fn add_to_waitlist() {}
+    }
+}
+
+	……
+
+// 将 crate::front_of_house::hosting 模块引入了 eat_at_restaurant 函数的作用域
+use crate::front_of_house::hosting;
+
+pub fn eat_at_restaurant() {
+    hosting::add_to_waitlist();
+    hosting::add_to_waitlist();
+    hosting::add_to_waitlist();
+}
+
+// 将 HashMap 引入作用域的习惯用法
+use std::collections::HashMap;
+
+fn main() {
+    let mut map = HashMap::new();
+    map.insert(1, 2);
+}
+```
+
+
+
+#### `as` 关键字指定别名
+
+例：`std::fmt` 和 `std::io` 拥有两个具有相同名称但父模块不同的 `Result` 类型；
+
+```rust
+use std::fmt::Result;
+use std::io::Result as IoResult;
+
+fn function1() -> Result {
+    // --snip--
+}
+
+fn function2() -> IoResult<()> {
+    // --snip--
+}
+```
+
+
+
+#### `pub use` 重导出名称
+
+在 Rust 中，当我们使用 `use` 关键字将名称导入作用域时，在该作用域中，这个名称是私有的；
+
+使用 `pub use` 关键字可以指定一条 **公有的** 访问路径别名，使得该路径下名称可见；
+
+```rust
+mod front_of_house {
+    pub mod hosting {
+        pub fn add_to_waitlist() {}
+    }
+}
+
+// 重导出名称
+pub use crate::front_of_house::hosting;
+
+pub fn eat_at_restaurant() {
+    hosting::add_to_waitlist();
+}
+```
+
+
+
+#### 嵌套路径和全部引用的写法
+
+```rust
+// 等效于 use std::io; use std::io::Write;
+use std::io::{self, Write};
+
+// 将把该路径下所有公有项引入作用域，可以指定路径后跟 *，glob 运算符：
+use std::collections::*;
+```
+
+
+
+### 引入外部包的流程
+
+回忆之前的猜数字游戏，使用了外部包 `rand` 生成随机数；
+
+1. 为了在项目中使用 `rand`，在 *Cargo.toml* 中加入了如下行，使得 Cargo 知道要从 [crates.io](https://crates.io) 下载 `rand` 和其依赖，使其可在项目代码中使用。
+
+```toml
+[dependencies]
+rand = "0.5.5"
+```
+
+2. 为了将 `rand` 定义引入项目包的作用域，我们加入一行 `use` 起始的包名，它以 `rand` 包名开头，并列出了需要引入作用域的项 Rng ；
+
+```rust
+use rand::Rng;
+
+fn main() {
+    let secret_number = rand::thread_rng().gen_range(1, 101);
+}
+```
+
+
+
+注意：标准库 `std` 对于你的包来说也是外部 crate，只是不需要修改 Cargo.toml 来引入，但需要通过 `use` 将标准库中定义的项引入项目包；
+
+
+
+## （这部分不是最新，上一个标题是更新进度）
 
 
 
