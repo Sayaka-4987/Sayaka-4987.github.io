@@ -17,6 +17,7 @@ tags:								    # 标签
 
 - 转载自各种网络教程，整理自用；
 - 还是老一套免责声明：我太菜了，没法保证内容不出错，欢迎各位神仙大佬拍砖；
+- 若出现报错 `ERROR 1064` 请首先注意关键字的字母 **拼写问题**；
 - SQL 的关键字默认不区分大小写，本文只是为了 **突出显示哪些是 SQL 的关键字** 才采用大写~~（可把我别扭坏了）~~；
 
 
@@ -223,7 +224,7 @@ ALTER TABLE 表名 ADD COLUMN [字段名] [数据类型] [列属性] [位置];
 
 
 
-示例，位置默认是 `AFTER` 最后一个字段：
+示例，增加名为 runoob_likes 的字段，位置默认是 `AFTER` 最后一个字段：
 
 ```sql
 ALTER TABLE runoob_table ADD COLUMN runoob_likes int unsigned;
@@ -239,11 +240,15 @@ ALTER TABLE 表名 MODIFY [字段名] [数据类型] [列属性];
 
 #### 重命名字段
 
+使用 `CHANGE` 关键字：
+
 ```sql
 ALTER TABLE 表名 CHANGE [旧字段] [新字段名] [新数据类型(必选)] [属性];
 ```
 
 #### 删除字段
+
+使用 `DROP` 关键字：
 
 ```sql
 ALTER TABLE 表名 DROP [字段名]
@@ -314,6 +319,8 @@ SELECT * FROM students WHERE id<5 AND age>20; 　-- 查询id小于5且年龄大�
 
 
 ### `UPDATE` 更新数据
+
+通用语法：
 
 ```sql
 UPDATE 表名 SET 字段1=新值1, 字段2=新值2 [WHERE Clause];
