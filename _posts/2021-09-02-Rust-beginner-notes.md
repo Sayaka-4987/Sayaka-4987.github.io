@@ -1566,11 +1566,158 @@ fn main() {
 
 
 
-## （这部分不是最新，上一个标题是更新进度）
+### 将模块分割进不同文件
+
+（这里没完全懂，但是发现~~可以跟着 IDE 提示走~~……）
+
+```rust
+// src/lib.rs 文件内容如下：
+
+// 使用分号而不是代码块，告诉 Rust 在另一个与模块同名的文件中加载模块的内容
+mod front_of_house;	
+
+// 声明 front_of_house 模块，其内容将位于 src/front_of_house.rs
+pub use crate::front_of_house::hosting;	
+
+pub fn eat_at_restaurant() {
+    hosting::add_to_waitlist();
+    hosting::add_to_waitlist();
+    hosting::add_to_waitlist();
+}
+```
 
 
 
-## 输入输出
+```rust
+// src/front_of_house.rs 文件内容如下：
+
+// 获取 front_of_house 模块的定义内容，将 hosting 模块也提取到自己的文件中
+pub mod hosting {
+    pub fn add_to_waitlist() {}
+}
+```
+
+
+
+## 集合
+
+[Module std::collections](https://doc.rust-lang.org/stable/std/collections/)
+
+Rust 的集合可以分为四大类：
+
+| 类型              | 实例                      |
+| ----------------- | ------------------------- |
+| 序列（Sequences） | Vec, VecDeque, LinkedList |
+| 图（Maps）        | HashMap, BTreeMap         |
+| 集合（Sets）      | HashSet, BTreeSet         |
+| 其他              | BinaryHeap                |
+
+
+
+###  `Vec<T>` 类型（vector）
+
+1. 编译时必须准确的知道储存每个元素到底需要多少内存；
+
+2. 适用于储存多于一个的值，所有的值在内存中彼此相邻地排列；
+
+3. 只能储存相同类型的值；
+
+   
+
+#### 创建 `vector` 对象
+
+```rust
+// 方法1. 指定类型并调用 Vec::new() 函数
+let v: Vec<i32> = Vec::new();
+
+// 方法2. 初始化的 vector
+let v = vec![1, 2, 3];
+```
+
+类似其他数据结构， vector 离开作用域时会被释放；
+
+
+
+#### 更新 `vector` 
+
+```rust
+let mut v = Vec::new();
+// 使用 push 方法向 vector 增加值
+v.push(5);
+v.push(6);
+v.push(7);
+v.push(8);
+```
+
+
+
+#### 访问 `vector` 
+
+```rust
+let v = vec![1, 2, 3, 4, 5];
+```
+
+对于一个这样的 vector，有两种访问值的方法：
+
+1. **索引语法**，下标从 0 开始，使用 & 和 [] 返回一个引用；
+2. **get() 方法**，返回一个 Option<&T>；
+
+```rust
+let third: &i32 = &v[2];
+println!("The third element is {}", third);
+```
+
+```rust
+match v.get(2) {
+    Some(third) => println!("The third element is {}", third),
+    None => println!("There is no third element."),
+}
+```
+
+前者在引用失败时将发生 `panic` ，而后者只会返回一个 None 对象；
+
+
+
+#### 遍历 `vector`  
+
+两种方法：
+
+1. 通过 `for` 循环遍历 vector 的元素；
+2. 遍历 vector 中元素的**可变引用**；
+
+```rust
+let v = vec![100, 32, 57];
+for i in &v {
+    println!("{}", i);
+}
+
+let mut v = vec![100, 32, 57];
+for i in &mut v {
+    *i += 50;	// 解引用运算符 *，目前看起来和 C/C++ 差不多
+}
+```
+
+
+
+#### 用 vector 储存包含多种类型的枚举
+
+```rust
+enum SpreadsheetCell {
+    Int(i32),
+    Float(f64),
+    Text(String),
+}
+
+let row = vec![
+    SpreadsheetCell::Int(3),
+    SpreadsheetCell::Text(String::from("blue")),
+    SpreadsheetCell::Float(10.12),
+];
+```
+
+
+
+## 输入输出（这部分不是最新，上一个标题是更新进度）
 
 ### 命令行输出
 
