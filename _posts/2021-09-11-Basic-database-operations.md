@@ -101,6 +101,8 @@ mysql> SHOW DATABASES LIKE "%schema%";
 ALTER DATABASE 数据库名 [库选项名=值];
 ```
 
+
+
 使用示例：
 
 ```sql
@@ -121,6 +123,8 @@ Query OK, 1 row affected (0.02 sec)
 ```sql
 CREATE TABLE 表名 (字段名 字段类型);
 ```
+
+
 
 也可以用 `.` 运算符将数据库表创建到指定的数据库下:
 
@@ -216,6 +220,8 @@ ALTER TABLE 表名 CHARSET=GBK;
 ```sql
 ALTER TABLE 表名 ADD COLUMN [字段名] [数据类型] [列属性] [位置];
 ```
+
+
 
 示例，位置默认是 `AFTER` 最后一个字段：
 
