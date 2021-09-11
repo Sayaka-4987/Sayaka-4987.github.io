@@ -28,14 +28,14 @@ tags:								    # 标签
 #### 新建数据库
 
 ```sql
-CREATE DATABASE the_database_name；
+CREATE DATABASE 数据库名；
 ```
 
 可后接库选项：
 
 ```sql
 CREATE DATABASE 
-IF NOT EXISTS the_database_name 				-- 如果数据库不存在则创建，存在则不创建
+IF NOT EXISTS 数据库名 	-- 如果数据库不存在则创建，存在则不创建
 DEFAULT CHARSET utf8 COLLATE utf8_general_ci;	-- 设定编码集为utf8
 ```
 
@@ -44,7 +44,7 @@ DEFAULT CHARSET utf8 COLLATE utf8_general_ci;	-- 设定编码集为utf8
 ### `DROP` 删除
 
 ```sql
-DROP DATABASE the_database_name;
+DROP DATABASE 数据库名;
 ```
 
 
@@ -97,14 +97,14 @@ mysql> SHOW DATABASES LIKE "%schema%";
 
 数据库的名字不可修改，仅允许修改字符集（CHARSET）和校对集（COLLATE）选项：
 
-```SQL
-ALTER DATABASE the_database_name [库选项名=值];
+```sql
+ALTER DATABASE 数据库名 [库选项名=值];
 ```
 
 使用示例：
 
 ```sql
-mysql> ALTER DATABASE RUNOOB CHARSET = GBK;
+mysql> ALTER DATABASE RUNOOB CHARSET = gbk;
 Query OK, 1 row affected (0.02 sec)
 ```
 
@@ -116,23 +116,23 @@ Query OK, 1 row affected (0.02 sec)
 
 #### 通用语法
 
-需要先 `use database_name` 进入一个数据库：
+需要先 `use 数据库名` 进入一个数据库：
 
-```SQL
-CREATE TABLE the_table_name (column_name column_type);
+```sql
+CREATE TABLE 表名 (字段名 字段类型);
 ```
 
 也可以用 `.` 运算符将数据库表创建到指定的数据库下:
 
 ```sql
-CREATE TABLE database_name.table_name (column_name column_type);
+CREATE TABLE 数据库名.表名 (字段名 字段类型);
 ```
 
 
 
 #### 设置更多属性
 
-注意这里都不是单引号，是键盘上 1 左边那个 \` 反单引号（backquote），否则会报错 ERROR 1064 (42000): You have an error in your SQL syntax；
+注意这里都不是单引号，是键盘上 1 左边那个 \` 反单引号（backquote），否则会报错 `ERROR 1064 (42000): You have an error in your SQL syntax；`
 
 ```sql
 CREATE TABLE IF NOT EXISTS `runoob_tbl`(
@@ -151,14 +151,14 @@ CREATE TABLE IF NOT EXISTS `runoob_tbl`(
 可以一次性删除多张表:
 
 ```sql
-drop table table_name1,table_name2....;	
+drop table 表名1,表名2....;	
 ```
 
 
 
 ### `SHOW` 查询
 
-需要先 `use database_name` 进入一个数据库；
+需要先 `use 数据库名` 进入一个数据库；
 
 #### 查看所有表
 
@@ -177,42 +177,44 @@ pattern 模式写法和对数据库一样；
 SHOW TABLES LIKE "pattern";
 ```
 
-#### 查看表中的字段信息 
 
-`DES` 、 `DESCRIBE` 、 `SHOW`  三个关键字均可，但写法有细微区别：
+
+### `DESC` 查看表中的字段信息 
+
+`DESC` 、 `DESCRIBE` 、 `SHOW`  三个关键字均可，但写法有细微区别：
 
 ```sql
-DESC the_table_name;
+DESC 表名;
 
-DESCRIBE the_table_name;
+DESCRIBE 表名;
 
-SHOW COLUMNS FROM the_table_name;
+SHOW COLUMNS FROM 表名;
 ```
 
 
 
 ### `ALTER` 修改
 
-需要先 `use database_name` 进入一个数据库，或把 `table_name` 换成能指定操作的表在哪个数据库里的 `database_name.table_name` ：
+需要先 `use 数据库名` 进入一个数据库，或把 `表名` 换成能指定操作的表在哪个数据库里的 `数据库名.表名` ：
 
 #### 修改表名和选项
 
 改名：
 
 ```sql
-RENAME TABLE old_name TO new_name;
+RENAME TABLE 旧表名 TO 新表名;
 ```
 
 修改属性选项：
 
 ```sql
-ALTER TABLE the_table_name CHARSET=GBK;
+ALTER TABLE 表名 CHARSET=GBK;
 ```
 
 #### 增加字段
 
-```SQL
-ALTER TABLE the_table_name ADD COLUMN [字段名] [数据类型] [列属性] [位置];
+```sql
+ALTER TABLE 表名 ADD COLUMN [字段名] [数据类型] [列属性] [位置];
 ```
 
 示例，位置默认是 `AFTER` 最后一个字段：
@@ -226,24 +228,98 @@ ALTER TABLE runoob_table ADD COLUMN runoob_likes int unsigned;
 通常是修改属性或者修改数据类型：
 
 ```sql
-ALTER TABLE the_table_name MODIFY [字段名] [数据类型] [列属性];
+ALTER TABLE 表名 MODIFY [字段名] [数据类型] [列属性];
 ```
 
 #### 重命名字段
 
 ```sql
-ALTER TABLE the_table_name CHANGE [旧字段] [新字段名] [数据类型] [属性];
+ALTER TABLE 表名 CHANGE [旧字段] [新字段名] [新数据类型(必选)] [属性];
 ```
 
 #### 删除字段
 
 ```sql
-ALTER TABLE the_table_name DROP [字段名]
+ALTER TABLE 表名 DROP [字段名]
 ```
 
 
 
 ## 对表中信息的操作
+
+### `INSERT` 插入数据
+
+```sql
+INSERT INTO 表名 (字段名1, 字段名2 ...) VALUES (值1, 值2, 值3 ..);
+```
+
+可以批量写入，也可以不给出所有值，示例：
+
+```sql
+INSERT INTO product (pname, price) VALUES
+	('智能机器人',25999.22),
+	('彩色电视',1250.36),
+	('沙发',58899.02)
+
+INSERT INTO runoob_table (runoob_title, runoob_author, submission_date) VALUES
+    ("Hello MySQL!", "Alice", curtime());
+```
+
+### 删除表中数据
+
+#### `DELETE` 关键字
+
+`DELETE` 会一条一条删除指定的数据，而且不会清空自动自增的 `auto_increment` 记录数；
+
+```sql
+DELETE FROM 表名 [WHERE 条件];
+```
+
+#### `TRUNCATE` 关键字
+
+`TRUNCATE` 会直接将表删除，重新建表：
+
+```sql
+TRUNCATE TABLE 表名;
+```
+
+
+
+### `SELECT` 查询数据
+
+通用语法：
+
+```sql
+SELECT [字段名列表，或 * ] FROM 表名 [WHERE 条件] [LIMIT N] [OFFSET M]
+```
+
+#### `WHERE` 关键词指定查询条件
+
+- 支持 "where 列名 = 值" 这种名等于值的查询形式；
+- 支持一般的比较运算符，例如  =、>、<、>=、<、!= ，以及一些扩展运算符 is [not] null、in、like 等；
+- 可以对查询条件使用 or 和 and 进行  **组合查询** ；
+
+```sql
+SELECT * FROM students WHERE name="张三";
+
+SELECT * FROM students WHERE id<5 AND age>20; 　-- 查询id小于5且年龄大于20的所有人信息:
+```
+
+
+
+### `UPDATE` 更新数据
+
+```sql
+UPDATE 表名 SET 字段1=新值1, 字段2=新值2 [WHERE Clause];
+```
+
+
+
+
+
+
+
+
 
 
 
