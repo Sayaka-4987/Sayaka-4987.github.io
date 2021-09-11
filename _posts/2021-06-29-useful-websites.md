@@ -59,11 +59,13 @@ tags:								    # 标签
 
 ### 糊弄报告
 
+- [申论生成器](https://sojo.im/slscq/)
+
 - [中国知网高校/机构外部访问系统 (cnki.net)](https://fsso.cnki.net/)
 
 - [彩云小梦尝鲜版 (caiyunai.com)](http://if.caiyunai.com/dream/#/)
 
-- [秘塔写作猫 (xiezuocat.com)](https://xiezuocat.com/#/) （感谢ZX提供）
+- [秘塔写作猫 (xiezuocat.com)](https://xiezuocat.com/#/) （感谢 ZX 提供）
 
 - [PaperAsk官网-降低论文重复率软件](https://www.paperask.com/) （每天只有一次免费查重机会）
 
@@ -77,7 +79,7 @@ tags:								    # 标签
 
 - [QPR四步自杀预防](https://weibo.com/ttarticle/x/m/show/id/2309404285239156452369?_wb_client_=1) （希望大家都用不上，但希望大家都存一份）
 
-- [Everything\_文件查找工具](https://voidtools.com/zh-cn/) （也是看ZX用了2333）
+- [Everything\_文件查找工具](https://voidtools.com/zh-cn/) （也是看 ZX 用了2333）
 
 - [如何自制猫食](https://zh.wikihow.com/养猫)
 
