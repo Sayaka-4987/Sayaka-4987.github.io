@@ -87,6 +87,8 @@ tags:								    # 标签
 
 ### 躺平/摸鱼/玩游戏
 
+- [使用dosbox玩游戏](https://github.com/dosasm/masm-tasm/wiki/playgame)
+
 - [5种方法来装病 wikiHow](https://zh.wikihow.com/装病) 
 
 - [生成损坏文件\_File Destructor 2.0 - Hype Magazine (xnet.se)](http://www.xnet.se/fd/)
