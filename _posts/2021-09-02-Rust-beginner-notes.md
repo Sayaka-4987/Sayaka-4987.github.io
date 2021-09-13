@@ -1382,7 +1382,7 @@ if let Some(3) = some_u8_value {
 
 ```rust
 /* 例：餐厅前台
-crate 
+crate
  └── front_of_house
      ├── hosting
      │   ├── add_to_waitlist
@@ -1463,7 +1463,7 @@ mod front_of_house {
     }
 }
 
-	……
+	// ... 
 
 // 将 crate::front_of_house::hosting 模块引入了 eat_at_restaurant 函数的作用域
 use crate::front_of_house::hosting;
@@ -1494,11 +1494,11 @@ use std::fmt::Result;
 use std::io::Result as IoResult;
 
 fn function1() -> Result {
-    // --snip--
+    // ... 
 }
 
 fn function2() -> IoResult<()> {
-    // --snip--
+    // ... 
 }
 ```
 
@@ -1714,6 +1714,142 @@ let row = vec![
     SpreadsheetCell::Float(10.12),
 ];
 ```
+
+
+
+### Rust 的字符串
+
+Rust 的核心语言中只有一种字符串类型：`str` ，还有 `str` 衍生出的字符串 slice 类型：`&str`
+
+标准库提供 `String` 类型，这是一种可增长的、可变的、有所有权的、UTF-8 编码（slice 也是）的字符串类型；
+
+标准库中还包含一系列其他字符串类型，比如 `OsString`、`OsStr`、`CString` 和 `CStr`；
+
+
+
+#### 字符串在内存中如何储存
+
+`String` 是一个 `Vec<u8>` 的封装；
+
+对于 Rust，事实上有三种相关方式可以理解字符串：字节、标量值和字形簇；
+
+索引操作预期总是需要常数时间 O(1)，但是，对于 `String` 不可能保证这样的性能，因为 Rust 必须从开头到索引位置遍历一次来确定有多少有效的字符，因此，Rust 不允许使用索引获取 `String` 字符；
+
+```rust
+let len = String::from("Hola").len();	// 运行结果是 4
+```
+
+
+
+#### 新建字符串
+
+```rust
+// 1. 以 new 函数创建字符串
+let mut s = String::new();
+
+// 2. to_string 方法用于字符串字面值：
+let s = "initial contents".to_string();
+
+// 3. 
+let s = String::from("initial contents");
+```
+
+
+
+#### 修改字符串
+
+可以使用 `+` 运算符或 `format!` 宏来拼接 `String` ；
+
+可以通过 `push_str` 方法和 `push` 方法来附加字符串 slice，从而使 `String` 变长；
+
+```rust
+let s1 = String::from("Hello, ");
+let s2 = String::from("world!");
+let s3 = s1 + &s2;	
+// 注意：此时 s1 已经被移动了，不能继续使用；s2 仍然有效，因为 add 没有获取参数的所有权
+
+let s1 = String::from("tic");
+let s2 = String::from("tac");
+let s3 = String::from("toe");
+let s = format!("{}-{}-{}", s1, s2, s3);	// 使用 format! 宏做复杂的字符串拼接
+
+let mut s1 = String::from("foo");
+let s2 = "bar";
+s1.push_str(s2);
+println!("s2 is {}", s2);	// s2 仍可使用，说明 push_str 并没有转移 s2 的所有权
+
+let mut s = String::from("lo");
+s.push('l');
+```
+
+
+
+#### 字符串切片
+
+字符串索引应该返回的类型是不明确的：字节值、字符、字形簇或者字符串 slice；
+
+如果真的希望使用索引创建字符串 slice 时，可以使用 `[]` 和一个 range 来创建含特定字节的字符串 slice：
+
+```rust
+let hello = "Здравствуйте";
+// 这种字母是两个字节长的，所以 s 将会是 “Зд”。
+let s = &hello[0..4];
+```
+
+
+
+#### 遍历字符串的方法
+
+标准库只提供了访问单独的 Unicode 标量值的 `chars()` 方法，和访问每一个原始字节的 `bytes()` 方法，没有提供从字符串中获取字形簇的方法：
+
+```rust
+for c in "नमस्ते".chars() {
+    println!("{}", c);
+}
+
+for b in "नमस्ते".bytes() {
+    println!("{}", b);
+}
+```
+
+
+
+### `HashMap<K, V>` 类型
+
+`HashMap` 是最不常用的，所以并没有被 prelude 自动引用；
+
+键值对被插入哈希表后，所有权就转移给哈希表；
+
+#### 创建哈希表对象
+
+第一种方法：
+
+```rust
+use std::collections::HashMap;	// HashMap 需要手动引入
+
+let mut scores = HashMap::new();	// 使用 new 创建一个空的 HashMap
+
+scores.insert(String::from("Blue"), 10);	//  使用 insert 增加元素
+scores.insert(String::from("Yellow"), 50);
+```
+
+第二种方法是使用一个元组的 vector 的 `collect` 方法：
+
+```rust
+use std::collections::HashMap;
+
+let teams  = vec![String::from("Blue"), String::from("Yellow")];
+let initial_scores = vec![10, 50];
+
+// 使用 zip 方法来创建一个元组的 vector，其中 “Blue” 与 10 是一对，然后使用 collect 方法将这个元组 vector 转换成一个 HashMap
+let scores: HashMap<_, _> = teams.iter().zip(initial_scores.iter()).collect();
+```
+
+
+
+
+
+
 
 
 
