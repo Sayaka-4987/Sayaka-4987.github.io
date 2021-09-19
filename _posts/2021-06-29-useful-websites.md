@@ -87,6 +87,8 @@ tags:								    # 标签
 
 ### 躺平/摸鱼/玩游戏
 
+- [微伞小游戏，内含合成大西瓜](http://www.wesane.com/)
+
 - [使用dosbox玩游戏](https://github.com/dosasm/masm-tasm/wiki/playgame)
 
 - [5种方法来装病 wikiHow](https://zh.wikihow.com/装病) 
