@@ -42,8 +42,26 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-
+ ……
 ```
+
+
+
+## 输入输出
+
+### 命令行输出
+
+`println!()` 和 `print!()` 都是命令行输出字符串的方法，第一个参数是格式字符串，后面是一串可变参数；
+
+Rust 中格式字符串中的占位符是一对 `{}` ，在 `{}` 之间还可以放一个数字，意义是将把之后的一串可变参数当作一个数组访问，填入的这个数字就是数组下标，从 0 开始；
+
+```rust
+fn main() {
+    println!("a is {0}, a again is {0}", a); 
+}
+```
+
+想用原来的 `{` 和 `}` 需要打成 `{{` 和 `}}` ，其他转义字符还是前面加一个 `\` ；
 
 
 
@@ -1958,7 +1976,9 @@ Rust 将错误组合成两个主要类别：**可恢复错误**（recoverable）
 
 可恢复错误通常代表向用户报告错误和提示重试操作的情况，比如未找到文件。不可恢复错误通常是 bug 的同义词，比如尝试访问超过数组结尾的位置。Rust 并没有异常，只有可恢复错误 `Result<T, E>` ，和不可恢复错误 `panic!` （遇到错误时停止程序执行）；
 
-### `panic!` 宏和不可恢复错误
+
+
+### `panic!` 宏和不可恢复的错误
 
 当执行 `panic!` 这个宏时，程序会打印出一个错误信息，展开并回溯栈，清理它遇到的每一个函数的数据，然后退出；
 
@@ -1980,31 +2000,200 @@ stack backtrace:
 */             
 ```
 
+可以设置 `RUST_BACKTRACE` 环境变量为非 0 值，从而得到一个 backtrace；
+
+```powershell
+$ RUST_BACKTRACE=1 cargo run
+```
 
 
 
+#### Rust 的 backtrace 
+
+跟其他语言中的一样，backtrace 包括程序从开始到执行到目前代码位置的过程中所有被调用的函数；
+
+- 阅读 backtrace 的关键是从头开始读，直到发现 **自己编写的文件**，就是问题的发源地；
+
+- 这一行之上是你的代码所调用的代码，往下则是调用你的代码的代码；
+- 这些行可能包含核心 Rust 代码，标准库代码或用到的 crate 代码；
 
 
 
+### `Result` 与可恢复的错误
 
-
-
-
-## 输入输出（这部分不是最新，上一个标题是更新进度）
-
-### 命令行输出
-
-`println!()` 和 `print!()` 都是命令行输出字符串的方法，第一个参数是格式字符串，后面是一串可变参数；
-
-Rust 中格式字符串中的占位符是一对 `{}` ，在 `{}` 之间还可以放一个数字，意义是将把之后的一串可变参数当作一个数组访问，填入的这个数字就是数组下标，从 0 开始；
+（这里教程给了一个小技巧：如果不知道返回值是什么类型，可以先给接受返回值的变量，比如就叫 `f` ，加一个我们知道 **肯定不是** 函数返回值类型的类型注解，然后让编译器错误信息告诉我们 `f` 的类型 **应该** 是什么）
 
 ```rust
-fn main() {
-    println!("a is {0}, a again is {0}", a); 
+error[E0308]: mismatched types
+ --> src/main.rs:4:18
+  |
+4 |     let f: u32 = File::open("hello.txt");
+  |                  ^^^^^^^^^^^^^^^^^^^^^^^ expected u32, found enum
+`std::result::Result`
+  |
+  = note: expected type `u32`
+             found type `std::result::Result<std::fs::File, std::io::Error>`
+
+```
+
+
+
+#### 使用 `Result` 来从错误中恢复
+
+已知 Result 类型定义如下：
+
+```rust
+enum Result<T, E> {
+    Ok(T),
+    Err(E),
 }
 ```
 
-想用原来的 `{` 和 `}` 需要打成 `{{` 和 `}}` ，其他转义字符还是前面加一个 `\` ；
+这意味着我们可以根据接收的 Result 不同，用不同的分支应对可能出现的情况（比如各种错误），并使程序进入我们预先准备的解决方案代码块中；
+
+```rust
+use std::fs::File;
+use std::io::ErrorKind;
+
+fn main() {
+    let f = File::open("hello.txt");
+    
+    let f = match f {
+        Ok(file) => file,
+        Err(error) => match error.kind() {
+            ErrorKind::NotFound => match File::create("hello.txt") {
+                // 不存在该文件时，首先尝试创建
+                Ok(fc) => fc,
+                Err(e) => panic!("Problem creating the file: {:?}", e),
+            },
+            other_error => panic!("Problem opening the file: {:?}", other_error),
+        },
+    };
+}
+```
+
+
+
+使用闭包的更好的写法（待补充 `unwrap_or_else` 的知识）：
+
+```rust
+use std::fs::File;
+use std::io::ErrorKind;
+
+fn main() {
+    let f = File::open("hello.txt").unwrap_or_else(|error| {
+        if error.kind() == ErrorKind::NotFound {
+            File::create("hello.txt").unwrap_or_else(|error| {
+                panic!("Problem creating the file: {:?}", error);
+            })
+        } else {
+            panic!("Problem opening the file: {:?}", error);
+        }
+    });
+}
+```
+
+
+
+#### `unwrap` 和 `expect` 方法
+
+这两个方法都是 “失败时 panic ” 这一功能的简写；
+
+- `unwrap` 方法根据 Result 返回值作出不同的行为，如果得到 Ok 就返回 Ok 中的结果值，如果是 Err，`unwrap` 会调用 `panic!` ：
+
+```rust
+use std::fs::File;
+
+fn main() {
+    let f = File::open("hello.txt").unwrap();
+}
+```
+
+- `expect` 方法比 `unwrap` 更好，可以传递适当的参数作为 `panic!` 的错误信息，而不像`unwrap` 那样使用默认的 `panic!` 信息：
+
+```rust
+use std::fs::File;
+
+fn main() {
+    let f = File::open("hello.txt").expect("Failed to open hello.txt");
+}
+```
+
+
+
+#### 用 `?` 运算符传播错误
+
+（翻译比较怪，原文 *propagating*）通俗地说，就是把错误抛到调用者那里处理；
+
+```rust
+use std::io;
+use std::io::Read;
+use std::fs::File;
+
+fn read_username_from_file() -> Result<String, io::Error> {
+    let mut f = File::open("hello.txt")?;
+    let mut s = String::new();
+    f.read_to_string(&mut s)?;
+    Ok(s)
+}
+
+// 缩短代码：还可以在 ? 之后直接使用链式方法调用
+fn read_username_from_file() -> Result<String, io::Error> {
+    let mut s = String::new();
+    File::open("hello.txt")?.read_to_string(&mut s)?;
+    Ok(s)
+}
+
+// 以上两种写法都等价于：
+fn read_username_from_file() -> Result<String, io::Error> {
+    let f = File::open("hello.txt");
+
+    let mut f = match f {
+        Ok(file) => file,
+        Err(e) => return Err(e),
+    };
+
+    let mut s = String::new();
+
+    match f.read_to_string(&mut s) {
+        Ok(_) => Ok(s),
+        Err(e) => Err(e),
+    }
+}
+```
+
+
+
+注意：只能在返回 `Result` 或者其它实现了 `std::ops::Try` 的类型的函数中使用 `?` 运算符；
+
+允许把 main 函数改成返回 `Result` 的版本：
+
+```rust
+use std::error::Error;
+use std::fs::File;
+
+// 可以理解 Box<dyn Error> 为使用 ? 时 main 允许返回的 “任何类型的错误”
+fn main() -> Result<(), Box<dyn Error>> {	
+    let f = File::open("hello.txt")?;
+    Ok(())
+}
+```
+
+
+
+### 选用错误处理方式的建议
+
+| panic!                                                       | Result                                                       |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| 适用于代码原型和测试；                                       | 操作可能会在一种可以恢复的情况下失败；                       |
+| 代表一个程序无法处理的状态，需要立即停止执行；               | 允许使用无效或不正确的值继续程序；                           |
+| 有可能会导致一些假设、保证、协议或不可变性被打破的状态，例如无效的、自相矛盾的或者不存在的值； | 使用 `Result` 来显式告诉代码调用者此处需要处理潜在的成功或失败； |
+
+
+
+
+
+
 
 
 
