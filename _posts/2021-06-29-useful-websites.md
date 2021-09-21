@@ -1,6 +1,6 @@
 ---
 layout:     post   				        # 使用的布局（不需要改）
-title:      实用网站分享 					# 标题 
+title:      实用网站分享（持续更新） 					# 标题 
 subtitle:   （基本也是其他朋友给的）		# 副标题
 date:       2021-06-29 				    # 时间
 author:     YXWang 					    # 作者
@@ -11,15 +11,17 @@ tags:								    # 标签
     - 网站分享
 ---
 
-## 实用网站分享（施工中，后续会更新）
+## 实用网站分享（施工中，后续会不断更新）
+
+
 
 ### 编程学习
 
-- [一个Linux 发行版——YunoHost](https://yunohost.org/en/apps?q=%2Fapps)
+- [一个 Linux 发行版——YunoHost](https://yunohost.org/en/apps?q=%2Fapps)
 
 - [彻底搞懂如何使用 Hexo\+GitHubPages 搭建个人博客](https://juejin.cn/post/6844904131266609165)
 
-  (注：我用的是 Jekyll，但我觉得 Hexo 更好)
+  （注：我这个博客用的是 Jekyll，没本地预览功能所以觉得 Hexo 更好）
 
 - [C# 文档 - 入门/教程/参考](https://docs.microsoft.com/zh-cn/dotnet/csharp/)
 
@@ -73,13 +75,17 @@ tags:								    # 标签
 
 ### 生活
 
+- [WeTransfer 网盘](https://wetransfer.com/)
+
 - [人工智能聊天/心理治疗 Replika.ai](https://replika.ai/) （注：提供自杀/惊恐发作/抑郁等危机干预服务）
 
 - [FreeRename文件改名工具(FreeRename)下载\__v6.0](http://www.opdown.com/soft/72709.html#download) 
 
 - [QPR四步自杀预防](https://weibo.com/ttarticle/x/m/show/id/2309404285239156452369?_wb_client_=1) （希望大家都用不上，但希望大家都存一份）
 
-- [Everything\_文件查找工具](https://voidtools.com/zh-cn/) （也是看 ZX 用了2333）
+- [Everything\_文件查找工具](https://voidtools.com/zh-cn/) （也是 ZX 推荐的）
+
+- [Everything 拼音首字母拓展](https://github.com/Chaoses-Ib/IbEverythingExt)
 
 - [如何自制猫食](https://zh.wikihow.com/养猫)
 
@@ -88,6 +94,8 @@ tags:								    # 标签
 ### 躺平/摸鱼/玩游戏
 
 - [微伞小游戏，内含合成大西瓜](http://www.wesane.com/)
+
+- [电影资源网站](https://www.mypianku.net/) 
 
 - [使用dosbox玩游戏](https://github.com/dosasm/masm-tasm/wiki/playgame)
 
