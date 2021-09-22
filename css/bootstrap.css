@@ -1513,6 +1513,8 @@ pre,
 samp {
   font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
 }
+
+/* Markdown 格式中 `` 括起来的代码样式 */
 code {
   padding: 2px 4px;
   font-size: 90%;
@@ -1520,6 +1522,7 @@ code {
   background-color: #f9f2f4;
   border-radius: 4px;
 }
+
 kbd {
   padding: 2px 4px;
   font-size: 90%;
