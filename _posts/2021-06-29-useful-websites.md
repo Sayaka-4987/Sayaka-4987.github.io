@@ -17,6 +17,8 @@ tags:								    # 标签
 
 ### 编程学习
 
+- [50+ mini web projects using HTML, CSS & JS](https://github.com/bradtraversy/50projects50days)
+
 - [一个 Linux 发行版——YunoHost](https://yunohost.org/en/apps?q=%2Fapps)
 
 - [彻底搞懂如何使用 Hexo\+GitHubPages 搭建个人博客](https://juejin.cn/post/6844904131266609165)
