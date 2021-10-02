@@ -11,9 +11,9 @@ tags:								    # 标签
     - Python
 ---
 
-机器学习基础知识，整理自 BJTU 专业选修课《机器学习》课程课件
+机器学习基础知识，整理自 BJTU 专业选修课《机器学习》课程课件，感谢 lys 大佬的指点（
 
-为了自用从 .ipynb 转成更方便的 markdown 格式，感谢 lys 大佬的指点（
+为了自用从 `.ipynb` 转成更方便的 `markdown` 格式……这个自动导出问题还挺多的，注释行必须多加个换行才能在博客正常显示
 
 
 
@@ -140,14 +140,23 @@ a = 3
 b = 2
 c = 1.5
 print(a + b)  # 3 + 2
+
 print(a + c)  # 3 + 1.5
+
 print(a * c)  # 3 * 1.5
+
 print(a / b)  # 3 / 2
+
 print(a / c)  # 3 / 1.5
+
 print(a // b) # 3 // 2
+
 print(a**2)   # a^2
+
 print(a**3)   # a^3
+
 print(a % b)  # a % b
+
 print(b % c)  # b % c
 ```
 
@@ -175,6 +184,7 @@ list 中的元素可以是同类型的，也可以是不同类型的：
 
 ```python
 # list的初始化
+
 a = []
 print(a)
 
@@ -215,7 +225,9 @@ print(a[2])
 print(a[3])
 print(a[4])
 print(a[5]) # 越界
+
 print(1 in a) # 1是否在列表a中
+
 print("haha" in a) # "haha"是否在列表a中
 ```
 
@@ -236,7 +248,6 @@ list[start: end: step_size]
 
 ```python
 print(a)
-
 print(a[:])    # 不指定start和end时，默认为0和len(a)，即取列表中的所有元素，并返回一个新列表
 
 print(a[0:])   # 从第1个元素到最后一个元素
@@ -266,7 +277,6 @@ print(a[1::2]) # 从第2个元素到最有一个元素，每隔1个元素取一�
 
 ```python
 result = [i**2 for i in range(10)]
-
 print([i**2 for i in range(10)]) # 1到9每个数字的平方
 
 print([type(x) for x in a])      # a中每个元素的类型
@@ -304,13 +314,9 @@ print(b)
 # 在列表的末尾插入一个元素
 
 print('before append an element:')
-
 print(a)
-
 a.append("new element")
-
 print('after append an element:')
-
 print(a)
 ```
 
@@ -319,13 +325,12 @@ print(a)
 # 在列表的任意位置插入一个元素
 
 print('before insert an element:')
-
 print(a)
 
-a.insert(1, "new element2") # 在下标(index)为1的地方插入一个字符串"new element2"
+# 在下标(index)为1的地方插入一个字符串"new element2"
 
+a.insert(1, "new element2") 
 print('after insert an element:')
-
 print(a)
 ```
 
@@ -334,15 +339,13 @@ print(a)
 # 删除第二个元素，并返回
 
 print("before delete the second element:")
-
 print(a)
 
-b = a.pop(1) # 删除第二个元素，index为1，并返回，赋值给b
+# 删除第二个元素，index为1，并返回，赋值给b
 
+b = a.pop(1) 
 print("after delete the second element:")
-
 print(a)
-
 print("the second element in list a before delete:", b)
 ```
 
@@ -351,13 +354,10 @@ print("the second element in list a before delete:", b)
 # 删除第一次出现的一个元素
 
 a = [1, 2, 3, 1, 2]
-
 print(a)
-
 a.remove(1) # 删除从左到右第一个出现的1
 
 print(a)
-
 a.remove(1) # 删除从左到右第一个出现的1
 
 print(a)
@@ -368,11 +368,9 @@ print(a)
 # 对列表进行原地排序
 
 a = [5, 3, 1, 4, 7, 3, 9, 0]
-
 a.sort() # 对a进行从小打大排序
 
 print(a)
-
 a.sort(reverse = True) # 对a进行从大到小排序
 
 print(a)
@@ -383,7 +381,6 @@ print(a)
 # 查找第一次出现的一个值
 
 a = [1, 2, 3, 4, 1, 2, 3, 4]
-
 print(a.index(2)) # 打印出从左到右，2这个元素第一次出现的index值
 ```
 
@@ -462,7 +459,6 @@ print(number)
 
 ```python
 a = [1, 2, 3, 4, 5]
-
 b = [6, 2, 4, 1, 6, 0]
 
 # 在下方使用extend方法，将b中的元素扩展到a中
@@ -508,13 +504,11 @@ a = [1, 2, 3, 4, 5, 1, 3, 6, 2, 4, 1, 4, 2, 6, 8, 2]
 # ------start code------
 
 max_value = a.max()
-
 min_value = a.min()
 
 # ------end code------
 
 print(max_value)
-
 print(min_value)
 ```
 
@@ -529,17 +523,13 @@ print(min_value)
 # 初始化一个tuple
 
 a = ()
-
 print(a)
-
 print(type(a))
-
 ```
 
 
 ```python
 a = tuple()
-
 print(a)
 ```
 
@@ -548,7 +538,6 @@ print(a)
 # 初始化一个有元素的tuple
 
 a = (1, 2, 3)
-
 print(a)
 ```
 
@@ -557,7 +546,6 @@ print(a)
 # 初始化一个仅有一个元素的tuple
 
 a = (1, )
-
 print(a)
 ```
 
@@ -566,11 +554,8 @@ print(a)
 # 初始化一个元素的tuple时，如果不加逗号， python 会将小括号理解成数值运算里的括号
 
 a = (1)
-
 print(a)
-
 print(type(a))
-
 ```
 
 
@@ -580,11 +565,8 @@ print(type(a))
 
 ```python
 a = (1, 2, 3)
-
 print(a[0])
-
 print(a[1])
-
 print(a[2])
 ```
 
@@ -620,13 +602,9 @@ python 还提供了一个 `sorted()` 函数，可以将一个可迭代对象内�
 
 ```python
 a = [5, 2, 3, 1, 9, 4, 8]
-
 b = sorted(a)
-
 print(b)
-
 c = sorted(a, reverse = True)
-
 print(c)
 ```
 
@@ -665,9 +643,7 @@ help(sum)
 
 ```python
 a = (1.1, 2.2, 3.3, 4.4)
-
 b = sum(a)
-
 print(b)
 ```
 
@@ -678,7 +654,6 @@ print(b)
 
 ```python
 a = (1, "list", 2, "tuple")
-
 print(sum(a))
 ```
 
@@ -788,18 +763,14 @@ print(b)
 
 ```python
 a = (1, 2, 3)
-
 b = list(a)
-
 print(b, type(b))
 ```
 
 
 ```python
 a = [1, 2, 3]
-
 b = tuple(a)
-
 print(b, type(b))
 ```
 
@@ -807,14 +778,12 @@ print(b, type(b))
 
 ### tuple 的不可变
 
-什么是可变，什么是不可变，tuple的不可变体现在哪里？
+一旦元组被生成，里面的元素就不可变了，不允许添加、删除以及修改里面的元素
 
 
 ```python
 a = [1, 2, 3, 4]
-
 a[0] = 5
-
 print(a)
 ```
 
@@ -829,7 +798,7 @@ print(a)
 
 
 
-一旦元组被生成，里面的元素就不可变了，不允许添加、删除以及修改里面的元素, **但是**
+但也有可变元组，原因请联想 Java 中的 String 类型；
 
 
 ```python
@@ -858,20 +827,16 @@ print(b)
 # ------ end code ------
 ```
 
-原因请联想 Java 中的 String 类型；
-
 
 
 ## 4. 字符串
 
- python 中的字符串很强大，内置了多种方法，字符串的特征是 `" "` , `' '` , `''' '''` , `""" """`  
+python 中的字符串很强大，内置了多种方法，字符串的特征是 `" "` , `' '` , `''' '''` , `""" """`  
 
 
 ```python
 a = 'Tom'
-
 b = "Tom"
-
 print(a == b)
 ```
 
@@ -965,9 +930,7 @@ a = "Tom and Jarry"print(a.startswith('Tom'))print(a.endswith("Jarry"))
 
 ```python
 print(help(str.split)) 
-
 a = "Tom and Jarry"
-
 print(a.split(' '))
 ```
 
@@ -980,11 +943,8 @@ print(a.split(' '))
 
 ```python
 a = "Tom and Jarry"
-
 b = a.replace('Tom', 'Jack')
-
 print(b)
-
 print(a)
 ```
 
@@ -997,9 +957,7 @@ print(a)
 
 ```python
 a = " Tom and Jarry    \n"
-
 b = a.strip()
-
 b
 ```
 
@@ -1010,14 +968,12 @@ b
 
 ```python
 a = " Tom and Jarry    \n"
-
 a
 ```
 
 
 ```python
 a = " Tom and Jarry    \n"
-
 print(a)
 ```
 
@@ -1035,14 +991,12 @@ print(help(str.join))
 
 ```python
 a = ['Tom', 'Jack', "Jarry"]
-
 print('\n'.join(a))
 ```
 
 
 ```python
 a = ['Tom', 'Jack', "Jarry"]
-
 print(', '.join(a))
 ```
 
@@ -1057,9 +1011,7 @@ python 中的 dict(字典) 是非常强大的数据结构，由键值对组成�
 # 初始化
 
 a = {}
-
 print(a)
-
 type(a)
 ```
 
@@ -1068,9 +1020,7 @@ type(a)
 # 初始化
 
 a = dict()
-
 print(a)
-
 type(a)
 ```
 
@@ -1079,9 +1029,7 @@ type(a)
 # 初始化
 
 a = {'Name': 'David'}
-
 print(a)
-
 type(a)
 ```
 
@@ -1188,9 +1136,7 @@ x, y = 1, 2
 
 ```python
 print(x, y)
-
 x, y = y, x
-
 print(x, y)
 ```
 
