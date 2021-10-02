@@ -236,14 +236,23 @@ list[start: end: step_size]
 
 ```python
 print(a)
+
 print(a[:])    # 不指定start和end时，默认为0和len(a)，即取列表中的所有元素，并返回一个新列表
+
 print(a[0:])   # 从第1个元素到最后一个元素
+
 print(a[2:])   # 从第3个元素到最后一个元素
+
 print(a[1:5])  # 从第2个元素到第5个元素(index为4)
+
 print(a[:-1])  # 从第1个元素到倒数第2个元素
+
 print(a[:-3])  # 从第1个元素到倒数第4个元素
+
 print(a[::1])  # 从第1个元素到最后一个元素，每个元素都取
+
 print(a[::2])  # 从第1个元素到最后一个元素，每隔1个元素取一次
+
 print(a[1::2]) # 从第2个元素到最有一个元素，每隔1个元素取一次
 ```
 
@@ -259,6 +268,7 @@ print(a[1::2]) # 从第2个元素到最有一个元素，每隔1个元素取一�
 result = [i**2 for i in range(10)]
 
 print([i**2 for i in range(10)]) # 1到9每个数字的平方
+
 print([type(x) for x in a])      # a中每个元素的类型
 ```
 
@@ -271,11 +281,15 @@ print([type(x) for x in a])      # a中每个元素的类型
 
 ```python
 a = [1, 2, None, True, "String"]
+
 # 尝试取列表a中的倒数第3个元素，将其存入b中
+
 # ------start code------
+
 b = a[-3]
 
 # ------end code------
+
 print(b)
 ```
 
@@ -288,59 +302,88 @@ print(b)
 
 ```python
 # 在列表的末尾插入一个元素
+
 print('before append an element:')
+
 print(a)
+
 a.append("new element")
+
 print('after append an element:')
+
 print(a)
 ```
 
 
 ```python
 # 在列表的任意位置插入一个元素
+
 print('before insert an element:')
+
 print(a)
+
 a.insert(1, "new element2") # 在下标(index)为1的地方插入一个字符串"new element2"
+
 print('after insert an element:')
+
 print(a)
 ```
 
 
 ```python
 # 删除第二个元素，并返回
+
 print("before delete the second element:")
+
 print(a)
+
 b = a.pop(1) # 删除第二个元素，index为1，并返回，赋值给b
+
 print("after delete the second element:")
+
 print(a)
+
 print("the second element in list a before delete:", b)
 ```
 
 
 ```python
 # 删除第一次出现的一个元素
+
 a = [1, 2, 3, 1, 2]
+
 print(a)
+
 a.remove(1) # 删除从左到右第一个出现的1
+
 print(a)
+
 a.remove(1) # 删除从左到右第一个出现的1
+
 print(a)
 ```
 
 
 ```python
 # 对列表进行原地排序
+
 a = [5, 3, 1, 4, 7, 3, 9, 0]
+
 a.sort() # 对a进行从小打大排序
+
 print(a)
+
 a.sort(reverse = True) # 对a进行从大到小排序
+
 print(a)
 ```
 
 
 ```python
 # 查找第一次出现的一个值
+
 a = [1, 2, 3, 4, 1, 2, 3, 4]
+
 print(a.index(2)) # 打印出从左到右，2这个元素第一次出现的index值
 ```
 
@@ -374,57 +417,79 @@ list里的其他方法：
 
 ```python
 a = [1, 2, 3, 4, 5]
+
 # 在下方使用clear方法
+
 # ------start code------
+
 a.clear()
 
 # ------end code------
+
 print(a)
 ```
 
 
 ```python
 a = [1, 2, 3, 4, 5]
+
 # 在下方使用copy方法，复制给b
+
 # ------start code------
+
 b = a.copy()
 
 # ------end code------
+
 print(b)
 ```
 
 
 ```python
 a = [1, 2, 3, 4, 5, 1, 3, 6, 2, 4, 1, 4, 2, 6, 8, 2]
+
 # 在下方使用count方法，数出列表a内2的个数
+
 # ------start code------
+
 number = a.count(2)
 
 # ------end code------
+
 print(number)
 ```
 
 
 ```python
 a = [1, 2, 3, 4, 5]
+
 b = [6, 2, 4, 1, 6, 0]
+
 # 在下方使用extend方法，将b中的元素扩展到a中
+
 # ------start code------
+
 a.extend(b)
 
 # ------end code------
+
 print(a)
+
 print(b)
 ```
 
 
 ```python
 a = [1, 2, 3, 4, 5, 1, 3, 6, 2, 4, 1, 4, 2, 6, 8, 2]
+
 # 在下方使用reverse方法，将a中的元素转置
+
 # ------start code------
+
 a.reverse()
 
 # ------end code------
+
 print(a)
 ```
 
@@ -437,12 +502,19 @@ print(a)
 
 ```python
 a = [1, 2, 3, 4, 5, 1, 3, 6, 2, 4, 1, 4, 2, 6, 8, 2]
+
 # 在下方使用max函数，将a中的最大值存到max_value中，使用min函数，将最小值存到min_value中
+
 # ------start code------
+
 max_value = a.max()
+
 min_value = a.min()
+
 # ------end code------
+
 print(max_value)
+
 print(min_value)
 ```
 
@@ -455,37 +527,50 @@ print(min_value)
 
 ```python
 # 初始化一个tuple
+
 a = ()
+
 print(a)
+
 print(type(a))
+
 ```
 
 
 ```python
 a = tuple()
+
 print(a)
 ```
 
 
 ```python
 # 初始化一个有元素的tuple
+
 a = (1, 2, 3)
+
 print(a)
 ```
 
 
 ```python
 # 初始化一个仅有一个元素的tuple
+
 a = (1, )
+
 print(a)
 ```
 
 
 ```python
 # 初始化一个元素的tuple时，如果不加逗号， python 会将小括号理解成数值运算里的括号
+
 a = (1)
+
 print(a)
+
 print(type(a))
+
 ```
 
 
@@ -495,8 +580,11 @@ print(type(a))
 
 ```python
 a = (1, 2, 3)
+
 print(a[0])
+
 print(a[1])
+
 print(a[2])
 ```
 
@@ -507,10 +595,14 @@ print(a[2])
 
 ```python
 a = (1, 2, 3, 4, 5, 6, 7, 8, 9)
-print(a[::2]) # 取index为偶数的元素
-print(a[1::2])# 取index为奇数的元素
-print(a[:])   # 取所有的元素
-print(a[:-5]) # 取第一个元素到倒数第六个元素
+
+print(a[::2])   # 取index为偶数的元素
+
+print(a[1::2])  # 取index为奇数的元素
+
+print(a[:])     # 取所有的元素
+
+print(a[:-5])   # 取第一个元素到倒数第六个元素
 ```
 
 
@@ -528,9 +620,13 @@ python 还提供了一个 `sorted()` 函数，可以将一个可迭代对象内�
 
 ```python
 a = [5, 2, 3, 1, 9, 4, 8]
+
 b = sorted(a)
+
 print(b)
+
 c = sorted(a, reverse = True)
+
 print(c)
 ```
 
@@ -541,11 +637,16 @@ print(c)
 
 ```python
 # test1
+
 a = (5, 2, 3, 1, 9, 4, 8)
+
 # ------ start code ------
+
 b = sorted(a)
 c = sorted(a, reverse=True)
+
 # ------ end code ------
+
 print(b)
 print(c)
 ```
@@ -563,7 +664,11 @@ help(sum)
 
 
 ```python
-a = (1.1, 2.2, 3.3, 4.4)b = sum(a)print(b)
+a = (1.1, 2.2, 3.3, 4.4)
+
+b = sum(a)
+
+print(b)
 ```
 
 
@@ -572,7 +677,9 @@ a = (1.1, 2.2, 3.3, 4.4)b = sum(a)print(b)
 
 
 ```python
-a = (1, "list", 2, "tuple")print(sum(a))
+a = (1, "list", 2, "tuple")
+
+print(sum(a))
 ```
 
 
@@ -582,9 +689,13 @@ a = (1, "list", 2, "tuple")print(sum(a))
 
 ```python
 a = (1, "list", 2, "tuple", 3, "dict", 4, "set")
+
 # ------ start code ------
+
 summation = a[::2]
+
 # ------ end code ------
+
 print(summation)
 ```
 
@@ -597,11 +708,13 @@ print(summation)
 
 ```python
 a = (1, 2, 3, 4, 5, 6)
+
 # ------ start code ------
 
 average = a.sum()/len(a)
 
 # ------ end code ------
+
 print(average)
 ```
 
@@ -614,6 +727,7 @@ print(average)
 
 ```python
 # 将a转换为浮点型
+
 a = "3.14"
 b = float(a)
 print(b, type(b))
@@ -622,6 +736,7 @@ print(b, type(b))
 
 ```python
 # 将a转换为整型
+
 a = "3"
 b = int(a)
 print(b, type(b))
@@ -630,6 +745,7 @@ print(b, type(b))
 
 ```python
 # 将a转换为整型
+
 a = "1"
 b = int(a)
 print(b, type(b))
@@ -638,6 +754,7 @@ print(b, type(b))
 
 ```python
 # 将a转换为整型
+
 a = 3.99
 b = int(a)
 print(b, type(b))
@@ -653,7 +770,15 @@ print(b, type(b))
 
 
 ```python
-a = "-3.14"# ------ start code ------b = int(float(a))# ------ end code ------print(b)
+a = "-3.14"
+
+# ------ start code ------
+
+b = int(float(a))
+
+# ------ end code ------
+
+print(b)
 ```
 
 
@@ -662,12 +787,20 @@ a = "-3.14"# ------ start code ------b = int(float(a))# ------ end code ------pr
 
 
 ```python
-a = (1, 2, 3)b = list(a)print(b, type(b))
+a = (1, 2, 3)
+
+b = list(a)
+
+print(b, type(b))
 ```
 
 
 ```python
-a = [1, 2, 3]b = tuple(a)print(b, type(b))
+a = [1, 2, 3]
+
+b = tuple(a)
+
+print(b, type(b))
 ```
 
 
@@ -678,12 +811,20 @@ a = [1, 2, 3]b = tuple(a)print(b, type(b))
 
 
 ```python
-a = [1, 2, 3, 4]a[0] = 5print(a)
+a = [1, 2, 3, 4]
+
+a[0] = 5
+
+print(a)
 ```
 
 
 ```python
-a = (1, 2, 3, 4)a[0] = 5print(a)
+a = (1, 2, 3, 4)
+
+a[0] = 5
+
+print(a)
 ```
 
 
@@ -692,19 +833,28 @@ a = (1, 2, 3, 4)a[0] = 5print(a)
 
 
 ```python
-a = [1, 2, 3]b = (a, 1, 2)print(b)
+a = [1, 2, 3]
+
+b = (a, 1, 2)
+
+print(b)
 ```
 
 
 ```python
-a.append(4)print(a)
+a.append(4)
+
+print(a)
 ```
 
 
 ```python
 # 打印b试试
+
 # ------ start code ------
+
 print(b)
+
 # ------ end code ------
 ```
 
@@ -714,12 +864,14 @@ print(b)
 
 ## 4. 字符串
 
- python 中的字符串很强大，内置了多种方法，字符串的特征是 `" "`, `' '`, `''' '''`, `""" """` 
+ python 中的字符串很强大，内置了多种方法，字符串的特征是 `" "` , `' '` , `''' '''` , `""" """`  
 
 
 ```python
 a = 'Tom'
+
 b = "Tom"
+
 print(a == b)
 ```
 
@@ -730,6 +882,7 @@ print(a == b)
 
 ```python
 a = '''TomandJack'''
+
 print(a)
 ```
 
@@ -811,8 +964,11 @@ a = "Tom and Jarry"print(a.startswith('Tom'))print(a.endswith("Jarry"))
 
 
 ```python
-print(help(str.split)) # 查看文档
-a = "Tom and Jarry"print(a.split(' '))
+print(help(str.split)) 
+
+a = "Tom and Jarry"
+
+print(a.split(' '))
 ```
 
 
@@ -824,8 +980,11 @@ a = "Tom and Jarry"print(a.split(' '))
 
 ```python
 a = "Tom and Jarry"
+
 b = a.replace('Tom', 'Jack')
+
 print(b)
+
 print(a)
 ```
 
@@ -838,7 +997,9 @@ print(a)
 
 ```python
 a = " Tom and Jarry    \n"
+
 b = a.strip()
+
 b
 ```
 
@@ -849,12 +1010,14 @@ b
 
 ```python
 a = " Tom and Jarry    \n"
+
 a
 ```
 
 
 ```python
 a = " Tom and Jarry    \n"
+
 print(a)
 ```
 
@@ -872,12 +1035,14 @@ print(help(str.join))
 
 ```python
 a = ['Tom', 'Jack', "Jarry"]
+
 print('\n'.join(a))
 ```
 
 
 ```python
 a = ['Tom', 'Jack', "Jarry"]
+
 print(', '.join(a))
 ```
 
@@ -890,24 +1055,33 @@ python 中的 dict(字典) 是非常强大的数据结构，由键值对组成�
 
 ```python
 # 初始化
+
 a = {}
+
 print(a)
+
 type(a)
 ```
 
 
 ```python
 # 初始化
+
 a = dict()
+
 print(a)
+
 type(a)
 ```
 
 
 ```python
 # 初始化
+
 a = {'Name': 'David'}
+
 print(a)
+
 type(a)
 ```
 
@@ -1014,7 +1188,9 @@ x, y = 1, 2
 
 ```python
 print(x, y)
+
 x, y = y, x
+
 print(x, y)
 ```
 
@@ -1025,6 +1201,7 @@ print(x, y)
 
 ```python
 t = [(1, 2), [3, 4], (5, 6), (7, 8)]
+
 for x, y in t:
     print('x:', x, ',', 'y:', y)
 ```
@@ -1083,6 +1260,7 @@ python 字典背后的结构是Hash table.
 
 ```python
 # 初始化
+
 a = set()
 print(a)
 print(type(a))
@@ -1091,6 +1269,7 @@ print(type(a))
 
 ```python
 # 初始化
+
 a = {1,2,3}
 print(a)
 print(type(a))
@@ -1099,6 +1278,7 @@ print(type(a))
 
 ```python
 # 初始化
+
 a = {1, }
 print(a)
 print(type(a))
@@ -1107,6 +1287,7 @@ print(type(a))
 
 ```python
 # 初始化
+
 a = {1}
 print(a)
 print(type(a))
@@ -1121,6 +1302,7 @@ print(type(a))
 
 ```python
 # 初始化
+
 a = [1,2,3]
 print(set(a))
 ```
@@ -1177,6 +1359,7 @@ print(a)
 
 ```python
 # 交集
+
 a = {1, 2, 3}
 b = {1, 2, 4}
 print(a.intersection(b))
@@ -1186,6 +1369,7 @@ print(a & b)
 
 ```python
 # 并集
+
 a = {1, 2, 3}
 b = {1, 2, 4}
 print(a.union(b))
@@ -1195,6 +1379,7 @@ print(a | b)
 
 ```python
 # 差集
+
 a = {1, 2, 3}
 b = {1, 2, 4}
 print(a.difference(b))
@@ -1207,6 +1392,7 @@ print(b - a)
 
 ```python
 # 对称差集
+
 a = {1, 2, 3}
 b = {1, 2, 4}
 print(a.symmetric_difference(b))
@@ -1229,7 +1415,9 @@ a = [random.choice(temp) for i in range(1000)]
 
 ```python
 # ------ start code ------
+
 print([([0]+a)[i] - (a+[0])[i] for i in range(len(a))].count(0))
+
 # ------ end code ------
 ```
 
