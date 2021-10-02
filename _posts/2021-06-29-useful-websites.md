@@ -17,6 +17,10 @@ tags:								    # 标签
 
 ### 编程学习
 
+- [Rust 高级编程](https://learnku.com/docs/nomicon/2018/)
+
+- [Go语言圣经（中文版）](https://books.studygolang.com/gopl-zh/)
+
 - [50+ mini web projects using HTML, CSS & JS](https://github.com/bradtraversy/50projects50days)
 
 - [一个 Linux 发行版——YunoHost](https://yunohost.org/en/apps?q=%2Fapps)
@@ -62,6 +66,8 @@ tags:								    # 标签
   
 
 ### 糊弄报告
+
+- [网名生成器](https://www.qmsjmfb.com/)
 
 - [申论生成器](https://sojo.im/slscq/)
 
