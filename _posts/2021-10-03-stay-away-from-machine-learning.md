@@ -1259,12 +1259,16 @@ print(set(a))
 
 
 ```python
-a = (1, )print(a)print(type(a))
+a = (1, )
+print(a)
+print(type(a))
 ```
 
 
 ```python
-b = (1)print(b)print(type(b))
+b = (1)
+print(b)
+print(type(b))
 ```
 
 
