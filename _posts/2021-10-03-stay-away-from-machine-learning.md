@@ -1482,7 +1482,9 @@ a = [1,2,3,4]
 modify(a)
 ```
 
-    clear list!
+```python
+clear list!
+```
 
 
 
@@ -1958,12 +1960,15 @@ print(m2.shape)
 
 ```python
 # 将m2变成一个1行4列的矩阵
+
 m3 = m2.reshape(1, 4) 
 print(m3)
 print(m3.shape)
 ```
 
-    [[1 2 3 4]](1, 4)
+```python
+[[1 2 3 4]](1, 4)
+```
 
 
 使用 reshape 可以对 array 的维度进行变换，会返回一个新的 array，不会影响该 array 原来的维度
@@ -1989,7 +1994,9 @@ data = np.random.uniform(0, 1, size = (4, 3))
 print(data)
 ```
 
-    [[0.3890509  0.07852005 0.10866473] [0.68119759 0.73162121 0.84347843] [0.92551516 0.79543677 0.49450627] [0.49077995 0.66073402 0.81769004]]
+```python
+[[0.3890509  0.07852005 0.10866473] [0.68119759 0.73162121 0.84347843] [0.92551516 0.79543677 0.49450627] [0.49077995 0.66073402 0.81769004]]
+```
 
 
 
@@ -3581,28 +3588,25 @@ plt.plot(a, b, '-', color = 'red')
 
 ```python
 # blue
-# YOUR CODE HERE
+
 plt.figure(figsize = (8, 4))
 plt.plot(a, b, '-', color = 'blue')
-
 ```
 
 
 ```python
 # yellow
-# YOUR CODE HERE
+
 plt.figure(figsize = (8, 4))
 plt.plot(a, b, '-', color = 'yellow')
-
 ```
 
 
 ```python
 # green
-# YOUR CODE HERE
+
 plt.figure(figsize = (8, 4))
 plt.plot(a, b, '-', color = 'green')
-
 ```
 
 
@@ -3689,8 +3693,6 @@ plt.suptitle("title")
 
 # Part 6 Scikit-learn for Machine Learning
 
-
-
 [Scikit-learn文档](https://scikit-learn.org/stable/documentation.html)
 
 scikit-learn 是python中最有名的机器学习库，构建在numpy, scipy, matplotlib之上，使用起来很简单，速度还很快，而且代码开源，可以在github上学习它的源码，学习各种机器学习算法的实现过程。
@@ -3732,12 +3734,14 @@ warnings.filterwarnings('ignore')
 
 ```python
 # 引入数据集
+
 from sklearn.datasets import make_moons
 ```
 
 
 ```python
 # 引入数据预处理工具
+
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 ```
@@ -3745,6 +3749,7 @@ from sklearn.preprocessing import StandardScaler
 
 ```python
 # 引入模型
+
 from sklearn.neural_network import MLPClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
@@ -3755,6 +3760,7 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 
 ```python
 # 引入评价指标
+
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import precision_score
 from sklearn.metrics import recall_score
@@ -3846,12 +3852,12 @@ lr.fit(X_train, y_train)
 ```
 
 
-
-
-    LogisticRegression(C=1.0, class_weight=None, dual=False, fit_intercept=True,
-              intercept_scaling=1, max_iter=100, multi_class='warn',
-              n_jobs=None, penalty='l2', random_state=None, solver='warn',
-              tol=0.0001, verbose=0, warm_start=False)
+```python
+LogisticRegression(C=1.0, class_weight=None, dual=False, fit_intercept=True,
+          intercept_scaling=1, max_iter=100, multi_class='warn',
+          n_jobs=None, penalty='l2', random_state=None, solver='warn',
+          tol=0.0001, verbose=0, warm_start=False)
+```
 
 
 
