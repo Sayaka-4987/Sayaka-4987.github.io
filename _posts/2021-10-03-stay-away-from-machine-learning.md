@@ -514,7 +514,7 @@ print(min_value)
 
 ## 3. 元组（tuple）
 
-元组是一种不可变的类型，它和 list 类似，但是 list 是可变的，tuple不可变，标志是 `()` ：
+元组是一种不可变的类型，它和 list 类似，但是 list 是可变的，tuple不可变，标志是 `( )` ：
 
 
 ```python
@@ -916,7 +916,9 @@ print(help(str.endswith))
 
 
 ```python
-a = "Tom and Jarry"print(a.startswith('Tom'))print(a.endswith("Jarry"))
+a = "Tom and Jarry"
+print(a.startswith('Tom'))
+print(a.endswith("Jarry"))
 ```
 
 
@@ -1482,7 +1484,7 @@ a = [1,2,3,4]
 modify(a)
 ```
 
-```python
+```c
 clear list!
 ```
 
@@ -1548,7 +1550,7 @@ test(1)
 
 
 
-### 匿名函数
+### `lambda` 函数
 
 和其他大多数语言一样，Python 也提供了匿名函数的功能，语法如下：
 
@@ -1616,7 +1618,8 @@ if x<-1:
 elif 1 <= x <= 1/2:    
     y = -3 * x
 else:    
-    y = x - 2print(y)
+    y = x - 2
+    print(y)
 ```
 
 
@@ -1850,11 +1853,11 @@ print("Is the file closed?", f.closed)
 
 ### 其他文件模式
 
-可以看到，使用 `with open as f`，同样可以做到读写文件，而且这样写起来很简洁，只要把打开文件后要执行的语句，使用 4 个空格作为缩进写在一起即可。
+可以看到，使用 `with open() as f`，同样可以做到读写文件，而且这样写起来很简洁，只要把打开文件后要执行的语句，使用 4 个空格作为缩进写在一起即可。
 
 值得注意的是，我们只使用了两种模式，r 和 w，事实上还有 rb 和 wb，分别是读取二进制文件和写入二进制文件，当我们写程序，下载一些东西的时候，比如图片格式，常使用 wb 保存一个图片；
 
-python 还提供了一个模式 “a”，这个模式是追加用的，如果用a模式打开文件，那么可以直接用 write 方法写入新的信息，这些信息会被追加到文件的尾部。以上这几种是很常用的模式。
+python 还提供了一个模式 'a'，这个模式是追加用的，如果用 a 模式打开文件，那么可以直接用 write 方法写入新的信息，这些信息会被追加到文件的尾部。以上这几种是很常用的模式。
 
 可以使用 help(open) 查看 open 的文档
 
@@ -1877,7 +1880,7 @@ with open('test', 'r') as f:
 
 # Part 3 Numpy for Numerical Calculation
 
-### 遇事不决查文档
+## 遇事不决查文档
 
 [Numpy 文档](https://www.numpy.org/devdocs/reference/index.html) 
 
@@ -1949,7 +1952,9 @@ m2 = np.array([[1],
 print(m2.shape)
 ```
 
-    (4, 1)
+```python
+(4, 1)
+```
 
 
 
@@ -1995,7 +2000,10 @@ print(data)
 ```
 
 ```python
-[[0.3890509  0.07852005 0.10866473] [0.68119759 0.73162121 0.84347843] [0.92551516 0.79543677 0.49450627] [0.49077995 0.66073402 0.81769004]]
+[[0.3890509  0.07852005 0.10866473]
+ [0.68119759 0.73162121 0.84347843]
+ [0.92551516 0.79543677 0.49450627]
+ [0.49077995 0.66073402 0.81769004]]
 ```
 
 
@@ -2035,7 +2043,9 @@ print(row_0)
 print(row_0.shape)
 ```
 
-    [0.3890509  0.07852005 0.10866473](3,)
+```python
+[0.3890509  0.07852005 0.10866473](3,)
+```
 
 
 
@@ -2050,7 +2060,9 @@ print(row_0)
 print(row_0.shape)
 ```
 
-    [0.3890509  0.07852005 0.10866473](3,)
+```python
+[0.3890509  0.07852005 0.10866473](3,)
+```
 
 
 
@@ -2065,7 +2077,9 @@ print(col_0)
 print(col_0.shape)
 ```
 
-    [0.3890509  0.68119759 0.92551516 0.49077995](4,)
+```python
+[0.3890509  0.68119759 0.92551516 0.49077995](4,)
+```
 
 
 
@@ -2080,7 +2094,9 @@ print(row_0_)
 print(row_0_.shape)
 ```
 
-    [[0.3890509  0.07852005 0.10866473]](1, 3)
+```python
+[[0.3890509  0.07852005 0.10866473]](1, 3)
+```
 
 
 
@@ -2092,7 +2108,9 @@ print(col_0_)
 print(col_0_.shape)
 ```
 
-    [[0.3890509 ] [0.07852005] [0.10866473]](3, 1)
+```python
+[[0.3890509 ] [0.07852005] [0.10866473]](3, 1)
+```
 
 
 
@@ -2103,7 +2121,9 @@ print(col_0_.shape)
 a = np.array([1,2])b = np.array([3,4])print(a, b)
 ```
 
-    [1 2] [3 4]
+```python
+[1 2] [3 4]
+```
 
 
 a 和 b 都是一个长度为2的一维向量，可以直接相加减
@@ -2395,7 +2415,11 @@ print(np.argmin(output))
 
 
 ```python
-A = np.array([[ 0.33847987,  0.7492099 ],       [ 0.20938843,  0.53851897],       [ 0.638118  ,  0.52182376],       [ 0.98172993,  0.12160851],       [ 0.5551554 ,  0.86638236]])
+A = np.array([[0.33847987,  0.7492099 ],
+              [0.20938843,  0.53851897],
+              [0.638118  ,  0.52182376],
+              [0.98172993,  0.12160851],
+              [0.5551554 ,  0.86638236]])
 ```
 
 
@@ -2492,7 +2516,8 @@ A + B
 
 
 ```python
-x = np.array([ 0.78803502,  0.85090948,  0.17827904,  0.26081458,  0.61807529,        0.06409987,  0.70153396,  0.10446683,  0.52234655,  0.80166488])
+x = np.array([ 0.78803502,  0.85090948,  0.17827904,  0.26081458,  0.61807529,
+               0.06409987,  0.70153396,  0.10446683,  0.52234655,  0.80166488])
 ```
 
 
@@ -2524,7 +2549,7 @@ b = 0.39147861519281024
 1/(np.exp(-np.sum(x*W.reshape(-1))+b)+1)
 ```
 
-答案是0.81173994
+答案是 0.81173994
 
 
 
@@ -2557,7 +2582,7 @@ X = np.random.uniform(size = (1000, 10))
 
 start_time = time()
 
-# YOUR CODE HERE
+# for 循环
 
 [1/(np.exp(-np.sum(x*W.reshape(-1))+b)+1) for x in np.transpose(X)]
 
@@ -2570,9 +2595,9 @@ print('time:', end_time - start_time)
 
 start_time = time()
 
-# YOUR CODE HERE
+# np.matmul() 函数：进行两个 numpy 数组的矩阵相乘，计算时会自动进行广播
 
-1/(np.exp(-np.matmul(X, W) + b) + 1)
+1/(np.exp(-np.matmul(X, W) + b) + 1) 
 
 end_time = time()
 print('time:', end_time - start_time)
@@ -3486,6 +3511,8 @@ data.to_csv('foo.csv')
 
 # Part 5 Matplotlib for Visualization
 
+## 遇事不决查文档
+
 [Matplotlib文档](https://matplotlib.org/3.1.1/index.html)
 
 Matplotlib 是一个画图的库，和numpy，pandas可以无缝衔接，anaconda已经集成；
@@ -3534,8 +3561,6 @@ plt.figure(figsize) 中，figsize 指定图的大小
 
 
 ```python
-# YOUR CODE HERE
-
 plt.figure(figsize=(4,4))
 plt.plot(a, b, 'o')
 
@@ -3693,6 +3718,8 @@ plt.suptitle("title")
 
 # Part 6 Scikit-learn for Machine Learning
 
+## 遇事不决查文档
+
 [Scikit-learn文档](https://scikit-learn.org/stable/documentation.html)
 
 scikit-learn 是python中最有名的机器学习库，构建在numpy, scipy, matplotlib之上，使用起来很简单，速度还很快，而且代码开源，可以在github上学习它的源码，学习各种机器学习算法的实现过程。
@@ -3832,11 +3859,12 @@ plt.figure(figsize = (8, 8))
 plt.title("Input data")
 
 # Plot the training points
+
 plt.scatter(X_train[:, 0], X_train[:, 1], c=y_train, cmap=cm_bright, edgecolors='k')
 
 # and testing points
+
 plt.scatter(X_test[:, 0], X_test[:, 1], c=y_test, cmap=cm_bright, alpha=0.3, edgecolors='k')
-    
 ```
 
 
