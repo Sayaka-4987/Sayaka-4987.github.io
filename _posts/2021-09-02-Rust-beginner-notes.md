@@ -25,6 +25,12 @@ tags:								    # 标签
 
 
 
+Rust 语言代码文件后缀名为 `.rs` ；
+
+Rust 是一种 **预编译静态类型** 语言，这意味着你可以编译程序并将可执行文件送给其他人，而接受者不需要安装 Rust 就可以运行；
+
+
+
 ## 环境配置
 
 Rust：这里用 [IntelliJ\_IDEA 社区版](https://www.jetbrains.com/zh-cn/idea/download/#section=windows) 作为 IDE ，需要安装 `Rust` 和 `toml` 两个插件，中间差什么可以无脑跟着 IDE 的提示装，新建项目选 `Rust-Binary (application) `；
@@ -1561,14 +1567,14 @@ use std::collections::*;
 
 回忆之前的猜数字游戏，使用了外部包 `rand` 生成随机数；
 
-1. 为了在项目中使用 `rand`，在 *Cargo.toml* 中加入了如下行，使得 Cargo 知道要从 [crates.io](https://crates.io) 下载 `rand` 和其依赖，使其可在项目代码中使用。
+- 为了在项目中使用 `rand`，在 *Cargo.toml* 中加入了如下行，使得 Cargo 知道要从 [crates.io](https://crates.io) 下载 `rand` 和其依赖，使其可在项目代码中使用。
 
 ```toml
 [dependencies]
 rand = "0.5.5"
 ```
 
-2. 为了将 `rand` 定义引入项目包的作用域，我们加入一行 `use` 起始的包名，它以 `rand` 包名开头，并列出了需要引入作用域的项 Rng ；
+- 为了将 `rand` 定义引入项目包的作用域，我们加入一行 `use` 起始的包名，它以 `rand` 包名开头，并列出了需要引入作用域的项 Rng ；
 
 ```rust
 use rand::Rng;
@@ -2123,7 +2129,7 @@ fn main() {
 
 #### 用 `?` 运算符传播错误
 
-（翻译比较怪，原文 *propagating*）通俗地说，就是把错误抛到调用者那里处理；
+（翻译比较怪，原文 *propagating*）通俗地说就是把错误抛到外层调用者那里处理；
 
 ```rust
 use std::io;
@@ -2191,26 +2197,662 @@ fn main() -> Result<(), Box<dyn Error>> {
 
 
 
-## 泛型和 trait 方法
+## 泛型
+
+回顾提取函数来减少重复的步骤：
+
+1. 找出重复代码；
+2. 将重复代码提取到了一个函数中，并在函数签名中指定了代码中的输入和返回值；
+3. 将重复代码的两个实例，改为调用函数；
 
 
 
+要在函数体中使用参数，就必须在函数签名中声明它的名字，好让编译器知道这个名字指代的是什么。同理，当在函数签名中使用一个类型参数时，必须在使用它之前就声明它。为了定义泛型版本的 `largest` 函数，类型参数声明位于函数名称与参数列表中间的尖括号 `<>` 中，像这样：
 
+```rust
+fn largest<T>(list: &[T]) -> T { 
+    ……  
+}
+```
+
+可以这样理解这个定义：函数 `largest` 有泛型类型 `T`，它有个参数 `list`，其类型是元素为 `T` 的 slice，`largest` 函数的返回值类型也是 `T`；
+
+
+
+### 枚举成员、方法、结构体都可以使用泛型
+
+Rust 通过在编译时进行泛型代码的 单态化（monomorphization）来保证效率，编译器寻找所有泛型代码被调用的位置，并使用泛型代码针对具体类型生成代码；
+
+```rust
+enum Option<T> {
+    Some(T),
+    None,
+}
+
+enum Result<T, E> {
+    Ok(T),
+    Err(E),
+}
+
+struct Point<T> {
+    x: T,
+    y: T,
+}
+
+impl<T> Point<T> {
+    fn x(&self) -> &T {
+        &self.x
+    }
+}
+```
+
+
+
+### trait 方法
+
+trait 类似于其他语言中的 **接口**（*interfaces*），告诉 Rust 编译器某个特定类型拥有可能与其他类型共享的功能，我们通过 trait 以一种抽象的方式定义共享的行为；
+
+可以使用 *trait bounds* 指定泛型是任何拥有特定行为的类型；
+
+
+
+#### 定义 trait 
+
+使用 `trait` 关键字来声明一个 trait，后面是 trait 的名字，在这个例子中是 `Summary`；
+
+在大括号中声明描述实现这个 trait 的类型所需要的方法，在这个例子中是 `fn summarize(&self) -> String`；
+
+```rust
+pub trait Summary {
+    // 1. 可以只声明一个方法签名，后跟分号，而不是在大括号中提供其实现
+    fn summarize(&self) -> String;  
+    
+    // 2. 或指定一个默认的字符串值：
+    fn summarize(&self) -> String {
+        String::from("(Read more...)")
+    }
+}
+```
+
+trait 体中可以有多个方法：一行一个方法签名，且都以分号结尾；
+
+
+
+#### 实现 trait
+
+每一个实现 `Summary` 这个 trait 的类型，都需要提供其自定义行为的方法体；
+
+编译器也会确保任何实现 `Summary` trait 的类型都拥有与这个签名的定义完全一致的 `summarize` 方法；
+
+
+
+注意：只有当 trait 或者要实现 trait 的类型 **位于 crate 的本地作用域** 时，才能为该类型实现 trait；否则两个 crate 可以分别对相同类型实现相同的 trait，而 Rust 不知道应该用哪一个实现；
+
+```rust
+pub struct NewsArticle {
+    pub headline: String,
+    pub location: String,
+    pub author: String,
+    pub content: String,
+}
+
+impl Summary for NewsArticle {
+    fn summarize(&self) -> String {
+        format!("{}, by {} ({})", self.headline, self.author, self.location)
+    }
+}
+
+pub struct Tweet {
+    pub username: String,
+    pub content: String,
+    pub reply: bool,
+    pub retweet: bool,
+}
+
+impl Summary for Tweet {
+    fn summarize(&self) -> String {
+        format!("{}: {}", self.username, self.content)
+    }
+}
+```
+
+
+
+### Trait Bound 语法
+
+如果我们需要 item1 和 item2 同一个实现了 Summary trait 的类型：
+
+```rust
+pub fn notify<T: Summary>(item1: T, item2: T) {
+    ……
+}
+```
+
+
+
+#### trait 作为参数
+
+可以定义一个函数 `notify` 来调用其参数 `item` 上的 `summarize` 方法，该参数是实现了 `Summary` trait 的某种类型，可以使用 `impl Trait` 语法：
+
+```rust
+pub fn notify(item: impl Summary) {
+    println!("Breaking news! {}", item.summarize());
+}
+
+// impl Summary 的写法实际等价于这样的 Trait Bound 语法：
+pub fn notify<T: Summary>(item: T) {
+    println!("Breaking news! {}", item.summarize());
+}
+```
+
+item 参数需要是一个实现了 Summary 的类型；
+
+
+
+#### 通过 `+` 指定多个 trait bound
+
+当我们需要 `item` 就同时实现两个不同的 trait：`Display` 和 `Summary`，可以通过 `+` 语法实现：
+
+```rust
+pub fn notify(item: impl Summary + Display) {
+    ……
+}
+
+pub fn notify<T: Summary + Display>(item: T) {	// 泛型的版本
+    ……
+}
+```
+
+
+
+#### 通过 `where` 简化 trait bound
+
+使用过多的 trait bound 会使得函数签名难以阅读，Rust 有一个可以在函数签名之后的 `where` 从句中后置 trait bound 的语法；
+
+```rust
+fn some_function<T, U>(t: T, u: U) -> i32
+    where T: Display + Clone,
+          U: Clone + Debug
+{
+    ……
+}
+```
+
+等价于：
+
+```rust
+fn some_function<T: Display + Clone, U: Clone + Debug>(t: T, u: U) -> i32 {
+    ……
+}
+```
+
+
+
+### 返回一个实现 trait 的类型
+
+```rust
+fn returns_summarizable() -> impl Summary {
+    Tweet {
+        username: String::from("horse_ebooks"),
+        content: String::from("of course, as you probably already know, people"),
+        reply: false,
+        retweet: false,
+    }
+}
+```
+
+
+
+### 修复之前泛型版本的 `largest` 函数
+
+```rust
+fn largest<T: PartialOrd + Copy>(list: &[T]) -> T {
+    let mut largest = list[0];
+
+    for &item in list.iter() {
+        if item > largest {
+            largest = item;
+        }
+    }
+
+    largest
+}
+
+fn main() {
+    let number_list = vec![34, 50, 25, 100, 65];
+
+    let result = largest(&number_list);
+    println!("The largest number is {}", result);
+
+    let char_list = vec!['y', 'm', 'a', 'q'];
+
+    let result = largest(&char_list);
+    println!("The largest char is {}", result);
+}
+```
 
 
 
 ## 生命周期
 
+生命周期即就是作用域的名字，每一个引用、以及包含引用的数据结构，都需要一个生命周期指定它 **保持有效** 的作用域；
+
+每一个 let 表达式都隐式引入了一个作用域；
+
+生命周期用这样的符号表示：`'a` , `'static`，通常情况下不需要显式命名；
+
+
+
+### 生命周期注解语法 `'`
+
+生命周期注解有着一个不太常见的语法：
+
+- 参数名称必须以撇号 `'` 开头，其名称通常全是小写，类似于泛型其名称非常短；
+- `'a` 是大多数人默认使用的名称；
+- 生命周期参数注解位于引用的 `&` 之后，并有一个空格来将引用类型与生命周期注解分隔开；
+
+
+
+例：这里有一个没有生命周期参数的 `i32` 的引用，一个有叫做 `'a` 的生命周期参数的 `i32` 的引用，和一个生命周期也是 `'a` 的 `i32` 的可变引用：
+
+```rust
+&i32         // 引用
+&'a i32      // 带有显式生命周期的引用
+&'a mut i32  // 带有显式生命周期的可变引用
+```
+
+单个的生命周期注解本身没有意义，生命周期注解适用于表示多个引用的泛型生命周期参数如何相互联系；
+
+如果函数有一个生命周期 `'a` 的 `i32` 的引用的参数 `first`，还有另一个同样是生命周期 `'a` 的 `i32` 的引用的参数 `second`，这两个生命周期注解就意味着，引用 `first` 和 `second` 必须与这泛型生命周期存在得一样久；
+
+
+
+修改之前的 longest 函数：
+
+```rust
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+    if x.len() > y.len() {
+        x
+    } else {
+        y
+    }
+}
+```
+
+- `longest` 函数并不需要知道 `x` 和 `y` 具体会存在多久，`longest` 函数只需要知道，有某个可以被 `'a` 替代的作用域将会满足这个签名；
+- `longest`  函数返回的引用的生命周期，将与 **传入该函数的引用的生命周期的较小者** 一致，这就是我们告诉 Rust  需要其保证的约束条件，在函数签名中指定生命周期参数并不改变任何传入值或返回值的生命周期，而是指出任何不满足这个约束条件的值都将被借用检查器拒绝；
+
+
+
+### 注解的省略规则
+
+这些规则是一系列特定的场景，此时编译器会考虑，如果代码符合这些场景，就无需明确指定生命周期：
+
+- 每一个在输入位置省略的生命周期都对应一个唯一的生命周期参数。
+- 如果只有一个输入的生命周期位置（无论省略还是没省略），那个生命周期会赋给所有省略了的输出生命周期。
+  如果有多个输入生命周期位置，而其中一个是 &self 或者 &mut self，那么 self 的生命周期会赋给所有省略了的输出生命周期。
+- 除了上述两种情况，其他省略生命周期的情况都是错误的。
+
+```rust
+fn print(s: &str);                                      // 省略的
+fn print<'a>(s: &'a str);                               // 完整的
+
+fn debug(lvl: usize, s: &str);                          // 省略的
+fn debug<'a>(lvl: usize, s: &'a str);                   // 完整的
+
+fn substr(s: &str, until: usize) -> &str;               // 省略的
+fn substr<'a>(s: &'a str, until: usize) -> &'a str;     // 完整的
+
+fn get_str() -> &str;                                   // 错误，没有输入
+
+fn frob(s: &str, t: &str) -> &str;                      // 错误，有两个输入的生命周期
+
+fn get_mut(&mut self) -> &mut T;                        // 省略的
+fn get_mut<'a>(&'a mut self) -> &'a mut T;              // 完整的
+
+fn args<T: ToCStr>(&mut self, args: &[T]) -> &mut Command                  // 省略的
+fn args<'a, 'b, T: ToCStr>(&'a mut self, args: &'b [T]) -> &'a mut Command // 完整的
+
+fn new(buf: &mut [u8]) -> BufWriter;                    // 省略的
+fn new<'a>(buf: &'a mut [u8]) -> BufWriter<'a>          // 完整的
+```
+
+
+
+### 静态生命周期
+
+`'static` 是一种特殊的生命周期，能够**存活于整个程序期间**；
+
+所有的字符串字面值都拥有 `'static` 生命周期，我们也可以选择标注出来：
+
+```rust
+let s: &'static str = "I have a static lifetime.";
+```
+
+
+
+### 结合泛型类型参数、trait bounds 和生命周期
+
+写法如下：
+
+```rust
+use std::fmt::Display;
+
+fn longest_with_an_announcement<'a, T>(x: &'a str, y: &'a str, ann: T) -> &'a str
+    where T: Display
+{
+    println!("Announcement! {}", ann);
+    if x.len() > y.len() {
+        x
+    } else {
+        y
+    }
+}
+```
+
+
+
+## 例：特定文件中搜索指定字符串
+
+> 注意 `std::env::args` 在其任何参数包含无效 Unicode 字符时会 panic。如果你需要接受包含无效 Unicode 字符的参数，使用 `std::env::args_os` 代替。这个函数返回 `OsString` 值而不是 `String` 值。这里出于简单考虑使用了 `std::env::args`，因为 `OsString` 值每个平台都不一样而且比 `String` 值处理起来更为复杂。
+
+
+
+### 第一部分：接受命令行参数
+
+首先将命令行参数收集到一个 vector 中并打印出来：
+
+```rust
+use std::env;
+
+fn main() {
+    let args: Vec<String> = env::args().collect();
+
+    let query = &args[1];
+    let filename = &args[2];
+
+    println!("Searching for {}", query);
+    println!("In file {}", filename);
+}
+```
+
+
+
+### 第二部分：读取文件
+
+在 `main` 中新增了一行语句：`fs::read_to_string` 接受 `filename`，打开文件，接着返回包含其内容的 `Result<String>`；
+
+```rust
+use std::{env, fs};
+
+fn main() {
+    let args: Vec<String> = env::args().collect();
+
+    let query = &args[1];
+    let filename = &args[2];
+
+    println!("Searching for {}", query);
+    println!("In file {}", filename);
+
+    let contents = fs::read_to_string(filename)
+        .expect("Something went wrong reading the file");
+
+    println!("With text:\n{}", contents);
+}
+```
+
+
+
+### 第三部分：模块化改进
+
+- 将程序拆分成 *main.rs* 和 *lib.rs* 并将程序的逻辑放入 *lib.rs* 中。
+- 当命令行解析逻辑比较小时，可以保留在 *main.rs* 中。
+- 当命令行解析开始变得复杂时，也同样将其从 *main.rs* 提取到 *lib.rs* 中。
+
+
+
+`main` 函数的责任应该被限制为：
+
+- 使用参数值调用命令行解析逻辑
+- 设置任何其他的配置
+- 调用 *lib.rs* 中的 `run` 函数
+- 如果 `run` 返回错误，则处理这个错误
+
+这个模式的一切就是为了关注分离：*main.rs* 处理程序运行，而 *lib.rs* 处理所有的真正的任务逻辑；
+
+因为不能直接测试 `main` 函数，所以我们将所有的程序逻辑移动到 *lib.rs* 的函数；
+
+
+
+~~整理起来太麻烦就只放最终结果了~~
+
+*libs.rs* 文件：
+
+```rust
+use std::{env, fs, process};
+use std::error::Error;
+
+pub fn run(config: Config) -> Result<(), Box<dyn Error>>{
+    let contents = fs::read_to_string(config.filename)?;
+    println!("With text:\n{}", contents);
+    Ok(())
+}
+
+// 模块化提取参数的部分
+pub struct Config {
+    pub query: String,
+    pub filename: String,
+}
+
+impl Config {
+    pub fn new(args: &[String]) -> Result<Config, &'static str> {
+        if args.len() < 3 {
+            return Err("not enough arguments");
+        }
+
+        let query = args[1].clone();
+        let filename = args[2].clone();
+
+        Ok(Config { query, filename })
+    }
+}
+```
+
+*main.rs* 文件：
+
+```rust
+mod libs;
+
+use crate::libs::Config;
+use std::{env, process};
+
+fn main() {
+    let args: Vec<String> = env::args().collect();
+
+    let config = Config::new(&args).unwrap_or_else(|err| {
+        // 如果新建 Config 失败则使用错误码退出
+        println!("Problem parsing arguments: {}", err);
+        process::exit(1);     
+    });
+
+    println!("Searching for {}", config.query);
+    println!("In file {}", config.filename);
+
+    if let Err(e) = crate::libs::run(config) {
+        println!("Application error: {}", e);
+        process::exit(1);
+    }
+}
+```
+
+
+
+###  `eprintln!()` 宏把错误输出到标准错误
+
+使用方法如下：
+
+```rust
+fn main() {
+    let args: Vec<String> = env::args().collect();
+
+    let config = Config::new(&args).unwrap_or_else(|err| {
+        eprintln!("Problem parsing arguments: {}", err);
+        process::exit(1);
+    });
+
+    if let Err(e) = minigrep::run(config) {
+        eprintln!("Application error: {}", e);
+
+        process::exit(1);
+    }
+}
+```
+
+运行后就可以打开 output.txt 查看错误信息：
+
+```powershell
+$ cargo run to poem.txt > output.txt
+```
+
+
+
+## 闭包（closures）
+
+Rust 的 闭包（closures）是可以保存进变量、或作为参数传递给其他函数的匿名函数；
+
+
+
+### 创建闭包
+
+- 闭包的定义以一对竖线 `|` 开始，在竖线中指定闭包的参数（类似 Smalltalk 和 Ruby ），如果有多于一个参数，可以使用逗号分隔，比如 `|param1, param2|`；
+- 可以在一个地方创建闭包，然后在不同的上下文中执行闭包运算；
+- 不同于函数的是，闭包允许捕获调用者作用域中的值；
+
+```rust
+// let 语句表明 expensive_closure 包含一个匿名函数的定义，使用闭包的原因是我们需要在一个位置定义代码，储存代码，并在之后的位置实际调用它；
+// 期望调用的代码现在储存在 expensive_closure 中
+let expensive_closure = |num| {
+    println!("calculating slowly...");
+    thread::sleep(Duration::from_secs(2));
+    num   // 作为调用闭包时的返回值
+};
+```
+
+
+
+### 调用闭包
+
+调用闭包类似于调用函数，只需要指定存放闭包定义的变量名，并后跟包含期望使用的参数的括号
+
+```rust
+fn generate_workout(intensity: u32, random_number: u32) {
+    let expensive_closure = |num| {
+        println!("calculating slowly...");
+        thread::sleep(Duration::from_secs(2));
+        num
+    };
+
+    if intensity < 25 {
+        println!(
+            "Today, do {} pushups!", expensive_closure(intensity)
+        );
+        println!(
+            "Next, do {} situps!", expensive_closure(intensity)
+        );
+    } else {
+        if random_number == 3 {
+            println!("Take a break today! Remember to stay hydrated!");
+        } else {
+            println!(
+                "Today, run for {} minutes!", expensive_closure(intensity)
+            );
+        }
+    }
+}
+```
+
+
+
+### 为提高可读性增加类型注解
+
+可以让闭包长得更像函数：
+
+```rust
+let expensive_closure = |num: u32| -> u32 {
+    println!("calculating slowly...");
+    thread::sleep(Duration::from_secs(2));
+    num
+};
+
+fn  add_one_v1   (x: u32) -> u32 { x + 1 }		// 函数定义
+let add_one_v2 = |x: u32| -> u32 { x + 1 };		// 完整标注的闭包定义
+let add_one_v3 = |x|             { x + 1 };		// 省略了类型注解
+let add_one_v4 = |x|               x + 1  ;		// 去掉了可选的大括号，因为闭包体只有一行
+```
+
+
+
+### 带泛型和 `Fn` trait 的闭包
+
+在上一个场景中，我们需要用结构体存放闭包以实现延迟初始化，优化运行性能，为了让结构体存放闭包，我们需要指定闭包的类型；
+
+在 Rust 中，两个有相同签名的闭包实例还有自己独有的匿名类型，所以依然是不同的类型，因此必须使用泛型和 trait bound 才能定义用到闭包的结构体、枚举或函数参数；
+
+`Fn` 系列 trait 由标准库提供，所有的闭包都实现了 trait `Fn`、`FnMut` 或 `FnOnce` 中的一个；
+
+```rust
+// Cacher 结构体在 calculation 中存放闭包，并在 value 中存放 Option 值
+struct Cacher<T> where T: Fn(u32) -> u32 {
+    // 泛型 T 的字段，T 需要是一个实现了 Fn 的闭包，且必须有一个 u32 参数，返回一个 u32 值
+    calculation: T,		
+    value: Option<u32>,
+}
+
+/*
+缓存逻辑如下：
+在执行闭包之前，value 将是 None，如果使用 Cacher 的代码请求闭包的结果，
+这时会执行闭包，并将结果储存在 value 字段的 Some 成员中，
+当代码再次请求闭包的结果，不再执行闭包，而是会返回存放在 Some 成员中的结果 
+*/
+impl<T> Cacher<T>
+    where T: Fn(u32) -> u32
+{
+    fn new(calculation: T) -> Cacher<T> {
+        Cacher {
+            calculation,
+            value: None,
+        }
+    }
+
+    fn value(&mut self, arg: u32) -> u32 {
+        match self.value {
+            Some(v) => v,
+            None => {
+                let v = (self.calculation)(arg);
+                self.value = Some(v);
+                v
+            },
+        }
+    }
+}
+```
+
+### 捕获环境中的值
+
+比起函数，闭包特有的功能是 **捕获其环境，并访问其被定义的作用域的变量**；
+
+```rust
+fn main() {
+    let x = 4;
+    let equal_to_x = |z| z == x;
+    let y = 4;
+    assert!(equal_to_x(y));
+}
+```
 
 
 
 
 
+# 更新分界线
 
-
-
-## 其它
-
-Rust 语言代码文件后缀名为 `.rs` ；
-
-Rust 是一种 **预编译静态类型** 语言，这意味着你可以编译程序并将可执行文件送给其他人，而接受者不需要安装 Rust 就可以运行；
