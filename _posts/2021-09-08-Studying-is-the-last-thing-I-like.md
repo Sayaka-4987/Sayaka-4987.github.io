@@ -7,7 +7,6 @@ author:     YXWang 					    # 作者
 header-img: img/post-bg-unix-linux.jpg	 	# 这篇文章的标题背景图片
 catalog: true 						    # 是否归档
 tags:								    # 标签
-    - 施工中
     - 计算机网络原理
     - 汇编与接口技术
 
