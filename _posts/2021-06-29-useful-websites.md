@@ -2,7 +2,7 @@
 layout:     post   				        # 使用的布局（不需要改）
 title:      实用网站分享（持续更新） 					# 标题 
 subtitle:   （基本也是其他朋友给的）		# 副标题
-date:       2021-06-29 				    # 时间
+date:       2021-10-05 				    # 时间
 author:     YXWang 					    # 作者
 header-img: img/post-bg-hacker.jpg	 	# 这篇文章的标题背景图片
 catalog: true 						    # 是否归档
@@ -83,7 +83,7 @@ tags:								    # 标签
 
 ### 生活
 
-- [WeTransfer 网盘](https://wetransfer.com/)
+- [WeTransfer 网盘](https://wetransfer.com/) 
 
 - [人工智能聊天/心理治疗 Replika.ai](https://replika.ai/) （注：提供自杀/惊恐发作/抑郁等危机干预服务）
 
@@ -105,7 +105,7 @@ tags:								    # 标签
 
 - [电影资源网站](https://www.mypianku.net/) 
 
-- [使用dosbox玩游戏](https://github.com/dosasm/masm-tasm/wiki/playgame)
+- [使用 dosbox 玩游戏](https://github.com/dosasm/masm-tasm/wiki/playgame)
 
 - [5种方法来装病 wikiHow](https://zh.wikihow.com/装病) 
 
