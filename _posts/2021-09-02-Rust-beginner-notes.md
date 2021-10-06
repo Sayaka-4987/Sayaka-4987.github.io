@@ -932,7 +932,7 @@ fn calculate_length(s: &String) -> usize {	// 以 s 的引用作为参数，而�
 
 
 
-#### 可变引用
+#### `&mut` 可变引用
 
 注意：特定作用域中的特定数据 **只能有一个可变引用**；
 
@@ -2872,6 +2872,185 @@ fn main() {
 
 
 ## 迭代器（iterator）
+
+Rust 对迭代器也有延迟初始化，在使用迭代器前，它不会有任何效果；
+
+
+
+### 用 `.iter()` 创建一个迭代器
+
+```rust
+let v1 = vec![1, 2, 3];
+
+let v1_iter = v1.iter();
+
+// 在调用方法使用迭代器时它才有效果
+for val in v1_iter {
+    println!("Got: {}", val);
+}
+```
+
+
+
+### 迭代器的 `Iterator` trait 
+
+迭代器都实现了一个叫做 `Iterator` trait，定义在标准库；
+
+实现 `Iterator` trait 要求定义一个 `Item` 类型，这个 `Item` 类型就是迭代器返回的元素类型，它被用作 `next` 方法的返回值类型：
+
+```rust
+pub trait Iterator {
+    type Item;
+
+    fn next(&mut self) -> Option<Self::Item>;
+
+    // 此处省略了方法的默认实现
+}
+```
+
+`next` 每次返回迭代器中的一个项，它的结果封装在 `Some` 中，当迭代器结束时，返回 `None` ；
+
+
+
+### 调用迭代器的方法
+
+称为 **消费适配器**（*consuming adaptors*），因为它们会消耗迭代器；
+
+可以获取迭代器所有项的总和的 `sum` 方法就是一个消费适配器，在这个例子中，调用 `sum` 之后不再允许使用 `v1_iter` ，因为 `sum` 它会夺走迭代器的所有权：
+
+```rust
+#[test]
+fn iterator_sum() {
+    let v1 = vec![1, 2, 3];
+
+    let v1_iter = v1.iter();
+
+    let total: i32 = v1_iter.sum();
+    
+	// 这里 v1_iter 不能再使用 
+    assert_eq!(total, 6);
+}
+```
+
+
+
+### 产生其他迭代器的方法
+
+称为 **迭代器适配器**（*iterator adaptors*），因为它们允许我们将当前迭代器变为不同类型的迭代器；
+
+可以链式调用多个迭代器适配器，但迭代器都是延迟初始化的，所以必须调用一个消费适配器方法，接收迭代器适配器调用的结果；
+
+```rust
+let v1: Vec<i32> = vec![1, 2, 3];
+
+let v2: Vec<_> = v1.iter().map(|x| x + 1).collect();
+
+assert_eq!(v2, vec![2, 3, 4]);
+```
+
+
+
+### 使用闭包获取环境
+
+一个通过使用 `filter` 迭代器适配器和捕获环境的闭包的常规用例；
+
+#### 迭代器的 `.filter` 方法
+
+
+
+```rust
+#[derive(PartialEq, Debug)]
+struct Shoe {
+    size: u32,
+    style: String,
+}
+
+// 获取一个鞋子 vector 的所有权和一个鞋子大小作为参数，返回一个只包括我的尺码的鞋子 vector
+fn shoes_in_my_size(shoes: Vec<Shoe>, shoe_size: u32) -> Vec<Shoe> {
+    shoes.into_iter()
+        .filter(|s| s.size == shoe_size)
+        .collect()
+}
+
+#[test]
+fn filters_by_size() {
+    let shoes = vec![
+        Shoe { size: 10, style: String::from("sneaker") },
+        Shoe { size: 13, style: String::from("sandal") },
+        Shoe { size: 10, style: String::from("boot") },
+    ];
+
+    let in_my_size = shoes_in_my_size(shoes, 10);
+
+    assert_eq!(
+        in_my_size,
+        vec![
+            Shoe { size: 10, style: String::from("sneaker") },
+            Shoe { size: 10, style: String::from("boot") },
+        ]
+    );
+}
+```
+
+
+
+### 创建自定义迭代器
+
+为 `Counter` 类型实现 `Iterator` trait，通过定义 `next` 方法来指定使用迭代器时的行为：
+
+```rust
+struct Counter {
+    count: u32,
+}
+
+impl Counter {
+    fn new() -> Counter {
+        Counter { count: 0 }
+    }
+}
+
+impl Iterator for Counter {
+    type Item = u32;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        self.count += 1;
+
+        if self.count < 6 {
+            Some(self.count)
+        } else {
+            None
+        }
+    }
+}
+```
+
+
+
+#### 为自定义的迭代器使用其他迭代器的方法
+
+```rust
+fn using_other_iterator_trait_methods() {
+    let sum: u32 = Counter::new().zip(Counter::new().skip(1))
+                                 .map(|(a, b)| a * b)
+                                 .filter(|x| x % 3 == 0)
+                                 .sum();
+    assert_eq!(18, sum);
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
