@@ -38,6 +38,8 @@ Rust：这里用 [IntelliJ\_IDEA 社区版](https://www.jetbrains.com/zh-cn/idea
 
 Cargo：是 Rust 的构建系统和包管理器，用 Cargo 新建的项目会自动生成两个文件和一个目录：一个 Cargo.toml 配置文件，一个 src 目录，以及位于 src 目录中的 main.rs 文件；同时初始化一个配备 .gitignore 文件的 git 仓库；
 
+关于 Cargo 可以参考 [进一步认识 Cargo 和 Crates.io](https://kaisery.github.io/trpl-zh-cn/ch14-00-more-about-cargo.html) 一节：
+
 ```toml
 # Cargo.toml 的内容
 
@@ -3040,11 +3042,56 @@ fn using_other_iterator_trait_methods() {
 
 
 
+### 函数式编程优化
+
+```rust
+pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
+    let mut results = Vec::new();
+
+    for line in contents.lines() {
+        if line.contains(query) {
+            results.push(line);
+        }
+    }
+
+    results
+}
+```
+
+在 `search` 函数实现中使用迭代器适配器的版本：
+
+```rust
+pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
+    contents.lines()
+        .filter(|line| line.contains(query))
+        .collect()
+}
+```
 
 
 
+#### 迭代器和闭包的性能比 `for` 循环更好
 
+原理是 Rust 会把迭代器的迭代次数展开，移除循环控制代码的开销并替换为重复代码；
 
+```rust
+let buffer: &mut [i32];
+let coefficients: [i64; 12];
+let qlp_shift: i16;
+
+// 为了计算 prediction 的值，这些代码遍历了 coefficients 中的 12 个值，
+// 使用 zip 方法将系数与 buffer 的前 12 个值组合在一起
+// 接着将每一对值相乘，再将所有结果相加，然后将总和右移 qlp_shift 位。
+
+for i in 12..buffer.len() {
+    let prediction = coefficients.iter()
+                                 .zip(&buffer[i - 12..i])
+                                 .map(|(&c, &s)| c * s as i64)
+                                 .sum::<i64>() >> qlp_shift;
+    let delta = buffer[i];
+    buffer[i] = prediction as i32 + delta;
+}
+```
 
 
 
