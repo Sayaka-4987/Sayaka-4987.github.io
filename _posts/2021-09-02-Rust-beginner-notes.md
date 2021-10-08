@@ -3095,6 +3095,143 @@ for i in 12..buffer.len() {
 
 
 
+## 智能指针
+
+- Rust 中的一类数据结构（联想 C++ 的智能指针）；
+- 大部分情况下，智能指针拥有他们指向的数据，并允许你修改；
+- 智能指针通常使用结构体实现，区别于常规结构体，智能指针实现了 `Deref` 和 `Drop` trait ：
+  - `Deref` trait 允许智能指针重载 **解引用运算符** 
+  - `Drop` trait 允许我们自定义当智能指针离开作用域时，要运行的代码；
+
+
+
+标准库中最常用的一些智能指针：
+
+- `Box<T>`，用于在堆上分配值
+- `Rc<T>`，引用计数类型，其数据可以有多个所有者
+- `Ref<T>` 和 `RefMut<T>`，通过 `RefCell<T>` 访问
+
+
+
+### `Box<T>` 类型
+
+- `Box<T>` 将一个值放在堆上，在栈上留一个指向堆数据的指针；
+- 除了在堆上之外，Box 没有性能损失；
+- `Box<T>` 的应用场景：
+  - 在编译时未知大小的类型（例：递归类型）
+  - 有大量数据并希望在确保数据不被拷贝的情况下转移所有权的时候
+  - 希望拥有一个值，并只关心它的类型是否实现了特定 trait ，而不是其具体类型的时候
+
+
+
+#### 处理递归
+
+Rust 要求在编译时知道类型占用多少空间，一种无法在编译时知道大小的类型是 **递归类型**（*recursive type*），其值的一部分可以是相同类型的另一个值。这种值的嵌套理论上可以无限的进行下去，所以 Rust 不能知道递归类型需要多少空间；
+
+
+
+#### 用 cons list 探索递归
+
+`cons` 函数利用两个参数来构造一个新的列表，他们通常是一个单独的值和另一个列表。
+
+cons 函数的概念涉及到更常见的函数式编程术语，“将 *x* 与 *y* 连接” 通常意味着，构建一个新的容器，将 *x* 的元素放在新容器的开头，其后则是容器 *y* 的元素；
+
+- cons list 的每一项都包含两个元素：当前项的值和下一项；
+- 其最后一项只包含一个叫做 `Nil` 的值且没有下一项；
+- cons list 通过递归调用 `cons` 函数产生，递归终止条件（base case）是 `Nil`，它宣布列表的终止
+  （不同于第六章中的 “null” 或 “nil” 的概念，这不是无效或缺失的值）；
+- 在 Rust 中，大部分需要列表的时候 `Vec<T>` 是一个更好的选择；
+
+
+
+```rust
+enum List {
+    Cons(i32, Box<List>),	// 写成 Cons(i32, List) 会变成需要无限大的空间，过不了编译
+    Nil,
+}
+
+use crate::List::{Cons, Nil};
+
+fn main() {
+    let list = Cons(1,
+        Box::new(Cons(2,
+            Box::new(Cons(3,
+                Box::new(Nil))))));
+}
+```
+
+
+
+#### 像引用一样使用 `Box`
+
+```rust
+fn main() {
+    let x = 5;
+    let y = Box::new(x);
+
+    assert_eq!(5, x);
+    assert_eq!(5, *y);
+}
+```
+
+
+
+### `Deref` trait 
+
+- `Deref` trait，要求实现名为 `deref` 的方法，其借用 `self` 并返回一个内部数据的引用；
+- 每次调用 `*` 运算符，比如 `*y` 时，Rust 事实上在底层调用了 `*(y.deref())` 
+
+- 因此，实现 `Deref` trait 后，就可以将某类型像引用一样处理；
+
+```rust
+use std::ops::Deref;
+
+
+impl<T> Deref for MyBox<T> {
+    type Target = T;
+
+    fn deref(&self) -> &T {
+        &self.0
+    }
+}
+```
+
+
+
+#### Deref 强制转换
+
+这里 `(*m)` 将 `MyBox<String>` 解引用为 `String`，接着 `&` 和 `[..]` 获取了整个 `String` 的字符串 slice 来匹配 `hello` 的签名：
+
+```rust
+fn hello(name: &str) {
+    println!("Hello, {}!", name);
+}
+
+fn main() {
+    let m = MyBox::new(String::from("Rust"));
+    hello(&(*m)[..]);
+}
+```
+
+但对于实现了 `Deref` trait 的类型，只需要这么写： 
+
+```rust
+fn main() {
+    let m = MyBox::new(String::from("Rust"));
+    hello(&m);
+}
+```
+
+
+
+当涉及到定义了 `Deref` trait的类型，Rust 会在编译时分析这些类型，并使用任意多次 `Deref::deref` 调用，以获得匹配参数的类型；
+
+Rust 在发现类型和 trait 实现满足三种情况时会进行 Deref 强制转换：
+
+- 当 `T: Deref<Target=U>` 时从 `&T` 到 `&U` 
+- 当 `T: DerefMut<Target=U>` 时从 `&mut T` 到 `&mut U` 
+- 当 `T: Deref<Target=U>` 时从 `&mut T` 到 `&U` 
+
 
 
 
