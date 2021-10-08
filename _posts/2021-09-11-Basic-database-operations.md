@@ -21,9 +21,187 @@ tags:								    # 标签
 
 
 
+## 数据定义语言（DDL）
+
+| 操作对象 | 创建            | 删除          | 修改           |
+| -------- | --------------- | ------------- | -------------- |
+| 模式     | `CREATE SCHEMA` | `DROP SCHEMA` | SQL 标准不提供 |
+| 表       | `CREATE TABLE`  | `DROP TABLE`  | `ALTER TABLE`  |
+| 视图     | `CREATE VIEW`   | `DROP VIEW`   | SQL 标准不提供 |
+| 索引     | `CREATE INDEX`  | `DROP INDEX`  | `ALTER INDEX`  |
+
+
+
+### 模式的定义和删除
+
+在 MySQL 中，SCHEMA 和 DATABASE 是等价的，其他产品中 SCHEMA 一般是被 DATABASE 包含；
+
+#### 创建模式 `CREATE SCHEMA <模式名> AUTHORIZATION <用户名>` 
+
+例：
+
+```sql
+CREATE SCHEMA "S-T" AUTHORIZATION WANG; 
+```
+
+- 只有具有数据库管理员权限的用户才能创建模式
+- 若不指定模式名，模式名隐含为用户名
+- 定义模式是定义了一个命名空间
+- 允许在定义模式的子句中创建基本表、视图、定义授权
+  `CREATE SCHEMA <模式名> AUTHORIZATION  <用户名> [<表定义>|<视图定义>|<授权定义>]` 
+  就是 <用户名> 后先不接分号，而是表定义、视图定义的语句；
+
+
+
+#### 删除模式 `DROP SCHEMA <模式名> <CASCADE|RESTRICT>`  
+
+例：
+
+```sql
+DROP SCHEMA ZAHNG RESTRICT
+```
+
+- CASCADE 和 RESTRICT 必选其一：
+  - CASCADE（级联）表示删除模式时把该模式中所有数据库对象也全部删除；
+  - RESTRICT（限制）表示如果该模式下已有数据库对象，则拒绝该删除语句的执行；
+
+
+
+### 基本表的定义、删除与修改
+
+#### 创建基本表 `CREATE TABLE` 
+
+基本格式：
+
+```sql
+CREATE TABLE <表名> (
+    <列名><数据类型> [列级完整性约束条件], 
+    <列名><数据类型> [列级完整性约束条件], 
+    <列名><数据类型> [列级完整性约束条件], 
+    ...
+    [表级完整性约束条件]
+); 
+```
+
+例：
+
+```sql
+CREATE TABLE Course (
+    Cno CHAR(4) PRIMARY KEY, 	-- 列级完整性约束条件：Cno 是主码
+    Cname CHAR(40) NOT NULL, 	-- 列级完整性约束条件：Cname 不能为空
+    Cpno CHAR(4), 
+    Ccredit SMALLINT, 
+    FOREIGN KEY (Cpno) REFERENCES Course(Cno) 	-- 表级完整性约束条件：Cpno是外码，它参照表是自身
+);
+```
+
+- 完整性约束条件被存在数据字典中
+- 涉及多个属性列的完整性约束条件 **必须定义在表级**
+- 保留字不能用作表名、列名
+- 参照表和被参照表可以是同一个表
+- 常用的完整性约束：
+  - 主码约束 `PRIMARY KEY` 
+  - 唯一性约束 `UNIQUE` 
+  - 非空值约束 `NOT NULL` 
+  - 参照完整性约束 `FOREIGN KEY REFERENCES` 
+  - 检查子句 `CHECK` （例：`CHECK ((grade IS NULL) OR (grade BETWEEN 0 AND 100))` ）
+
+
+
+#### 定义基本表所属模式的三种方法
+
+每一个基本表都属于某一个模式，一个模式包含多个基本表；
+
+- 方法一：在表名中显式给出模式名 
+- 方法二：在创建模式语句中同时创建表 
+- 方法三：设置所属的模式 
+
+
+
+#### SQL 通用数据类型表 
+
+| 数据类型                           | 描述                                                         |
+| ---------------------------------- | ------------------------------------------------------------ |
+| CHARACTER(n)                       | 固定长度 n 的字符/字符串，                                   |
+| VARCHAR(n) 或 CHARACTER VARYING(n) | 最大长度 n 的字符/字符串，可变长度                           |
+| BINARY(n)                          | 固定长度 n 的二进制串                                        |
+| BOOLEAN                            | 存储 TRUE 或 FALSE 值                                        |
+| VARBINARY(n) 或 BINARY VARYING(n)  | 最大长度 n 的二进制串，可变长度                              |
+| INTEGER(p)                         | 精度 p 的整数值（没有小数点）                                |
+| SMALLINT                           | 精度 5 的整数值（没有小数点）                                |
+| INTEGER                            | 精度 10 的整数值（没有小数点）                               |
+| BIGINT                             | 精度 19 的整数值（没有小数点）                               |
+| DECIMAL(p,s)                       | 精度 p，小数点后位数 s 的精确数值<br>例如：decimal(5,2) 是一个小数点前有 3 位数，小数点后有 2 位数的数字 |
+| NUMERIC(p,s)                       | 精度 p，小数点后位数 s 的精确数值（与 DECIMAL 相同）         |
+| FLOAT(p)                           | 尾数精度 p ，近似数值<br/>采用以 10 为基数的指数计数法的浮点数<br/>该类型的 size 参数由一个指定最小精度的单一数字组成 |
+| REAL                               | 尾数精度 7 的近似数值                                        |
+| FLOAT                              | 尾数精度 16 的近似数值                                       |
+| DOUBLE PRECISION                   | 尾数精度 16 的近似数值                                       |
+| DATE                               | 日期类型，存储年、月、日的值，格式 `YYYY-MM-DD`              |
+| TIME                               | 时间类型，存储小时、分、秒的值，格式 `HH:MM:SS`              |
+| TIMESTAMP                          | 时间戳类型，存储年、月、日、小时、分、秒的值                 |
+| INTERVAL                           | 时间间隔类型，由一些整数字段组成，代表一段时间，取决于区间的类型 |
+| ARRAY                              | 固定长度的有序集合                                           |
+| MULTISET                           | 可变长度的无序集合                                           |
+| XML                                | 存储 XML 数据                                                |
+
+
+
+#### 删除基本表 `DROP TABLE <CASCADE|RESTRICT>` 
+
+CASCADE 和 RESTRICT 必选其一：
+
+- CASCADE（级联）表示删除该表时把相关的依赖对象（例如视图）同时删除；
+- RESTRICT（限制）表示如果还有视图、触发器、存储过程、函数依赖该表时，则拒绝删除操作；
+
+ 
+
+#### 修改基本表 `ALTER TABLE` 
+
+基本格式：
+
+```sql
+ALTER TABLE <表名>
+    [ADD [COLUMN] <新列名><数据类型> [完整性约束]]
+    [ADD <新表级完整性约束>]
+    [DROP [COLUMN] <要删除的列名> [CASCADE|RESTRICT]]
+    [DROP CONSTRAINT <要删除的完整性约束名> [RESTRICT|CASCADE]]
+    [ALTER COLUMN <要修改的列名><数据类型>];
+```
+
+例：
+```sql
+ALTER TABLE course ADD UNIQUE(course_name)
+```
+
+
+
+### 索引的建立、删除
+
+#### 建立索引  `CREATE [UNIQUE] [CLUSTER] INDEX <索引名> ON <表名>(<列名>[<次序>], ... ); `
+
+例：
+
+```sql
+CREATE UNIQUE INDEX SCno ON SC(Sno ASC, Cno DESC)
+```
+
+- 索引由数据库管理员或表的创建者按需建立，能加快数据库查询速度
+- 但索引需要占用存储空间，会降低数据库增加、修改数据的速度
+- 索引需要随着基本表更新而维护
+- 有些 DBMS 会自动为 PRIMARY KEY 和 UNIQUE 创建索引
+
+
+
+
+
+
+
+
+
 ## 对数据库的操作
 
-### `CREATE` 增加
+### `CREATE` 创建
 
 #### 新建数据库
 
@@ -114,7 +292,7 @@ Query OK, 1 row affected (0.02 sec)
 
 ## 对表的操作
 
-### `CREATE` 增加
+### `CREATE` 创建
 
 #### 通用语法
 
