@@ -742,7 +742,299 @@ user.sayHi(); // Ilya
 ### 构造函数
 
 1. 构造函数，或简称构造器，就是常规函数，但**命名首字母要大写**
-2. 构造函数只能使用 `new` 来调用。这样的调用意味着在开始时创建了空的 `this`，并在最后返回填充了值的 `this`。
+2. 构造函数只能使用 `new` 来调用
 
 
 
+```javascript
+function User(name) {
+  this.name = name;
+
+  this.sayHi = function() {
+    alert( "My name is: " + this.name );
+  };
+}
+
+let john = new User("John");
+
+john.sayHi(); // My name is: John
+
+/*
+john = {
+   name: "John",
+   sayHi: function() { ... }
+}
+*/
+```
+
+
+
+### 使用 `?.` 安全的访问嵌套对象属性
+
+使用 `?.` 来安全地读取或删除，但不能写入；
+
+例如 `value?.prop`：
+
+- 如果 `value` 存在，则结果与 `value.prop` 相同，
+- 否则（当 `value` 为 `undefined/null` 时）则返回 `undefined`。
+
+
+
+即使 对象 `user` 不存在，使用 `user?.address` 来读取地址也没问题：
+
+```javascript
+
+let user = null;
+
+alert( user?.address ); // undefined
+alert( user?.address.street ); // undefined
+```
+
+
+
+`?.` 的使用场合：
+
+- ?. 前的变量必须已声明
+- 应该只将 ?. 使用在一些东西可以不存在的地方
+
+
+
+#### 其它变体：`?.()`，`?.[]`
+
+ `?.()` 用于调用一个可能不存在的函数：
+
+```javascript
+let userAdmin = {
+  admin() {
+    alert("I am admin");
+  }
+};
+
+let userGuest = {};
+
+userAdmin.admin?.(); // I am admin
+
+userGuest.admin?.(); // 啥都没有（没有这样的方法）
+```
+
+
+
+`?.[]` 用于从一个可能不存在的对象上安全地读取属性：
+
+```javascript
+let user1 = {
+  firstName: "John"
+};
+
+let user2 = null; // 假设，我们不能授权此用户
+
+let key = "firstName";
+
+alert( user1?.[key] ); // John
+alert( user2?.[key] ); // undefined
+
+alert( user1?.[key]?.something?.not?.existing); // undefined
+```
+
+
+
+### 对象 — 原始值转换
+
+对象到原始值的转换，是由许多期望以原始值作为值的内建函数和运算符自动调用的。
+
+这里有三种类型（hint）：
+
+- `"string"`（对于 `alert` 和其他需要字符串的操作）
+- `"number"`（对于数学运算）
+- `"default"`（少数运算符）
+
+
+
+规范明确描述了哪个运算符使用哪个 hint。很少有运算符“不知道期望什么”并使用 `"default"` hint。通常对于内建对象，`"default"` hint 的处理方式与 `"number"` 相同，因此在实践中，最后两个 hint 常常合并在一起。
+
+转换算法是：
+
+1. 调用 `obj[Symbol.toPrimitive](hint)` 如果这个方法存在，
+
+2. 否则，如果 hint 是 
+
+   ```
+   "string"
+   ```
+
+   - 尝试 `obj.toString()` 和 `obj.valueOf()`，无论哪个存在。
+
+3. 否则，如果 hint 是 
+
+   ```
+   "number"
+   ```
+
+    或者 
+
+   ```
+   "default"
+   ```
+
+   - 尝试 `obj.valueOf()` 和 `obj.toString()`，无论哪个存在。
+
+在实践中，为了便于进行日志记录或调试，对于所有能够返回一种“可读性好”的对象的表达形式的转换，只实现以 `obj.toString()` 作为全能转换的方法就够了。
+
+
+
+### 对象原型（prototype）
+
+内容来自：https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Objects/Object_prototypes
+
+JavaScript 常被描述为一种**基于原型的语言 (prototype-based language)**——每个对象拥有一个**原型对象**，对象以其原型为模板、从原型继承方法和属性。原型对象也可能拥有原型，并从中继承方法和属性，一层一层、以此类推。这种关系常被称为**原型链 (prototype chain)**，它解释了为何一个对象会拥有定义在其他对象中的属性和方法。
+
+
+
+
+
+# JSON 方法，toJSON
+
+[JSON](http://en.wikipedia.org/wiki/JSON)（JavaScript Object Notation）是表示值和对象的通用格式。在 [RFC 4627](http://tools.ietf.org/html/rfc4627) 标准中有对其的描述。最初它是为 JavaScript 而创建的，但许多其他编程语言也有用于处理它的库。因此，当客户端使用 JavaScript 而服务器端是使用 Ruby/PHP/Java 等语言编写的时，使用 JSON 可以很容易地进行数据交换。
+
+JavaScript 提供了如下方法：
+
+- `JSON.stringify` 将对象转换为 JSON。
+- `JSON.parse` 将 JSON 转换回对象。
+
+
+
+得到的 `json` 字符串是一个被称为 **JSON 编码（JSON-encoded）** 或 **序列化（serialized）** 或 **字符串化（stringified）** 或 **编组化（marshalled）** 的对象，我们现在已经准备好通过有线发送它或将其放入普通数据存储。
+
+请注意，JSON 编码的对象与对象字面量有几个重要的区别：
+
+- 字符串使用双引号。JSON 中没有单引号或反引号。所以 `'John'` 被转换为 `"John"`
+- 对象属性名称也是双引号的。这是强制性的。所以 `age:30` 被转换成 `"age":30`
+
+
+
+## 将对象转换为 JSON：`JSON.stringify()` 函数
+
+大部分情况，`JSON.stringify` 仅与第一个参数一起使用，但是，如果我们需要微调替换过程，比如过滤掉循环引用，我们可以使用 `JSON.stringify` 的第二个参数
+
+```javascript
+let json = JSON.stringify(value[, replacer, space])
+```
+
+- value：要编码的值。
+- replacer：要编码的属性数组或映射函数 `function(key, value)`。
+- space：用于格式化的空格数量
+
+
+
+```javascript
+let student = {
+  name: 'John',
+  age: 30,
+  isAdmin: false,
+  courses: ['html', 'css', 'js'],
+  wife: null
+};
+
+let json = JSON.stringify(student);
+
+alert(typeof json); // we've got a string!
+
+alert(json);
+/* JSON 编码的对象：
+{
+  "name": "John",
+  "age": 30,
+  "isAdmin": false,
+  "courses": ["html", "css", "js"],
+  "wife": null
+}
+*/
+```
+
+
+
+### 排除和转换：replacer
+
+可以为 `occupiedBy` 以外的所有内容按原样返回 `value`，为了 `occupiedBy`，下面的代码返回 `undefined`：         
+
+```javascript
+let room = {
+  number: 23
+};
+
+let meetup = {
+  title: "Conference",
+  participants: [{name: "John"}, {name: "Alice"}],
+  place: room // meetup 引用了 room
+};
+
+room.occupiedBy = meetup; // room 引用了 meetup
+
+alert( JSON.stringify(meetup, function replacer(key, value) {
+  alert(`${key}: ${value}`);
+  return (key == 'occupiedBy') ? undefined : value;
+}));
+
+/* key:value pairs that come to replacer:
+:             [object Object]
+title:        Conference
+participants: [object Object],[object Object]
+0:            [object Object]
+name:         John
+1:            [object Object]
+name:         Alice
+place:        [object Object]
+number:       23
+*/
+```
+
+
+
+### 格式化：space
+
+指定嵌套对象缩进几个空格，默认值是2个空格；
+
+
+
+### 对象可以提供 `toJSON` 方法
+
+```javascript
+let room = {
+  number: 23,
+  // 添加一个自定义的 toJSON：
+  toJSON() {
+    return this.number;
+  }
+};
+
+let meetup = {
+  title: "Conference",
+  room
+};
+
+alert( JSON.stringify(room) ); // 23
+
+alert( JSON.stringify(meetup) );
+/*
+  {
+    "title":"Conference",
+    "room": 23
+  }
+*/
+```
+
+
+
+## 要解码 JSON 字符串：`JSON.parse()` 函数
+
+```javascript
+let value = JSON.parse(str, [reviver]);
+```
+
+- str
+
+  要解析的 JSON 字符串。
+
+- reviver
+
+  可选的函数 function(key,value)，该函数将为每个 `(key, value)` 对调用，并可以对值进行转换。
