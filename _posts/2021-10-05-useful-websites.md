@@ -17,7 +17,9 @@ tags:								    # 标签
 
 ### 编程学习
 
-- [Rust 高级编程](https://learnku.com/docs/nomicon/2018/)
+- [X分钟速成Y](https://learnxinyminutes.com/) 
+
+- [Rust 高级编程（还有个名字叫锈灵之书）](https://learnku.com/docs/nomicon/2018/)
 
 - [Go语言圣经（中文版）](https://books.studygolang.com/gopl-zh/)
 
@@ -25,7 +27,7 @@ tags:								    # 标签
 
 - [一个 Linux 发行版——YunoHost](https://yunohost.org/en/apps?q=%2Fapps)
 
-- [彻底搞懂如何使用 Hexo\+GitHubPages 搭建个人博客](https://juejin.cn/post/6844904131266609165)
+- [彻底搞懂如何使用 Hexo \+ GitHubPages 搭建个人博客](https://juejin.cn/post/6844904131266609165)
 
   （注：我这个博客用的是 Jekyll，没本地预览功能所以觉得 Hexo 更好）
 
@@ -77,9 +79,8 @@ tags:								    # 标签
 
 - [秘塔写作猫 (xiezuocat.com)](https://xiezuocat.com/#/) （感谢 ZX 提供）
 
-- [PaperAsk官网-降低论文重复率软件](https://www.paperask.com/) （每天只有一次免费查重机会）
-
   
+
 
 ### 生活
 
