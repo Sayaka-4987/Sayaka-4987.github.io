@@ -11,18 +11,13 @@ tags:								    # 标签
     - JavaScript
 ---
 
-# 试图速成 JavaScript 和 React
-
-内容来自：https://zh.javascript.info/
-
-
-
-## X 分钟速成 Y，其中 Y=javascript
+# X 分钟速成 Y，其中 Y=javascript
 
 内容来自 https://learnxinyminutes.com/docs/zh-cn/javascript-cn/
 
-```javascript
+用于写法速查；
 
+```javascript
 // 注释方式和C很像，这是单行注释
 /* 这是多行
    注释 */
@@ -34,10 +29,13 @@ doStuff();
 doStuff()
 
 // 因为这些特殊情况会导致意外的结果，所以我们在这里保留分号。
+```
 
-///////////////////////////////////
-// 1. 数字、字符串与操作符
 
+
+## 1. 数字、字符串与操作符
+
+```javascript
 // Javascript 只有一种数字类型(即 64位 IEEE 754 双精度浮点 double)。
 // double 有 52 位表示尾数，足以精确存储大到 9✕10¹⁵ 的整数。
 3; // = 3
@@ -124,10 +122,14 @@ undefined; // 用来表示还没有设置的值(尽管`undefined`自身实际是
 
 // false, null, undefined, NaN, 0 和 "" 都是假的；其他的都视作逻辑真
 // 注意 0 是逻辑假而  "0"是逻辑真，尽管 0 == "0"。
+```
 
-///////////////////////////////////
-// 2. 变量、数组和对象
 
+
+## 2. 变量、数组和对象
+
+
+```javascript
 // 变量需要用`var`关键字声明。Javascript是动态类型语言，
 // 所以你无需指定类型。 赋值需要用 `=` 
 var someVar = 5;
@@ -180,10 +182,25 @@ myObj.myThirdKey = true;
 
 // 如果你想要获取一个还没有被定义的值，那么会返回undefined
 myObj.myFourthKey; // = undefined
+```
 
-///////////////////////////////////
-// 3. 逻辑与控制结构
 
+
+#### 将字符串拆分为多行：回勾引号 ` 
+
+```javascript
+let str = `
+  ECMA International's TC39 is a group of JavaScript developers,
+  implementers, academics, and more, collaborating with the community
+  to maintain and evolve the definition of JavaScript.
+`;
+```
+
+
+
+## 3. 逻辑与控制结构
+
+```javascript
 // 本节介绍的语法与Java的语法几乎完全相同
 
 // `if`语句和其他语言中一样。
@@ -242,10 +259,12 @@ switch (grade) {
     console.log("Oy vey");
     break;
 }
+```
 
-///////////////////////////////////
-// 4. 函数、作用域、闭包
 
+## 4. 函数、作用域、闭包
+
+```javascript
 // JavaScript 函数由`function`关键字定义
 function myFunction(thing){
     return thing.toUpperCase();
@@ -312,11 +331,13 @@ function sayHelloInFiveSeconds(name){
     // 所以inner在其最终被调用时仍然能够访问`prompt`变量。
 }
 sayHelloInFiveSeconds("Adam"); // 会在5秒后弹出 "Hello, Adam!"
+```
 
 
-///////////////////////////////////
-// 5. 对象、构造函数与原型
 
+## 5. 对象、构造函数与原型
+
+```javascript
 //  对象可以包含方法。
 var myObj = {
     myFunc: function(){
@@ -469,4 +490,259 @@ if (Object.create === undefined){ // 如果存在则不覆盖
     }
 }
 ```
+
+
+
+
+
+# 现代 JavaScript 教程
+
+内容来自 https://zh.javascript.info/
+
+
+
+## 1. 简历、手册与规范
+
+现代的 JavaScript 是一种“安全的”编程语言。它不提供对内存或 CPU 的底层访问，因为它最初是为浏览器创建的，不需要这些功能。
+
+JavaScript 的能力很大程度上取决于它运行的环境。例如，[Node.js](https://wikipedia.org/wiki/Node.js) 支持允许 JavaScript 读取/写入任意文件，执行网络请求等的函数。
+
+浏览器中的 JavaScript 可以做下面这些事：
+
+- 在网页中添加新的 HTML，修改网页已有内容和网页的样式。
+- 响应用户的行为，响应鼠标的点击，指针的移动，按键的按动。
+- 向远程服务器发送网络请求，下载和上传文件（所谓的 [AJAX](https://en.wikipedia.org/wiki/Ajax_(programming)) 和 [COMET](https://en.wikipedia.org/wiki/Comet_(programming)) 技术）。
+- 获取或设置 cookie，向访问者提出问题或发送消息。
+- 记住客户端的数据（“本地存储”）。
+
+
+
+JavaScript 是将这三件事结合在一起的唯一的浏览器技术:
+
+- 与 HTML/CSS 完全集成。
+- 简单的事，简单地完成。
+- 被所有的主流浏览器支持，并且默认开启。
+
+
+
+### 手册和兼容性表
+
+[MDN（Mozilla）JavaScript 索引](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference) 
+
+https://caniuse.com/
+
+
+
+### 按下 `F12` 开启开发者模式
+
+开发者工具允许我们查看错误、执行命令、检查变量等
+
+单击行号可以设置断点，**右键单击** 可以设置一个 **条件** 断点
+
+也可以在代码中使用 `debugger` 命令来暂停代码
+
+```javascript
+function hello(name) {
+  let phrase = `Hello, ${name}!`;
+
+  debugger;  // <-- 调试器会在这停止
+
+  say(phrase);
+}
+```
+
+
+
+#### 输出到控制台：`console.log` 函数
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  console.log("value", i);
+}
+```
+
+
+
+
+
+## 2.基础知识
+
+
+
+### lambda 表达式
+
+```javascript
+let age = prompt("What is your age?", 18);
+
+let welcome = (age < 18) ?
+  () => alert('Hello') :
+  () => alert("Greetings!");
+
+welcome();
+```
+
+
+
+### 交互：alert、prompt 和 confirm
+
+参考 https://developer.mozilla.org/zh-CN/docs/Web/API/Window
+
+我们使用浏览器作为工作环境，所以基本的 UI 功能将是：
+
+- `prompt(question[, default\])`
+
+  提出一个问题，并返回访问者输入的内容，如果他按下「取消」则返回 `null` 
+
+- `confirm(question)`
+
+  提出一个问题，并建议用户在“确定”和“取消”之间进行选择。选择结果以 `true/false` 形式返回 
+
+- `alert(message)`
+
+  输出一个 `消息` 
+
+
+
+这些函数都会产生 **模态框**，它们会暂停代码执行并阻止访问者与页面的其他部分进行交互，直到用户做出回答为止，上述所有方法共有两个限制：
+
+1. 模态窗口的确切位置由浏览器决定，通常在页面中心
+2. 窗口的确切外观也取决于浏览器，我们不能修改它
+
+这就是简单的代价，还有其他一些方法可以显示更漂亮的窗口，并与用户进行更丰富的交互。
+
+
+
+## 3.对象
+
+JavaScript 中有八种基本的数据类型（译注：前七种为基本数据类型，也称为原始类型，而 `object` 为复杂数据类型）
+
+- `number` 用于任何类型的数字：整数或浮点数，在 `±(253-1)` 范围内的整数
+- `bigint` 用于任意长度的整数
+- `string` 用于字符串：一个字符串可以包含 0 个或多个字符，所以没有单独的单字符类型
+- `boolean` 用于 `true` 和 `false`
+- `null` 用于未知的值 —— 只有一个 `null` 值的独立类型
+- `undefined` 用于未定义的值 —— 只有一个 `undefined` 值的独立类型
+- `symbol` 用于唯一的标识符
+
+
+
+可以通过 `typeof` 运算符查看存储在变量中的数据类型。
+
+- 两种形式：`typeof x` 或者 `typeof(x)`
+- 以字符串的形式返回类型名称，例如 `"string"`
+- `typeof null` 会返回 `"object"` —— 这是 JavaScript 编程语言的一个错误，实际上它并不是一个 `object`
+
+
+
+`object` 对象的特点：
+
+- `object` 用于更复杂的数据结构;
+- `object` 对象通过引用被赋值和拷贝。
+- 一个变量存储的不是“对象的值”，而是一个对值的“引用”（内存地址），因此，拷贝此类变量或将其作为函数参数传递时，所拷贝的是引用，而不是对象本身。
+- 所有通过被拷贝的引用的操作（如添加、删除属性）都作用在同一个对象上。
+
+
+
+### 创建对象
+
+```javascript
+let user = {     // 创建一个对象
+  name: "John",  // 键 "name"，值 "John"
+  age: 30        // 键 "age"，值 30
+};
+
+// 读取文件的属性：
+alert( user.name ); // John
+alert( user.age ); // 30
+```
+
+
+
+可以用多字词语来作为属性名，但必须给它们加上引号：
+
+```javascript
+let user = {
+  name: "John",
+  age: 30,
+  "likes birds": true  // 多词属性名必须加引号
+};
+
+let key = "likes birds";
+
+// 跟 user["likes birds"] = true; 一样
+user[key] = true;
+// 但不能使用 . 运算符
+alert( user.key ) // undefined
+```
+
+
+
+练习：
+
+1. 创建一个空的对象 `user`。
+2. 为这个对象增加一个属性，键是 `name`，值是 `John`。
+3. 再增加一个属性，键是 `surname`，值是 `Smith`。
+4. 把键为 `name` 的属性的值改成 `Pete`。
+5. 删除这个对象中键为 `name` 的属性。
+
+```javascript
+let user = {};
+user.name = "John";
+user.surname = "Smith";
+user.name = "Pete";
+delete user.name;
+```
+
+
+
+### JavaScript 的垃圾回收
+
+- 垃圾回收是自动完成的，我们不能强制执行或是阻止执行。
+- 当对象是可达状态时，它一定是存在于内存中的。
+- 被引用与可访问（从一个根）不同：一组相互连接的对象可能整体都不可达。
+
+
+
+### 对象方法，"this"
+
+- 存储在对象属性中的函数被称为“方法”
+- 方法允许对象进行像 `object.doSomething()` 这样的“操作”
+- 方法可以将对象引用为 `this`
+- **`this` 的值是在程序运行时得到的**
+
+- 一个函数在声明时，可能就使用了 `this`，但是这个 `this` 只有在函数被调用时才会有值
+- 可以在对象之间复制函数
+- 以“方法”的语法调用函数时：`object.method()`，调用过程中的 `this` 值是 `object`
+- **lambda 函数没有 `this`，在 lambda 函数内部访问到的 `this` 都是从外部获取的**
+
+
+
+```javascript
+// 方法简写看起来更好，对吧？
+let user = {
+  sayHi() { // 与 "sayHi: function()" 一样
+    alert("Hello");
+  }
+};
+
+// lambda 函数没有自己的 this
+let user = {
+  firstName: "Ilya",
+  sayHi() {
+    let arrow = () => alert(this.firstName);
+    arrow();
+  }
+};
+
+user.sayHi(); // Ilya
+```
+
+
+
+### 构造函数
+
+1. 构造函数，或简称构造器，就是常规函数，但**命名首字母要大写**
+2. 构造函数只能使用 `new` 来调用。这样的调用意味着在开始时创建了空的 `this`，并在最后返回填充了值的 `this`。
+
+
 
