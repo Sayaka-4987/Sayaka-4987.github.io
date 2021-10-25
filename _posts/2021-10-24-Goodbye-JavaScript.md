@@ -1038,3 +1038,336 @@ let value = JSON.parse(str, [reviver]);
 - reviver
 
   可选的函数 function(key,value)，该函数将为每个 `(key, value)` 对调用，并可以对值进行转换。
+
+
+
+例：
+
+```javascript
+let userData = '{ "name": "John", "age": 35, "isAdmin": false, "friends": [0,1,2,3] }';
+
+let user = JSON.parse(userData);
+
+alert( user.friends[1] ); // 1
+```
+
+
+
+### 使用 reviver
+
+reviver 函数适用于 **反序列（deserialize）**，即转换回 JavaScript 对象：
+
+```javascript
+let str = '{"title":"Conference","date":"2017-11-30T12:00:00.000Z"}';
+
+let meetup = JSON.parse(str, function(key, value) {
+  if (key == 'date') return new Date(value);
+  return value;
+});
+
+alert( meetup.date.getDate() ); // 现在正常运行了！
+```
+
+
+
+
+
+# Thinking in React
+
+内容来自：https://beta.reactjs.org/learn/thinking-in-react 
+
+
+
+## Props vs State
+
+React 有两种类型的“模型”数据：Props 和 State
+
+- Props 是传递给函数的参数，例如一个 `Form` 可以通过一个 `color`支持一个 `Button` 
+- State 是组件需要追踪并随时刷新的内容，例如一个 `Button`可能会跟踪 `isHovered`状态
+
+
+
+## Hook
+
+Hook 用于“挂钩”一个组件的 [渲染周期](https://beta.reactjs.org/learn/render-and-commit)
+
+###  `useState()` Hook
+
+```react
+import { useState } from 'react';
+
+// 添加两个状态变量 FilterableProductTable并指定应用程序的初始状态
+function FilterableProductTable({ products }) {
+  const [filterText, setFilterText] = useState('');
+  const [inStockOnly, setInStockOnly] = useState(false);
+
+  return (
+    <div>
+      <SearchBar 
+        filterText={filterText} 
+        inStockOnly={inStockOnly} 
+        onFilterTextChange={setFilterText} 
+        onInStockOnlyChange={setInStockOnly} />
+      <ProductTable 
+        products={products} 
+        filterText={filterText}
+        inStockOnly={inStockOnly} />
+    </div>
+  );
+}
+
+function ProductCategoryRow({ category }) {
+  return (
+    <tr>
+      <th colSpan="2">
+        {category}
+      </th>
+    </tr>
+  );
+}
+
+function ProductRow({ product }) {
+  const name = product.stocked ? product.name :
+    <span style={{ color: 'red' }}>
+      {product.name}
+    </span>;
+
+  return (
+    <tr>
+      <td>{name}</td>
+      <td>{product.price}</td>
+    </tr>
+  );
+}
+
+function ProductTable({ products, filterText, inStockOnly }) {
+  const rows = [];
+  let lastCategory = null;
+
+  products.forEach((product) => {
+    if (product.name.indexOf(filterText) === -1) {
+      return;
+    }
+    if (inStockOnly && !product.stocked) {
+      return;
+    }
+    if (product.category !== lastCategory) {
+      rows.push(
+        <ProductCategoryRow
+          category={product.category}
+          key={product.category} />
+      );
+    }
+    rows.push(
+      <ProductRow
+        product={product}
+        key={product.name} />
+    );
+    lastCategory = product.category;
+  });
+
+  return (
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>{rows}</tbody>
+    </table>
+  );
+}
+
+function SearchBar({
+  filterText,
+  inStockOnly,
+  onFilterTextChange,
+  onInStockOnlyChange
+}) {
+  return (
+    <form>
+      <input 
+        type="text" 
+        value={filterText} placeholder="Search..." 
+        onChange={(e) => onFilterTextChange(e.target.value)} />
+      <label>
+        <input 
+          type="checkbox" 
+          checked={inStockOnly} 
+          onChange={(e) => onInStockOnlyChange(e.target.checked)} />
+        {' '}
+        Only show products in stock
+      </label>
+    </form>
+  );
+}
+
+const PRODUCTS = [
+  {category: "Fruits", price: "$1", stocked: true, name: "Apple"},
+  {category: "Fruits", price: "$1", stocked: true, name: "Dragonfruit"},
+  {category: "Fruits", price: "$2", stocked: false, name: "Passionfruit"},
+  {category: "Vegetables", price: "$2", stocked: true, name: "Spinach"},
+  {category: "Vegetables", price: "$4", stocked: false, name: "Pumpkin"},
+  {category: "Vegetables", price: "$1", stocked: true, name: "Peas"}
+];
+
+export default function App() {
+  return <FilterableProductTable products={PRODUCTS} />;
+}
+
+```
+
+
+
+## 组件
+
+React 允许将标记、CSS 和 JavaScript 组合成自定义“组件” ，即应用程序的可重用 UI 元素
+
+
+
+### `export default` 导出组件
+
+是 [JavaScript 的语法 ](https://developer.mozilla.org/docs/web/javascript/reference/statements/export)，允许您在文件中标记主要功能，以便您以后可以从其他文件中导入它
+
+
+
+### 定义 JS 函数
+
+React 组件是常规的 JavaScript 函数，但 **名称必须以大写字母开头**
+
+
+
+### 返回 JSX 标记
+
+跨行的返回信息必须用 `<div>` 包裹：
+
+```react
+return (
+  <div>
+    <img src="https://i.imgur.com/MK3eW3As.jpg" alt="Katherine Johnson" />
+  </div>
+);
+```
+
+
+
+#### 浏览器如何理解
+
+- `<section>` 是小写的，所以 React 知道我们指的是一个 **HTML 标签**
+- `<Profile />` 以大写开头 `P`，所以 React 知道我们想要使用我们的 **组件** `Profile`
+
+```react
+function Profile() {
+  return (
+    <img
+      src="https://i.imgur.com/MK3eW3As.jpg"
+      alt="Katherine Johnson"
+    />
+  );
+}
+
+export default function Gallery() {
+  return (
+    <section>
+      <h1>Amazing scientists</h1>
+      <Profile />
+      <Profile />
+      <Profile />
+    </section>
+  );
+}
+```
+
+
+
+### 导出和导入组件 
+
+一个文件最多只能有一个 **默认** 导出，但它可以有任意多个 **命名** 导出
+
+<img src="https://beta.reactjs.org/images/docs/illustrations/i_import-export.svg" style="zoom: 67%;" />
+
+
+
+|          | 导出语句                              | 导入语句                                |
+| -------- | ------------------------------------- | --------------------------------------- |
+| 默认导出 | `export default function Button() {}` | `import Button from './button.js';`     |
+| 命名导出 | `export function Button() {}`         | `import { Button } from './button.js';` |
+
+
+
+例：把 `Gallery` 、 `Profile` 移到单独文件，这里采用默认导出
+
+- App.js：
+
+```react
+import Gallery from './Gallery.js';
+
+export default function App() {
+  return (
+    <Gallery />
+  );
+}
+```
+
+
+
+- Gallery.js：
+
+```react
+import Profile from './Profile.js';
+
+export default function Gallery() {
+  return (
+    <section>
+      <h1>Amazing scientists</h1>
+      <Profile />
+      <Profile />
+      <Profile />
+    </section>
+  );
+}
+
+```
+
+
+
+- Profile.js：
+
+```react
+export default function Profile() {
+  return (
+    <img
+      src="https://i.imgur.com/QIrZWGIs.jpg"
+      alt="Alan L. Hart"
+    />
+  );
+}
+```
+
+
+
+## JSX
+
+HTML 标记不能直接放进 React 组件，但可以将 HTML 标记转换为 JSX 标记；
+
+### JSX 的规则
+
+#### 1. 只返回单个根元素
+
+```react
+<div>	{/* 也可以写成 <> */}
+  <h1>Hedy Lamarr's Todos</h1>
+  <img 
+    src="https://i.imgur.com/yXOvdOSs.jpg" 
+    alt="Hedy Lamarr" 
+    className="photo"
+  >
+  <ul>
+    ...
+  </ul>
+</div>  {/* 也可以写成 </> */}
+```
+
+
+
