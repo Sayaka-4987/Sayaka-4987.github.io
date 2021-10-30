@@ -1228,7 +1228,7 @@ React 允许将标记、CSS 和 JavaScript 组合成自定义“组件” ，即
 
 ### `export default` 导出组件
 
-是 [JavaScript 的语法 ](https://developer.mozilla.org/docs/web/javascript/reference/statements/export)，允许您在文件中标记主要功能，以便您以后可以从其他文件中导入它
+`export default` 是 [JavaScript 的语法 ](https://developer.mozilla.org/docs/web/javascript/reference/statements/export)，允许在文件中标记要导出的主要功能，以便可以从其他文件中导入它
 
 
 
@@ -1298,7 +1298,7 @@ export default function Gallery() {
 
 例：把 `Gallery` 、 `Profile` 移到单独文件，这里采用默认导出
 
-- App.js：
+- **App.js：**
 
 ```react
 import Gallery from './Gallery.js';
@@ -1312,7 +1312,7 @@ export default function App() {
 
 
 
-- Gallery.js：
+- **Gallery.js：**
 
 ```react
 import Profile from './Profile.js';
@@ -1332,7 +1332,7 @@ export default function Gallery() {
 
 
 
-- Profile.js：
+- **Profile.js：**
 
 ```react
 export default function Profile() {
@@ -1370,4 +1370,229 @@ HTML 标记不能直接放进 React 组件，但可以将 HTML 标记转换为 J
 ```
 
 
+
+#### 2. 需要显式闭合标签
+
+`<img>` 必须写成 `<img />`
+
+`<li>oranges` 必须写成 `<li>oranges</li>` 
+
+
+
+#### 3. 使用驼峰命名
+
+例外： [`aria-*`](https://developer.mozilla.org/docs/Web/Accessibility/ARIA) 和 [`data-*`](https://developer.mozilla.org/docs/Learn/HTML/Howto/Use_data_attributes) 属性像在 HTML 中一样用破折号编写
+
+```react
+<img 
+  src="https://i.imgur.com/yXOvdOSs.jpg" 
+  alt="Hedy Lamarr" 
+  className="photo"
+/>
+```
+
+
+
+#### 4. 用引号或花括号传递字符串
+
+```react
+export default function Avatar() {
+  const avatar = 'https://i.imgur.com/7vQD0fPs.jpg';
+  const description = 'Gregorio Y. Zara';
+  return (
+    <img
+      className="avatar"  {/* "avatar" 是字符串属性 */}
+      src={avatar}        {/* 动态的文本信息，会调用变量 avatar */}
+      alt={description}
+    />
+  );
+}
+```
+
+
+
+#### 5. 在花括号间编写 JavaScript
+
+任何 JavaScript 表达式都可以在大括号之间工作
+
+```react
+const today = new Date();
+
+function formatDate(date) {
+  return new Intl.DateTimeFormat(
+    'en-US',
+    { weekday: 'long' }
+  ).format(date);
+}
+
+export default function TodoList() {
+  return (
+    <h1>To Do List for {formatDate(today)}</h1>  {/* 函数调用 `formatDate()` */}
+  );
+}
+
+{/* 甚至还可以写成这样： */}
+const person = {
+  name: 'Gregorio Y. Zara',
+  theme: {
+    backgroundColor: 'black',
+    color: 'pink'
+  }
+};
+
+export default function TodoList() {
+  return (
+    <div style={person.theme}>
+      <h1>{person.name}'s Todos</h1>
+      <img
+        className="avatar"
+        src="https://i.imgur.com/7vQD0fPs.jpg"
+        alt="Gregorio Y. Zara"
+      />
+      <ul>
+        <li>Improve the videophone</li>
+        <li>Prepare aeronautics lectures</li>
+        <li>Work on the alcohol-fuelled engine</li>
+      </ul>
+    </div>
+  );
+}
+```
+
+
+
+在 JSX 中只能以两种方式使用花括号： 
+
+- 作为 **文本** 直接在 JSX 标签内
+  - `<h1>{name}'s To Do List</h1>` 有效
+  - `<{tag}>Gregorio Y. Zara's To Do List</{tag}>` 是非法的
+- 作为 **属性** 紧随其后的 `=` 标志
+  - `src={avatar}` 将阅读 avatar变量
+  - `src="{avatar}"` 将传递字符串 {avatar}
+
+
+
+#### 6. 双层花括号传递对象
+
+对象也用花括号表示，例： `{ name: "Hedy Lamarr", inventions: 5 }` 
+
+因此在 JSX 中传递 JS 对象必须将该对象包裹在两层花括号中： `person={{ name: "Hedy Lamarr", inventions: 5 }}`
+
+
+
+例：传一个背景为黑色，字体为粉色的内联样式
+
+```react
+export default function TodoList() {
+  return (
+    <ul style={{
+      backgroundColor: 'black',
+      color: 'pink'
+    }}>
+      <li>Improve the videophone</li>
+      <li>Prepare aeronautics lectures</li>
+      <li>Work on the alcohol-fuelled engine</li>
+    </ul>
+  );
+}
+```
+
+
+
+### HTML to JSX 转换器
+
+[转换器链接](https://transform.tools/html-to-jsx) ——将您现有的 HTML 和 SVG 转换为 JSX
+
+
+
+## Props
+
+- React 组件使用 **props** 来相互通信；
+-  每个父组件都可以通过提供 props 将一些信息传递给它的子组件；
+- Props 可以传递任何 JavaScript 值，包括对象、数组和函数；
+
+
+
+### 给子组件传 Props
+
+这里子组件是 Avatar：
+
+```javascript
+export default function Profile() {
+  return (
+    <Avatar
+      person={{ name: 'Lin Lanying', imageId: '1bX5QH6' }}
+      size={100}
+    />
+  );
+}
+```
+
+
+
+### 子组件接收 Props 
+
+- 也可以设默认参数，这里设了size=100；
+- 组件需要更改其 props（例如，响应用户交互或新数据）时，它的旧 props 将被丢弃，然后它要求其父组件传递一个新 props，最终 JavaScript 引擎将回收旧 props 占用的内存；
+
+```javascript
+function Avatar({ person, size=100 }) {
+  // person and size are available here
+    return (
+    <img
+      className="avatar"
+      src={getImageUrl(person)}
+      alt={person.name}
+      width={size}
+      height={size}
+    />
+  );
+}
+
+// 也可以：
+function Avatar(props) {
+  let person = props.person;
+  let size = props.size;
+  // ...
+}
+```
+
+
+
+## JSX 条件渲染 
+
+在 React 中，控制流（如条件）由 JavaScript 处理，可以根据条件返回不同的 JSX 
+
+例：Sally Ride 的装箱单，有一个 `PackingList`组件渲染几个 `Item`s
+
+```js
+function Item({ name, isPacked }) {
+  if (isPacked) {
+    return <li className="item">{name} ✔</li>;
+  }
+  return <li className="item">{name}</li>;
+}
+
+export default function PackingList() {
+  return (
+    <section>
+      <h1>Sally Ride's Packing List</h1>
+      <ul>
+        <Item 
+          isPacked={true} 
+          name="Space suit" 
+        />
+        <Item 
+          isPacked={true} 
+          name="Helmet with a golden leaf" 
+        />
+        <Item 
+          isPacked={false} 
+          name="Photo of Tam" 
+        />
+      </ul>
+    </section>
+  );
+}
+```
 
