@@ -2118,7 +2118,9 @@ print(col_0_.shape)
 
 
 ```python
-a = np.array([1,2])b = np.array([3,4])print(a, b)
+a = np.array([1,2])
+b = np.array([3,4])
+print(a, b)
 ```
 
 ```python
