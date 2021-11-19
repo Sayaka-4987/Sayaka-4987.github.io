@@ -17,6 +17,12 @@ tags:								    # 标签
 
 ### 编程学习
 
+- [MIT_计算机教育中缺失的一课](https://missing-semester-cn.github.io/)
+
+- [TeachYourselfCS-CN](https://github.com/izackwu/TeachYourselfCS-CN/blob/master/TeachYourselfCS-CN.md)
+
+- [Reddit的learnprogramming小组](https://www.reddit.com/r/learnprogramming/wiki/faq#wiki_getting_started)
+
 - [X分钟速成Y](https://learnxinyminutes.com/) 
 
 - [Rust 高级编程（还有个名字叫锈灵之书）](https://learnku.com/docs/nomicon/2018/)
