@@ -21,13 +21,13 @@ tags:								    # 标签
 
 - [TeachYourselfCS-CN](https://github.com/izackwu/TeachYourselfCS-CN/blob/master/TeachYourselfCS-CN.md)
 
-- [Reddit的learnprogramming小组](https://www.reddit.com/r/learnprogramming/wiki/faq#wiki_getting_started)
+- [Reddit 的 learnprogramming 小组](https://www.reddit.com/r/learnprogramming/wiki/faq#wiki_getting_started)
 
-- [X分钟速成Y](https://learnxinyminutes.com/) 
+- [X 分钟速成 Y](https://learnxinyminutes.com/) 
 
 - [Rust 高级编程（还有个名字叫锈灵之书）](https://learnku.com/docs/nomicon/2018/)
 
-- [Go语言圣经（中文版）](https://books.studygolang.com/gopl-zh/)
+- [Go 语言圣经（中文版）](https://books.studygolang.com/gopl-zh/)
 
 - [50+ mini web projects using HTML, CSS & JS](https://github.com/bradtraversy/50projects50days)
 
@@ -74,6 +74,8 @@ tags:								    # 标签
   
 
 ### 糊弄报告
+
+（这里有几个已经要钱了……）
 
 - [网名生成器](https://www.qmsjmfb.com/)
 
