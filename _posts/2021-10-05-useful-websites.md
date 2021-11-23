@@ -77,6 +77,8 @@ tags:								    # 标签
 
 （这里有几个已经要钱了……）
 
+- [万词王 WantWords](https://wantwords.thunlp.org/)
+
 - [网名生成器](https://www.qmsjmfb.com/)
 
 - [申论生成器](https://sojo.im/slscq/)
