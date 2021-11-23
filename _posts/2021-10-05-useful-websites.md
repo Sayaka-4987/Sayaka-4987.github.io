@@ -53,17 +53,17 @@ tags:								    # 标签
 
 - [力扣 (leetcode-cn.com)](https://leetcode-cn.com/)
 
-- [PTA\_程序设计类实验辅助教学平台 (pintia.cn)](https://pintia.cn/)
+- [PTA 程序设计类实验辅助教学平台 (pintia.cn)](https://pintia.cn/)
 
-- [ZJU\_数据结构\_中国大学MOOC(慕课) (icourse163.org)](https://www.icourse163.org/learn/ZJU-93001#/learn/announce)
+- [浙江大学\_数据结构\_中国大学MOOC(慕课) (icourse163.org)](https://www.icourse163.org/learn/ZJU-93001#/learn/announce)
 
-- [NUDT\_大学计算机基础CAP\_中国大学MOOC(慕课) (icourse163.org)](https://www.icourse163.org/course/NUDT-1001614002) 
+- [国防科技大学\_大学计算机基础CAP\_中国大学MOOC(慕课) (icourse163.org)](https://www.icourse163.org/course/NUDT-1001614002) 
 
-- [HUST\_计算机组成原理\_中国大学MOOC(慕课) (icourse163.org)](https://www.icourse163.org/course/HUST-1003159001)
+- [华中科技大学\_计算机组成原理\_中国大学MOOC(慕课) (icourse163.org)](https://www.icourse163.org/course/HUST-1003159001)
 
-- [HIT\_操作系统\_中国大学MOOC(慕课) (icourse163.org)](https://www.icourse163.org/course/HIT-1002531008) 
+- [哈尔滨工业大学\_操作系统\_中国大学MOOC(慕课) (icourse163.org)](https://www.icourse163.org/course/HIT-1002531008) 
 
-- [HIT\_计算机网络\_中国大学MOOC(慕课) (icourse163.org)](https://www.icourse163.org/course/HIT-154005)
+- [哈尔滨工业大学\_计算机网络\_中国大学MOOC(慕课) (icourse163.org)](https://www.icourse163.org/course/HIT-154005)
 
 - [中科大郑烇、杨坚全套《计算机网络》课程](https://www.bilibili.com/video/BV1JV411t7ow)
 
