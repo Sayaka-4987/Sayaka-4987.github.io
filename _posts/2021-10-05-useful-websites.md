@@ -17,6 +17,8 @@ tags:								    # 标签
 
 ### 编程学习
 
+- [C++ 那些事](https://light-city.club/sc/)
+
 - [MIT_计算机教育中缺失的一课](https://missing-semester-cn.github.io/)
 
 - [TeachYourselfCS-CN](https://github.com/izackwu/TeachYourselfCS-CN/blob/master/TeachYourselfCS-CN.md)
