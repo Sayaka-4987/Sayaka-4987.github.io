@@ -21,7 +21,7 @@ tags:								    # 标签
 
 - [Golang 标准库文档](https://studygolang.com/pkgdoc) 
 - [Go语言 Leetcode 题解](https://books.halfrost.com/leetcode/) 
-- [Go语言圣经 《The Go Programming Language》 中文版本](https://books.studygolang.com/gopl-zh/) 
+- [Go语言圣经《The Go Programming Language》](https://books.studygolang.com/gopl-zh/)  
 - [Go语言高级编程《Advanced Go Programming》](https://chai2010.cn/advanced-go-programming-book/) 
 
 
@@ -115,7 +115,7 @@ func counter(w http.ResponseWriter, r *http.Request) {
 
 
 
-## 1. 基本写法和数据类型
+## 1. 基本写法、数据类型、结构
 
 Go 语言推荐驼峰命名；
 
@@ -279,11 +279,15 @@ func FToC(f Fahrenheit) Celsius { return Celsius((f - 32) * 5 / 9) }
 
 
 
+作用域
+
 ### 变量的生命周期和垃圾回收
 
 Go 语言有自动的内存回收机制；
 
 
+
+Go语言的习惯是在if中处理错误然后直接返回
 
 
 
