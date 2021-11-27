@@ -382,7 +382,7 @@ Go 语言有自动的内存回收机制；
 
 - 复数有 `complex64` 和 `complex128` 
 
-```Go
+```go
 var x complex128 = complex(1, 2) // 1+2i
 var y complex128 = complex(3, 4) // 3+4i
 fmt.Println(x*y)                 // "(-5+10i)"
@@ -574,7 +574,7 @@ func remove(slice []int, i int) []int {
 
 容量部分可省略
 
-```Go
+```go
 make([]T, len)
 make([]T, len, cap) // same as make([]T, cap)[:len]
 
