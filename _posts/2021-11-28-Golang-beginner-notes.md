@@ -20,7 +20,9 @@ tags:								    # 标签
 ### 参考资料
 
 - [Golang 标准库文档](https://studygolang.com/pkgdoc) 
+- [Go 语言中文网](https://studygolang.com/tag/%E5%AE%98%E6%96%B9%E7%BD%91%E7%AB%99)
 - [Go语言 Leetcode 题解](https://books.halfrost.com/leetcode/) 
+- [7 天用 Go 从零实现 Web 框架 Gee 教程（7days-golang）](https://geektutu.com/post/gee.html)
 - [Go语言圣经《The Go Programming Language》](https://books.studygolang.com/gopl-zh/)  
 - [Go语言高级编程《Advanced Go Programming》](https://chai2010.cn/advanced-go-programming-book/) 
 
@@ -119,6 +121,8 @@ func counter(w http.ResponseWriter, r *http.Request) {
 
 Go 语言推荐驼峰命名；
 
+在这里一个变量/包声明了不用是会被报错的，不要浪费；
+
 
 
 ### `var` 声明变量
@@ -188,8 +192,6 @@ const (
 
 
 
-
-
 ### 简短变量声明 `:=` 
 
 简短变量声明语句中必须 **至少要声明一个新的变量**  
@@ -201,6 +203,13 @@ if err != nil {
 }
 // ...use f...
 f.Close()
+
+// 一般i为下标，c为内容
+for i, c := range s {
+    if m[int(c)] == 1 {
+        return i
+    }
+}
 ```
 
 
@@ -427,8 +436,9 @@ fmt.Println(i, i+1, i*i) // "127 -128 1"
 
 - `[1]` 副词告诉Printf函数再次使用第一个操作数；
 - `#` 副词告诉Printf在用 %o、%x、%X 输出时带有 0、0x、0X 前缀；
-- 用 `%c` 参数打印字符；
-- 用 `%q` 参数打印带单引号的字符：
+- `%c` 参数打印字符；
+- `%q` 参数打印带单引号的字符：
+  - 其他方面和 C/C++ 差不多
 
 ```go
 o := 0666
@@ -484,7 +494,8 @@ const GoUsage = `Go is a tool for managing Go source code.
 [Golang 标准库文档链接](https://studygolang.com/pkgdoc) 
 
 ```go
-import "strconv"
+// import "strconv"
+
 x := 123
 y := fmt.Sprintf("%d", x)
 fmt.Println(y, strconv.Itoa(x)) // "123 123"
@@ -510,7 +521,7 @@ var q [3]int = [3]int{1, 2, 3}
 fmt.Println(a[0])        
 fmt.Println(a[len(a)-1]) 
 
-// 取下标和值
+// 遍历数组，取下标和值
 for i, v := range a {
     fmt.Printf("%d %d\n", i, v)
 }
@@ -539,7 +550,9 @@ fmt.Println(a == d) // compile error: cannot compare [2]int == [3]int
 
 ### Slice 
 
-应该是可以代替 C++ 的大多数顺序容器，只不过需要开脑洞利用一下切片功能
+应该是可以代替 C++ 的大多数顺序容器，只不过需要开脑洞合理利用一下切片功能
+
+~~对着 LeetCode 评论区无能狂怒：我怎么就想不出来呢~~
 
 ```go
 // 本质变长序列，底层是指针、长度、容量
@@ -570,9 +583,7 @@ func remove(slice []int, i int) []int {
 
 #### `make()` 函数创建 slice
 
-创建一个指定元素类型、长度和容量的slice
-
-容量部分可省略
+创建一个指定元素类型、长度和容量的 slice，容量部分可省略
 
 ```go
 make([]T, len)
@@ -600,7 +611,7 @@ for _, r := range "Hello, 世界" {
 
 ### Map
 
-Go 语言没有 set，可以用忽略值只用键的 map 代替
+Slice 和 Map 都只能和 nil 比，不能像数组那样互相比；
 
 ```go
 // map 是哈希表，可以写为 map[K]V 
@@ -612,7 +623,7 @@ ages := map[string]int{
     "charlie": 34,
 }
 
-// Go 没提供查询一个key在不在map中的办法，但是可以利用方便的变量赋值
+// Go 没提供查询一个key在不在map中的办法，但是可以利用方便的变量赋值实现
 // _, ok := map[key];语句查找成功返回两个值，ok=true，查找失败时返回零值，ok=false
 // ok 的布尔值是 if 的最终结果 
 if _, ok := map[key]; ok {
@@ -624,6 +635,9 @@ var m = make(map[string]int)
 func k(list []string) string  { return fmt.Sprintf("%q", list) }
 func Add(list []string)       { m[k(list)]++ }
 func Count(list []string) int { return m[k(list)] }
+
+// Go 语言没有 set，可以用忽略值只用键的 map 代替；
+seen := make(map[string]struct{})  // a set of strings
 ```
 
 
@@ -638,27 +652,94 @@ delete(ages, "alice") // remove element ages["alice"]
 
 ### 结构体
 
+成员顺序不同的结构体是不相同的；
+
+**大写字母开头的成员就是 public 的；**
+
 ```go
+// 定义
 type Employee struct {
     ID        int
-    Name      string
-    Address   string
+    Name, Address   string
     DoB       time.Time
     Position  string
     Salary    int
     ManagerID int
 }
 
+// 新建实例
 var dilbert Employee
+
+// 访问成员
+dilbert.Salary -= 5000 // demoted, for writing too few lines of code
+position := &dilbert.Position
+*position = "Senior " + *position // promoted, for outsourcing to Elbonia
+var employeeOfTheMonth *Employee = &dilbert
+employeeOfTheMonth.Position += " (proactive team player)"
+
+// 返回结构体的函数
+func EmployeeByID(id int) *Employee { /* ... */ }
+fmt.Println(EmployeeByID(dilbert.ManagerID).Position) // "Pointy-haired boss"
+id := dilbert.ID
+EmployeeByID(id).Salary = 0  // fired for... no real reason
+
+// 结构体字面值表示方法1
+type Point struct{ X, Y int }
+p := Point{1, 2}
+
+// 结构体字面值表示方法2，以成员名字和相应的值来初始化
+anim := gif.GIF{LoopCount: nframes}
+
+// 修改结构体内容的函数
+func AwardAnnualRaise(e *Employee) {
+    e.Salary = e.Salary * 105 / 100
+}
+
+// 直接返回地址
+pp := &Point{1, 2}   /* 和下面两条语句是等价的
+pp := new(Point)
+*pp = Point{1, 2} */
+
+// 如果所有成员都是可以比较的，那么该结构体也是可以用 == 和 != 比较的；
+p := Point{1, 2}
+q := Point{2, 1}
+fmt.Println(p.X == q.X && p.Y == q.Y) // "false"
+
+// 匿名成员，只声明一个成员对应的数据类型而不指名成员的名字
+type Point struct {
+    X, Y int
+}
+
+type Circle struct {
+    Point
+    Radius int
+}
+
+type Wheel struct {
+    Circle
+    Spokes int
+}
+
+var w Wheel
+w.X = 8            // equivalent to w.Circle.Point.X = 8
+w.Y = 8            // equivalent to w.Circle.Point.Y = 8
+w.Radius = 5       // equivalent to w.Circle.Radius = 5
+w.Spokes = 20
 ```
+
+
+
+
+
+
+
+# 整理进度线
 
 
 
 ### JSON
 
 
-
-## 整理进度线
 
 
 
