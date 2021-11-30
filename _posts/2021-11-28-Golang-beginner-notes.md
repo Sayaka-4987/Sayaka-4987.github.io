@@ -729,6 +729,23 @@ w.Spokes = 20
 
 
 
+### 数据结构常用的结构体
+
+```go
+// 单链表
+type ListNode struct {
+	Val  int
+	Next *ListNode
+}
+
+// 二叉树
+type TreeNode struct {
+    Val int
+    Left *TreeNode
+    Right *TreeNode
+}
+```
+
 
 
 
