@@ -1,12 +1,12 @@
 ---
-layout:     post   				        # 使用的布局（不需要改）
-title:      Go 语言快速入门 				# 标题 
-subtitle:   ZX 觉得这个能一天看完，但我啥也没记住，只好再看一遍		# 副标题
-date:       2021-11-28				    # 时间
-author:     YXWang 					    # 作者
-header-img: img/post-bg-keybord.jpg 	# 这篇文章的标题背景图片
-catalog: true 						    # 是否归档
-tags:								    # 标签
+layout:     post                           # 使用的布局（不需要改）
+title:      Go 语言快速入门                 # 标题 
+subtitle:   ZX 觉得这个能一天看完，但我啥也没记住，只好再看一遍        # 副标题
+date:       2021-11-28                    # 时间
+author:     YXWang                         # 作者
+header-img: img/post-bg-keybord.jpg     # 这篇文章的标题背景图片
+catalog: true                             # 是否归档
+tags:                                    # 标签
     - 施工中
     - Go语言
 ---
@@ -15,18 +15,14 @@ tags:								    # 标签
 
 这里现在很多东西只有标题，主要是让我记起来“Golang这玩意有啥特点”，内容慢慢填吧，坑了（
 
-
-
 ### 参考资料
 
-- [Golang 标准库文档](https://studygolang.com/pkgdoc) 
 - [Go 语言中文网](https://studygolang.com/tag/%E5%AE%98%E6%96%B9%E7%BD%91%E7%AB%99)
+- [Golang 标准库文档](https://studygolang.com/pkgdoc) 
 - [Go语言 Leetcode 题解](https://books.halfrost.com/leetcode/) 
 - [7 天用 Go 从零实现 Web 框架 Gee 教程（7days-golang）](https://geektutu.com/post/gee.html)
 - [Go语言圣经《The Go Programming Language》](https://books.studygolang.com/gopl-zh/)  
 - [Go语言高级编程《Advanced Go Programming》](https://chai2010.cn/advanced-go-programming-book/) 
-
-
 
 ## 0. 入门例程
 
@@ -75,8 +71,6 @@ func fetch(url string, ch chan<- string) {
 }
 ```
 
-
-
 ### Web 服务
 
 ```go
@@ -115,15 +109,13 @@ func counter(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-
-
 ## 1. 基本写法、结构
 
 Go 语言推荐驼峰命名；
 
-在这里一个变量/包声明了不用是会被报错的，不要浪费；
+Go 没有 `?:` 三元运算符；
 
-
+在这里一个变量/包声明了不用是会报错的，所以不要浪费；
 
 ### `var` 声明变量
 
@@ -132,8 +124,6 @@ var i, j, k int                  // int, int, int
 var b, f, s = true, 2.3, "four"  // bool, float64, string
 var f, err = os.Open(name)       // 多个返回值初始化，os.Open() 也许返回一个文件，也许是 error
 ```
-
-
 
 ### `const` 声明常量
 
@@ -147,8 +137,6 @@ const (
     pi = 3.14159265358979323846264338327950288419716939937510582097494459
 )
 ```
-
-
 
 #### iota 常量生成器
 
@@ -190,9 +178,7 @@ const (
 )
 ```
 
-
-
-### 简短变量声明 `:=` 
+### 简短变量声明 `:=`
 
 简短变量声明语句中必须 **至少要声明一个新的变量**  
 
@@ -212,8 +198,6 @@ for i, c := range s {
 }
 ```
 
-
-
 ### 指针
 
 和 C/C++ 差不多；
@@ -228,8 +212,6 @@ fmt.Println(*p) // "1"
 fmt.Println(x)  // "2"
 ```
 
-
-
 #### `new(T)` 函数
 
 表达式 new(T) 创建一个T类型的匿名变量，初始化为T类型的**零值**，返回变量地址，指针类型为`*T` 
@@ -240,8 +222,6 @@ fmt.Println(*p)  // "0"
 *p = 2           // 设置 int 匿名变量的值为 2
 fmt.Println(*p)  // "2"
 ```
-
-
 
 ### 变量赋值
 
@@ -271,8 +251,6 @@ func fib(n int) int {
 }
 ```
 
-
-
 Go 的自增和自减是语句，而不是表达式
 
 ```go
@@ -280,8 +258,6 @@ v++      // 等价方式 v = v + 1；v 变成 2
 v--      // 等价方式 v = v - 1；v 变成 1
 x = i++  // 错误！
 ```
-
-
 
 ### 会产生多个值的表达式
 
@@ -307,9 +283,7 @@ _, ok = mm[""], false     // map返回1个值
 _ = mm[""]                // map返回1个值
 ```
 
-
-
-### 下划线空白标识符 `_` 
+### 下划线空白标识符 `_`
 
 可以丢弃不需要的值
 
@@ -317,8 +291,6 @@ _ = mm[""]                // map返回1个值
 _, err = io.Copy(dst, src) // 丢弃字节数
 _, ok = x.(T)              // 只检测类型，忽略具体值
 ```
-
-
 
 ### `type` 声明类型
 
@@ -341,8 +313,6 @@ func CToF(c Celsius) Fahrenheit { return Fahrenheit(c*9/5 + 32) }
 func FToC(f Fahrenheit) Celsius { return Celsius((f - 32) * 5 / 9) }
 ```
 
-
-
 ### 作用域
 
 声明语句的作用域：
@@ -355,8 +325,6 @@ func FToC(f Fahrenheit) Celsius { return Celsius((f - 32) * 5 / 9) }
 - 指程序运行时变量存在的有效时间段，在此时间区域内它可以被程序的其他部分引用；
 - 是一个运行时的概念。
 
-
-
 Go语言的习惯是在 if 中处理错误然后直接返回；
 
 ```go
@@ -368,13 +336,9 @@ f.ReadByte()
 f.Close()
 ```
 
-
-
 ### 变量的生命周期和垃圾回收
 
 Go 语言有自动的内存回收机制；
-
-
 
 ## 2. 数据类型
 
@@ -399,8 +363,6 @@ fmt.Println(real(x*y))           // "-5"
 fmt.Println(imag(x*y))           // "10"
 ```
 
-
-
 ### 类型转换写法 T(x)
 
 ```go
@@ -417,20 +379,16 @@ var i int8 = 127
 fmt.Println(i, i+1, i*i) // "127 -128 1"
 ```
 
-
-
 ### 位运算操作符
 
-| 运算符 | 作用           |
-| ------ | -------------- |
-| &      | 位运算 AND     |
-| \|     | 位运算 OR      |
-| ^      | 位运算 XOR     |
-| &^     | 位清空 AND NOT |
-| <<     | 左移           |
-| \>\>   | 右移           |
-
-
+| 运算符  | 作用          |
+| ---- | ----------- |
+| &    | 位运算 AND     |
+| \|   | 位运算 OR      |
+| ^    | 位运算 XOR     |
+| &^   | 位清空 AND NOT |
+| <<   | 左移          |
+| \>\> | 右移          |
 
 ### `fmt.Printf()` 格式化输出
 
@@ -458,8 +416,6 @@ fmt.Printf("%d %[1]c %[1]q\n", unicode) // "22269 国 '国'"
 fmt.Printf("%d %[1]q\n", newline)       // "10 '\n'"
 ```
 
-
-
 ### 字符串
 
 #### `s[i:j]` 取子字符串
@@ -473,8 +429,6 @@ fmt.Println(s[:])   // "hello, world"
 fmt.Println("goodbye" + s[5:])  // "goodbye, world"
 ```
 
-
-
 #### \`...\` 原生的字符串字面值
 
 - 会删除回车
@@ -486,8 +440,6 @@ fmt.Println("goodbye" + s[5:])  // "goodbye, world"
 ```go
 const GoUsage = `Go is a tool for managing Go source code.
 ```
-
-
 
 #### 处理字符串和字节slice
 
@@ -505,13 +457,13 @@ y, err := strconv.ParseInt("123", 10, 64) // base 10, up to 64 bits
 ```
 
 - strings 包提供了许多如字符串的查询、替换、比较、截断、拆分和合并等功能。
+
 - bytes 包也提供了很多类似功能的函数，但是针对和字符串有着相同结构的 []byte 类型；
   string字符串是只读的，因此逐步构建字符串会导致很多分配和复制，使用 bytes.Buffer 类型将会更有效；
+
 - strconv 包提供了布尔型、整型数、浮点数和对应字符串的相互转换，还提供了双引号转义相关的转换。
 
 - unicode 包提供了 IsDigit、IsLetter、IsUpper、IsLower 等类似功能，用于给字符分类
-
-
 
 ### 数组
 
@@ -546,9 +498,7 @@ d := [3]int{1, 2}
 fmt.Println(a == d) // compile error: cannot compare [2]int == [3]int
 ```
 
-
-
-### Slice 
+### Slice
 
 应该是可以代替 C++ 的大多数顺序容器，只不过需要开脑洞合理利用一下切片功能
 
@@ -567,19 +517,20 @@ s = nil        // len(s) == 0, s == nil
 s = []int(nil) // len(s) == 0, s == nil
 s = []int{}    // len(s) == 0, s != nil
 
-// 可以用来模拟一个stack
-stack = append(stack, v)     // push v
-top := stack[len(stack)-1]   // top of stack
-stack = stack[:len(stack)-1] // pop
+// slice可以用来模拟一个stack
+stack = append(stack, v)     // 入栈
+top := stack[len(stack)-1]   // 取栈顶元素，记得确保len(stack)-1 >= 0
+stack = stack[:len(stack)-1] // 出栈
 
 // 删除中间的某个元素
 func remove(slice []int, i int) []int {
     copy(slice[i:], slice[i+1:])
     return slice[:len(slice)-1]
 }
+
+// sort 排序，使用了 sort.Interface
+sort.Slice(arr, func(i, j int) bool { return arr[i].score < arr[j].score }) // 升序排序
 ```
-
-
 
 #### `make()` 函数创建 slice
 
@@ -596,8 +547,6 @@ for i := range res {
 }
 ```
 
-
-
 #### `append() ` 函数向slice追加元素
 
 ```go
@@ -605,9 +554,10 @@ var runes []rune
 for _, r := range "Hello, 世界" {
     runes = append(runes, r)
 }
+
+// 第二个参数也可以是Slice，但是后面要加...
+badOranges = append(badOranges, nextBadOranges...)
 ```
-
-
 
 ### Map
 
@@ -627,7 +577,7 @@ ages := map[string]int{
 // _, ok := map[key];语句查找成功返回两个值，ok=true，查找失败时返回零值，ok=false
 // ok 的布尔值是 if 的最终结果 
 if _, ok := map[key]; ok {
-	// 存在
+    // 存在
 }
 
 // 使用了fmt.Sprintf函数将字符串列表转换为一个字符串用作map的key
@@ -640,15 +590,11 @@ func Count(list []string) int { return m[k(list)] }
 seen := make(map[string]struct{})  // a set of strings
 ```
 
-
-
 #### delete() 函数删除 map 中元素
 
 ```go
 delete(ages, "alice") // remove element ages["alice"]
 ```
-
-
 
 ### 结构体
 
@@ -727,15 +673,13 @@ w.Radius = 5       // equivalent to w.Circle.Radius = 5
 w.Spokes = 20
 ```
 
-
-
 ### 数据结构常用的结构体
 
 ```go
 // 单链表
 type ListNode struct {
-	Val  int
-	Next *ListNode
+    Val  int
+    Next *ListNode
 }
 
 // 二叉树
@@ -744,55 +688,297 @@ type TreeNode struct {
     Left *TreeNode
     Right *TreeNode
 }
+
+// 递归实现中序遍历二叉树
+func inorderTraversal(root *TreeNode) []int {
+    var res []int
+    var inorder func(*TreeNode)
+    inorder = func(node *TreeNode) {
+        if node == nil {
+            return
+        }
+        inorder(node.Left)
+        res = append(res, node.Val)
+        inorder(node.Right)
+    }
+    inorder(root)
+    return res
+}
 ```
 
+### JSON 的对象类型
 
+标准库有一些包提供支持：
 
+- encoding/json
+- encoding/xml
+- encoding/asn1
 
+```json
+boolean         true
+number          -273.15
+string          "She said \"Hello, BF\""
+array           ["gold", "silver", "bronze"]
+object          {"year": 1980,
+                 "event": "archery",
+                 "medals": ["gold", "silver", "bronze"]}
+```
 
-# 整理进度线
+```go
+type Movie struct {
+    Title  string
+    // 结构体成员Tag, 通常是一系列用空格分隔的key:"value"键值对序列, 键名:对象名,选项 
+    // omitempty选项表示当Go语言结构体成员为空或零值时，不生成该JSON对象
+    Year   int  `json:"released"`         
+    Color  bool `json:"color,omitempty"` 
+    Actors []string
+}
 
+var movies = []Movie{
+    {Title: "Casablanca", Year: 1942, Color: false,
+        Actors: []string{"Humphrey Bogart", "Ingrid Bergman"}},
+    {Title: "Cool Hand Luke", Year: 1967, Color: true,
+        Actors: []string{"Paul Newman"}},
+    {Title: "Bullitt", Year: 1968, Color: true,
+        Actors: []string{"Steve McQueen", "Jacqueline Bisset"}},
+    // ...
+}
 
-
-### JSON
-
-
-
-
-
-### Go 的包和文件
-
-
-
-
+// 结构体slice转为JSON
+data, err := json.MarshalIndent(movies, "", "    ")
+if err != nil {
+    log.Fatalf("JSON marshaling failed: %s", err)
+}
+fmt.Printf("%s\n", data)
+```
 
 ### 文本和HTML模板
 
+标准库有一些包提供支持，遇事不决查文档：
 
+- text/template
+- html/template
+
+```bash
+$ go doc html/template
+```
+
+```go
+const templ = `{{.TotalCount}} issues:
+{{range .Items}}----------------------------------------
+Number: {{.Number}}
+User:   {{.User.Login}}
+Title:  {{.Title | printf "%.64s"}}
+Age:    {{.CreatedAt | daysAgo}} days
+{{end}}`
+```
+
+## 3. 函数
+
+### `func` 声明函数
+
+- 函数值之间不可比较；
+- 不能用函数值作为map的key
+- 函数像其他值一样，拥有类型；
+- 函数可以被赋值给其他变量，传递给函数，作为函数返回值；
+
+```go
+func name(parameter-list) (result-list) {
+    body
+}
+
+// 等价于func f(i int, j int, k int,  s string, t string)
+func f(i, j, k int, s, t string) { /* ... */ } 
+
+// 空白标识符依然能用，可以忽略第二个参数而不影响其函数签名
+func first(x int, _ int) int { return x }
+
+// 可变参数个数
+func sum(vals ...int) int {
+    total := 0
+    for _, val := range vals {
+        total += val
+    }
+    return total
+}
+
+// 函数赋值给变量
+var preorder func(*TreeNode)
+preorder = func(node *TreeNode) {
+    if node == nil {
+        return
+    }
+    res = append(res, node.Val)
+    preorder(node.Left)
+    preorder(node.Right)
+}
+preorder(root)    // 调用
+```
 
 ### 递归
 
+Go 语言自带可变栈，栈的大小按需增加，所以使用递归时不必考虑溢出和安全问题；
 
+```go
+/* Leetcode 21. 合并两个有序链表 */
+
+type ListNode struct {
+    Val  int
+    Next *ListNode
+}
+
+func mergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode {
+    if list1 == nil {
+        return list2
+    } else if list2 == nil {
+        return list1
+    } else if list1.Val < list2.Val {
+        // 递归设计思路：让较小结点的 next 指针指向其余结点的合并结果
+        list1.Next = mergeTwoLists(list1.Next, list2)
+        return list1
+    } else {
+        list2.Next = mergeTwoLists(list1, list2.Next)
+        return list2
+    }
+}
+```
 
 ### 多返回值的函数
 
+```go
+// 函数直接 return res1, res2 就行
+func findLinks(url string) ([]string, error) {
+    resp, err := http.Get(url)
+    if err != nil {
+        return nil, err
+    }
+    if resp.StatusCode != http.StatusOK {
+        resp.Body.Close()
+        return nil, fmt.Errorf("getting %s: %s", url, resp.Status)
+    }
+    doc, err := html.Parse(resp.Body)
+    resp.Body.Close()
+    if err != nil {
+        return nil, fmt.Errorf("parsing %s as HTML: %v", url, err)
+    }
+    return visit(nil, doc), nil
+}
 
+// 调用时应该显式分配这多个返回值
+links, err := findLinks(url)
+links1, _ := findLinks(url) 
+
+// 按照惯例，函数的最后一个bool类型的返回值表示函数是否运行成功，error类型的返回值代表函数的错误信息
+// 每一个return语句等价于：return words, images, err
+func CountWordsAndImages(url string) (words, images int, err error) {
+    resp, err := http.Get(url)
+    if err != nil {
+        return
+    }
+    doc, err := html.Parse(resp.Body)
+    resp.Body.Close()
+    if err != nil {
+        err = fmt.Errorf("parsing HTML: %s", err)
+        return
+    }
+    words, images = countWordsAndImages(doc)
+    return
+}
+
+func countWordsAndImages(n *html.Node) (words, images int) { /* ... */ }
+```
 
 ### 错误处理
 
+方法1：返回错误信息
 
+```go
+doc, err := html.Parse(resp.Body)
+resp.Body.Close()
+if err != nil {
+    // 注意错误信息中应避免大写和换行符
+    return nil, fmt.Errorf("parsing %s as HTML: %v", url,err) 
+}
+
+// 输出函数获得字符串类型的错误信息
+fmt.Println(err)
+fmt.Printf("%v", err)
+```
+
+方法2：重复尝试操作
+
+```go
+for tries := 0; time.Now().Before(deadline); tries++ {
+    _, err := http.Head(url)
+    if err == nil {
+        return nil // success
+    }
+    log.Printf("server not responding (%s);retrying…", err)
+    time.Sleep(time.Second << uint(tries)) // exponential back-off
+}
+```
+
+方法3：输出错误信息并结束程序
+
+* 应该只在main中执行这种操作，库函数一般只应该传播错误，除非遇到bug
+
+```go
+// (In function main.)
+if err := WaitForServer(url); err != nil {
+    fmt.Fprintf(os.Stderr, "Site is down: %v\n", err)
+    os.Exit(1)
+}
+
+// 更标准的写法
+if err := WaitForServer(url); err != nil {
+    log.Fatalf("Site is down: %v\n", err)
+}
+
+// 也可以只输出错误信息
+if err := Ping(); err != nil {
+    log.Printf("ping failed: %v; networking disabled",err)
+}
+```
+
+### 匿名函数
+
+优点在于可以访问它所在作用域里的全部变量
+
+```go
+// squares返回一个匿名函数, 该匿名函数每次被调用时都会返回下一个数的平方。
+func squares() func() int {
+    var x int
+    return func() int {
+        x++
+        return x * x
+    }
+}
+```
 
 ### defer 语句
 
+当执行到含有关键字 `defer` 的语句时，函数和参数表达式得到计算，但直到包含该defer语句的函数执行完毕时，defer后的函数才会被执行
 
+```go
+// 例：互斥锁
+var mu sync.Mutex
+var m = make(map[string]int)
+func lookup(key string) int {
+    mu.Lock()
+    defer mu.Unlock()
+    return m[key]
+}
+```
 
 ### panic 异常和 recover 捕获异常
 
+当panic异常发生时：
 
+- 程序会中断运行，并立即执行在该 goroutine 中的 `defer` 函数
+- 随后程序崩溃并输出日志信息
+  - 日志信息包括panic value和函数调用的堆栈跟踪信息
 
 ### Go 语言的接口
-
-
 
 ## 并发
 
@@ -825,31 +1011,17 @@ func fib(x int) int {
 }
 ```
 
-
-
-
-
 ### channel
 
 channel 用来在 goroutine 之间进行参数传递
 
-
-
 ### 例：创建一个线上网站的本地镜像
 
-
-
 ### 互斥锁 `sync.Mutex`
-
- 
-
-
 
 ### 读写锁 `sync.RWMutex`
 
 允许多个只读操作并行执行，但写操作会完全互斥。这种锁叫作“多读单写”锁（multiple readers, single writer lock）
-
-
 
 ### 延迟初始化 `sync.Once`
 

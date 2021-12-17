@@ -17,6 +17,8 @@ tags:								    # 标签
 
 ### 编程学习
 
+- [Learn Git Branching](https://learngitbranching.js.org/?locale=zh_CN) （感谢 lys 提供）
+
 - [C++ 那些事](https://light-city.club/sc/)
 
 - [MIT_计算机教育中缺失的一课](https://missing-semester-cn.github.io/)
@@ -37,17 +39,15 @@ tags:								    # 标签
 
 - [彻底搞懂如何使用 Hexo \+ GitHubPages 搭建个人博客](https://juejin.cn/post/6844904131266609165)
 
-  （注：我这个博客用的是 Jekyll，没本地预览功能所以觉得 Hexo 更好）
+  （注：我这个博客用的是 Jekyll，但是没本地预览功能，所以觉得 Hexo 更好）
 
 - [C# 文档 - 入门/教程/参考](https://docs.microsoft.com/zh-cn/dotnet/csharp/)
 
 - [清华大学开源软件镜像站\_Tsinghua Open Source Mirror](https://mirrors.tuna.tsinghua.edu.cn/) 
 
-- [谷歌编程之夏 GSoC](https://summerofcode.withgoogle.com/) 
+- [谷歌编程之夏 GSoC](https://summerofcode.withgoogle.com/) （注：大致日程是每年 <u>4月份</u> 报名，需要 <u>6月到8月</u> 有**完整的三个月时间**参加，有兴趣又有闲的同学可以看看这类项目）
 
-  (注：大致日程是每年 <u>4月份</u> 报名，需要 <u>6月到8月</u> 有**完整的三个月时间**参加，有兴趣又有闲的同学可以明年看看这类项目)
-
-- [cplusplus.com - The C++ Resources Network](http://www.cplusplus.com/)
+  [cplusplus.com - The C++ Resources Network](http://www.cplusplus.com/)
 
 - [OI Wiki (oi-wiki.org)](https://oi-wiki.org/)
 
