@@ -3,7 +3,7 @@ layout:     post   				        # 使用的布局（不需要改）
 title:      想想军训带什么				 # 标题 
 subtitle:   希望编织袋没事				 # 副标题
 date:       2021-06-30 				    # 时间
-author:     YXWang 					    # 作者
+author:     WYX 					    # 作者
 header-img: img/post-bg-reunion.webp	 	# 这篇文章的标题背景图片
 catalog: true 						    # 是否归档
 tags:								    # 标签

@@ -3,7 +3,7 @@ layout:     post   				        # 使用的布局（不需要改）
 title:      Python：机器学习基础知识 		# 标题 
 subtitle:   我就不该选这门课 				# 副标题
 date:       2021-10-03				    # 时间
-author:     YXWang 					    # 作者
+author:     WYX 					    # 作者
 header-img: img/post-bg-keybord.jpg 	# 这篇文章的标题背景图片
 catalog: true 						    # 是否归档
 tags:								    # 标签

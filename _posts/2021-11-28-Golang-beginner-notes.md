@@ -3,7 +3,7 @@ layout:     post                           # 使用的布局（不需要改）
 title:      Go 语言快速入门                 # 标题 
 subtitle:   ZX 觉得这个能一天看完，但我啥也没记住，只好再看一遍        # 副标题
 date:       2021-11-28                    # 时间
-author:     YXWang                         # 作者
+author:     WYX                         # 作者
 header-img: img/post-bg-keybord.jpg     # 这篇文章的标题背景图片
 catalog: true                             # 是否归档
 tags:                                    # 标签

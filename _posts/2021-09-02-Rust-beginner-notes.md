@@ -3,7 +3,7 @@ layout:     post   				        # 使用的布局（不需要改）
 title:      Rust 学习笔记 				# 标题 
 subtitle:   先在这里挖个大坑		        # 副标题
 date:       2021-09-02 				    # 时间
-author:     YXWang 					    # 作者
+author:     WYX 					    # 作者
 header-img: img/post-bg-keybord.jpg 	# 这篇文章的标题背景图片
 catalog: true 						    # 是否归档
 tags:								    # 标签

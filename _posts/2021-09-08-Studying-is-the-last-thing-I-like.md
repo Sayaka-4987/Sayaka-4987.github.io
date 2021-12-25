@@ -3,7 +3,7 @@ layout:     post   				        # 使用的布局（不需要改）
 title:      这学期的笔记链接 				# 标题 
 subtitle:   反正也学不会，那是不是就可以不学了		# 副标题
 date:       2021-09-08 				    # 时间
-author:     YXWang 					    # 作者
+author:     WYX 					    # 作者
 header-img: img/post-bg-unix-linux.jpg	 	# 这篇文章的标题背景图片
 catalog: true 						    # 是否归档
 tags:								    # 标签

@@ -3,7 +3,7 @@ layout:     post   				        # 使用的布局（不需要改）
 title:      小组作业经验谈			    # 标题 
 subtitle:   一个人类永恒的难题				# 副标题
 date:       2021-07-30 				    # 时间
-author:     YXWang 					    # 作者
+author:     WYX 					    # 作者
 header-img: img/post_bg_teamwork.jpg 	# 这篇文章的标题背景图片
 catalog: true 						    # 是否归档
 tags:								    # 标签
