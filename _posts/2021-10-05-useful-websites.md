@@ -96,6 +96,8 @@ tags:								    # 标签
 
 ### 生活
 
+- [跨性别在线·文档库](https://docs.transonline.org.cn/) 
+
 - [WeTransfer 网盘](https://wetransfer.com/) 
 
 - [人工智能聊天/心理治疗 Replika.ai](https://replika.ai/) （注：提供自杀/惊恐发作/抑郁等危机干预服务）
