@@ -11,6 +11,117 @@ tags:								    # 标签
     - JavaScript
 ---
 
+# 全栈公开课 fullstackopen.com
+
+https://fullstackopen.com/zh/#course-contents 
+
+## 组件事件处理
+
+必须始终通过将状态设置为新对象来更改状态，所以即使是是+1操作也必须建一个新变量，再把状态置为新值
+
+```react
+import React, { useState } from 'react'
+
+const App = () => {
+  const [left, setLeft] = useState(0)
+  const [right, setRight] = useState(0)
+
+  return (
+    <div>
+      {left}
+      <button onClick={() => setLeft(left + 1)}>left</button>
+      <button onClick={() => setRight(right + 1)}>right</button>
+      {right}
+    </div>
+  )
+}
+```
+
+组件也可以是任意类型
+
+```react
+const App = () => {
+  const [clicks, setClicks] = useState({
+    left: 0, right: 0
+  })
+
+  const handleLeftClick = () => {
+    const newClicks = { 
+      left: clicks.left + 1, 
+      right: clicks.right 
+    }
+    setClicks(newClicks)
+  }
+ 
+  /* 换成展开语法： */
+  const handleRightClick = () => {
+  const newClicks = { 
+    ...clicks, 	// 具有 clicks 对象的所有属性的副本
+    right: clicks.right + 1  // 新对象中 right 属性的值将为 clicks.right+1
+  }
+  setClicks(newClicks)
+}
+
+  return (
+    <div>
+      {clicks.left}
+      <button onClick={handleLeftClick}>left</button>
+      <button onClick={handleRightClick}>right</button>
+      {clicks.right}
+    </div>
+  )
+}
+```
+
+练习题
+
+```react
+import React, { useState } from 'react'
+
+const Statistics = (props) => {
+  let good = props.good
+  let neutral = props.neutral
+  let bad = props.bad
+  if (good + neutral + bad === 0) {
+    return <p>还没有评价！</p>
+  }
+  return [
+    <table>
+      <tr><td>good</td><td>{good}</td></tr>
+      <tr><td>neutral</td><td>{neutral}</td></tr>
+      <tr><td>bad</td><td>{bad}</td></tr>
+      <tr><td>all</td><td>{good + neutral + bad}</td></tr>
+      <tr><td>average</td><td>{1.0 * good - 1.0 * bad}</td></tr>
+      <tr><td>positive</td><td>{1.0 * good / (good + neutral + bad)}</td></tr>
+    </table>
+  ]
+}
+
+const App = () => {
+  // save clicks of each button to own state
+  const [good, setGood] = useState(0)
+  const [neutral, setNeutral] = useState(0)
+  const [bad, setBad] = useState(0)
+
+  return (
+    <div>
+      <h1>评价</h1>
+      <button onClick={() => setGood(good + 1)}>good</button>
+      <button onClick={() => setNeutral(neutral + 1)}>neutral</button>
+      <button onClick={() => setBad(bad + 1)}>bad</button>
+      <h1>统计</h1>
+      <Statistics good={good} neutral={neutral} bad={bad} />
+    </div>
+  )
+}
+
+export default App
+```
+
+
+
+
+
 # X 分钟速成 Y，其中 Y=javascript
 
 内容来自 https://learnxinyminutes.com/docs/zh-cn/javascript-cn/
@@ -182,6 +293,11 @@ myObj.myThirdKey = true;
 
 // 如果你想要获取一个还没有被定义的值，那么会返回undefined
 myObj.myFourthKey; // = undefined
+
+// 数组的 map 方法
+const t = [1, 2, 3]
+const m1 = t.map(value => value * 2)
+console.log(m1)   // [2, 4, 6] is printed
 ```
 
 
@@ -202,7 +318,6 @@ let str = `
 
 ```javascript
 // 本节介绍的语法与Java的语法几乎完全相同
-
 // `if`语句和其他语言中一样。
 var count = 1;
 if (count == 3){
@@ -560,8 +675,6 @@ for (let i = 0; i < 5; i++) {
   console.log("value", i);
 }
 ```
-
-
 
 
 
@@ -1070,8 +1183,6 @@ alert( meetup.date.getDate() ); // 现在正常运行了！
 
 
 
-
-
 # Thinking in React
 
 内容来自：https://beta.reactjs.org/learn/thinking-in-react 
@@ -1215,7 +1326,6 @@ const PRODUCTS = [
 export default function App() {
   return <FilterableProductTable products={PRODUCTS} />;
 }
-
 ```
 
 
@@ -1595,4 +1705,6 @@ export default function PackingList() {
   );
 }
 ```
+
+
 
