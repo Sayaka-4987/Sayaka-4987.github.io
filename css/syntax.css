@@ -1,8 +1,3 @@
-/* to make lines scroll instead of wrap */
-
-
-/* from http://stackoverflow.com/a/23393920 */
-
 .highlight pre code * {
     white-space: nowrap;
 }
@@ -13,7 +8,7 @@
 
 .highlight pre code {
     white-space: pre;
-    color: #ff8f4e
+    color: #f8f8f2
 }
 
 .highlight pre,
@@ -23,6 +18,7 @@ pre,
     border: 1px solid #272822;
     padding: 6px 10px;
     border-radius: 3px;
+    color: #ff8f4e
 }
 
 .highlight .lineno {
@@ -31,9 +27,9 @@ pre,
     color: #8f908a;
 }
 
-.highlight .hll {
+/* .highlight .hll {
     color: #f8f8f2
-}
+} */
 
 .highlight .c {
     color: #5aad50
