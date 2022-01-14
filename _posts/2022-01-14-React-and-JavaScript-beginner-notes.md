@@ -1,7 +1,7 @@
 ---
 layout:     post   				        # 使用的布局（不需要改）
 title:      试图速成 JavaScript 和 React 	# 标题 
-subtitle:   好想放寒假		    # 副标题
+subtitle:   yarn 比 npm 好用太多了	    # 副标题
 date:       2022-01-14 				    # 时间
 author:     WYX 					    # 作者
 header-img: img/post-bg-js-version.jpg 	# 这篇文章的标题背景图片
@@ -12,9 +12,10 @@ tags:								    # 标签
     - React
 ---
 
-# 全栈公开课 fullstackopen.com
+# 全栈公开课 fullstackopen.com 作业记录
 
-[fullstackopen.com](https://fullstackopen.com/zh/#course-contents)
+- [课程目录](https://fullstackopen.com/zh/#course-contents) 
+- 建议使用 yarn 代替 npm
 
 ## 组件事件处理
 
@@ -209,7 +210,7 @@ const App = ({ notes }) => {
 
 ### 练习题：课程显示
 
-App.js
+##### App.js
 
 ```react
 import React from 'react'
@@ -263,7 +264,7 @@ const App = () => {
 export default App
 ```
 
-Course.js
+##### Course.js
 
 ```react
 import React from 'react'
@@ -308,16 +309,18 @@ export default Course
 
 ## 受控组件
 
+注意：`event.preventDefault()` 会阻止提交表单的默认操作（使页面重新加载）
+
 ```react
 import React, {useState} from 'react'
 
-const Note = ({ note }) => {  return (    <li>{note.content}</li>  )}
+const Note = ({ note }) => {  
+  return (<li>{note.content}</li>)
+}
 
 const App = (props) => {
   const [notes, setNotes] = useState(props.notes)
-  const [newNote, setNewNote] = useState(
-    'a new note...'
-  ) 
+  const [newNote, setNewNote] = useState('a new note...') 
   const [showAll, setShowAll] = useState(true)
   const notesToShow = showAll    ? notes    : notes.filter(note => note.important === true)
 
@@ -364,11 +367,325 @@ export default App
 
 ### 练习题：The Phonebook
 
+```react
+import React, { useState } from 'react'
+
+const Person = ({person}) => {
+  return (<><p>{person.name}: {person.number}</p></>)
+}
+
+const ShowPersons = ({persons, keyword}) => {
+  return (<div>{
+    persons.map(person => {
+      // 正则表达式，模糊搜索，不区分大小写
+      var reg = new RegExp(keyword, 'i') 
+      var isHas = person.name.match(reg)
+      if(isHas) {
+        return <Person key={person.name} person={person}/>
+      } else {
+        // eslint-disable-next-line array-callback-return
+        return;
+      }
+    })
+  }</div>)
+}
+
+const Fliter = ({keyword, handleNewKeyword}) => {
+  return(
+    <div>search: <input value={keyword} onChange={handleNewKeyword}/></div>
+  )
+}
+
+const PersonForm = ({newName, newNumber, addPerson, handleNewName, handleNewNumber}) => {
+  return (<form>
+    <div>
+      name: <input value={newName} onChange={handleNewName}/>
+    </div>
+    <div>
+      number: <input value={newNumber} onChange={handleNewNumber}/>
+    </div>
+    <div>
+      <button type="submit" onClick={addPerson}>add</button>
+    </div>
+  </form>)
+}
+
+const App = () => {
+  const [persons, setPersons] = useState([
+    { name: 'Arto Hellas', number: '040-123456'},
+    { name: 'Ada Lovelace', number: '39-44-5323523'},
+    { name: 'Dan Abramov', number: '12-43-234345'},
+    { name: 'Mary Poppendieck', number: '39-23-6423122'}
+  ]) 
+  const [newName, setNewName] = useState('plz enter a name ...')
+  const handleNewName = (event) => {
+    setNewName(event.target.value)
+  }
+  const [newNumber, setNewNumber] = useState('1000000')
+  const handleNewNumber = (event) => {
+    setNewNumber(event.target.value)
+  }
+  const [keyword, setNewKeyWord] = useState('')
+  const handleNewKeyword = (event) => {
+    setNewKeyWord(event.target.value)
+  }
+  const addPerson = (event) => {
+    // event.preventDefault() 会阻止提交表单的默认操作（页面重新加载）
+    event.preventDefault()  
+    const newPerson = {
+      name: newName,
+      number: newNumber
+    }
+    // 判断个相等怎么这么多事啊
+    let isSame = persons.some(p => JSON.stringify(p.name) === JSON.stringify(newPerson.name)) 
+    if (isSame) {
+      window.alert(`"${newName}" is already added to phonebook! `);      
+    } else {
+      setPersons(persons.concat(newPerson))
+    }    
+    setNewName("plz enter a name ...")
+  }
+
+  return (
+    <div>
+      <h2>Phonebook</h2>
+      <Fliter 
+        keyword={keyword} 
+        handleNewKeyword={handleNewKeyword} 
+      />
+      <h2>Add new number</h2>
+      <PersonForm
+        newName={newName}
+        newNumber={newNumber}
+        addPerson={addPerson}
+        handleNewName={handleNewName}
+        handleNewNumber={handleNewNumber}      
+      />
+      <h2>Numbers</h2>
+      <ShowPersons keyword={keyword} persons={persons}/>
+    </div>
+  )
+}
+
+export default App
+```
 
 
 
+## 从服务器获取数据
 
-# X 分钟速成 Y，其中 Y=javascript
+（运行在 3001 端口，监听项目目录下 db.json 的）Json 服务器：
+
+```bash
+yarn json-server --port 3001 --watch db.json
+```
+
+需要再开一个终端运行 React：
+
+```bash
+yarn start
+```
+
+promise 是一个表示异步操作的对象，有三种不同的状态：
+
+1. The promise is pending（提交中）：最终值(下面两个中的一个)还不可用
+2. The promise is fulfilled（兑现）：操作已经完成，最终的值是可用的，这通常是一个成功的操作。 这种状态有时也被称为resolve
+3. The promise is rejected（拒绝）：一个错误阻止了最终值，这通常表示一个失败操作
+
+例：
+
+```react
+import axios from 'axios' 
+
+const App = () => {  
+  const hook = () => {
+    console.log('effect')
+    axios
+      .get('http://localhost:3001/persons')
+      // axios.get 从服务器获取到数据，并将 .then() 包含的函数注册为事件处理:
+      .then(response => { 
+        console.log('promise fulfilled')
+        console.log(response.data)
+      })
+  }
+  // useEffect 第一个参数是函数本身，第二个参数是指定effect运行的频率
+  useEffect(hook, [])
+  return ''
+}
+
+export default App
+```
+
+这道题的交互方式：
+
+![](https://fullstackopen.com/static/650087bbee40291069025432f1408a29/d4713/18e.png)
+
+### 练习题：国家查询
+
+这组练习耗时有点多，没做完所有功能，JavaScript 的数组筛选有点恶心
+
+```react
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+
+const CountriesFliter = ({countries, keyword}) => {
+  return(<div>{
+    countries.map(country => {
+      // 正则表达式，模糊搜索，不区分大小写
+      var reg = new RegExp(keyword, 'i') 
+      var isHas = country.name.common.match(reg)
+      if(isHas) {
+        return <Country country={country} key={country.name.common}/>
+      } else {
+        // eslint-disable-next-line array-callback-return
+        return;
+      }
+    })
+  }</div>)
+}
+
+const Country = ({country}) => {
+  return (<div>
+    {country.name.common}
+  </div>)
+}
+
+const App = () => {  
+  const [countries, setCountries] = useState([])
+  const [keyword, setKeyword] = useState('Enter a keyword ...')
+  const handleKeyword = (e) => {
+    setKeyword(e.target.value)
+  }
+
+  const hook = () => {
+    console.log('effect')
+    axios
+      .get('https://restcountries.com/v3.1/all')
+      // axios.get 从服务器获取到数据，并将 .then() 包含的函数注册为事件处理:
+      .then(response => { 
+        console.log('promise fulfilled!')
+        console.log(response.data)
+        setCountries(countries.concat(response.data))
+      })
+  }
+  // useEffect 第一个参数是要运行的函数，第二个参数是指定effect运行的频率
+  useEffect(hook, [])
+
+  return (<div>
+    <h3>search countries by keyword: <input value={keyword} onChange={handleKeyword}/></h3>
+    <CountriesFliter countries={countries} keyword={keyword}/>
+  </div>)
+}
+
+export default App
+```
+
+
+
+## 把数据存到服务器
+
+把 `axios.get()` 换成 `axios.post()` ，第二个参数放要传送的数据对象
+
+```js
+addNote = event => {
+  event.preventDefault()
+  const noteObject = {
+    content: newNote,
+    date: new Date(),
+    important: Math.random() < 0.5,
+  }
+
+  axios    
+    .post('http://localhost:3001/notes', noteObject)    
+    .then(response => {      
+      console.log(response)    
+  })
+}
+```
+
+完整例程：
+
+```react
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+
+const Note = ({ note }) => {
+  return (
+    <li>{note.content}</li>
+  )
+}
+
+const App = () => {
+  const [notes, setNotes] = useState([])
+  const [newNote, setNewNote] = useState('')
+  const [showAll, setShowAll] = useState(false)
+
+  useEffect(() => {
+    console.log('effect')
+    axios
+      .get('http://localhost:3001/notes')
+      .then(response => {
+        console.log('promise fulfilled')
+        setNotes(response.data)
+      })
+  }, [])
+  console.log('render', notes.length, 'notes')
+
+  const addNote = (event) => {
+    event.preventDefault()
+    const noteObject = {
+      content: newNote,
+      date: new Date().toISOString(),
+      important: Math.random() > 0.5,
+    }
+
+    axios
+    .post('http://localhost:3001/notes', noteObject)
+    .then(response => {
+      setNotes(notes.concat(response.data))
+      setNewNote('')
+    })
+  }
+
+  const handleNoteChange = (event) => {
+    console.log(event.target.value)
+    setNewNote(event.target.value)
+  }
+
+  const notesToShow = showAll
+  ? notes
+  : notes.filter(note => note.important)
+
+  return (
+    <div>
+      <h1>Notes</h1>
+      <div>
+        <button onClick={() => setShowAll(!showAll)}>
+          show {showAll ? 'important' : 'all' }
+        </button>
+      </div>   
+      <ul>
+        {notesToShow.map(note => 
+            <Note key={note.id} note={note} />
+        )}
+      </ul>
+      <form onSubmit={addNote}>
+        <input
+          value={newNote}
+          onChange={handleNoteChange}
+        />
+        <button type="submit">save</button>
+      </form>  
+    </div>
+  )
+}
+
+export default App
+```
+
+
+
+# X 分钟速成 JS
 
 内容来自 https://learnxinyminutes.com/docs/zh-cn/javascript-cn/
 
@@ -1814,8 +2131,6 @@ export default function TodoList() {
   );
 }
 ```
-
-
 
 在 JSX 中只能以两种方式使用花括号： 
 
