@@ -685,6 +685,168 @@ export default App
 
 
 
+## Node.js 和 Express
+
+在这里遇到了奇怪的问题：`Error: Cannot find module '...\backend\node_modules\express\index.js'.` 
+
+解决方案（不知道生效的是啥，推测是1）：
+
+1. **在项目根目录下 `yarn add express`**，而不是全局安装在绝对路径
+2. 在 VSCode 的 settings.json 里加了三行：
+   `"eslint.packageManager": "yarn",
+   "prettier.packageManager": "yarn",
+   "npm.packageManager": "yarn"`
+
+
+
+### 练习题：Phonebook backend
+
+测试用的 rest 文件，配合 VSCode 的 REST Client 拓展使用，一键发送 request 
+
+```json
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+	"name": "Chris",
+    "number": "123456"
+}
+```
+
+index.js
+
+```react
+const express = require('express')
+const app = express()
+var morgan = require('morgan')
+
+// 自定义的 morgan token 和使用方式
+morgan.token('token_for_body', function (req, res) { 
+  return JSON.stringify(req.body)
+})
+// 会记录在控制台日志信息：POST /api/persons 15.808 {"name":"Chris","number":"123456"}
+app.use(morgan(':method :url :response-time :token_for_body '))
+
+let persons = [{ 
+    "id": 1,
+    "name": "Arto Hellas", 
+    "number": "040-123456"
+  }, { 
+    "id": 2,
+    "name": "Ada Lovelace", 
+    "number": "39-44-5323523"
+  }, { 
+    "id": 3,
+    "name": "Dan Abramov", 
+    "number": "12-43-234345"
+  }, { 
+    "id": 4,
+    "name": "Mary Poppendieck", 
+    "number": "39-23-6423122"
+  }
+]
+
+app.use(express.json())
+
+app.get('/', (req, res) => {
+  res.send('<h1>Hello World!</h1>')
+})
+
+app.get('/api/persons', (req, res) => {
+  res.json(persons)
+})
+
+app.get('/api/info', (req, res) => {
+  let num = persons.length
+  let cur_time = new Date().toLocaleTimeString()
+  res.send(`
+  Phonebook has info for ${num} people.<br>
+  Get time: ${cur_time}
+  `)
+})
+
+// 用冒号为 express 路由定义参数
+app.get('/api/persons/:id', (request, response) => {
+  // 不类型转换这个参数就会被 JS 当成字符串
+  const id = Number(request.params.id)
+  const person = persons.find(person => person.id === id)
+  if (person) {      // 所有的 JavaScript 对象都会被当作 true
+    response.json(person)  
+  } else {    
+    response.status(404).end()  
+  }
+})
+
+// 删除 api 
+app.delete('/api/persons/:id', (request, response) => {
+  const id = Number(request.params.id)
+  persons = persons.filter(person => person.id !== id)
+  response.status(204).end()
+})
+
+const generateId = () => {
+  const Id = persons.length > 0
+  // `...` 是数组展开语法
+    ? 1 * Math.floor(Math.random() * (0xFF))
+    : 0
+  return Id + 1
+}
+
+function isEmpty(str) {
+  if (str == 'undefined' || !str || !/[^\s]/.test(str)) {
+    //为空
+    return true
+  }
+  return false
+}
+
+// 发送新便签
+app.post('/api/persons', (request, response) => {
+  const body = request.body
+  console.log(body)
+  if (!body) {
+    return response.status(400).json({ 
+      error: 'content missing' 
+    })
+  }
+
+  const person = {
+    id: generateId(),
+    name: body.name, 
+    number: body.number
+  }
+
+  let isSame = persons.some(p => 
+    JSON.stringify(p.name) === JSON.stringify(person.name)
+  ) 
+  if (isSame) {
+    return response.status(406).json({ 
+      error: 'name must be unique'
+    })
+  } else if (isEmpty(person.number)) {
+    return response.status(406).json({ 
+      error: 'number can not be empty'
+    })
+  } else if (isEmpty(person.name)) {
+    return response.status(406).json({ 
+      error: 'name can not be empty'
+    })
+  } else {
+    persons = persons.concat(person)
+    response.json(person)
+  }  
+})
+
+const PORT = 3001
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`)
+})
+```
+
+~~这个用到的工具又卡住我了，校园邮箱收不到验证码~~
+
+
+
 # X 分钟速成 JS
 
 内容来自 https://learnxinyminutes.com/docs/zh-cn/javascript-cn/
