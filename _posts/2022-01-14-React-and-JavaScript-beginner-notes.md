@@ -12,839 +12,6 @@ tags:								    # 标签
     - React
 ---
 
-# 全栈公开课 fullstackopen.com 作业记录
-
-- [课程目录](https://fullstackopen.com/zh/#course-contents) 
-- 建议使用 yarn 代替 npm
-
-## 组件事件处理
-
-必须始终通过将状态设置为新对象来更改状态，所以即使是是+1操作也必须建一个新变量，再把状态置为新值
-
-```react
-import React, { useState } from 'react'
-
-const App = () => {
-  const [left, setLeft] = useState(0)
-  const [right, setRight] = useState(0)
-
-  return (
-    <div>
-      {left}
-      <button onClick={() => setLeft(left + 1)}>left</button>
-      <button onClick={() => setRight(right + 1)}>right</button>
-      {right}
-    </div>
-  )
-}
-```
-
-### 组件可以是任意类型
-
-```react
-const App = () => {
-  const [clicks, setClicks] = useState({
-    left: 0, right: 0
-  })
-
-  const handleLeftClick = () => {
-    const newClicks = { 
-      left: clicks.left + 1, 
-      right: clicks.right 
-    }
-    setClicks(newClicks)
-  }
- 
-  /* 换成展开语法： */
-  const handleRightClick = () => {
-  const newClicks = { 
-    ...clicks, 	// 具有 clicks 对象的所有属性的副本
-    right: clicks.right + 1  // 新对象中 right 属性的值将为 clicks.right+1
-  }
-  setClicks(newClicks)
-}
-
-  return (
-    <div>
-      {clicks.left}
-      <button onClick={handleLeftClick}>left</button>
-      <button onClick={handleRightClick}>right</button>
-      {clicks.right}
-    </div>
-  )
-}
-```
-
-### 练习题：好评系统
-
-胡写一通.jpg 
-
-```react
-import React, { useState } from 'react'
-
-const Statistics = (props) => {
-  let good = props.good
-  let neutral = props.neutral
-  let bad = props.bad
-  if (good + neutral + bad === 0) {
-    return <p>还没有评价！</p>
-  }
-  return [
-    <table>
-      <tr><td>good</td><td>{good}</td></tr>
-      <tr><td>neutral</td><td>{neutral}</td></tr>
-      <tr><td>bad</td><td>{bad}</td></tr>
-      <tr><td>all</td><td>{good + neutral + bad}</td></tr>
-      <tr><td>average</td><td>{1.0 * good - 1.0 * bad}</td></tr>
-      <tr><td>positive</td><td>{1.0 * good / (good + neutral + bad)}</td></tr>
-    </table>
-  ]
-}
-
-const App = () => {
-  // save clicks of each button to own state
-  const [good, setGood] = useState(0)
-  const [neutral, setNeutral] = useState(0)
-  const [bad, setBad] = useState(0)
-
-  return (
-    <div>
-      <h1>评价</h1>
-      <button onClick={() => setGood(good + 1)}>good</button>
-      <button onClick={() => setNeutral(neutral + 1)}>neutral</button>
-      <button onClick={() => setBad(bad + 1)}>bad</button>
-      <h1>统计</h1>
-      <Statistics good={good} neutral={neutral} bad={bad} />
-    </div>
-  )
-}
-
-export default App
-```
-
-
-
-## Map 方法
-
-index.js 内容如下:
-
-```react
-import ReactDOM from 'react-dom'
-import App from './App'
-
-const notes = [
-  {
-    id: 1,
-    content: 'HTML is easy',
-    date: '2019-05-30T17:30:31.098Z',
-    important: true
-  },
-  {
-    id: 2,
-    content: 'Browser can execute only JavaScript',
-    date: '2019-05-30T18:39:34.091Z',
-    important: false
-  },
-  {
-    id: 3,
-    content: 'GET and POST are the most important methods of HTTP protocol',
-    date: '2019-05-30T19:20:14.298Z',
-    important: true
-  }
-]
-
-ReactDOM.render(
-  <App notes={notes} />,
-  document.getElementById('root')
-)
-```
-
-map 方法生成的每个元素必须有一个名为 key 的属性
-
-```react
-const App = (props) => {
-  const { notes } = props
-
-  return (
-    <div>
-      <h1>Notes</h1>
-      <ul>
-        {notes.map(note => 
-          <li key={note.id}>
-            {note.content}
-          </li>        
-        )}
-      </ul>
-    </div>
-  )
-}
-```
-
-
-
-## 模块导出的组件
-
-Note.js 文件：
-
-```react
-import React from 'react'
-
-const Note = ({ note }) => {
-  return (
-    <li>{note.content}</li>
-  )
-}
-
-export default Note 	// 声明实时绑定导出
-```
-
-import 这个 Note 模块：
-
-```react
-import React from 'react'
-import Note from './components/Note'
-const App = ({ notes }) => {
-  // ...
-}
-```
-
-### 练习题：课程显示
-
-##### App.js
-
-```react
-import React from 'react'
-import Course from './Course'
-
-const App = () => {
-  const courses = [{
-      name: 'Half Stack application development',
-      id: 1,
-      parts: [{
-          name: 'Fundamentals of React',
-          exercises: 10,
-          id: 1
-        },{
-          name: 'Using props to pass data',
-          exercises: 7,
-          id: 2
-        },{
-          name: 'State of a component',
-          exercises: 14,
-          id: 3
-        },{
-          name: 'Redux',
-          exercises: 11,
-          id: 4
-        }
-      ]
-    },{
-      name: 'Node.js',
-      id: 2,
-      parts: [{
-          name: 'Routing',
-          exercises: 3,
-          id: 1
-        },{
-          name: 'Middlewares',
-          exercises: 7,
-          id: 2
-        }
-      ]
-    }
-  ]
-  return (<div>
-    <h1>Web Course</h1>
-    {courses.map(course => 
-      <Course course={course} />
-    )}
-  </div>)
-}
-
-export default App
-```
-
-##### Course.js
-
-```react
-import React from 'react'
-
-const Header = ({name}) => {
-  return [<h2>{name}</h2>]
-}
-  
-const Content = ({parts}) => {
-  const total = parts.reduce(
-    // 第二个参数是reduce累加初始值，不写个0会被当成字符串加法
-    (acc, cur) => acc + cur.exercises, 0	
-  )
-
-  return (
-    <div>
-    {parts.map(part => 
-        <Part id={part.id} name={part.name} exercises={part.exercises}/>
-    )}
-    <p>Total: {total}</p>
-    </div>
-  )
-}
-
-const Part = ({id, name, exercises}) => {
-  return (<p>
-    {name}, {exercises}
-  </p>)
-}
-
-const Course = ({course}) => {
-  return (<>
-    <Header name={course.name} />
-    <Content parts={course.parts} />
-  </>)
-}
-
-export default Course
-```
-
-
-
-## 受控组件
-
-注意：`event.preventDefault()` 会阻止提交表单的默认操作（使页面重新加载）
-
-```react
-import React, {useState} from 'react'
-
-const Note = ({ note }) => {  
-  return (<li>{note.content}</li>)
-}
-
-const App = (props) => {
-  const [notes, setNotes] = useState(props.notes)
-  const [newNote, setNewNote] = useState('a new note...') 
-  const [showAll, setShowAll] = useState(true)
-  const notesToShow = showAll    ? notes    : notes.filter(note => note.important === true)
-
-  const addNote = (event) => {
-    event.preventDefault()
-    const noteObject = {
-      content: newNote,
-      date: new Date().toISOString(),
-      important: Math.random() < 0.5,
-      id: notes.length + 1,
-    }
-    setNotes(notes.concat(noteObject))
-    setNewNote('')
-  }
-
-  const handleNoteChange = (event) => {    
-    console.log(event.target.value)    
-    setNewNote(event.target.value)
-  }
-  
-  return (
-    <div>
-      <h1>Notes</h1>
-      <div>
-        <button onClick={() => setShowAll(!showAll)}>          
-          show {showAll ? 'important' : 'all' }        
-        </button>      
-      </div>
-      <ul>
-        {notesToShow.map(note => <Note key={note.id} note={note} />)}
-      </ul>
-      <form onSubmit={addNote}>
-        <input
-          value={newNote}
-          onChange={handleNoteChange}        />
-        <button type="submit">save</button>
-      </form>   
-    </div>
-  )
-}
-
-export default App
-```
-
-### 练习题：The Phonebook
-
-```react
-import React, { useState } from 'react'
-
-const Person = ({person}) => {
-  return (<><p>{person.name}: {person.number}</p></>)
-}
-
-const ShowPersons = ({persons, keyword}) => {
-  return (<div>{
-    persons.map(person => {
-      // 正则表达式，模糊搜索，不区分大小写
-      var reg = new RegExp(keyword, 'i') 
-      var isHas = person.name.match(reg)
-      if(isHas) {
-        return <Person key={person.name} person={person}/>
-      } else {
-        // eslint-disable-next-line array-callback-return
-        return;
-      }
-    })
-  }</div>)
-}
-
-const Fliter = ({keyword, handleNewKeyword}) => {
-  return(
-    <div>search: <input value={keyword} onChange={handleNewKeyword}/></div>
-  )
-}
-
-const PersonForm = ({newName, newNumber, addPerson, handleNewName, handleNewNumber}) => {
-  return (<form>
-    <div>
-      name: <input value={newName} onChange={handleNewName}/>
-    </div>
-    <div>
-      number: <input value={newNumber} onChange={handleNewNumber}/>
-    </div>
-    <div>
-      <button type="submit" onClick={addPerson}>add</button>
-    </div>
-  </form>)
-}
-
-const App = () => {
-  const [persons, setPersons] = useState([
-    { name: 'Arto Hellas', number: '040-123456'},
-    { name: 'Ada Lovelace', number: '39-44-5323523'},
-    { name: 'Dan Abramov', number: '12-43-234345'},
-    { name: 'Mary Poppendieck', number: '39-23-6423122'}
-  ]) 
-  const [newName, setNewName] = useState('plz enter a name ...')
-  const handleNewName = (event) => {
-    setNewName(event.target.value)
-  }
-  const [newNumber, setNewNumber] = useState('1000000')
-  const handleNewNumber = (event) => {
-    setNewNumber(event.target.value)
-  }
-  const [keyword, setNewKeyWord] = useState('')
-  const handleNewKeyword = (event) => {
-    setNewKeyWord(event.target.value)
-  }
-  const addPerson = (event) => {
-    // event.preventDefault() 会阻止提交表单的默认操作（页面重新加载）
-    event.preventDefault()  
-    const newPerson = {
-      name: newName,
-      number: newNumber
-    }
-    // 判断个相等怎么这么多事啊
-    let isSame = persons.some(p => JSON.stringify(p.name) === JSON.stringify(newPerson.name)) 
-    if (isSame) {
-      window.alert(`"${newName}" is already added to phonebook! `);      
-    } else {
-      setPersons(persons.concat(newPerson))
-    }    
-    setNewName("plz enter a name ...")
-  }
-
-  return (
-    <div>
-      <h2>Phonebook</h2>
-      <Fliter 
-        keyword={keyword} 
-        handleNewKeyword={handleNewKeyword} 
-      />
-      <h2>Add new number</h2>
-      <PersonForm
-        newName={newName}
-        newNumber={newNumber}
-        addPerson={addPerson}
-        handleNewName={handleNewName}
-        handleNewNumber={handleNewNumber}      
-      />
-      <h2>Numbers</h2>
-      <ShowPersons keyword={keyword} persons={persons}/>
-    </div>
-  )
-}
-
-export default App
-```
-
-
-
-## 从服务器获取数据
-
-（运行在 3001 端口，监听项目目录下 db.json 的）Json 服务器：
-
-```bash
-yarn json-server --port 3001 --watch db.json
-```
-
-需要再开一个终端运行 React：
-
-```bash
-yarn start
-```
-
-promise 是一个表示异步操作的对象，有三种不同的状态：
-
-1. The promise is pending（提交中）：最终值(下面两个中的一个)还不可用
-2. The promise is fulfilled（兑现）：操作已经完成，最终的值是可用的，这通常是一个成功的操作。 这种状态有时也被称为resolve
-3. The promise is rejected（拒绝）：一个错误阻止了最终值，这通常表示一个失败操作
-
-例：
-
-```react
-import axios from 'axios' 
-
-const App = () => {  
-  const hook = () => {
-    console.log('effect')
-    axios
-      .get('http://localhost:3001/persons')
-      // axios.get 从服务器获取到数据，并将 .then() 包含的函数注册为事件处理:
-      .then(response => { 
-        console.log('promise fulfilled')
-        console.log(response.data)
-      })
-  }
-  // useEffect 第一个参数是函数本身，第二个参数是指定effect运行的频率
-  useEffect(hook, [])
-  return ''
-}
-
-export default App
-```
-
-这道题的交互方式：
-
-![](https://fullstackopen.com/static/650087bbee40291069025432f1408a29/d4713/18e.png)
-
-### 练习题：国家查询
-
-这组练习耗时有点多，没做完所有功能，JavaScript 的数组筛选有点恶心
-
-```react
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
-
-const CountriesFliter = ({countries, keyword}) => {
-  return(<div>{
-    countries.map(country => {
-      // 正则表达式，模糊搜索，不区分大小写
-      var reg = new RegExp(keyword, 'i') 
-      var isHas = country.name.common.match(reg)
-      if(isHas) {
-        return <Country country={country} key={country.name.common}/>
-      } else {
-        // eslint-disable-next-line array-callback-return
-        return;
-      }
-    })
-  }</div>)
-}
-
-const Country = ({country}) => {
-  return (<div>
-    {country.name.common}
-  </div>)
-}
-
-const App = () => {  
-  const [countries, setCountries] = useState([])
-  const [keyword, setKeyword] = useState('Enter a keyword ...')
-  const handleKeyword = (e) => {
-    setKeyword(e.target.value)
-  }
-
-  const hook = () => {
-    console.log('effect')
-    axios
-      .get('https://restcountries.com/v3.1/all')
-      // axios.get 从服务器获取到数据，并将 .then() 包含的函数注册为事件处理:
-      .then(response => { 
-        console.log('promise fulfilled!')
-        console.log(response.data)
-        setCountries(countries.concat(response.data))
-      })
-  }
-  // useEffect 第一个参数是要运行的函数，第二个参数是指定effect运行的频率
-  useEffect(hook, [])
-
-  return (<div>
-    <h3>search countries by keyword: <input value={keyword} onChange={handleKeyword}/></h3>
-    <CountriesFliter countries={countries} keyword={keyword}/>
-  </div>)
-}
-
-export default App
-```
-
-
-
-## 把数据存到服务器
-
-把 `axios.get()` 换成 `axios.post()` ，第二个参数放要传送的数据对象
-
-```js
-addNote = event => {
-  event.preventDefault()
-  const noteObject = {
-    content: newNote,
-    date: new Date(),
-    important: Math.random() < 0.5,
-  }
-
-  axios    
-    .post('http://localhost:3001/notes', noteObject)    
-    .then(response => {      
-      console.log(response)    
-  })
-}
-```
-
-完整例程：
-
-```react
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
-
-const Note = ({ note }) => {
-  return (
-    <li>{note.content}</li>
-  )
-}
-
-const App = () => {
-  const [notes, setNotes] = useState([])
-  const [newNote, setNewNote] = useState('')
-  const [showAll, setShowAll] = useState(false)
-
-  useEffect(() => {
-    console.log('effect')
-    axios
-      .get('http://localhost:3001/notes')
-      .then(response => {
-        console.log('promise fulfilled')
-        setNotes(response.data)
-      })
-  }, [])
-  console.log('render', notes.length, 'notes')
-
-  const addNote = (event) => {
-    event.preventDefault()
-    const noteObject = {
-      content: newNote,
-      date: new Date().toISOString(),
-      important: Math.random() > 0.5,
-    }
-
-    axios
-    .post('http://localhost:3001/notes', noteObject)
-    .then(response => {
-      setNotes(notes.concat(response.data))
-      setNewNote('')
-    })
-  }
-
-  const handleNoteChange = (event) => {
-    console.log(event.target.value)
-    setNewNote(event.target.value)
-  }
-
-  const notesToShow = showAll
-  ? notes
-  : notes.filter(note => note.important)
-
-  return (
-    <div>
-      <h1>Notes</h1>
-      <div>
-        <button onClick={() => setShowAll(!showAll)}>
-          show {showAll ? 'important' : 'all' }
-        </button>
-      </div>   
-      <ul>
-        {notesToShow.map(note => 
-            <Note key={note.id} note={note} />
-        )}
-      </ul>
-      <form onSubmit={addNote}>
-        <input
-          value={newNote}
-          onChange={handleNoteChange}
-        />
-        <button type="submit">save</button>
-      </form>  
-    </div>
-  )
-}
-
-export default App
-```
-
-
-
-## Node.js 和 Express
-
-在这里遇到了奇怪的问题：`Error: Cannot find module '...\backend\node_modules\express\index.js'.` 
-
-解决方案（不知道生效的是啥，推测是1）：
-
-1. **在项目根目录下 `yarn add express`**，而不是全局安装在绝对路径
-2. 在 VSCode 的 settings.json 里加了三行：
-   `"eslint.packageManager": "yarn",
-   "prettier.packageManager": "yarn",
-   "npm.packageManager": "yarn"`
-
-
-
-### 练习题：Phonebook backend
-
-测试用的 rest 文件，配合 VSCode 的 REST Client 拓展使用，一键发送 request 
-
-```json
-POST http://localhost:3001/api/persons
-Content-Type: application/json
-
-{
-	"name": "Chris",
-    "number": "123456"
-}
-```
-
-index.js
-
-```react
-const express = require('express')
-const app = express()
-var morgan = require('morgan')
-
-// 自定义的 morgan token 和使用方式
-morgan.token('token_for_body', function (req, res) { 
-  return JSON.stringify(req.body)
-})
-// 会记录在控制台日志信息：POST /api/persons 15.808 {"name":"Chris","number":"123456"}
-app.use(morgan(':method :url :response-time :token_for_body '))
-
-let persons = [{ 
-    "id": 1,
-    "name": "Arto Hellas", 
-    "number": "040-123456"
-  }, { 
-    "id": 2,
-    "name": "Ada Lovelace", 
-    "number": "39-44-5323523"
-  }, { 
-    "id": 3,
-    "name": "Dan Abramov", 
-    "number": "12-43-234345"
-  }, { 
-    "id": 4,
-    "name": "Mary Poppendieck", 
-    "number": "39-23-6423122"
-  }
-]
-
-app.use(express.json())
-
-app.get('/', (req, res) => {
-  res.send('<h1>Hello World!</h1>')
-})
-
-app.get('/api/persons', (req, res) => {
-  res.json(persons)
-})
-
-app.get('/api/info', (req, res) => {
-  let num = persons.length
-  let cur_time = new Date().toLocaleTimeString()
-  res.send(`
-  Phonebook has info for ${num} people.<br>
-  Get time: ${cur_time}
-  `)
-})
-
-// 用冒号为 express 路由定义参数
-app.get('/api/persons/:id', (request, response) => {
-  // 不类型转换这个参数就会被 JS 当成字符串
-  const id = Number(request.params.id)
-  const person = persons.find(person => person.id === id)
-  if (person) {      // 所有的 JavaScript 对象都会被当作 true
-    response.json(person)  
-  } else {    
-    response.status(404).end()  
-  }
-})
-
-// 删除 api 
-app.delete('/api/persons/:id', (request, response) => {
-  const id = Number(request.params.id)
-  persons = persons.filter(person => person.id !== id)
-  response.status(204).end()
-})
-
-const generateId = () => {
-  const Id = persons.length > 0
-  // `...` 是数组展开语法
-    ? 1 * Math.floor(Math.random() * (0xFF))
-    : 0
-  return Id + 1
-}
-
-function isEmpty(str) {
-  if (str == 'undefined' || !str || !/[^\s]/.test(str)) {
-    //为空
-    return true
-  }
-  return false
-}
-
-// 发送新便签
-app.post('/api/persons', (request, response) => {
-  const body = request.body
-  console.log(body)
-  if (!body) {
-    return response.status(400).json({ 
-      error: 'content missing' 
-    })
-  }
-
-  const person = {
-    id: generateId(),
-    name: body.name, 
-    number: body.number
-  }
-
-  let isSame = persons.some(p => 
-    JSON.stringify(p.name) === JSON.stringify(person.name)
-  ) 
-  if (isSame) {
-    return response.status(406).json({ 
-      error: 'name must be unique'
-    })
-  } else if (isEmpty(person.number)) {
-    return response.status(406).json({ 
-      error: 'number can not be empty'
-    })
-  } else if (isEmpty(person.name)) {
-    return response.status(406).json({ 
-      error: 'name can not be empty'
-    })
-  } else {
-    persons = persons.concat(person)
-    response.json(person)
-  }  
-})
-
-const PORT = 3001
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
-})
-```
-
-~~这个用到的工具又卡住我了，校园邮箱收不到验证码~~
-
 
 
 # X 分钟速成 JS
@@ -1912,20 +1079,16 @@ alert( meetup.date.getDate() ); // 现在正常运行了！
 
 内容来自：https://beta.reactjs.org/learn/thinking-in-react 
 
-
-
 ## Props vs State
 
 React 有两种类型的“模型”数据：Props 和 State
 
-- Props 是传递给函数的参数，例如一个 `Form` 可以通过一个 `color`支持一个 `Button` 
-- State 是组件需要追踪并随时刷新的内容，例如一个 `Button`可能会跟踪 `isHovered`状态
-
-
+- Props 是传递给函数的参数，例如一个 `Form` 要传送一个 `color` 给一个 `Button` 
+- State 是组件需要追踪并随时刷新的内容，例如一个 `Button`可能会跟踪 `isHovered` 状态
 
 ## Hook
 
-Hook 用于“挂钩”一个组件的 [渲染周期](https://beta.reactjs.org/learn/render-and-commit)
+Hook 用于“挂钩”一个组件的 [渲染周期](https://beta.reactjs.org/learn/render-and-commit) 
 
 ###  `useState()` Hook
 
@@ -2431,3 +1594,968 @@ export default function PackingList() {
 
 
 
+# 全栈公开课 fullstackopen.com 作业记录
+
+- [课程目录](https://fullstackopen.com/zh/#course-contents) 
+- 建议使用 yarn 代替 npm
+
+## 组件事件处理
+
+必须始终通过将状态设置为新对象来更改状态，所以即使是是+1操作也必须建一个新变量，再把状态置为新值
+
+```react
+import React, { useState } from 'react'
+
+const App = () => {
+  const [left, setLeft] = useState(0)
+  const [right, setRight] = useState(0)
+
+  return (
+    <div>
+      {left}
+      <button onClick={() => setLeft(left + 1)}>left</button>
+      <button onClick={() => setRight(right + 1)}>right</button>
+      {right}
+    </div>
+  )
+}
+```
+
+### 组件可以是任意类型
+
+```react
+const App = () => {
+  const [clicks, setClicks] = useState({
+    left: 0, right: 0
+  })
+
+  const handleLeftClick = () => {
+    const newClicks = { 
+      left: clicks.left + 1, 
+      right: clicks.right 
+    }
+    setClicks(newClicks)
+  }
+ 
+  /* 换成展开语法： */
+  const handleRightClick = () => {
+  const newClicks = { 
+    ...clicks, 	// 具有 clicks 对象的所有属性的副本
+    right: clicks.right + 1  // 新对象中 right 属性的值将为 clicks.right+1
+  }
+  setClicks(newClicks)
+}
+
+  return (
+    <div>
+      {clicks.left}
+      <button onClick={handleLeftClick}>left</button>
+      <button onClick={handleRightClick}>right</button>
+      {clicks.right}
+    </div>
+  )
+}
+```
+
+### 练习题：好评系统
+
+胡写一通.jpg 
+
+```react
+import React, { useState } from 'react'
+
+const Statistics = (props) => {
+  let good = props.good
+  let neutral = props.neutral
+  let bad = props.bad
+  if (good + neutral + bad === 0) {
+    return <p>还没有评价！</p>
+  }
+  return [
+    <table>
+      <tr><td>good</td><td>{good}</td></tr>
+      <tr><td>neutral</td><td>{neutral}</td></tr>
+      <tr><td>bad</td><td>{bad}</td></tr>
+      <tr><td>all</td><td>{good + neutral + bad}</td></tr>
+      <tr><td>average</td><td>{1.0 * good - 1.0 * bad}</td></tr>
+      <tr><td>positive</td><td>{1.0 * good / (good + neutral + bad)}</td></tr>
+    </table>
+  ]
+}
+
+const App = () => {
+  // save clicks of each button to own state
+  const [good, setGood] = useState(0)
+  const [neutral, setNeutral] = useState(0)
+  const [bad, setBad] = useState(0)
+
+  return (
+    <div>
+      <h1>评价</h1>
+      <button onClick={() => setGood(good + 1)}>good</button>
+      <button onClick={() => setNeutral(neutral + 1)}>neutral</button>
+      <button onClick={() => setBad(bad + 1)}>bad</button>
+      <h1>统计</h1>
+      <Statistics good={good} neutral={neutral} bad={bad} />
+    </div>
+  )
+}
+
+export default App
+```
+
+
+
+## Map 方法
+
+index.js 内容如下:
+
+```react
+import ReactDOM from 'react-dom'
+import App from './App'
+
+const notes = [
+  {
+    id: 1,
+    content: 'HTML is easy',
+    date: '2019-05-30T17:30:31.098Z',
+    important: true
+  },
+  {
+    id: 2,
+    content: 'Browser can execute only JavaScript',
+    date: '2019-05-30T18:39:34.091Z',
+    important: false
+  },
+  {
+    id: 3,
+    content: 'GET and POST are the most important methods of HTTP protocol',
+    date: '2019-05-30T19:20:14.298Z',
+    important: true
+  }
+]
+
+ReactDOM.render(
+  <App notes={notes} />,
+  document.getElementById('root')
+)
+```
+
+map 方法生成的每个元素必须有一个名为 key 的属性
+
+```react
+const App = (props) => {
+  const { notes } = props
+
+  return (
+    <div>
+      <h1>Notes</h1>
+      <ul>
+        {notes.map(note => 
+          <li key={note.id}>
+            {note.content}
+          </li>        
+        )}
+      </ul>
+    </div>
+  )
+}
+```
+
+
+
+## 模块导出的组件
+
+Note.js 文件：
+
+```react
+import React from 'react'
+
+const Note = ({ note }) => {
+  return (
+    <li>{note.content}</li>
+  )
+}
+
+export default Note 	// 声明实时绑定导出
+```
+
+import 这个 Note 模块：
+
+```react
+import React from 'react'
+import Note from './components/Note'
+const App = ({ notes }) => {
+  // ...
+}
+```
+
+### 练习题：课程显示
+
+##### App.js
+
+```react
+import React from 'react'
+import Course from './Course'
+
+const App = () => {
+  const courses = [{
+      name: 'Half Stack application development',
+      id: 1,
+      parts: [{
+          name: 'Fundamentals of React',
+          exercises: 10,
+          id: 1
+        },{
+          name: 'Using props to pass data',
+          exercises: 7,
+          id: 2
+        },{
+          name: 'State of a component',
+          exercises: 14,
+          id: 3
+        },{
+          name: 'Redux',
+          exercises: 11,
+          id: 4
+        }
+      ]
+    },{
+      name: 'Node.js',
+      id: 2,
+      parts: [{
+          name: 'Routing',
+          exercises: 3,
+          id: 1
+        },{
+          name: 'Middlewares',
+          exercises: 7,
+          id: 2
+        }
+      ]
+    }
+  ]
+  return (<div>
+    <h1>Web Course</h1>
+    {courses.map(course => 
+      <Course course={course} />
+    )}
+  </div>)
+}
+
+export default App
+```
+
+##### Course.js
+
+```react
+import React from 'react'
+
+const Header = ({name}) => {
+  return [<h2>{name}</h2>]
+}
+  
+const Content = ({parts}) => {
+  const total = parts.reduce(
+    // 第二个参数是reduce累加初始值，不写个0会被当成字符串加法
+    (acc, cur) => acc + cur.exercises, 0	
+  )
+
+  return (
+    <div>
+    {parts.map(part => 
+        <Part id={part.id} name={part.name} exercises={part.exercises}/>
+    )}
+    <p>Total: {total}</p>
+    </div>
+  )
+}
+
+const Part = ({id, name, exercises}) => {
+  return (<p>
+    {name}, {exercises}
+  </p>)
+}
+
+const Course = ({course}) => {
+  return (<>
+    <Header name={course.name} />
+    <Content parts={course.parts} />
+  </>)
+}
+
+export default Course
+```
+
+
+
+## 受控组件
+
+注意：`event.preventDefault()` 会阻止提交表单的默认操作（使页面重新加载）
+
+```react
+import React, {useState} from 'react'
+
+const Note = ({ note }) => {  
+  return (<li>{note.content}</li>)
+}
+
+const App = (props) => {
+  const [notes, setNotes] = useState(props.notes)
+  const [newNote, setNewNote] = useState('a new note...') 
+  const [showAll, setShowAll] = useState(true)
+  const notesToShow = showAll    ? notes    : notes.filter(note => note.important === true)
+
+  const addNote = (event) => {
+    event.preventDefault()
+    const noteObject = {
+      content: newNote,
+      date: new Date().toISOString(),
+      important: Math.random() < 0.5,
+      id: notes.length + 1,
+    }
+    setNotes(notes.concat(noteObject))
+    setNewNote('')
+  }
+
+  const handleNoteChange = (event) => {    
+    console.log(event.target.value)    
+    setNewNote(event.target.value)
+  }
+  
+  return (
+    <div>
+      <h1>Notes</h1>
+      <div>
+        <button onClick={() => setShowAll(!showAll)}>          
+          show {showAll ? 'important' : 'all' }        
+        </button>      
+      </div>
+      <ul>
+        {notesToShow.map(note => <Note key={note.id} note={note} />)}
+      </ul>
+      <form onSubmit={addNote}>
+        <input
+          value={newNote}
+          onChange={handleNoteChange}        />
+        <button type="submit">save</button>
+      </form>   
+    </div>
+  )
+}
+
+export default App
+```
+
+### 练习题：The Phonebook
+
+```react
+import React, { useState } from 'react'
+
+const Person = ({person}) => {
+  return (<><p>{person.name}: {person.number}</p></>)
+}
+
+const ShowPersons = ({persons, keyword}) => {
+  return (<div>{
+    persons.map(person => {
+      // 正则表达式，模糊搜索，不区分大小写
+      var reg = new RegExp(keyword, 'i') 
+      var isHas = person.name.match(reg)
+      if(isHas) {
+        return <Person key={person.name} person={person}/>
+      } else {
+        // eslint-disable-next-line array-callback-return
+        return;
+      }
+    })
+  }</div>)
+}
+
+const Fliter = ({keyword, handleNewKeyword}) => {
+  return(
+    <div>search: <input value={keyword} onChange={handleNewKeyword}/></div>
+  )
+}
+
+const PersonForm = ({newName, newNumber, addPerson, handleNewName, handleNewNumber}) => {
+  return (<form>
+    <div>
+      name: <input value={newName} onChange={handleNewName}/>
+    </div>
+    <div>
+      number: <input value={newNumber} onChange={handleNewNumber}/>
+    </div>
+    <div>
+      <button type="submit" onClick={addPerson}>add</button>
+    </div>
+  </form>)
+}
+
+const App = () => {
+  const [persons, setPersons] = useState([
+    { name: 'Arto Hellas', number: '040-123456'},
+    { name: 'Ada Lovelace', number: '39-44-5323523'},
+    { name: 'Dan Abramov', number: '12-43-234345'},
+    { name: 'Mary Poppendieck', number: '39-23-6423122'}
+  ]) 
+  const [newName, setNewName] = useState('plz enter a name ...')
+  const handleNewName = (event) => {
+    setNewName(event.target.value)
+  }
+  const [newNumber, setNewNumber] = useState('1000000')
+  const handleNewNumber = (event) => {
+    setNewNumber(event.target.value)
+  }
+  const [keyword, setNewKeyWord] = useState('')
+  const handleNewKeyword = (event) => {
+    setNewKeyWord(event.target.value)
+  }
+  const addPerson = (event) => {
+    // event.preventDefault() 会阻止提交表单的默认操作（页面重新加载）
+    event.preventDefault()  
+    const newPerson = {
+      name: newName,
+      number: newNumber
+    }
+    // 判断个相等怎么这么多事啊
+    let isSame = persons.some(p => JSON.stringify(p.name) === JSON.stringify(newPerson.name)) 
+    if (isSame) {
+      window.alert(`"${newName}" is already added to phonebook! `);      
+    } else {
+      setPersons(persons.concat(newPerson))
+    }    
+    setNewName("plz enter a name ...")
+  }
+
+  return (
+    <div>
+      <h2>Phonebook</h2>
+      <Fliter 
+        keyword={keyword} 
+        handleNewKeyword={handleNewKeyword} 
+      />
+      <h2>Add new number</h2>
+      <PersonForm
+        newName={newName}
+        newNumber={newNumber}
+        addPerson={addPerson}
+        handleNewName={handleNewName}
+        handleNewNumber={handleNewNumber}      
+      />
+      <h2>Numbers</h2>
+      <ShowPersons keyword={keyword} persons={persons}/>
+    </div>
+  )
+}
+
+export default App
+```
+
+
+
+## 从服务器获取数据
+
+（运行在 3001 端口，监听项目目录下 db.json 的）Json 服务器：
+
+```bash
+yarn json-server --port 3001 --watch db.json
+```
+
+需要再开一个终端运行 React：
+
+```bash
+yarn start
+```
+
+promise 是一个表示异步操作的对象，有三种不同的状态：
+
+1. The promise is pending（提交中）：最终值(下面两个中的一个)还不可用
+2. The promise is fulfilled（兑现）：操作已经完成，最终的值是可用的，这通常是一个成功的操作。 这种状态有时也被称为resolve
+3. The promise is rejected（拒绝）：一个错误阻止了最终值，这通常表示一个失败操作
+
+例：
+
+```react
+import axios from 'axios' 
+
+const App = () => {  
+  const hook = () => {
+    console.log('effect')
+    axios
+      .get('http://localhost:3001/persons')
+      // axios.get 从服务器获取到数据，并将 .then() 包含的函数注册为事件处理:
+      .then(response => { 
+        console.log('promise fulfilled')
+        console.log(response.data)
+      })
+  }
+  // useEffect 第一个参数是函数本身，第二个参数是指定effect运行的频率
+  useEffect(hook, [])
+  return ''
+}
+
+export default App
+```
+
+这道题的交互方式：
+
+![](https://fullstackopen.com/static/650087bbee40291069025432f1408a29/d4713/18e.png)
+
+### 练习题：国家查询
+
+这组练习耗时有点多，没做完所有功能，JavaScript 的数组筛选有点恶心
+
+```react
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+
+const CountriesFliter = ({countries, keyword}) => {
+  return(<div>{
+    countries.map(country => {
+      // 正则表达式，模糊搜索，不区分大小写
+      var reg = new RegExp(keyword, 'i') 
+      var isHas = country.name.common.match(reg)
+      if(isHas) {
+        return <Country country={country} key={country.name.common}/>
+      } else {
+        // eslint-disable-next-line array-callback-return
+        return;
+      }
+    })
+  }</div>)
+}
+
+const Country = ({country}) => {
+  return (<div>
+    {country.name.common}
+  </div>)
+}
+
+const App = () => {  
+  const [countries, setCountries] = useState([])
+  const [keyword, setKeyword] = useState('Enter a keyword ...')
+  const handleKeyword = (e) => {
+    setKeyword(e.target.value)
+  }
+
+  const hook = () => {
+    console.log('effect')
+    axios
+      .get('https://restcountries.com/v3.1/all')
+      // axios.get 从服务器获取到数据，并将 .then() 包含的函数注册为事件处理:
+      .then(response => { 
+        console.log('promise fulfilled!')
+        console.log(response.data)
+        setCountries(countries.concat(response.data))
+      })
+  }
+  // useEffect 第一个参数是要运行的函数，第二个参数是指定effect运行的频率
+  useEffect(hook, [])
+
+  return (<div>
+    <h3>search countries by keyword: <input value={keyword} onChange={handleKeyword}/></h3>
+    <CountriesFliter countries={countries} keyword={keyword}/>
+  </div>)
+}
+
+export default App
+```
+
+
+
+## 把数据存到服务器
+
+把 `axios.get()` 换成 `axios.post()` ，第二个参数放要传送的数据对象
+
+```js
+addNote = event => {
+  event.preventDefault()
+  const noteObject = {
+    content: newNote,
+    date: new Date(),
+    important: Math.random() < 0.5,
+  }
+
+  axios    
+    .post('http://localhost:3001/notes', noteObject)    
+    .then(response => {      
+      console.log(response)    
+  })
+}
+```
+
+完整例程：
+
+```react
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+
+const Note = ({ note }) => {
+  return (
+    <li>{note.content}</li>
+  )
+}
+
+const App = () => {
+  const [notes, setNotes] = useState([])
+  const [newNote, setNewNote] = useState('')
+  const [showAll, setShowAll] = useState(false)
+
+  useEffect(() => {
+    console.log('effect')
+    axios
+      .get('http://localhost:3001/notes')
+      .then(response => {
+        console.log('promise fulfilled')
+        setNotes(response.data)
+      })
+  }, [])
+  console.log('render', notes.length, 'notes')
+
+  const addNote = (event) => {
+    event.preventDefault()
+    const noteObject = {
+      content: newNote,
+      date: new Date().toISOString(),
+      important: Math.random() > 0.5,
+    }
+
+    axios
+    .post('http://localhost:3001/notes', noteObject)
+    .then(response => {
+      setNotes(notes.concat(response.data))
+      setNewNote('')
+    })
+  }
+
+  const handleNoteChange = (event) => {
+    console.log(event.target.value)
+    setNewNote(event.target.value)
+  }
+
+  const notesToShow = showAll
+  ? notes
+  : notes.filter(note => note.important)
+
+  return (
+    <div>
+      <h1>Notes</h1>
+      <div>
+        <button onClick={() => setShowAll(!showAll)}>
+          show {showAll ? 'important' : 'all' }
+        </button>
+      </div>   
+      <ul>
+        {notesToShow.map(note => 
+            <Note key={note.id} note={note} />
+        )}
+      </ul>
+      <form onSubmit={addNote}>
+        <input
+          value={newNote}
+          onChange={handleNoteChange}
+        />
+        <button type="submit">save</button>
+      </form>  
+    </div>
+  )
+}
+
+export default App
+```
+
+
+
+## Node.js 和 Express
+
+在这里遇到了奇怪的问题：`Error: Cannot find module '...\backend\node_modules\express\index.js'.` 
+
+解决方案（不知道生效的是啥，推测是1）：
+
+1. **在项目根目录下 `yarn add express`**，而不是全局安装在绝对路径
+2. 在 VSCode 的 settings.json 里加了三行：
+   `"eslint.packageManager": "yarn",
+   "prettier.packageManager": "yarn",
+   "npm.packageManager": "yarn"`
+
+
+
+### 练习题：Phonebook backend
+
+测试用的 rest 文件，配合 VSCode 的 REST Client 拓展使用，一键发送 request 
+
+```json
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+	"name": "Chris",
+    "number": "123456"
+}
+```
+
+index.js
+
+```react
+const express = require('express')
+const app = express()
+var morgan = require('morgan')
+
+// 自定义的 morgan token 和使用方式
+morgan.token('token_for_body', function (req, res) { 
+  return JSON.stringify(req.body)
+})
+// 会记录在控制台日志信息：POST /api/persons 15.808 {"name":"Chris","number":"123456"}
+app.use(morgan(':method :url :response-time :token_for_body '))
+
+let persons = [{ 
+    "id": 1,
+    "name": "Arto Hellas", 
+    "number": "040-123456"
+  }, { 
+    "id": 2,
+    "name": "Ada Lovelace", 
+    "number": "39-44-5323523"
+  }, { 
+    "id": 3,
+    "name": "Dan Abramov", 
+    "number": "12-43-234345"
+  }, { 
+    "id": 4,
+    "name": "Mary Poppendieck", 
+    "number": "39-23-6423122"
+  }
+]
+
+app.use(express.json())
+
+app.get('/', (req, res) => {
+  res.send('<h1>Hello World!</h1>')
+})
+
+app.get('/api/persons', (req, res) => {
+  res.json(persons)
+})
+
+app.get('/api/info', (req, res) => {
+  let num = persons.length
+  let cur_time = new Date().toLocaleTimeString()
+  res.send(`
+  Phonebook has info for ${num} people.<br>
+  Get time: ${cur_time}
+  `)
+})
+
+// 用冒号为 express 路由定义参数
+app.get('/api/persons/:id', (request, response) => {
+  // 不类型转换这个参数就会被 JS 当成字符串
+  const id = Number(request.params.id)
+  const person = persons.find(person => person.id === id)
+  if (person) {      // 所有的 JavaScript 对象都会被当作 true
+    response.json(person)  
+  } else {    
+    response.status(404).end()  
+  }
+})
+
+// 删除 api 
+app.delete('/api/persons/:id', (request, response) => {
+  const id = Number(request.params.id)
+  persons = persons.filter(person => person.id !== id)
+  response.status(204).end()
+})
+
+const generateId = () => {
+  const Id = persons.length > 0
+  // `...` 是数组展开语法
+    ? 1 * Math.floor(Math.random() * (0xFF))
+    : 0
+  return Id + 1
+}
+
+function isEmpty(str) {
+  if (str == 'undefined' || !str || !/[^\s]/.test(str)) {
+    //为空
+    return true
+  }
+  return false
+}
+
+// 发送新便签
+app.post('/api/persons', (request, response) => {
+  const body = request.body
+  console.log(body)
+  if (!body) {
+    return response.status(400).json({ 
+      error: 'content missing' 
+    })
+  }
+
+  const person = {
+    id: generateId(),
+    name: body.name, 
+    number: body.number
+  }
+
+  let isSame = persons.some(p => 
+    JSON.stringify(p.name) === JSON.stringify(person.name)
+  ) 
+  if (isSame) {
+    return response.status(406).json({ 
+      error: 'name must be unique'
+    })
+  } else if (isEmpty(person.number)) {
+    return response.status(406).json({ 
+      error: 'number can not be empty'
+    })
+  } else if (isEmpty(person.name)) {
+    return response.status(406).json({ 
+      error: 'name can not be empty'
+    })
+  } else {
+    persons = persons.concat(person)
+    response.json(person)
+  }  
+})
+
+const PORT = 3001
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`)
+})
+```
+
+~~这个用到的工具又卡住我了，校园邮箱收不到验证码~~
+
+
+
+# 转载：Nginx 部署前后端分离项目
+
+本文转载自 [前后端分离项目的服务器部署 - 简书](https://www.jianshu.com/p/cbb21c6f3427)
+
+前几天我的个人网站终于部署上线了，趁现在还记得，赶紧把流程记录下来。本文讲的是前后端分离的项目的服务器部署，这里就以我的个人网站为例子。我的个人网站前端是`react`，后端是`nodejs`，数据库是`mongodb`。
+
+为了把项目部署上线，首先我们需要确保这个项目已经在本地跑通了，所谓跑通就是前端，后端，和服务器都已经被串在一起，而且可以正常运行了。在这个基础上，我们的部署分为以下几个步骤：
+
+1.  购买域名和远程服务器
+2.  域名解析，实名制认证，备案
+3.  把项目代码放在远程服务器上
+4.  程服务器安装数据库
+5.  前端编译静态文件
+6.  nginx前端配置
+7.  解决前后端跨域问题
+8.  项目在线上跑通以及后续完善
+
+步骤很多，看起来很吓人，但是实际操作起来还是很快的，下面我们就一步一步的来讲解吧。
+
+### 1\. 购买域名和远程服务器
+
+域名和远程服务器推荐在[阿里云](https://www.aliyun.com/)上购买, 原因是购买了他们的产品后有一系列很详细的教程，对于新手来说是很友好的。
+
+购买后的域名需要进行实名制认证，这个过程很快，几乎是即时的，具体的认证方式阿里云上都有详细的说明。
+
+服务器我买的是阿里云的**轻量应用服务器**，物美价廉，对于我的个人网站来说足够用了。购买服务器时，会让你选择服务器的地域，如果你的地域选在国内的话那你的域名是需要备案的，而这个备案过程大约需要半个月，所以着急着项目上线的同学可以把地域选在香港，是不用备案的。但是服务器放在香港的缺点就是有点延迟，所以服务器放在哪里还需要自己权衡。
+
+购买服务器时还需要选择应用镜像和系统镜像，这里我们没有用到任何应用来构建我们的网站，所以只要选择系统镜像就好了。而选择什么系统呢？什么系统你最熟悉就选择什么系统，如果你完全是个小白，而且也不熟悉`Linux`系统的话，我个人~不负责任的~推荐`windows`系统。至于`windows`系统被嫌弃的不安全等问题，对于我这个个人网站来说都是不那么重要的。
+
+### 2\. 域名解析
+
+在对域名进行实名制认证之后(如果你的服务器地域在国内，还需要进行备案)，我们就可以对域名进行解析了。所谓域名解析，就是把域名的指向设置为我们购买的服务器的`ip`地址。域名只是一个方便我们记住的网站的名字，而我们真正需要访问的其实是服务器的那个`ip`地址。你也可以这么理解：我们通过域名解析来把域名和服务器关联了起来。
+
+域名解析很简单，如果你的域名和服务器都是在阿里云购买的，可以一键解析。具体教程阿里云上写的很清楚，这里就不再赘述。
+
+### 3\. 把项目代码放在远程服务器上
+
+接下来我们需要想个办法把代码搬到远程服务器上，这里我推荐使用`git`。我们可以把项目放在`github`上之后，再在远程服务器上把代码`clone`下来。关于`git`有一个很浅显易懂的教程，是廖雪峰老师写的，[这是链接](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)。
+
+代码`clone`下来以后不要忘了在服务器上安装运行代码所需要的软件和依赖包。比如我的后端是`nodejs`所以我就需要安装`node`。而依赖包的安装可以借助包管理工具`npm`或者是`yarn`。具体的方法在我的另一篇文章里有，[请移步](http://www.chenxin.art/work/detail/5c6abae0fca7ee01bcef17ad)。
+
+### 4\. 远程服务器安装数据库
+
+前后端就准备妥当，这时候我们需要在服务器上安装数据库了。不同的数据库安装方法不同，相同的数据库库不同的操作系统安装方法也不同，这里需要根据自己的情况去找相应的文档。
+
+如果你也是在`windows`系统里安装`mongodb`数据库的话，可以参考[这个视频](https://www.youtube.com/watch?v=u3IhK3dvzys)。
+
+关于如何在网上准确的找到自己所需要的资料，这里我想结合我的经验说几句。找资料首先第一想到的应该是官方文档，因为官方文档是最新的，很多数据库(比如`mongodb`我就踩过坑)，版本的变更安装方法也会不一样，第三方网站给出的安装方法往往都是过时的，不适用的。但如果官方文档读的云里雾里怎么办？这个时候我推荐去`Youtube`找视频看，把视频按发布时间排序，找最新的视频看。这样再结合官方文档应该就没有问题了。
+
+### 5\. 文件编译
+
+关于编译我知道的也不多，所以这里只说一下具体我是怎么操作的，留个坑以后填。
+
+首先是前端代码的编译，前端代码里直接`npm run build`或者是`yarn run build`就可以编译出静态文件，这里的静态文件是经过压缩的，所以代码的加载速度快。另外由于我的前端代码是用`ES6`标准写的，执行这个编译过程(如果你正确配置了`babel`)也帮我把`ES6`编译成了服务器可以识别的`ES5`代码。
+
+然后是后端，后端也使用`ES6`写的，所以后端也需要用`babel`来编译一下。
+
+### 6\. nginx前端配置
+
+这里我们使用`nginx`主要有两个目的，第一是我们需要`nginx`充当我们的前端静态文件代理服务器，第二就是我们需要`nginx`的反向代理帮我们解决跨域的问题，因为我们这是一个前后端分离的项目，前后端运行在不同的端口上就需要解决跨域的问题。
+
+`ngnix`可以去官网下载，下载完成后找到`nginx.conf`文件，我的是在目录`C:\nginx-1.14.2\nginx-1.14.2\conf`下。打开`nginx.conf`文件，这里我们重点关注一下`server`里面的配置，有几项要根据我们的具体情况进行编辑。
+
+```nginx
+server {
+    listen 80;
+    server_name chenxin.art;
+    root "C:/xinart/client/build";
+    location / {
+        try_files $uri /index.html;
+    }
+}
+```
+
+首先，`listen`在80端口，没有问题，因为我们输入网址时默认的就是访问80端口。
+
+`server_name`后面应该填上你自己的域名。
+
+`root`后面应该填你的前端静态文件的存放目录。
+
+`location`后面的`/`表示当路径在主页的时候，这里不需要改动。花括号表示访问根目录里面(也就是你填写的`root`目录)的`index.html`文件。如果你的入口文件是别的名字的话记得更改。
+
+整个连起来，着几行代码的意思就是：当输入网址`chenxin.art`的时候，`nginx`会加载`root`目录里的`index.html`文件。相信理解以后你就知道要改哪些东西了。
+
+到这一步为止，在浏览器中输入你的域名应该可以看到静态部分的网页了，但是你会发现所有的`ajax`请求都会报错，因为我们的前后端还没有真正的连通，还有一个跨域的问题需要解决。
+
+### 7\. 解决前后端跨域问题
+
+我们借助`nginx`的反向代理来解决跨域的问题。具体操作如下：在`nginx.conf`文件的`server`配置里新增几行代码，现在你的`server`应该如下所示：
+
+```
+    server {
+    
+    listen 80;
+    
+    server_name chenxin.art;
+    
+    root "C:/xinart/client/build";
+    
+    location / {
+        try_files $uri /index.html;
+    }
+       
+    location /api {
+        proxy_pass http://localhost:8080;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection ‘upgrade’;
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+    }
+
+```
+
+别的地方都没动，我们只是新增了一个`location`，而且这个`location`后面的路径需要改成你自己的`ajax`请求的路径，比如我的是`/api`。
+
+`proxy_pass`后面的端口号也要改一下，改成你的后端运行的端口。再后面的代码我们保持原样，不用更改。
+
+这新增的几句代码的意思是：当请求的路径以`/api`开头时，将请求代理到8080端口，而我的后端就运行在8080端口，所以就能够响应请求了。
+
+到这里为止，我们的项目就算是真正的在线上跑通了。
+
+### 8\. 项目在线上跑通以及后续完善
+
+项目跑通以后还有事情可以做，比如配置https，还有各种优化等等，有兴趣的同学可以自己去搜搜资料。
+
+### 一点小心得
+
+把自己个人网站的服务器部署像流水账这样写一遍也还是很有收获的，那就是很好的找出了自己不懂地方(苦笑)，那些说不清楚的地方其实就是还没有真正弄懂的地方。因为部署服务器涉及的东西太多太杂，一时半会想弄清也不现实，坑多慢慢填呀。。。

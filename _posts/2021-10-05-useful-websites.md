@@ -17,11 +17,13 @@ tags:								    # 标签
 
 ### 编程学习
 
+- [html 转换成 markdown 格式](https://www.helloworld.net/html2md)
+
 - [Learn Git Branching](https://learngitbranching.js.org/?locale=zh_CN) （感谢 lys 提供）
 
 - [C++ 那些事](https://light-city.club/sc/)
 
-- [MIT_计算机教育中缺失的一课](https://missing-semester-cn.github.io/)
+- [MIT-计算机教育中缺失的一课](https://missing-semester-cn.github.io/)
 
 - [TeachYourselfCS-CN](https://github.com/izackwu/TeachYourselfCS-CN/blob/master/TeachYourselfCS-CN.md)
 
@@ -57,15 +59,15 @@ tags:								    # 标签
 
 - [PTA 程序设计类实验辅助教学平台 (pintia.cn)](https://pintia.cn/)
 
-- [浙江大学\_数据结构\_中国大学MOOC(慕课) (icourse163.org)](https://www.icourse163.org/learn/ZJU-93001#/learn/announce)
+- [浙江大学《数据结构》中国大学MOOC(慕课) (icourse163.org)](https://www.icourse163.org/learn/ZJU-93001#/learn/announce)
 
-- [国防科技大学\_大学计算机基础CAP\_中国大学MOOC(慕课) (icourse163.org)](https://www.icourse163.org/course/NUDT-1001614002) 
+- [国防科技大学《大学计算机基础CAP》中国大学MOOC(慕课) (icourse163.org)](https://www.icourse163.org/course/NUDT-1001614002) 
 
-- [华中科技大学\_计算机组成原理\_中国大学MOOC(慕课) (icourse163.org)](https://www.icourse163.org/course/HUST-1003159001)
+- [华中科技大学《计算机组成原理》中国大学MOOC(慕课) (icourse163.org)](https://www.icourse163.org/course/HUST-1003159001)
 
-- [哈尔滨工业大学\_操作系统\_中国大学MOOC(慕课) (icourse163.org)](https://www.icourse163.org/course/HIT-1002531008) 
+- [哈尔滨工业大学《操作系统》中国大学MOOC(慕课) (icourse163.org)](https://www.icourse163.org/course/HIT-1002531008) 
 
-- [哈尔滨工业大学\_计算机网络\_中国大学MOOC(慕课) (icourse163.org)](https://www.icourse163.org/course/HIT-154005)
+- [哈尔滨工业大学《计算机网络》中国大学MOOC(慕课) (icourse163.org)](https://www.icourse163.org/course/HIT-154005)
 
 - [中科大郑烇、杨坚全套《计算机网络》课程](https://www.bilibili.com/video/BV1JV411t7ow)
 
@@ -96,6 +98,12 @@ tags:								    # 标签
 
 ### 生活
 
+- [This Website Will Self Destruct](https://www.thiswebsitewillselfdestruct.com/)
+
+- [ecosia 搜索引擎](https://www.ecosia.org/)
+
+- [qwant 搜索引擎](https://www.qwant.com/)
+
 - [跨性别在线·文档库](https://docs.transonline.org.cn/) 
 
 - [WeTransfer 网盘](https://wetransfer.com/) 
@@ -108,7 +116,7 @@ tags:								    # 标签
 
 - [Everything\_文件查找工具](https://voidtools.com/zh-cn/) （也是 ZX 推荐的）
 
-- [Everything 拼音首字母拓展](https://github.com/Chaoses-Ib/IbEverythingExt)
+  - [Everything 拼音首字母拓展](https://github.com/Chaoses-Ib/IbEverythingExt)
 
 - [如何自制猫食](https://zh.wikihow.com/养猫)
 
@@ -116,9 +124,11 @@ tags:								    # 标签
 
 ### 躺平/摸鱼/玩游戏
 
+- [影视森林](http://www.549.tv/)
+
 - [微伞小游戏，内含合成大西瓜](http://www.wesane.com/)
 
-- [电影资源网站](https://www.mypianku.net/) 
+- [电影资源网站 pianku](https://topianku.com/) 
 
 - [使用 dosbox 玩游戏](https://github.com/dosasm/masm-tasm/wiki/playgame)
 
