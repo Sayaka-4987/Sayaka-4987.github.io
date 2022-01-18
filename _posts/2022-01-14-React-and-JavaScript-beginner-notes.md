@@ -12,9 +12,11 @@ tags:								    # 标签
     - React
 ---
 
+- 这篇是一个顺序和逻辑都比较混乱的学习笔记
 
+# JavaScript 部分
 
-# X 分钟速成 JS
+## X 分钟速成 JS
 
 内容来自 https://learnxinyminutes.com/docs/zh-cn/javascript-cn/
 
@@ -36,7 +38,7 @@ doStuff()
 
 
 
-## 1. 数字、字符串与操作符
+### 1. 数字、字符串与操作符
 
 ```javascript
 // Javascript 只有一种数字类型(即 64位 IEEE 754 双精度浮点 double)。
@@ -129,7 +131,7 @@ undefined; // 用来表示还没有设置的值(尽管`undefined`自身实际是
 
 
 
-## 2. 变量、数组和对象
+### 2. 变量、数组和对象
 
 
 ```javascript
@@ -206,7 +208,7 @@ let str = `
 
 
 
-## 3. 逻辑与控制结构
+### 3. 逻辑与控制结构
 
 ```javascript
 // 本节介绍的语法与Java的语法几乎完全相同
@@ -269,7 +271,7 @@ switch (grade) {
 ```
 
 
-## 4. 函数、作用域、闭包
+### 4. 函数、作用域、闭包
 
 ```javascript
 // JavaScript 函数由`function`关键字定义
@@ -342,7 +344,7 @@ sayHelloInFiveSeconds("Adam"); // 会在5秒后弹出 "Hello, Adam!"
 
 
 
-## 5. 对象、构造函数与原型
+### 5. 对象、构造函数与原型
 
 ```javascript
 //  对象可以包含方法。
@@ -502,13 +504,13 @@ if (Object.create === undefined){ // 如果存在则不覆盖
 
 
 
-# 现代 JavaScript 教程
+## 现代 JavaScript 教程
 
 内容来自 https://zh.javascript.info/
 
 
 
-## 1. 简历、手册与规范
+### 1. 简历、手册与规范
 
 现代的 JavaScript 是一种“安全的”编程语言。它不提供对内存或 CPU 的底层访问，因为它最初是为浏览器创建的，不需要这些功能。
 
@@ -532,15 +534,13 @@ JavaScript 是将这三件事结合在一起的唯一的浏览器技术:
 
 
 
-### 手册和兼容性表
+#### 手册和兼容性表
 
 [MDN（Mozilla）JavaScript 索引](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference) 
 
 https://caniuse.com/
 
-
-
-### 按下 `F12` 开启开发者模式
+#### 按下 `F12` 开启开发者模式
 
 开发者工具允许我们查看错误、执行命令、检查变量等
 
@@ -558,8 +558,6 @@ function hello(name) {
 }
 ```
 
-
-
 #### 输出到控制台：`console.log` 函数
 
 ```javascript
@@ -570,11 +568,9 @@ for (let i = 0; i < 5; i++) {
 
 
 
-## 2.基础知识
+### 2.基础知识
 
-
-
-### lambda 表达式
+#### lambda 表达式
 
 ```javascript
 let age = prompt("What is your age?", 18);
@@ -586,9 +582,7 @@ let welcome = (age < 18) ?
 welcome();
 ```
 
-
-
-### 交互：alert、prompt 和 confirm
+#### 交互：alert、prompt 和 confirm
 
 参考 https://developer.mozilla.org/zh-CN/docs/Web/API/Window
 
@@ -617,7 +611,7 @@ welcome();
 
 
 
-## 3.对象
+### 3.对象
 
 JavaScript 中有八种基本的数据类型（译注：前七种为基本数据类型，也称为原始类型，而 `object` 为复杂数据类型）
 
@@ -648,7 +642,7 @@ JavaScript 中有八种基本的数据类型（译注：前七种为基本数据
 
 
 
-### 创建对象
+#### 创建对象
 
 ```javascript
 let user = {     // 创建一个对象
@@ -700,7 +694,7 @@ delete user.name;
 
 
 
-### JavaScript 的垃圾回收
+#### JavaScript 的垃圾回收
 
 - 垃圾回收是自动完成的，我们不能强制执行或是阻止执行。
 - 当对象是可达状态时，它一定是存在于内存中的。
@@ -708,7 +702,7 @@ delete user.name;
 
 
 
-### 对象方法，"this"
+#### 对象方法，"this"
 
 - 存储在对象属性中的函数被称为“方法”
 - 方法允许对象进行像 `object.doSomething()` 这样的“操作”
@@ -744,7 +738,7 @@ user.sayHi(); // Ilya
 
 
 
-### 构造函数
+#### 构造函数
 
 1. 构造函数，或简称构造器，就是常规函数，但**命名首字母要大写**
 2. 构造函数只能使用 `new` 来调用
@@ -774,7 +768,7 @@ john = {
 
 
 
-### 使用 `?.` 安全的访问嵌套对象属性
+#### 使用 `?.` 安全的访问嵌套对象属性
 
 使用 `?.` 来安全地读取或删除，但不能写入；
 
@@ -843,7 +837,7 @@ alert( user1?.[key]?.something?.not?.existing); // undefined
 
 
 
-### 对象 — 原始值转换
+#### 对象 — 原始值转换
 
 对象到原始值的转换，是由许多期望以原始值作为值的内建函数和运算符自动调用的。
 
@@ -887,13 +881,11 @@ alert( user1?.[key]?.something?.not?.existing); // undefined
 
 
 
-### 对象原型（prototype）
+#### 对象原型（prototype）
 
 内容来自：https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Objects/Object_prototypes
 
 JavaScript 常被描述为一种**基于原型的语言 (prototype-based language)**——每个对象拥有一个**原型对象**，对象以其原型为模板、从原型继承方法和属性。原型对象也可能拥有原型，并从中继承方法和属性，一层一层、以此类推。这种关系常被称为**原型链 (prototype chain)**，它解释了为何一个对象会拥有定义在其他对象中的属性和方法。
-
-
 
 
 
@@ -1075,9 +1067,14 @@ alert( meetup.date.getDate() ); // 现在正常运行了！
 
 
 
-# Thinking in React
+# React 教程
 
-内容来自：https://beta.reactjs.org/learn/thinking-in-react 
+内容来自：
+
+- https://beta.reactjs.org/learn/thinking-in-react （这个新一些，但是没中文）
+- https://zh-hans.reactjs.org/docs/getting-started.html 
+
+<img src="https://c2.im5i.com/2022/01/17/U2ZBl.png" alt="U2ZBl.png" style="zoom:80%;" />
 
 ## Props vs State
 
@@ -1086,11 +1083,365 @@ React 有两种类型的“模型”数据：Props 和 State
 - Props 是传递给函数的参数，例如一个 `Form` 要传送一个 `color` 给一个 `Button` 
 - State 是组件需要追踪并随时刷新的内容，例如一个 `Button`可能会跟踪 `isHovered` 状态
 
+## 组件
+
+React 允许将标记、CSS 和 JavaScript 组合成自定义“组件” ，即应用程序的可重用 UI 元素
+
+### `export default` 导出组件
+
+`export default` 是 [JavaScript 的语法 ](https://developer.mozilla.org/docs/web/javascript/reference/statements/export)，允许在文件中标记要导出的主要功能，以便可以从其他文件中导入它
+
+### 定义 JS 函数
+
+React 组件是常规的 JavaScript 函数，但 **名称必须以大写字母开头**
+
+### 返回 JSX 标记
+
+跨行的返回信息必须用 `<div>` 包裹：
+
+```react
+return (
+  <div>
+    <img src="https://i.imgur.com/MK3eW3As.jpg" alt="Katherine Johnson" />
+  </div>
+);
+```
+
+#### 浏览器如何理解
+
+- `<section>` 是小写的，所以 React 知道我们指的是一个 **HTML 标签**
+- `<Profile />` 以大写开头 `P`，所以 React 知道我们想要使用我们的 **组件** `Profile`
+
+```react
+function Profile() {
+  return (
+    <img
+      src="https://i.imgur.com/MK3eW3As.jpg"
+      alt="Katherine Johnson"
+    />
+  );
+}
+
+export default function Gallery() {
+  return (
+    <section>
+      <h1>Amazing scientists</h1>
+      <Profile />
+      <Profile />
+      <Profile />
+    </section>
+  );
+}
+```
+
+
+
+### 导出和导入组件 
+
+一个文件最多只能有一个 **默认** 导出，但它可以有任意多个 **命名** 导出
+
+<img src="https://beta.reactjs.org/images/docs/illustrations/i_import-export.svg" style="zoom: 67%;" />
+
+
+
+|          | 导出语句                              | 导入语句                                |
+| -------- | ------------------------------------- | --------------------------------------- |
+| 默认导出 | `export default function Button() {}` | `import Button from './button.js';`     |
+| 命名导出 | `export function Button() {}`         | `import { Button } from './button.js';` |
+
+
+
+例：把 `Gallery` 、 `Profile` 移到单独文件，这里采用默认导出
+
+- **App.js：**
+
+```react
+import Gallery from './Gallery.js';
+
+export default function App() {
+  return (
+    <Gallery />
+  );
+}
+```
+
+
+
+- **Gallery.js：**
+
+```react
+import Profile from './Profile.js';
+
+export default function Gallery() {
+  return (
+    <section>
+      <h1>Amazing scientists</h1>
+      <Profile />
+      <Profile />
+      <Profile />
+    </section>
+  );
+}
+
+```
+
+
+
+- **Profile.js：**
+
+```react
+export default function Profile() {
+  return (
+    <img
+      src="https://i.imgur.com/QIrZWGIs.jpg"
+      alt="Alan L. Hart"
+    />
+  );
+}
+```
+
+
+
+## JSX
+
+HTML 标记不能直接放进 React 组件，但可以将 HTML 标记转换为 JSX 标记；
+
+### JSX 的规则
+
+#### 1. 只返回单个根元素
+
+```react
+<div>	{/* 也可以写成 <> */}
+  <h1>Hedy Lamarr's Todos</h1>
+  <img 
+    src="https://i.imgur.com/yXOvdOSs.jpg" 
+    alt="Hedy Lamarr" 
+    className="photo"
+  >
+  <ul>
+    ...
+  </ul>
+</div>  {/* 也可以写成 </> */}
+```
+
+#### 2. 需要显式闭合标签
+
+`<img>` 必须写成 `<img />`
+
+`<li>oranges` 必须写成 `<li>oranges</li>` 
+
+#### 3. 使用驼峰命名
+
+例外： [`aria-*`](https://developer.mozilla.org/docs/Web/Accessibility/ARIA) 和 [`data-*`](https://developer.mozilla.org/docs/Learn/HTML/Howto/Use_data_attributes) 属性像在 HTML 中一样用破折号编写
+
+```react
+<img 
+  src="https://i.imgur.com/yXOvdOSs.jpg" 
+  alt="Hedy Lamarr" 
+  className="photo"
+/>
+```
+
+#### 4. 用引号或花括号传递字符串
+
+```react
+export default function Avatar() {
+  const avatar = 'https://i.imgur.com/7vQD0fPs.jpg';
+  const description = 'Gregorio Y. Zara';
+  return (
+    <img
+      className="avatar"  {/* "avatar" 是字符串属性 */}
+      src={avatar}        {/* 动态的文本信息，会调用变量 avatar */}
+      alt={description}
+    />
+  );
+}
+```
+
+#### 5. 在花括号间编写 JavaScript
+
+任何 JavaScript 表达式都可以在大括号之间工作
+
+```react
+const today = new Date();
+
+function formatDate(date) {
+  return new Intl.DateTimeFormat(
+    'en-US',
+    { weekday: 'long' }
+  ).format(date);
+}
+
+export default function TodoList() {
+  return (
+    <h1>To Do List for {formatDate(today)}</h1>  {/* 函数调用 `formatDate()` */}
+  );
+}
+
+{/* 甚至还可以写成这样： */}
+const person = {
+  name: 'Gregorio Y. Zara',
+  theme: {
+    backgroundColor: 'black',
+    color: 'pink'
+  }
+};
+
+export default function TodoList() {
+  return (
+    <div style={person.theme}>
+      <h1>{person.name}'s Todos</h1>
+      <img
+        className="avatar"
+        src="https://i.imgur.com/7vQD0fPs.jpg"
+        alt="Gregorio Y. Zara"
+      />
+      <ul>
+        <li>Improve the videophone</li>
+        <li>Prepare aeronautics lectures</li>
+        <li>Work on the alcohol-fuelled engine</li>
+      </ul>
+    </div>
+  );
+}
+```
+
+在 JSX 中只能以两种方式使用花括号： 
+
+- 作为 **文本** 直接在 JSX 标签内
+  - `<h1>{name}'s To Do List</h1>` 有效
+  - `<{tag}>Gregorio Y. Zara's To Do List</{tag}>` 是非法的
+- 作为 **属性** 紧随其后的 `=` 标志
+  - `src={avatar}` 将阅读 avatar变量
+  - `src="{avatar}"` 将传递字符串 {avatar}
+
+#### 6. 双层花括号传递对象
+
+对象也用花括号表示，例： `{ name: "Hedy Lamarr", inventions: 5 }` 
+
+因此在 JSX 中传递 JS 对象必须将该对象包裹在两层花括号中： `person={{ name: "Hedy Lamarr", inventions: 5 }}`
+
+例：传一个背景为黑色，字体为粉色的内联样式
+
+```react
+export default function TodoList() {
+  return (
+    <ul style={{
+      backgroundColor: 'black',
+      color: 'pink'
+    }}>
+      <li>Improve the videophone</li>
+      <li>Prepare aeronautics lectures</li>
+      <li>Work on the alcohol-fuelled engine</li>
+    </ul>
+  );
+}
+```
+
+### HTML to JSX 转换器
+
+[转换器链接](https://transform.tools/html-to-jsx) ——将您现有的 HTML 和 SVG 转换为 JSX
+
+### JSX 条件渲染 
+
+在 React 中，控制流（如条件）由 JavaScript 处理，可以根据条件返回不同的 JSX 
+
+例：Sally Ride 的装箱单，有一个 `PackingList`组件渲染几个 `Item`s
+
+```js
+function Item({ name, isPacked }) {
+  if (isPacked) {
+    return <li className="item">{name} ✔</li>;
+  }
+  return <li className="item">{name}</li>;
+}
+
+export default function PackingList() {
+  return (
+    <section>
+      <h1>Sally Ride's Packing List</h1>
+      <ul>
+        <Item 
+          isPacked={true} 
+          name="Space suit" 
+        />
+        <Item 
+          isPacked={true} 
+          name="Helmet with a golden leaf" 
+        />
+        <Item 
+          isPacked={false} 
+          name="Photo of Tam" 
+        />
+      </ul>
+    </section>
+  );
+}
+```
+
+
+
+## Props
+
+- React 组件使用 **props** 来相互通信；
+-  每个父组件都可以通过提供 props 将一些信息传递给它的子组件；
+- Props 可以传递任何 JavaScript 值，包括对象、数组和函数；
+
+### 给子组件传 Props
+
+这里子组件是 Avatar：
+
+```javascript
+export default function Profile() {
+  return (
+    <Avatar
+      person={{ name: 'Lin Lanying', imageId: '1bX5QH6' }}
+      size={100}
+    />
+  );
+}
+```
+
+### 子组件接收 Props 
+
+- 也可以设默认参数，这里设了size=100；
+- 组件需要更改其 props（例如，响应用户交互或新数据）时，它的旧 props 将被丢弃，然后它要求其父组件传递一个新 props，最终 JavaScript 引擎将回收旧 props 占用的内存；
+
+```javascript
+function Avatar({ person, size=100 }) {
+  // person and size are available here
+    return (
+    <img
+      className="avatar"
+      src={getImageUrl(person)}
+      alt={person.name}
+      width={size}
+      height={size}
+    />
+  );
+}
+
+// 也可以：
+function Avatar(props) {
+  let person = props.person;
+  let size = props.size;
+  // ...
+}
+```
+
+
+
 ## Hook
 
-Hook 用于“挂钩”一个组件的 [渲染周期](https://beta.reactjs.org/learn/render-and-commit) 
+- Hook 用于“挂钩”一个组件的 [渲染周期](https://beta.reactjs.org/learn/render-and-commit) 
+- Hooks 只能在组件函数的顶层调用，所以不可以在 if-else 块中定义 Hooks
 
 ###  `useState()` Hook
+
+- 可以完全代替 class 
+- 组件需要在渲染之间“记住”某些信息时，就需要使用 State
+- `useState()` 返回一对值：当前状态值，更新它的函数
+- 当常规变量就可以用时，不要引入状态变量
 
 ```react
 import { useState } from 'react';
@@ -1218,377 +1569,158 @@ export default function App() {
 
 
 
-## 组件
+## State
 
-React 允许将标记、CSS 和 JavaScript 组合成自定义“组件” ，即应用程序的可重用 UI 元素
+- 状态存储在组件之外
+- 放入状态的 JavaScript 对象都是只读的
+- 更新状态是用一个新值替换旧值
+- 可以使用 `{...obj, something: 'newValue'}` 语法快速创建对象的副本
 
+### 状态的更新机制
 
-
-### `export default` 导出组件
-
-`export default` 是 [JavaScript 的语法 ](https://developer.mozilla.org/docs/web/javascript/reference/statements/export)，允许在文件中标记要导出的主要功能，以便可以从其他文件中导入它
-
-
-
-### 定义 JS 函数
-
-React 组件是常规的 JavaScript 函数，但 **名称必须以大写字母开头**
-
-
-
-### 返回 JSX 标记
-
-跨行的返回信息必须用 `<div>` 包裹：
+React 在一个渲染的事件处理程序中会保持状态值“固定”，设置 State 是在下一次渲染时才能改变它的值
 
 ```react
-return (
-  <div>
-    <img src="https://i.imgur.com/MK3eW3As.jpg" alt="Katherine Johnson" />
-  </div>
-);
+import { useState } from 'react';
+
+export default function Counter() {
+  const [number, setNumber] = useState(0);
+
+  return (
+    <>
+      <h1>{number}</h1>
+      <button onClick={() => {
+        // 读取 number=0
+        setNumber(number + 1);  // 1.设置 number=0+1=1
+        setNumber(number + 1);  // 2.设置 number=0+1=1
+        setNumber(number + 1);  // 3.设置 number=0+1=1
+        // 等这个事件里所有 set 都操作完，重新渲染，number 还是 1
+      }}>+3</button>
+    </>
+  )
+}
 ```
 
-
-
-#### 浏览器如何理解
-
-- `<section>` 是小写的，所以 React 知道我们指的是一个 **HTML 标签**
-- `<Profile />` 以大写开头 `P`，所以 React 知道我们想要使用我们的 **组件** `Profile`
+各个事件中的更新是排队执行的
 
 ```react
-function Profile() {
-  return (
-    <img
-      src="https://i.imgur.com/MK3eW3As.jpg"
-      alt="Katherine Johnson"
-    />
-  );
-}
-
-export default function Gallery() {
-  return (
-    <section>
-      <h1>Amazing scientists</h1>
-      <Profile />
-      <Profile />
-      <Profile />
-    </section>
-  );
-}
+<button onClick={() => {
+        setNumber(number + 5);  // 1. 0+5=5
+        setNumber(n => n + 1);  // 2. 5+1=6
+        setNumber(42);			// 3. =42
+        // 依次执行，最后得到 42 
+  }}>Increase the number
+</button>
 ```
 
+### 状态的命名约定
 
-
-### 导出和导入组件 
-
-一个文件最多只能有一个 **默认** 导出，但它可以有任意多个 **命名** 导出
-
-<img src="https://beta.reactjs.org/images/docs/illustrations/i_import-export.svg" style="zoom: 67%;" />
-
-
-
-|          | 导出语句                              | 导入语句                                |
-| -------- | ------------------------------------- | --------------------------------------- |
-| 默认导出 | `export default function Button() {}` | `import Button from './button.js';`     |
-| 命名导出 | `export function Button() {}`         | `import { Button } from './button.js';` |
-
-
-
-例：把 `Gallery` 、 `Profile` 移到单独文件，这里采用默认导出
-
-- **App.js：**
+通常用相应状态变量的首字母命名更新函数参数： 
 
 ```react
-import Gallery from './Gallery.js';
-
-export default function App() {
-  return (
-    <Gallery />
-  );
-}
+setEnabled(e => !e);
+setLastName(ln => ln.reverse());
+setFriendCount(fc => fc * 2);
+setEnabled(enabled => !enabled);
 ```
 
+### 修改数组和对象
 
+|          | 不要这样做               | 建议这样做           |
+| -------- | ------------------------ | -------------------- |
+| 增加元素 | `push`, `unshift`        | `concat`, `[...arr]` |
+| 删除元素 | `pop`, `shift`, `splice` | `filter`, `slice`    |
+| 替换元素 | `splice`, `arr[i] = ...` | `map`                |
+| 排序元素 | `reverse`, `sort`        | 先复制一份原始数组   |
 
-- **Gallery.js：**
+#### map 方法示例
 
 ```react
-import Profile from './Profile.js';
-
-export default function Gallery() {
-  return (
-    <section>
-      <h1>Amazing scientists</h1>
-      <Profile />
-      <Profile />
-      <Profile />
-    </section>
-  );
-}
-
+<ul>
+    {notes.map(note => 
+      <li key={note.id}>
+        {note.content}
+      </li>        
+    )}
+</ul>
 ```
 
 
 
-- **Profile.js：**
+## Ref
+
+存储 key-value 对，key 是 ref={abc} 这里的标识 abc
+
+官方文档建议 **避免使用 refs 来做任何可以通过声明式实现来完成的事情**
+
+适合使用 refs 的情况：
+
+- 管理焦点，文本选择或媒体播放
+- 触发强制动画
+- 集成第三方 DOM 库
+
+### 创建 Refs 
+
+Refs 是使用 `React.createRef()` 创建的，并通过 `ref` 属性附加到 React 元素。在构造组件时，通常将 Refs 分配给实例属性，以便可以在整个组件中引用它们。
 
 ```react
-export default function Profile() {
-  return (
-    <img
-      src="https://i.imgur.com/QIrZWGIs.jpg"
-      alt="Alan L. Hart"
-    />
-  );
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.myRef = React.createRef();  }
+  render() {
+    return <div ref={this.myRef} />;  }
 }
 ```
 
+### 访问 Refs 
 
-
-## JSX
-
-HTML 标记不能直接放进 React 组件，但可以将 HTML 标记转换为 JSX 标记；
-
-### JSX 的规则
-
-#### 1. 只返回单个根元素
+当 ref 被传递给 `render` 中的元素时，对该节点的引用可以在 ref 的 `current` 属性中被访问。
 
 ```react
-<div>	{/* 也可以写成 <> */}
-  <h1>Hedy Lamarr's Todos</h1>
-  <img 
-    src="https://i.imgur.com/yXOvdOSs.jpg" 
-    alt="Hedy Lamarr" 
-    className="photo"
-  >
-  <ul>
-    ...
-  </ul>
-</div>  {/* 也可以写成 </> */}
+const node = this.myRef.current;
 ```
 
+ref 的值根据节点的类型而有所不同：
 
+- 当 `ref` 属性用于 HTML 元素时，构造函数中使用 `React.createRef()` 创建的 `ref` 接收底层 DOM 元素作为其 `current` 属性。
+- 当 `ref` 属性用于自定义 class 组件时，`ref` 对象接收组件的挂载实例作为其 `current` 属性。
+- **不能在函数组件上使用 `ref` 属性**，因为他们没有实例
 
-#### 2. 需要显式闭合标签
+### 回调 Refs 
 
-`<img>` 必须写成 `<img />`
+作用是精细地控制 refs 被设置和解除的时机，会传递一个函数，这个函数中接受 React 组件实例或 HTML DOM 元素作为参数，以使它们能在其他地方被存储和访问。
 
-`<li>oranges` 必须写成 `<li>oranges</li>` 
-
-
-
-#### 3. 使用驼峰命名
-
-例外： [`aria-*`](https://developer.mozilla.org/docs/Web/Accessibility/ARIA) 和 [`data-*`](https://developer.mozilla.org/docs/Learn/HTML/Howto/Use_data_attributes) 属性像在 HTML 中一样用破折号编写
+下面的例子描述了一个通用的范例：使用 `ref` 回调函数，在实例的属性中存储对 DOM 节点的引用。
 
 ```react
-<img 
-  src="https://i.imgur.com/yXOvdOSs.jpg" 
-  alt="Hedy Lamarr" 
-  className="photo"
-/>
-```
+class CustomTextInput extends React.Component {
+  constructor(props) {
+    super(props);
 
+    this.textInput = null;
+    this.setTextInputRef = element => {      this.textInput = element;    };
+    this.focusTextInput = () => {      // 使用原生 DOM API 使 text 输入框获得焦点      if (this.textInput) this.textInput.focus();    };  }
 
+  componentDidMount() {
+    // 组件挂载后，让文本框自动获得焦点
+    this.focusTextInput();  }
 
-#### 4. 用引号或花括号传递字符串
-
-```react
-export default function Avatar() {
-  const avatar = 'https://i.imgur.com/7vQD0fPs.jpg';
-  const description = 'Gregorio Y. Zara';
-  return (
-    <img
-      className="avatar"  {/* "avatar" 是字符串属性 */}
-      src={avatar}        {/* 动态的文本信息，会调用变量 avatar */}
-      alt={description}
-    />
-  );
-}
-```
-
-
-
-#### 5. 在花括号间编写 JavaScript
-
-任何 JavaScript 表达式都可以在大括号之间工作
-
-```react
-const today = new Date();
-
-function formatDate(date) {
-  return new Intl.DateTimeFormat(
-    'en-US',
-    { weekday: 'long' }
-  ).format(date);
-}
-
-export default function TodoList() {
-  return (
-    <h1>To Do List for {formatDate(today)}</h1>  {/* 函数调用 `formatDate()` */}
-  );
-}
-
-{/* 甚至还可以写成这样： */}
-const person = {
-  name: 'Gregorio Y. Zara',
-  theme: {
-    backgroundColor: 'black',
-    color: 'pink'
-  }
-};
-
-export default function TodoList() {
-  return (
-    <div style={person.theme}>
-      <h1>{person.name}'s Todos</h1>
-      <img
-        className="avatar"
-        src="https://i.imgur.com/7vQD0fPs.jpg"
-        alt="Gregorio Y. Zara"
-      />
-      <ul>
-        <li>Improve the videophone</li>
-        <li>Prepare aeronautics lectures</li>
-        <li>Work on the alcohol-fuelled engine</li>
-      </ul>
-    </div>
-  );
-}
-```
-
-在 JSX 中只能以两种方式使用花括号： 
-
-- 作为 **文本** 直接在 JSX 标签内
-  - `<h1>{name}'s To Do List</h1>` 有效
-  - `<{tag}>Gregorio Y. Zara's To Do List</{tag}>` 是非法的
-- 作为 **属性** 紧随其后的 `=` 标志
-  - `src={avatar}` 将阅读 avatar变量
-  - `src="{avatar}"` 将传递字符串 {avatar}
-
-
-
-#### 6. 双层花括号传递对象
-
-对象也用花括号表示，例： `{ name: "Hedy Lamarr", inventions: 5 }` 
-
-因此在 JSX 中传递 JS 对象必须将该对象包裹在两层花括号中： `person={{ name: "Hedy Lamarr", inventions: 5 }}`
-
-
-
-例：传一个背景为黑色，字体为粉色的内联样式
-
-```react
-export default function TodoList() {
-  return (
-    <ul style={{
-      backgroundColor: 'black',
-      color: 'pink'
-    }}>
-      <li>Improve the videophone</li>
-      <li>Prepare aeronautics lectures</li>
-      <li>Work on the alcohol-fuelled engine</li>
-    </ul>
-  );
-}
-```
-
-
-
-### HTML to JSX 转换器
-
-[转换器链接](https://transform.tools/html-to-jsx) ——将您现有的 HTML 和 SVG 转换为 JSX
-
-
-
-## Props
-
-- React 组件使用 **props** 来相互通信；
--  每个父组件都可以通过提供 props 将一些信息传递给它的子组件；
-- Props 可以传递任何 JavaScript 值，包括对象、数组和函数；
-
-
-
-### 给子组件传 Props
-
-这里子组件是 Avatar：
-
-```javascript
-export default function Profile() {
-  return (
-    <Avatar
-      person={{ name: 'Lin Lanying', imageId: '1bX5QH6' }}
-      size={100}
-    />
-  );
-}
-```
-
-
-
-### 子组件接收 Props 
-
-- 也可以设默认参数，这里设了size=100；
-- 组件需要更改其 props（例如，响应用户交互或新数据）时，它的旧 props 将被丢弃，然后它要求其父组件传递一个新 props，最终 JavaScript 引擎将回收旧 props 占用的内存；
-
-```javascript
-function Avatar({ person, size=100 }) {
-  // person and size are available here
+  render() {
+    // 使用 `ref` 的回调函数将 text 输入框 DOM 节点的引用存储到 React
+    // 实例上（比如 this.textInput）
     return (
-    <img
-      className="avatar"
-      src={getImageUrl(person)}
-      alt={person.name}
-      width={size}
-      height={size}
-    />
-  );
-}
-
-// 也可以：
-function Avatar(props) {
-  let person = props.person;
-  let size = props.size;
-  // ...
-}
-```
-
-
-
-## JSX 条件渲染 
-
-在 React 中，控制流（如条件）由 JavaScript 处理，可以根据条件返回不同的 JSX 
-
-例：Sally Ride 的装箱单，有一个 `PackingList`组件渲染几个 `Item`s
-
-```js
-function Item({ name, isPacked }) {
-  if (isPacked) {
-    return <li className="item">{name} ✔</li>;
+      <div>
+        <input
+          type="text"
+          ref={this.setTextInputRef}        />
+        <input
+          type="button"
+          value="Focus the text input"
+          onClick={this.focusTextInput}        />
+      </div>
+    );
   }
-  return <li className="item">{name}</li>;
-}
-
-export default function PackingList() {
-  return (
-    <section>
-      <h1>Sally Ride's Packing List</h1>
-      <ul>
-        <Item 
-          isPacked={true} 
-          name="Space suit" 
-        />
-        <Item 
-          isPacked={true} 
-          name="Helmet with a golden leaf" 
-        />
-        <Item 
-          isPacked={false} 
-          name="Photo of Tam" 
-        />
-      </ul>
-    </section>
-  );
 }
 ```
 
@@ -1706,7 +1838,7 @@ export default App
 
 
 
-## Map 方法
+### Map 方法
 
 index.js 内容如下:
 
@@ -1889,7 +2021,7 @@ export default Course
 
 
 
-## 受控组件
+## 受控组件和 state 属性
 
 注意：`event.preventDefault()` 会阻止提交表单的默认操作（使页面重新加载）
 
@@ -2431,52 +2563,9 @@ app.listen(PORT, () => {
 
 # 转载：Nginx 部署前后端分离项目
 
-本文转载自 [前后端分离项目的服务器部署 - 简书](https://www.jianshu.com/p/cbb21c6f3427)
+[前后端分离项目的服务器部署 - 简书](https://www.jianshu.com/p/cbb21c6f3427)
 
-前几天我的个人网站终于部署上线了，趁现在还记得，赶紧把流程记录下来。本文讲的是前后端分离的项目的服务器部署，这里就以我的个人网站为例子。我的个人网站前端是`react`，后端是`nodejs`，数据库是`mongodb`。
-
-为了把项目部署上线，首先我们需要确保这个项目已经在本地跑通了，所谓跑通就是前端，后端，和服务器都已经被串在一起，而且可以正常运行了。在这个基础上，我们的部署分为以下几个步骤：
-
-1.  购买域名和远程服务器
-2.  域名解析，实名制认证，备案
-3.  把项目代码放在远程服务器上
-4.  程服务器安装数据库
-5.  前端编译静态文件
-6.  nginx前端配置
-7.  解决前后端跨域问题
-8.  项目在线上跑通以及后续完善
-
-步骤很多，看起来很吓人，但是实际操作起来还是很快的，下面我们就一步一步的来讲解吧。
-
-### 1\. 购买域名和远程服务器
-
-域名和远程服务器推荐在[阿里云](https://www.aliyun.com/)上购买, 原因是购买了他们的产品后有一系列很详细的教程，对于新手来说是很友好的。
-
-购买后的域名需要进行实名制认证，这个过程很快，几乎是即时的，具体的认证方式阿里云上都有详细的说明。
-
-服务器我买的是阿里云的**轻量应用服务器**，物美价廉，对于我的个人网站来说足够用了。购买服务器时，会让你选择服务器的地域，如果你的地域选在国内的话那你的域名是需要备案的，而这个备案过程大约需要半个月，所以着急着项目上线的同学可以把地域选在香港，是不用备案的。但是服务器放在香港的缺点就是有点延迟，所以服务器放在哪里还需要自己权衡。
-
-购买服务器时还需要选择应用镜像和系统镜像，这里我们没有用到任何应用来构建我们的网站，所以只要选择系统镜像就好了。而选择什么系统呢？什么系统你最熟悉就选择什么系统，如果你完全是个小白，而且也不熟悉`Linux`系统的话，我个人~不负责任的~推荐`windows`系统。至于`windows`系统被嫌弃的不安全等问题，对于我这个个人网站来说都是不那么重要的。
-
-### 2\. 域名解析
-
-在对域名进行实名制认证之后(如果你的服务器地域在国内，还需要进行备案)，我们就可以对域名进行解析了。所谓域名解析，就是把域名的指向设置为我们购买的服务器的`ip`地址。域名只是一个方便我们记住的网站的名字，而我们真正需要访问的其实是服务器的那个`ip`地址。你也可以这么理解：我们通过域名解析来把域名和服务器关联了起来。
-
-域名解析很简单，如果你的域名和服务器都是在阿里云购买的，可以一键解析。具体教程阿里云上写的很清楚，这里就不再赘述。
-
-### 3\. 把项目代码放在远程服务器上
-
-接下来我们需要想个办法把代码搬到远程服务器上，这里我推荐使用`git`。我们可以把项目放在`github`上之后，再在远程服务器上把代码`clone`下来。关于`git`有一个很浅显易懂的教程，是廖雪峰老师写的，[这是链接](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)。
-
-代码`clone`下来以后不要忘了在服务器上安装运行代码所需要的软件和依赖包。比如我的后端是`nodejs`所以我就需要安装`node`。而依赖包的安装可以借助包管理工具`npm`或者是`yarn`。具体的方法在我的另一篇文章里有，[请移步](http://www.chenxin.art/work/detail/5c6abae0fca7ee01bcef17ad)。
-
-### 4\. 远程服务器安装数据库
-
-前后端就准备妥当，这时候我们需要在服务器上安装数据库了。不同的数据库安装方法不同，相同的数据库库不同的操作系统安装方法也不同，这里需要根据自己的情况去找相应的文档。
-
-如果你也是在`windows`系统里安装`mongodb`数据库的话，可以参考[这个视频](https://www.youtube.com/watch?v=u3IhK3dvzys)。
-
-关于如何在网上准确的找到自己所需要的资料，这里我想结合我的经验说几句。找资料首先第一想到的应该是官方文档，因为官方文档是最新的，很多数据库(比如`mongodb`我就踩过坑)，版本的变更安装方法也会不一样，第三方网站给出的安装方法往往都是过时的，不适用的。但如果官方文档读的云里雾里怎么办？这个时候我推荐去`Youtube`找视频看，把视频按发布时间排序，找最新的视频看。这样再结合官方文档应该就没有问题了。
+[使用 Nginx 部署前后端分离项目，解决跨域问题 - 江南一点雨 - 博客园](https://www.cnblogs.com/lenve/p/11576581.html)
 
 ### 5\. 文件编译
 
@@ -2519,19 +2608,14 @@ server {
 
 我们借助`nginx`的反向代理来解决跨域的问题。具体操作如下：在`nginx.conf`文件的`server`配置里新增几行代码，现在你的`server`应该如下所示：
 
-```
-    server {
-    
+```nginx
+server {
     listen 80;
-    
-    server_name chenxin.art;
-    
-    root "C:/xinart/client/build";
-    
+    server_name chenxin.art;    
+    root "C:/xinart/client/build";    
     location / {
         try_files $uri /index.html;
-    }
-       
+    }       
     location /api {
         proxy_pass http://localhost:8080;
         proxy_http_version 1.1;
@@ -2540,8 +2624,7 @@ server {
         proxy_set_header Host $host;
         proxy_cache_bypass $http_upgrade;
     }
-    }
-
+}
 ```
 
 别的地方都没动，我们只是新增了一个`location`，而且这个`location`后面的路径需要改成你自己的`ajax`请求的路径，比如我的是`/api`。
