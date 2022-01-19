@@ -1443,6 +1443,8 @@ function Avatar(props) {
 - `useState()` 返回一对值：当前状态值，更新它的函数
 - 当常规变量就可以用时，不要引入状态变量
 
+例：
+
 ```react
 import { useState } from 'react';
 
@@ -1565,6 +1567,46 @@ const PRODUCTS = [
 export default function App() {
   return <FilterableProductTable products={PRODUCTS} />;
 }
+```
+
+
+
+### `useReducer()` Hook
+
+基本可以达成和 `useState()` 等效的功能，代码更多，但有利于调试
+
+```react
+const [tasks, setTasks] = useState(initialTasks);
+// 换成 Reducer 的版本，两个参数是 Reducer 功能和初始状态值↓
+const [tasks, dispatch] = useReducer(tasksReducer, initialTasks);
+```
+
+
+
+### `useRef` Hook
+
+Ref 本质是一个常规的 JavaScript 对象
+
+可以通过 `refname.current` 直接操作 Ref 里的值
+
+更改 Ref **不会引起组件的重新渲染**，适用于单向数据流，比如只读/写 DOM 的值
+
+```react
+const ref = useRef(0);/*
+useRef(0) 会返回一个像这样的对象： { 
+  current: 0  ← The value you passed to useRef
+} */
+
+const inputRef = useRef(null);
+function handleClick() {
+  // 可通过这个 Ref 操纵 DOM
+  inputRef.current.focus();
+}
+
+<input ref={inputRef} />
+<button onClick={handleClick}>
+  Focus the input
+</button>
 ```
 
 
@@ -2561,6 +2603,16 @@ app.listen(PORT, () => {
 
 
 
+## yarn 打包发布
+
+首先需要给项目根目录下的 package.json 加一行 `"homepage": "./",` 
+
+静态文件 build 完了扔仓库就行
+
+参考文档：https://create-react-app.dev/docs/deployment/#github-pages
+
+
+
 # 转载：Nginx 部署前后端分离项目
 
 [前后端分离项目的服务器部署 - 简书](https://www.jianshu.com/p/cbb21c6f3427)
@@ -2632,13 +2684,3 @@ server {
 `proxy_pass`后面的端口号也要改一下，改成你的后端运行的端口。再后面的代码我们保持原样，不用更改。
 
 这新增的几句代码的意思是：当请求的路径以`/api`开头时，将请求代理到8080端口，而我的后端就运行在8080端口，所以就能够响应请求了。
-
-到这里为止，我们的项目就算是真正的在线上跑通了。
-
-### 8\. 项目在线上跑通以及后续完善
-
-项目跑通以后还有事情可以做，比如配置https，还有各种优化等等，有兴趣的同学可以自己去搜搜资料。
-
-### 一点小心得
-
-把自己个人网站的服务器部署像流水账这样写一遍也还是很有收获的，那就是很好的找出了自己不懂地方(苦笑)，那些说不清楚的地方其实就是还没有真正弄懂的地方。因为部署服务器涉及的东西太多太杂，一时半会想弄清也不现实，坑多慢慢填呀。。。
