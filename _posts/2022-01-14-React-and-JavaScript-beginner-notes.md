@@ -1,7 +1,7 @@
 ---
 layout:     post   				        # 使用的布局（不需要改）
 title:      试图速成 JavaScript 和 React 	# 标题 
-subtitle:   yarn 比 npm 好用太多了	    # 副标题
+subtitle:   npm 建议用 yarn 和 pnpm 代替	    # 副标题
 date:       2022-01-14 				    # 时间
 author:     WYX 					    # 作者
 header-img: img/post-bg-js-version.jpg 	# 这篇文章的标题背景图片
@@ -12,7 +12,22 @@ tags:								    # 标签
     - React
 ---
 
-- 这篇是一个顺序和逻辑都比较混乱的学习笔记
+## 推荐阅读顺序
+
+一个顺序和逻辑都比较混乱的学习笔记，~~责任全在 JS 本身~~ 
+
+- JavaScript
+  - 基本写法基础知识
+  - 对象概念
+  - DOM 概念
+  - JSON
+- React
+  - Props
+  - State
+  - Ref
+  - Hook
+
+
 
 # JavaScript 部分
 

@@ -98,6 +98,8 @@ tags:								    # 标签
 
 ### 生活
 
+- [在线剪贴板](https://bin.outv.im/)
+
 - [This Website Will Self Destruct](https://www.thiswebsitewillselfdestruct.com/)
 
 - [ecosia 搜索引擎](https://www.ecosia.org/)
