@@ -1015,7 +1015,111 @@ func fib(x int) int {
 
 channel 用来在 goroutine 之间进行参数传递
 
-### 例：创建一个线上网站的本地镜像
+```go
+import (
+	"fmt"
+	_ "sync"
+	"time"
+)
+
+func main() {
+	c1 := make(chan string)
+	c2 := make(chan string)
+	go count(5, "🐑", c1)
+	go count(5, "🐑🐑", c2)
+
+	for {
+		select {
+		case msg := <-c1:
+			fmt.Println(msg)
+		case msg := <-c2:
+			fmt.Println(msg)
+		}
+	}
+}
+
+func count(n int, animal string, c chan string) {
+	for i := 0; i < n; i++ {
+		c <- animal
+		time.Sleep(time.Millisecond * 500)
+	}
+	close(c)
+}
+```
+
+
+
+### 例：在某目录下查找文件名
+
+[教程链接](https://www.bilibili.com/video/BV1qT4y1c77u) 
+
+```go
+package main
+
+import (
+	"fmt"
+	"io/ioutil"
+	"time"
+)
+
+var query = "这里是要搜索的文件名"
+var matches int
+
+var worker_num = 0
+var max_worker_num = 32
+var search_request = make(chan string)
+var worker_done = make(chan bool)
+var found_match = make(chan bool)
+
+func main() {
+	start_time := time.Now()
+	go search("D:\\这里路径名太二刺猿了码一下\\", true)
+	waitForChannel()
+	fmt.Println(matches, "matches")
+	fmt.Println(time.Since(start_time))
+}
+
+func waitForChannel() {
+	for {
+		select {
+		case path := <-search_request:
+			worker_num++
+			go search(path, true)
+		case <-worker_done:
+			worker_num--
+			if worker_num == 0 {
+				return
+			}
+		case <-found_match:
+			matches++
+		}
+	}
+}
+
+func search(path string, master bool) {
+	files, err := ioutil.ReadDir(path)
+	if err == nil {
+		for _, file := range files {
+			name := file.Name()
+			if name == query {
+				found_match <- true
+			}
+			if file.IsDir() {
+				if worker_num < max_worker_num {
+					search_request <- path + name + "\\"
+				} else {
+					search(path+name+"\\", false)
+				}
+			}
+		}
+	}
+	if master {
+		worker_done <- true
+	}
+}
+```
+
+
 
 ### 互斥锁 `sync.Mutex`
 
