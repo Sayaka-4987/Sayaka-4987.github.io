@@ -12,16 +12,24 @@ tags:								    # 标签
     - React
 ---
 
+## 一个在线骰子成品
+
+QQ最近经常冻结跑团机器人越来越频繁了，感觉以后还是得用静态网页骰子代替
+
+https://sayaka-4987.github.io/CoC7thdice/
+
+
+
 ## 推荐阅读顺序
 
 一个顺序和逻辑都比较混乱的学习笔记，~~责任全在 JS 本身~~ 
 
-- JavaScript
+- JavaScript 的重点
   - 基本写法基础知识
   - 对象概念
   - DOM 概念
   - JSON
-- React
+- React 的重点
   - Props
   - State
   - Ref
