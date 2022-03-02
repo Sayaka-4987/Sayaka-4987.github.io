@@ -2,9 +2,9 @@
 layout:     post   				        # 使用的布局（不需要改）
 title:      新学期专业课笔记更新 			# 标题 
 subtitle:   大笨钟下送快递，上面摆完下面寄   # 副标题
-date:       2021-06-28 				    # 时间
+date:       2022-03-02 				    # 时间
 author:     WYX 					    # 作者
-header-img: img/post-bg-2015.jpg 	    # 这篇文章的标题背景图片
+header-img: img/post-bg-github-cup.jpg 	    # 这篇文章的标题背景图片
 catalog: true 						    # 是否归档
 tags:								    # 标签
     - 操作系统
