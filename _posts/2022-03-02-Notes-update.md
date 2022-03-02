@@ -7,7 +7,10 @@ author:     WYX 					    # 作者
 header-img: img/post-bg-2015.jpg 	    # 这篇文章的标题背景图片
 catalog: true 						    # 是否归档
 tags:								    # 标签
-    - Hello World
+    - 操作系统
+    - 编译原理
+    - 设计模式
+    - 计算机体系结构
 ---
 
 # 新学期专业课笔记更新
