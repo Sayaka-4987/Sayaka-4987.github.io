@@ -65,7 +65,9 @@ tags:								    # 标签
 
 - [华中科技大学《计算机组成原理》中国大学MOOC(慕课) (icourse163.org)](https://www.icourse163.org/course/HUST-1003159001)
 
-- [哈尔滨工业大学《操作系统》中国大学MOOC(慕课) (icourse163.org)](https://www.icourse163.org/course/HIT-1002531008) 
+- [哈尔滨工业大学《操作系统》中国大学MOOC(慕课) (icourse163.org)](https://www.icourse163.org/course/HIT-1002531008)  
+
+- [南京大学《操作系统：设计与实现》](https://www.bilibili.com/video/BV1HN41197Ko) 
 
 - [哈尔滨工业大学《计算机网络》中国大学MOOC(慕课) (icourse163.org)](https://www.icourse163.org/course/HIT-154005)
 
@@ -80,6 +82,8 @@ tags:								    # 标签
 ### 糊弄报告
 
 （这里有几个已经要钱了……）
+
+- [PlantUML](https://plantuml.com/zh/) 
 
 - [万词王 WantWords](https://wantwords.thunlp.org/)
 
