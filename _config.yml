@@ -1,10 +1,10 @@
 # Site settings
 title: Schnap5idee
-SEOTitle: 一些无用的想法 (Blog by WYX)
+SEOTitle: Blog by WYX
 header-img: img/post-bg-desk.jpg
 email: 19281171@bjtu.edu.cn (Educational)
-description: "这里以后会有一些简单的介绍"
-keyword: "BJTU, C++初学者, Java初学者, 期末火葬场生存大师, 当代菜鸡大学生"
+description: "wyx 的个人博客"
+keyword: "wyx 的个人博客, BJTU, C++初学者, 当代菜鸡大学生"
 url: "https://Sayaka-4987.github.io"          # your host, for absolute URL
 plugins:
   - jekyll-sitemap
