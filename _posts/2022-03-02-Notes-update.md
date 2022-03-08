@@ -22,3 +22,4 @@ tags:								    # 标签
 - [21-Spring-计算机体系结构笔记.md](https://github.com/Sayaka-4987/Notes_for_BJTU_Finals/blob/main/21-Spring-%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E7%AC%94%E8%AE%B0.md) 
 - [21-Spring-设计模式笔记.md](https://github.com/Sayaka-4987/Notes_for_BJTU_Finals/blob/main/21-Spring-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AC%94%E8%AE%B0.md) 
 
+再给 [欣欣的数字图像处理笔记](https://lilax.top/2021/10/11/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E7%AC%94%E8%AE%B0/) 打个广告，她超强的
