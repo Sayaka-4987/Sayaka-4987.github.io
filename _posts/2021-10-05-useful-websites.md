@@ -154,6 +154,8 @@ tags:								    # 标签
 
 - [摩尔庄园页游 淘米网 (61.com)](http://zmole.61.com/)
 
+- [有趣网址之家 - 收藏全球最有趣的网站](https://youquhome.com/) 
+
   
 
 
