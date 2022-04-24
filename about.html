@@ -11,34 +11,33 @@ header-img: "img/post-bg-rwd.webp"
     <option value="1"> 英文 English </option>
 </select> -->
 
-<!-- Chinese Version -->
+<!-- zh-CN version -->
 <div class="zh post-container">
 
-    <!--copied from markdown -->
-    <blockquote><p>"想改变现状又白费气力和总是失败，永远在期待幸福，而又得不到，也不可能得到。"</p></blockquote>
+    <blockquote>
+        <p>"想改变现状又白费气力和总是失败，永远在期待幸福，而又得不到，也不可能得到。"</p>
+    </blockquote>
 
-    <p>2019年秋季入学，现就读于北京交通大学计算机科学与技术专业，预计2023年7月毕业<br/>
-       这是我使用 <a href="https://pages.github.com/">GitHub Pages</a> 和 <a href="http://jekyll.com.cn/">Jekyll</a> 搭建的个人博客<br/>
-       欢迎各位 dalao 指点赐教！</p>
-    <p></p>
-    
+    <p>2019年秋季入学，现就读于北京交通大学计算机科学与技术专业，预计2023年7月毕业<br />
+        这是我使用 <a href="https://pages.github.com/">GitHub Pages</a> 和 <a href="http://jekyll.com.cn/">Jekyll</a>
+        搭建的个人博客<br />
+        欢迎各位 dalao 指点赐教！</p>
+
     <h3>联系方式: </h3>
     <ul>
         <li><a href="">邮箱: 19281171@bjtu.edu.cn</a></li>
         <li><a href="">微信: A262asdf</a></li>
         <li><a href="https://github.com/Sayaka-4987">GitHub</a></li>
     </ul>
-</div>
 
-<!-- English Version -->
-<div class="en post-container">
-        <h2>EN version:</h2>
+    <h3>EN version:</h3>
 
-        <p>Pronouns: she/her<br/>
-            Studying at Beijing Jiaotong University (09/2019 - 07/2023)<br/>
-            major Computer Science and Technology<br/>
-            This is my personal blog, through <a href="https://pages.github.com/">GitHub Pages</a> and <a href="http://jekyll.com.cn/">Jekyll</a><br/>
-            Your suggestions are welcome!</p>
+    <p>Pronouns: she/her<br />
+        Studying at Beijing Jiaotong University (09/2019 - 07/2023)<br />
+        major Computer Science and Technology<br />
+        This is my personal blog, through <a href="https://pages.github.com/">GitHub Pages</a> and <a
+            href="http://jekyll.com.cn/">Jekyll</a><br />
+        Your suggestions are welcome!</p>
 
     <h3>Talks:</h3>
     <ul>
@@ -46,46 +45,95 @@ header-img: "img/post-bg-rwd.webp"
         <li><a href="">WeChat: A262asdf</a></li>
         <li><a href="https://github.com/Sayaka-4987">GitHub</a></li>
     </ul>
+
+    <h2>本博客的食用方式</p>
+    <h3 id='归档查看历史博文'>归档查看历史博文</h3>
+    <p>请在主页 “<a href='https://sayaka-4987.github.io/tags/'>FEATURED TAGS</a>” 一栏查看对应标签，或者在导航栏点 
+    <a href='https://sayaka-4987.github.io/tags/'>Tags</a> </p>
+    <h3>标签分类解说：</h3>
+    <ul>
+        <li>
+            <p>北交生活</p>
+            <ul>
+                <li>杂谈文章，主要是规划生活建议</li>
+            </ul>
+        </li>
+        <li>
+            <p>博客公告</p>
+            <ul>
+                <li>博客本身的问题相关公告</li>
+            </ul>
+        </li>
+        <li>
+            <p>施工中</p>
+            <ul>
+                <li>带有这个 tag 的博文要么会持续更新（例如 <a href='https://sayaka-4987.github.io/2021/10/05/useful-websites/'>实用网站分享</a> ），要么是还没写完</li>
+            </ul>
+        </li>
+        <li>
+            <p>其他标签主要按语言/框架分类</p>
+            <ul>
+                <li>有 1 篇以上的才会在主页 “<a href='https://sayaka-4987.github.io/tags/'>FEATURED TAGS</a>” 显示</li>
+            </ul>
+        </li>
+
+    </ul>
+    <h3 id='仓库地址'>相关仓库地址</h3>
+    <p><a href='https://github.com/Sayaka-4987/Sayaka-4987.github.io'>博客仓库 Sayaka-4987/Sayaka-4987.github.io</a> </p>
+    <p><a href='https://github.com/Sayaka-4987/Notes_for_BJTU_Finals'>放多图笔记的仓库 Sayaka-4987/Notes_for_BJTU_Finals</a> </p>
+    <h3 id='转载授权'>授权转载规则</h3>
+    <p>本博客到处搜刮了很多网络资料，并非全部为原创内容，这部分无法采用已有的 CC 授权协议或开源证书；</p>
+    <p>对于本博客的纯原创内容授权如下：</p>
+    <ul>
+        <li>商业性使用 × （我自己都没知识付费！）</li>
+        <li>修改内容、二次创作 √ （非常欢迎！）</li>
+        <li>署名 △ （可以转载但不署名，但不允许修改署名）</li>
+    </ul>
+    <p>&nbsp;</p>
 </div>
+
+<!-- English Version 
+<div class="en post-container">
+</div>-->
 
 <!-- Handle Language Change -->
 <script type="text/javascript">
-    // get nodes
-    var $zh = document.querySelector(".zh");
-    var $en = document.querySelector(".en");
-    var $select = document.querySelector("select");
+// get nodes
+var $zh = document.querySelector(".zh");
+var $en = document.querySelector(".en");
+var $select = document.querySelector("select");
 
-    // bind hashchange event
-    window.addEventListener('hashchange', _render);
+// bind hashchange event
+window.addEventListener('hashchange', _render);
 
-    // handle render
-    function _render(){
-        var _hash = window.location.hash;
-        // en
-        if(_hash == "#en"){
-            $select.selectedIndex = 1;
-            $en.style.display = "block";
-            $zh.style.display = "none";
+// handle render
+function _render() {
+    var _hash = window.location.hash;
+    // en
+    if (_hash == "#en") {
+        $select.selectedIndex = 1;
+        $en.style.display = "block";
+        $zh.style.display = "none";
         // zh by default
-        }else{
-            // not trigger onChange, otherwise cause a loop call.
-            $select.selectedIndex = 0;
-            $zh.style.display = "block";
-            $en.style.display = "none";
-        }
+    } else {
+        // not trigger onChange, otherwise cause a loop call.
+        $select.selectedIndex = 0;
+        $zh.style.display = "block";
+        $en.style.display = "none";
     }
+}
 
-    // handle select change
-    function onLanChange(index){
-        if(index == 0){
-            window.location.hash = "#zh"
-        }else{
-            window.location.hash = "#en"
-        }
+// handle select change
+function onLanChange(index) {
+    if (index == 0) {
+        window.location.hash = "#zh"
+    } else {
+        window.location.hash = "#en"
     }
+}
 
-    // init
-    _render();
+// init
+_render();
 </script>
 
 
@@ -96,22 +144,26 @@ header-img: "img/post-bg-rwd.webp"
 <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
 
 <div id="gitalk-container"></div>
-    <script type="text/javascript">
-    var gitalk = new Gitalk({
+<script type="text/javascript">
+var gitalk = new Gitalk({
     clientID: '{{site.gitalk.clientID}}',
     clientSecret: '{{site.gitalk.clientSecret}}',
     repo: '{{site.gitalk.repo}}',
     owner: '{{site.gitalk.owner}}',
     admin: ['{{site.gitalk.admin}}'],
-    distractionFreeMode: {{site.gitalk.distractionFreeMode}},
+    distractionFreeMode: {
+        {
+            site.gitalk.distractionFreeMode
+        }
+    },
     id: 'about',
-    });
-    gitalk.render('gitalk-container');
+});
+gitalk.render('gitalk-container');
 </script>
 {% endif %}
 <!-- Gitalk end -->
 
- <!-- disqus 评论框 start  -->
+<!-- disqus 评论框 start  -->
 {% if site.disqus.enable %}
 
 <div class="comment">
@@ -122,17 +174,18 @@ header-img: "img/post-bg-rwd.webp"
 
 <!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "{{site.disqus.username}}";
-    var disqus_identifier = "{{site.disqus.username}}/{{page.url}}";
-    var disqus_url = "{{site.url}}{{page.url}}";
+/* * * CONFIGURATION VARIABLES * * */
+var disqus_shortname = "{{site.disqus.username}}";
+var disqus_identifier = "{{site.disqus.username}}/{{page.url}}";
+var disqus_url = "{{site.url}}{{page.url}}";
 
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
+(function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
 </script>
 <!-- disqus 公共JS代码 end -->
 {% endif %}
-
