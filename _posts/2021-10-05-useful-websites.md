@@ -1,21 +1,25 @@
 ---
-layout:     post   				        # 使用的布局（不需要改）
-title:      实用网站分享（持续更新） 					# 标题 
-subtitle:   （基本也是其他朋友给的）		# 副标题
-date:       2021-10-05 				    # 时间
-author:     WYX 					    # 作者
-header-img: img/post-bg-hacker.jpg	 	# 这篇文章的标题背景图片
-catalog: true 						    # 是否归档
-tags:								    # 标签
+layout:     post                           # 使用的布局（不需要改）
+title:      实用网站分享（持续更新）                     # 标题 
+subtitle:   （基本也是其他朋友给的）        # 副标题
+date:       2021-10-05                     # 时间
+author:     WYX                         # 作者
+header-img: img/post-bg-hacker.jpg         # 这篇文章的标题背景图片
+catalog: true                             # 是否归档
+tags:                                    # 标签
     - 施工中
     - 网站分享
 ---
 
 ## 实用网站分享（施工中，后续会不断更新）
 
-
-
 ### 编程学习
+
+- [胖头龙的咸鱼刷题笔记-算法篇](https://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=678970)
+
+- [代码随想录](https://programmercarl.com/)
+
+- [Interview Warmup - Grow with Google](https://grow.google/certificates/interview-warmup/)
 
 - [html 转换成 markdown 格式](https://www.helloworld.net/html2md)
 
@@ -40,7 +44,7 @@ tags:								    # 标签
 - [一个 Linux 发行版——YunoHost](https://yunohost.org/en/apps?q=%2Fapps)
 
 - [彻底搞懂如何使用 Hexo \+ GitHubPages 搭建个人博客](https://juejin.cn/post/6844904131266609165)
-
+  
   （注：我这个博客用的是 Jekyll，但是没本地预览功能，所以觉得 Hexo 更好）
 
 - [C# 文档 - 入门/教程/参考](https://docs.microsoft.com/zh-cn/dotnet/csharp/)
@@ -48,7 +52,7 @@ tags:								    # 标签
 - [清华大学开源软件镜像站\_Tsinghua Open Source Mirror](https://mirrors.tuna.tsinghua.edu.cn/) 
 
 - [谷歌编程之夏 GSoC](https://summerofcode.withgoogle.com/) （注：大致日程是每年 <u>4月份</u> 报名，需要 <u>6月到8月</u> 有**完整的三个月时间**参加，有兴趣又有闲的同学可以看看这类项目）
-
+  
   [cplusplus.com - The C++ Resources Network](http://www.cplusplus.com/)
 
 - [OI Wiki (oi-wiki.org)](https://oi-wiki.org/)
@@ -77,8 +81,6 @@ tags:								    # 标签
 
 - [北京交通大学 CITEL (bjtu.edu.cn)](https://citel.bjtu.edu.cn/)
 
-  
-
 ### 糊弄报告
 
 （这里有几个已经要钱了……）
@@ -97,10 +99,9 @@ tags:								    # 标签
 
 - [秘塔写作猫 (xiezuocat.com)](https://xiezuocat.com/#/) （感谢 ZX 提供）
 
-  
-
-
 ### 生活
+
+- [interactive-self-care-guide](https://philome.la/jace_harr/you-feel-like-shit-an-interactive-self-care-guide/play/index.html)
 
 - [在线剪贴板](https://bin.outv.im/)
 
@@ -121,12 +122,10 @@ tags:								    # 标签
 - [QPR四步自杀预防](https://weibo.com/ttarticle/x/m/show/id/2309404285239156452369?_wb_client_=1) （希望大家都用不上，但希望大家都存一份）
 
 - [Everything\_文件查找工具](https://voidtools.com/zh-cn/) （也是 ZX 推荐的）
-
+  
   - [Everything 拼音首字母拓展](https://github.com/Chaoses-Ib/IbEverythingExt)
 
 - [如何自制猫食](https://zh.wikihow.com/养猫)
-
-  
 
 ### 躺平/摸鱼/玩游戏
 
@@ -143,9 +142,9 @@ tags:								    # 标签
 - [生成损坏文件\_File Destructor 2.0 - Hype Magazine (xnet.se)](http://www.xnet.se/fd/)
 
 - 分屏插件（把视频变成画中画）
-
+  
   [Edge用户请点击](https://microsoftedge.microsoft.com/addons/detail/pip-picture-in-picture-/gokdpnhaggoioddclnnlpjfnkdinjjcc)   
-
+  
   [chrome用户请点击](https://chrome.google.com/webstore/detail/cbgkkbaghihhnaeabfcmmglhnfkfnpon)
 
 - [游戏列表 在线 DOS 游戏 (zczc.cz)](https://dos.zczc.cz/games/)
@@ -156,10 +155,8 @@ tags:								    # 标签
 
 - [有趣网址之家 - 收藏全球最有趣的网站](https://youquhome.com/) 
 
-  
-
-
 ### 评论区补充更新
+
 3个留学信息、学语言相关的，和一个起名网站：
 
 - <https://easytogermany.com/etg/en/page/display/home/> 前往德国须知
@@ -168,6 +165,3 @@ tags:								    # 标签
 - <https://www.fantasynamegenerators.com/> 给各种各样的人和事物起名的网站
 
 继续欢迎投稿补充！
-
-
-
