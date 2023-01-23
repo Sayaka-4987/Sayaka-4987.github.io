@@ -87,9 +87,6 @@ service-worker: true
 
 # Friends
 friends: [{
-        title: "我的 Gitee 主页",
-        href: "https://gitee.com/yxwang2023"
-    },{
         title: "ZXの花哨小玩意儿",
         href: "http://zxxx.cf/"
     },{
@@ -100,7 +97,7 @@ friends: [{
         href: "https://lilax.top/"
     },{
         title: "一方の笔记本",
-        href: "https://gnafiy.site/"
+        href: "https://gnafiy.github.io/"
     },{
         title: "Aoxin`s Blog",
         href: "http://www.auswitz.top/"
