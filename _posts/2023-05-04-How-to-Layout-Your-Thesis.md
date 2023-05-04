@@ -1,7 +1,7 @@
 ---
 layout:     post                            # 使用的布局（不需要改）
-title:      2分钟速成毕业论文排版Word技巧        # 标题 
-subtitle:   这玩意确实不适合学术写作        # 副标题
+title:      2 分钟速成毕业论文排版 Word 技巧        # 标题 
+subtitle:   Word 这玩意确实不适合学术写作        # 副标题
 date:       2023-05-04                     # 时间
 author:     WYX                         # 作者
 header-img: img/post_bg_accumulation.jpg         # 这篇文章的标题背景图片
