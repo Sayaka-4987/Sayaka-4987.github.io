@@ -74,7 +74,7 @@ tags:                                    # 标签
 
 关于 WinPE 环境，官方文档有比较详细的介绍，请看：[Windows PE (WinPE) 概述](https://learn.microsoft.com/zh-cn/windows-hardware/manufacture/desktop/winpe-intro?view=windows-11)
 
-### 方法 3: 重装系统
+### 方法 4: 重装系统
 
 使用前提：你有其他能开机的 Windows 系统设备，有一个大于 8GB 容量的 U 盘（可用光盘和光驱代替）
 
