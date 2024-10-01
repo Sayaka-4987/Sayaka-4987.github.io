@@ -5,37 +5,32 @@ header-img: img/post-bg-desk.jpg
 email: 19281171@bjtu.edu.cn (Educational)
 description: "wyx 的个人博客"
 keyword: "wyx 的个人博客, BJTU, C++初学者, 当代菜鸡大学生"
-url: "https://Sayaka-4987.github.io"          # your host, for absolute URL
+url: "https://Sayaka-4987.github.io" # your host, for absolute URL
 plugins:
-  - jekyll-sitemap
-baseurl: ""                                   # for example, '/blog' if your blog hosted on 'host/blog'
+    - jekyll-sitemap
+baseurl: "" # for example, '/blog' if your blog hosted on 'host/blog'
 github_repo: "https://github.com/Sayaka-4987/Sayaka-4987.github.io/" # you code repository
 
-
 # Sidebar settings
-sidebar: true                               # whether or not using Sidebar.
-sidebar-about-description: "username = WYX <br>\"唱吧，虽然现在我们如此苦难。\""
-sidebar-avatar: /img/avatar_karen.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
-
+sidebar: true # whether or not using Sidebar.
+sidebar-about-description: 'username = WYX <br>"想一睹奇迹与拂晓。"'
+sidebar-avatar: /img/avatar_cecilia.jpg # use absolute URL, seeing it's used in both `/` and `/about/`
 
 # SNS settings
 RSS: false
 github_username: Sayaka-4987
 
-
 # Build settings
 # from 2016, 'pygments' is unsupported on GitHub Pages. Use 'rouge' for highlighting instead.
 permalink: pretty
 paginate: 10
-exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
-anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
-
+exclude: ["less", "node_modules", "Gruntfile.js", "package.json", "README.md"]
+anchorjs: true # if you want to customize anchor. check out line:181 of `post.html`
 
 # Gems
 # from PR#40, to support local preview for Jekyll 3.0
-gems: 
+gems:
     - jekyll-sitemap
-
 
 # Markdown settings
 # replace redcarpet to kramdown,
@@ -44,71 +39,51 @@ gems:
 highlighter: rouge
 markdown: kramdown
 kramdown:
-  input: GFM                    # use Github Flavored Markdown !important
-  syntax_highlighter: rouge            
-
+    input: GFM # use Github Flavored Markdown !important
+    syntax_highlighter: rouge
 
 # 评论系统
 # Disqus（https://disqus.com/）
 # disqus_username: qiubaiying
 
-
 # Gitalk
 gitalk:
-  enable: true                                               # 是否开启Gitalk评论
-  clientID: 2dc7f04faf1b1ea0a03d                             # 生成的clientID
-  clientSecret: bbe6b336a3ddfb563dd36e034992590171dfb436     # 生成的clientSecret
-  repo: Sayaka-4987.github.io                                # 仓库名称
-  owner: Sayaka-4987                                         # github用户名
-  admin: Sayaka-4987
-  distractionFreeMode: true                                  # 是否启用类似FB的阴影遮罩
-
+    enable: true # 是否开启Gitalk评论
+    clientID: 2dc7f04faf1b1ea0a03d # 生成的clientID
+    clientSecret: bbe6b336a3ddfb563dd36e034992590171dfb436 # 生成的clientSecret
+    repo: Sayaka-4987.github.io # 仓库名称
+    owner: Sayaka-4987 # github用户名
+    admin: Sayaka-4987
+    distractionFreeMode: true # 是否启用类似FB的阴影遮罩
 
 # 统计
 # Analytics settings
 # Baidu Analytics
 # ba_track_id: b50bf2b12b5338a1845e33832976fd68
 
-
 # Google Analytics
 # ga_track_id: 'UA-90855596-1'            # Format: UA-xxxxxx-xx
 # ga_domain: auto               # 默认的是 auto, 这里我是自定义了的域名，你如果没有自己的域名，需要改成auto
 
-
 # Featured Tags
-featured-tags: true                     # 是否使用首页标签
-featured-condition-size: 1              # 相同标签数量大于这个数，才会出现在首页
-
+featured-tags: true # 是否使用首页标签
+featured-condition-size: 1 # 相同标签数量大于这个数，才会出现在首页
 
 # Progressive Web Apps
 chrome-tab-theme-color: "#000000"
 service-worker: true
 
-
 # Friends
-friends: [{
-        title: "ZXの花哨小玩意儿",
-        href: "http://zxxx.cf/"
-    },{
-        title: "ipLee的博客",
-        href: "https://ipchrislee.github.io/"
-    },{
-        title: "不知名仙(xin)女(xin)的博客",
-        href: "https://lilax.top/"
-    },{
-        title: "一方の笔记本",
-        href: "https://gnafiy.github.io/"
-    },{
-        title: "Aoxin Blog",
-        href: "https://www.aooxin.cn/"
-    },{
-        title: "Lucas' Blog",
-        href: "https://zllwhu.github.io/"
-    },{
-        title: "为想放友链的朋友留位",
-        href: "https://www.baidu.com/"
-    },{
-        title: "北京交通大学信息门户(MIS)",
-        href: "https://mis.bjtu.edu.cn/home/"
-    }
-]
+friends:
+    [
+        { title: "ZXの花哨小玩意儿", href: "http://zxxx.cf/" },
+        { title: "ipLee的博客", href: "https://ipchrislee.github.io/" },
+        { title: "不知名仙(xin)女(xin)的博客", href: "https://lilax.top/" },
+        { title: "一方の笔记本", href: "https://gnafiy.github.io/" },
+        { title: "Aoxin Blog", href: "https://www.aooxin.cn/" },
+        { title: "Lucas' Blog", href: "https://zllwhu.github.io/" },
+        {
+            title: "广告位招租",
+            href: "https://mis.bjtu.edu.cn/home/",
+        },
+    ]
