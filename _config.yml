@@ -4,7 +4,7 @@ SEOTitle: Blog by WYX
 header-img: img/post-bg-desk.jpg
 email: 19281171@bjtu.edu.cn (Educational)
 description: "wyx 的个人博客"
-keyword: "wyx 的个人博客, BJTU, C++初学者, 当代菜鸡大学生"
+keyword: "wyx 的个人博客"
 url: "https://Sayaka-4987.github.io" # your host, for absolute URL
 plugins:
     - jekyll-sitemap
@@ -14,7 +14,7 @@ github_repo: "https://github.com/Sayaka-4987/Sayaka-4987.github.io/" # you code 
 # Sidebar settings
 sidebar: true # whether or not using Sidebar.
 sidebar-about-description: 'username = WYX <br>"想一睹奇迹与拂晓。"'
-sidebar-avatar: /img/avatar_cecilia.jpg # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-avatar: /img/avatar_dog_in_fire.png # use absolute URL, seeing it's used in both `/` and `/about/`
 
 # SNS settings
 RSS: false
