@@ -8,7 +8,6 @@ header-img: img/post-bg-mountain-rainer.jpg 	    # 这篇文章的标题背景�
 catalog: true 						    # 是否归档
 tags:								    # 标签
     - 生活
-    - 施工中
 ---
 
 # 西雅图半周年杂谈
