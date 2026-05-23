@@ -13,12 +13,13 @@ github_repo: "https://github.com/Sayaka-4987/Sayaka-4987.github.io/" # you code 
 
 # Sidebar settings
 sidebar: true # whether or not using Sidebar.
-sidebar-about-description: 'username = WYX <br>"想一睹奇迹与拂晓。"'
+sidebar-about-description: 'username = Yuxiao Wang<br>"想一睹奇迹与拂晓。"'
 sidebar-avatar: /img/avatar_dog_in_fire.png # use absolute URL, seeing it's used in both `/` and `/about/`
 
 # SNS settings
 RSS: false
 github_username: Sayaka-4987
+linkedin_username: yuxiao-wang-042460245
 
 # Build settings
 # from 2016, 'pygments' is unsupported on GitHub Pages. Use 'rouge' for highlighting instead.
