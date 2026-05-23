@@ -7,7 +7,7 @@ author:     WYX 					    # 作者
 header-img: img/post-bg-reunion.webp	 	# 这篇文章的标题背景图片
 catalog: true 						    # 是否归档
 tags:								    # 标签
-    - 北交生活
+    - 生活
     - 军训
 ---
 
