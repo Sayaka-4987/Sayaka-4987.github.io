@@ -13,7 +13,7 @@ github_repo: "https://github.com/Sayaka-4987/Sayaka-4987.github.io/" # you code 
 
 # Sidebar settings
 sidebar: true # whether or not using Sidebar.
-sidebar-about-description: 'username = Yuxiao Wang<br><a href="https://www.youtube.com/watch?v=SMrYUa7c3oo">🎶想一睹奇迹与拂晓。</a>'
+sidebar-about-description: 'username = Yuxiao Wang<br><a href="https://www.youtube.com/watch?v=SMrYUa7c3oo">🎶</a> 想一睹奇迹与拂晓。'
 sidebar-avatar: /img/avatar_dog_in_fire.png # use absolute URL, seeing it's used in both `/` and `/about/`
 
 # SNS settings
