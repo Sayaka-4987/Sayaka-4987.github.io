@@ -4,7 +4,7 @@ title:      某个不知道什么时候停更的绿卡申请时间线          #
 subtitle:   如果不是因为 L1-B 签证允许双重倾向，我都不敢发这篇        # 副标题
 date:       2025-01-12 				    # 时间
 author:     WYX 					    # 作者
-header-img: img/post-1280px-Seattle_Downtown_Aerial,_May_2024.jpg 	    # 这篇文章的标题背景图片
+header-img: img/post-1280px-seattle-downtown-aerial-may-2024.jpg 	    # 这篇文章的标题背景图片
 catalog: true 						    # 是否归档
 tags:								    # 标签
     - 生活

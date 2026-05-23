@@ -4,7 +4,7 @@ title:      关于暂时放弃修复博客看图功能的公告 			    # 标题
 subtitle:   愿病魔早日战胜方某人	        # 副标题
 date:       2021-07-17 				    # 时间
 author:     WYX 					    # 作者
-header-img: img/post-bg-BW.jpg	 	    # 这篇文章的标题背景图片
+header-img: img/post-bg-bw.jpg	 	    # 这篇文章的标题背景图片
 catalog: true 						    # 是否归档
 tags:								    # 标签
     - 博客公告
