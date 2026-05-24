@@ -8,5 +8,5 @@
 
 This is my personal blog, through <a href="https://pages.github.com/">GitHub Pages</a> and <a href="http://jekyll.com.cn/">Jekyll</a>. 
 
-Mistakes and suggestions are welcome. 
+I write in my native language, and I really appreciate you using a translator to read this.
 
