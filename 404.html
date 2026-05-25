@@ -20,15 +20,42 @@ permalink: /404.html
 	</div>
 </header>
 
+<style>
+	.error-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		margin: 20px 0 10px;
+	}
+
+	.error-actions .btn {
+		min-width: 112px;
+		padding: 10px 18px;
+		border-radius: 6px;
+		border: 1px solid #3a7bb8;
+		background: #fff;
+		color: #2f6ea8;
+		font-weight: 600;
+		transition: all .2s ease;
+	}
+
+	.error-actions .btn:hover,
+	.error-actions .btn:focus {
+		background: #3a7bb8;
+		color: #fff;
+		border-color: #3a7bb8;
+	}
+</style>
+
 <div class="container" style="padding: 40px 0 30px;">
 	<div class="row">
 		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 			<p>你访问的页面可能已移动、链接失效，或者地址输入有误。可以从下面的入口继续浏览：</p>
-			<p>
-				<a class="btn btn-primary" href="{{ site.baseurl }}/">返回首页</a>
-				<a class="btn btn-default" href="{{ site.baseurl }}/tags/">浏览标签</a>
-				<a class="btn btn-default" href="{{ site.baseurl }}/feed.xml">RSS 订阅</a>
-			</p>
+			<div class="error-actions">
+				<a class="btn" href="{{ site.baseurl }}/">返回首页</a>
+				<a class="btn" href="{{ site.baseurl }}/tags/">浏览标签</a>
+				<a class="btn" href="{{ site.baseurl }}/feed.xml">RSS 订阅</a>
+			</div>
 
 			<hr>
 			<h3>最近文章</h3>
