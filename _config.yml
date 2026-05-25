@@ -49,13 +49,14 @@ kramdown:
 
 # Gitalk
 gitalk:
-    enable: true # 是否开启Gitalk评论
-    clientID: 2dc7f04faf1b1ea0a03d # 生成的clientID
-    clientSecret: bbe6b336a3ddfb563dd36e034992590171dfb436 # 生成的clientSecret
-    repo: Sayaka-4987.github.io # 仓库名称
-    owner: Sayaka-4987 # github用户名
-    admin: Sayaka-4987
-    distractionFreeMode: true # 是否启用类似FB的阴影遮罩
+    enable: false # 已迁移到 Utterances
+
+# Utterances
+utterances:
+    enable: true # 是否开启 Utterances 评论
+    repo: Sayaka-4987/Sayaka-4987.github.io # owner/repo
+    issue_term: pathname # 与页面路径绑定评论
+    theme: github-light
 
 # 统计
 # Analytics settings
