@@ -77,7 +77,7 @@ service-worker: true
 # Friends
 friends: [
     { 
-        title: "鬼焦原蛋白 | Blog", 
+        title: "鬼焦原蛋白 Blog", 
         href: "https://kogachnh2cooh.github.io/" 
     },
     { 
@@ -85,11 +85,11 @@ friends: [
         href: "http://zxxx.cf/" 
     },
     { 
-        title: "ipLee的博客", 
+        title: "ipLee 的博客", 
         href: "https://ipchrislee.github.io/" 
     },
     { 
-        title: "不知名仙(xin)女(xin)的博客", 
+        title: "不知名仙女（欣欣）的博客", 
         href: "https://lilax.top/" 
     },
     { 
@@ -105,7 +105,7 @@ friends: [
         href: "https://zllwhu.github.io/" 
     },
     {
-        title: "广告位招租，多来一些和我交换友情链接的朋友好不好",
+        title: "广告位招租，求交换友情链接！",
         href: "",
     },
 ]
