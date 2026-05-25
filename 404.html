@@ -20,6 +20,26 @@ permalink: /404.html
 	</div>
 </header>
 
-<script>
-	document.body.classList.add('page-fullscreen');
-</script>
+<div class="container" style="padding: 40px 0 30px;">
+	<div class="row">
+		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+			<p>你访问的页面可能已移动、链接失效，或者地址输入有误。可以从下面的入口继续浏览：</p>
+			<p>
+				<a class="btn btn-primary" href="{{ site.baseurl }}/">返回首页</a>
+				<a class="btn btn-default" href="{{ site.baseurl }}/tags/">浏览标签</a>
+				<a class="btn btn-default" href="{{ site.baseurl }}/feed.xml">RSS 订阅</a>
+			</p>
+
+			<hr>
+			<h3>最近文章</h3>
+			<ul class="list-unstyled" style="margin-top: 18px;">
+				{% for post in site.posts limit:6 %}
+				<li style="margin-bottom: 10px;">
+					<a href="{{ post.url | prepend: site.baseurl | replace: '//', '/' }}">{{ post.title }}</a>
+					<small style="color: #999; margin-left: 6px;">{{ post.date | date: "%Y-%m-%d" }}</small>
+				</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+</div>
