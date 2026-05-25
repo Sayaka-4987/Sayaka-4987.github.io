@@ -1,6 +1,6 @@
 ---
 layout:     post                           # 使用的布局（不需要改）
-title:      实用的网站分享 - Part 2                    # 标题 
+title:      实用网站分享 - Part 2                    # 标题 
 subtitle:   过了 5 年这个系列居然出了第二期        # 副标题
 date:       2026-05-25                     # 时间
 author:     WYX                         # 作者
