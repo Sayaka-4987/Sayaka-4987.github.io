@@ -17,7 +17,7 @@ sidebar-about-description: 'username = Yuxiao Wang<br><a href="https://www.youtu
 sidebar-avatar: /img/avatar_dog_in_fire.png # use absolute URL, seeing it's used in both `/` and `/about/`
 
 # SNS settings
-RSS: false
+RSS: true
 github_username: Sayaka-4987
 linkedin_username: yuxiao-wang-042460245
 
