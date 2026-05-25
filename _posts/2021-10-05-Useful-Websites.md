@@ -1,6 +1,6 @@
 ---
 layout:     post                           # 使用的布局（不需要改）
-title:      实用网站分享（持续更新）                     # 标题 
+title:      实用网站分享 - Part 1                     # 标题 
 subtitle:   （基本也是其他朋友给的）        # 副标题
 date:       2021-10-05                     # 时间
 author:     WYX                         # 作者
@@ -10,9 +10,9 @@ tags:                                    # 标签
     - 网站分享
 ---
 
-## 实用网站分享（施工中，后续会不断更新）
+# 实用网站分享 - Part 1
 
-### 编程学习
+## 编程学习
 
 - [胖头龙的咸鱼刷题笔记-算法篇](https://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=678970)
 
@@ -80,7 +80,7 @@ tags:                                    # 标签
 
 - [北京交通大学 CITEL (bjtu.edu.cn)](https://citel.bjtu.edu.cn/)
 
-### 糊弄报告
+## 糊弄报告
 
 （这里有几个已经要钱了……）
 
@@ -98,7 +98,7 @@ tags:                                    # 标签
 
 - [秘塔写作猫 (xiezuocat.com)](https://xiezuocat.com/#/) （感谢 ZX 提供）
 
-### 生活
+## 生活
 
 - [interactive-self-care-guide](https://philome.la/jace_harr/you-feel-like-shit-an-interactive-self-care-guide/play/index.html)
 
@@ -126,7 +126,7 @@ tags:                                    # 标签
 
 - [如何自制猫食](https://zh.wikihow.com/养猫)
 
-### 躺平/摸鱼/玩游戏
+## 躺平/摸鱼/玩游戏
 
 - [影视森林](http://www.549.tv/)
 
@@ -154,7 +154,7 @@ tags:                                    # 标签
 
 - [有趣网址之家 - 收藏全球最有趣的网站](https://youquhome.com/) 
 
-### 评论区补充更新
+## 评论区补充更新
 
 3个留学信息、学语言相关的，和一个起名网站：
 
