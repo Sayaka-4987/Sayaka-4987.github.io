@@ -5,7 +5,7 @@ header-img: img/post-bg-desk.jpg
 email: yuxiaowang2001@gmail.com
 description: "wyx 的个人博客"
 keyword: "wyx 的个人博客"
-url: "https://Sayaka-4987.github.io" # your host, for absolute URL
+url: "https://sayaka-4987.github.io" # your host, for absolute URL
 plugins:
     - jekyll-sitemap
 baseurl: "" # for example, '/blog' if your blog hosted on 'host/blog'
