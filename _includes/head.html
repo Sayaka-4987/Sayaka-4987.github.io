@@ -21,6 +21,11 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
     
+    <!-- 404 Page -->
+    {% if page.permalink == '/404.html' or page.url == '/404.html' %}
+    <meta name="robots" content="noindex,follow">
+    {% endif %}
+    
     <!-- RSS -->
     <link rel="alternate" type="application/rss+xml" title="{{ site.title | xml_escape }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}">
 
