@@ -68,6 +68,17 @@
         }
     })
 
+    $toggle.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            if ($navbar.className.indexOf('in') > 0) {
+                __HuxNav__.close()
+            } else {
+                __HuxNav__.open()
+            }
+        }
+    })
+
     /**
      * Since Fastclick is used to delegate 'touchstart' globally
      * to hack 300ms delay in iOS by performing a fake 'click',
@@ -83,5 +94,12 @@
         if(e.target == $toggle) return;
         if(e.target.className == 'icon-bar') return;
         __HuxNav__.close();
+    })
+
+    document.addEventListener('keydown', function(e){
+        if (e.key === 'Escape' && $navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close();
+            $toggle.focus();
+        }
     })
 </script>

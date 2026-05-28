@@ -220,10 +220,22 @@
     generateCatalog(".catalog-body");
 
     // toggle side catalog
-    $(".catalog-toggle").click((function(e){
+    var $catalogToggle = $(".catalog-toggle");
+    $catalogToggle.attr('role', 'button').attr('tabindex', '0').attr('aria-expanded', (!$('.side-catalog').hasClass('fold')).toString());
+
+    $catalogToggle.on('click', function(e){
         e.preventDefault();
-        $('.side-catalog').toggleClass("fold")
-    }))
+        $('.side-catalog').toggleClass("fold");
+        $catalogToggle.attr('aria-expanded', (!$('.side-catalog').hasClass('fold')).toString());
+    });
+
+    $catalogToggle.on('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            $('.side-catalog').toggleClass("fold");
+            $catalogToggle.attr('aria-expanded', (!$('.side-catalog').hasClass('fold')).toString());
+        }
+    });
 
     /*
      * Doc: https://github.com/davist11/jQuery-One-Page-Nav

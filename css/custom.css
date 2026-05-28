@@ -111,3 +111,47 @@
     color: #999;
     margin-left: 6px;
 }
+
+.post-preview-home {
+    padding: 6px 0;
+    transition: transform .18s ease;
+}
+
+.post-preview-home:hover {
+    transform: translateY(-1px);
+}
+
+.post-preview-home .post-content-preview {
+    line-height: 1.75;
+}
+
+.post-meta-home {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.post-meta-home .post-meta-separator {
+    color: #aaa;
+}
+
+.post-meta-home .post-meta-date {
+    letter-spacing: .2px;
+}
+
+.post-divider {
+    margin-top: 16px;
+    margin-bottom: 10px;
+}
+
+@media only screen and (max-width: 767px) {
+    .post-preview-home .post-title {
+        line-height: 1.35;
+    }
+
+    .post-meta-home {
+        gap: 6px;
+        font-size: 14px;
+    }
+}

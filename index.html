@@ -4,7 +4,7 @@ description: "直到火焰把海水全部化为盐"
 ---
 
 {% for post in paginator.posts %}
-<div class="post-preview">
+<div class="post-preview post-preview-home">
     <a href="{{ post.url | prepend: site.baseurl }}">
         <h2 class="post-title">
             {{ post.title }}
@@ -18,11 +18,13 @@ description: "直到火焰把海水全部化为盐"
             {{ post.content | strip_html | truncate:200 }}
         </div>
     </a>
-    <p class="post-meta">
-        Posted by {% if post.author %}{{ post.author }}{% else %}{{ site.title }}{% endif %} on {{ post.date | date: "%B %-d, %Y" }}
+    <p class="post-meta post-meta-home">
+        <span class="post-meta-author">Posted by {% if post.author %}{{ post.author }}{% else %}{{ site.title }}{% endif %}</span>
+        <span class="post-meta-separator" aria-hidden="true">•</span>
+        <time class="post-meta-date" datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%B %-d, %Y" }}</time>
     </p>
 </div>
-<hr>
+<hr class="post-divider">
 {% endfor %}
 
 <!-- Pager -->
