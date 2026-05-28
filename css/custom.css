@@ -61,6 +61,15 @@
     margin-top: -0.1em;
 }
 
+@media all and (max-width: 799px) {
+    .anchorjs-link {
+        position: static;
+        left: auto;
+        font-size: 1em;
+        margin-top: 0;
+    }
+}
+
 .error-actions {
     display: flex;
     flex-wrap: wrap;
