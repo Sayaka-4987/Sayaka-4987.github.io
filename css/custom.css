@@ -114,11 +114,6 @@
 
 .post-preview-home {
     padding: 2px 0;
-    transition: transform .18s ease;
-}
-
-.post-preview-home:hover {
-    transform: translateY(-1px);
 }
 
 .post-preview-home .post-content-preview {
