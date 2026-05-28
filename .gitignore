@@ -33,3 +33,8 @@ Temporary Items
 
 # debug file
 _site
+
+# local Ruby/Jekyll preview config
+Gemfile
+Gemfile.lock
+.bundle/
