@@ -116,6 +116,24 @@
     padding: 2px 0;
 }
 
+a:focus-visible,
+button:focus-visible,
+.catalog-toggle:focus-visible,
+.navbar-toggle:focus-visible {
+    outline: 3px solid #4b7fb8;
+    outline-offset: 2px;
+}
+
+.post-preview > .post-meta,
+.post-meta-home,
+.error-post-date {
+    color: #6f6f6f;
+}
+
+.post-content-preview {
+    color: #7a7a7a;
+}
+
 .post-preview-home .post-content-preview {
     line-height: 1.75;
 }
