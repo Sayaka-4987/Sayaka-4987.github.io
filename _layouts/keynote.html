@@ -8,16 +8,6 @@ layout: default
 
 <!-- Post Header -->
 <style type="text/css">
-    header.intro-header{
-        /*background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')*/
-        height: 500px;
-        overflow: hidden;
-    }
-    header iframe{
-        width: 100%;
-        height: 100%;
-        border: 0;
-    }
     /* Override Nav Style */
     {% if page.navcolor == "invert" %}
         .navbar-custom .nav li a,
@@ -28,8 +18,8 @@ layout: default
 
     {% endif %}
 </style>
-<header class="intro-header" >
-    <iframe src="{{page.iframe}}"/>
+<header class="intro-header keynote-header" >
+    <iframe class="keynote-frame" src="{{page.iframe}}"/>
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -66,7 +56,7 @@ layout: default
 
 				{{ content }}
 
-                <hr style="visibility: hidden;">
+                <hr class="hidden-pager-divider">
 
 
                 <ul class="pager">
@@ -206,7 +196,7 @@ layout: default
 </script>
 <!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
 <script>
-    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+    async("https://cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
         anchors.options = {
           visible: 'always',
           placement: 'right',
@@ -217,12 +207,12 @@ layout: default
 </script>
 <style>
     /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
+    @media all and (max-width: 799px) {
+        .anchorjs-link {
+            position: static;
+            left: auto;
+            font-size: 1em;
+            margin-top: 0;
         }
     }
 </style>
