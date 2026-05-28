@@ -7,7 +7,13 @@ layout: default
 <!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
 
 <!-- Post Header -->
-<header class="intro-header has-bg-image with-header-mask" style="--intro-bg-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')" >
+{% assign header_image = page.header-img | default: site.header-img %}
+<header class="intro-header with-header-mask">
+    {% if header_image %}
+    <div class="intro-header-media" aria-hidden="true">
+        <img src="{{ site.baseurl }}/{{ header_image | remove_first: '/' }}" alt="" loading="eager" decoding="async" fetchpriority="high">
+    </div>
+    {% endif %}
     <div class="header-mask" {% if page.header-mask %}style="background: rgba(0,0,0, {{ page.header-mask }});"{% endif %}></div>
     <div class="container">
         <div class="row">
