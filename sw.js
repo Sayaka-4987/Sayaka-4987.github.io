@@ -6,8 +6,8 @@
  * Register service worker.
  * ========================================================== */
 
-const PRECACHE = 'precache-v1';
-const RUNTIME = 'runtime';
+const PRECACHE = 'precache-v2';
+const RUNTIME = 'runtime-v2';
 const SW_DEBUG = false;
 const HOSTNAME_WHITELIST = [
   self.location.hostname,
