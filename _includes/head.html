@@ -29,6 +29,15 @@
     <!-- RSS -->
     <link rel="alternate" type="application/rss+xml" title="{{ site.title | xml_escape }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}">
 
+    {% assign header_image = page.header-img | default: site.header-img %}
+    {% assign should_preload_header = false %}
+    {% if page.layout == 'post' or paginator %}
+        {% assign should_preload_header = true %}
+    {% endif %}
+    {% if header_image and should_preload_header %}
+    <link rel="preload" as="image" href="{{ site.baseurl }}/{{ header_image | remove_first: '/' }}">
+    {% endif %}
+
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="{{ "/css/bootstrap.min.css" | prepend: site.baseurl }}">
 

@@ -1,5 +1,6 @@
 .intro-header.has-bg-image {
     background-image: var(--intro-bg-image);
+    background-color: #1f2833;
 }
 
 .with-header-shadow {
