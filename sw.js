@@ -6,9 +6,8 @@
  * Register service worker.
  * ========================================================== */
 
-const PRECACHE = 'precache-v2';
-const RUNTIME = 'runtime-v2';
-const RUNTIME_IMAGES = 'runtime-images-v1';
+const PRECACHE = 'precache-v1';
+const RUNTIME = 'runtime';
 const SW_DEBUG = false;
 const HOSTNAME_WHITELIST = [
   self.location.hostname,
@@ -67,16 +66,6 @@ const endWithExtension = (req) => Boolean(new URL(req.url).pathname.match(/\.\w+
 // Tracking https://twitter.com/Huxpro/status/798816417097224193
 const shouldRedirect = (req) => (isNavigationReq(req) && new URL(req.url).pathname.substr(-1) !== "/" && !endWithExtension(req))
 
-// Header images are same-origin assets under /img/.
-// Cache-first + background revalidate reduces perceived flash on repeat visits.
-const isHeaderImageReq = (req) => {
-  if (req.method !== 'GET' || req.destination !== 'image') {
-    return false;
-  }
-  const url = new URL(req.url);
-  return url.origin === self.location.origin && url.pathname.startsWith('/img/');
-}
-
 // The Util Function to get redirect URL
 // `${url}/` would mis-add "/" in the end of query, so we use URL object.
 // P.P.S. Always trust url.pathname instead of the whole url string.
@@ -113,16 +102,7 @@ self.addEventListener('install', e => {
  */
 self.addEventListener('activate',  event => {
   swLog('service worker activated.')
-  const currentCaches = [PRECACHE, RUNTIME, RUNTIME_IMAGES];
-  event.waitUntil(
-    caches.keys()
-      .then(cacheNames => Promise.all(
-        cacheNames
-          .filter(cacheName => !currentCaches.includes(cacheName))
-          .map(cacheName => caches.delete(cacheName))
-      ))
-      .then(() => self.clients.claim())
-  );
+  event.waitUntil(self.clients.claim());
 });
 
 
@@ -140,26 +120,6 @@ self.addEventListener('fetch', event => {
 
   // Skip some of cross-origin requests, like those for Google Analytics.
   if (HOSTNAME_WHITELIST.includes(new URL(event.request.url).hostname)) {
-
-    if (isHeaderImageReq(event.request)) {
-      const networkFetch = fetch(event.request)
-        .then(response => {
-          if (response && response.ok) {
-            caches.open(RUNTIME_IMAGES).then(cache => cache.put(event.request, response.clone()));
-          }
-          return response;
-        })
-        .catch(_ => null);
-
-      event.respondWith(
-        caches.match(event.request)
-          .then(cached => cached || networkFetch)
-          .then(resp => resp || caches.match('offline.html'))
-      );
-
-      event.waitUntil(networkFetch);
-      return;
-    }
     
     // Redirect in SW manually fixed github pages 404s on repo?blah 
     if(shouldRedirect(event.request)){
