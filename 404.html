@@ -7,7 +7,7 @@ permalink: /404.html
 
 
 <!-- Page Header -->
-{% assign header_image = page.header-img | default: site.header-img %}
+{% assign header_image = page['header-img'] | default: site['header-img'] %}
 <header class="intro-header">
 	{% if header_image %}
 	<div class="intro-header-media" aria-hidden="true">

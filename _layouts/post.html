@@ -7,7 +7,7 @@ layout: default
 <!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
 
 <!-- Post Header -->
-{% assign header_image = page.header-img | default: site.header-img %}
+{% assign header_image = page['header-img'] | default: site['header-img'] %}
 <header class="intro-header with-header-mask">
     {% if header_image %}
     <div class="intro-header-media" aria-hidden="true">
