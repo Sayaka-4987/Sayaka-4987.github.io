@@ -7,8 +7,8 @@ author:     WYX 					    # 作者
 header-img: img/post-1280px-seattle-downtown-aerial-may-2024.jpg 	    # 这篇文章的标题背景图片
 catalog: true 						    # 是否归档
 tags:								    # 标签
-    - 生活
-    - 施工中
+    - 生活片段
+    - 🚧 施工中
 ---
 
 # 某个不知道什么时候停更的绿卡申请时间线

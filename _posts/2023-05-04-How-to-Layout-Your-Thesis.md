@@ -7,7 +7,7 @@ author:     WYX                         # 作者
 header-img: img/post-bg-coffee.jpeg         # 这篇文章的标题背景图片
 catalog: true                             # 是否归档
 tags:                                    # 标签
-    - 毕业设计准备
+    - 毕业设计
 ---
 
 # 2 分钟速成毕业论文排版 Word 技巧

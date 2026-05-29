@@ -7,8 +7,7 @@ author:     WYX 					    # 作者
 header-img: img/post-bg-hacker.jpg 	    # 这篇文章的标题背景图片
 catalog: true 						    # 是否归档
 tags:								    # 标签
-    - 生活
-    - 随笔
+    - 自言自语
     - 伦理
     - 亲密关系
 
