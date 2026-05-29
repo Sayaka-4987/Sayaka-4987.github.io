@@ -8,6 +8,7 @@ header-img: img/post-bg-paint.jpg	    # 这篇文章的标题背景图片
 catalog: 	true						# 是否归档
 tags:								    # 标签
     - 工具分享
+    - 自言自语
 ---
 
 # 个人向专注辅助工具推荐
