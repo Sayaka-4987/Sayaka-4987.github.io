@@ -4,7 +4,7 @@ title:      知情同意：关于爱的一个伦理盲区               # 标题
 subtitle:   关于亲密关系中的隐瞒与知情权的一些思考    # 副标题
 date:       2026-05-23 				    # 时间
 author:     WYX 					    # 作者
-header-img: img/post-bg-hacker.jpg 	    # 这篇文章的标题背景图片
+header-img: img/post-bg-coffee.jpeg 	    # 这篇文章的标题背景图片
 catalog: true 						    # 是否归档
 tags:								    # 标签
     - 自言自语
