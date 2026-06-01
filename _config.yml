@@ -28,6 +28,7 @@ paginate: 10
 future: true
 exclude: ["less", "node_modules", "Gruntfile.js", "package.json", "README.md"]
 anchorjs: true # if you want to customize anchor. check out line:181 of `post.html`
+reading_speed_chars_per_min: 700 # Speed-reader mode: coffee-fueled ~700 chars/min
 
 # Gems
 # from PR#40, to support local preview for Jekyll 3.0

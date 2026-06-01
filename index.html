@@ -4,6 +4,17 @@ description: "直到火焰把海水全部化为盐"
 ---
 
 {% for post in paginator.posts %}
+{% assign post_text = post.content | strip_html | strip_newlines %}
+{% assign char_count = post_text | size %}
+{% assign reading_speed = site.reading_speed_chars_per_min | default: 700 %}
+{% assign read_minutes = char_count | divided_by: reading_speed %}
+{% assign read_remainder = char_count | modulo: reading_speed %}
+{% if read_remainder > 0 %}
+{% assign read_minutes = read_minutes | plus: 1 %}
+{% endif %}
+{% if read_minutes < 1 %}
+{% assign read_minutes = 1 %}
+{% endif %}
 <div class="post-preview post-preview-home">
     <a href="{{ post.url | prepend: site.baseurl }}">
         <h2 class="post-title">
@@ -22,6 +33,8 @@ description: "直到火焰把海水全部化为盐"
         <span class="post-meta-author">Posted by {% if post.author %}{{ post.author }}{% else %}{{ site.title }}{% endif %}</span>
         <span class="post-meta-separator" aria-hidden="true">•</span>
         <time class="post-meta-date" datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%B %-d, %Y" }}</time>
+        <span class="post-meta-separator" aria-hidden="true">•</span>
+        <span class="post-meta-reading-time">~ {{ read_minutes }} mins</span>
     </p>
 </div>
 <hr class="post-divider">
