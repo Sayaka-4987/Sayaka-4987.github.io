@@ -3,9 +3,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="{{ site.description }}">
+    {% assign seo_title = page.title | default: site.SEOTitle %}
+    {% assign seo_description = page.description | default: page.excerpt | default: site.description | strip_html | strip_newlines | truncate: 160 %}
+    {% assign seo_url = page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url %}
+    {% assign seo_image_raw = page.header-img | default: site.header-img %}
+    {% if seo_image_raw contains 'http://' or seo_image_raw contains 'https://' %}
+    {% assign seo_image = seo_image_raw %}
+    {% else %}
+    {% assign seo_image = seo_image_raw | prepend: '/' | replace: '//', '/' | prepend: site.baseurl | prepend: site.url %}
+    {% endif %}
+
+    <meta name="description" content="{{ seo_description }}">
     <meta name="keywords"  content="{{ site.keyword }}">
     <meta name="theme-color" content="{{ site.chrome-tab-theme-color }}">
+    <meta property="og:site_name" content="{{ site.title }}">
+    <meta property="og:title" content="{{ seo_title }}">
+    <meta property="og:description" content="{{ seo_description }}">
+    <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+    <meta property="og:url" content="{{ seo_url }}">
+    <meta property="og:image" content="{{ seo_image }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ seo_title }}">
+    <meta name="twitter:description" content="{{ seo_description }}">
+    <meta name="twitter:image" content="{{ seo_image }}">
     
     <title>{% if page.title %}{{ page.title }} - {{ site.SEOTitle }}{% else %}{{ site.SEOTitle }}{% endif %}</title>
 
@@ -19,7 +39,7 @@
     <link rel="apple-touch-icon" href="{{ site.baseurl }}/img/apple-touch-icon.png">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+    <link rel="canonical" href="{{ seo_url }}">
     
     <!-- 404 Page -->
     {% if page.permalink == '/404.html' or page.url == '/404.html' %}
