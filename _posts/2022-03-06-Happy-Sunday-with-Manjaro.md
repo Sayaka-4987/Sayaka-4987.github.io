@@ -9,6 +9,7 @@ catalog: true 						    # 是否归档
 tags:								    # 标签
     - 操作系统
     - VMware
+    - Manjaro
 ---
 
 # 折腾一个 manjaro XFCE 操作系统环境
