@@ -4,7 +4,7 @@
     <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% assign seo_title = page.title | default: site.SEOTitle %}
-    {% assign seo_description = page.description | default: page.excerpt | default: site.description | strip_html | strip_newlines | truncate: 160 %}
+    {% assign seo_description = page.description | default: page.subtitle | default: page.excerpt | default: site.description | strip_html | strip_newlines | truncate: 160 %}
     {% assign seo_url = page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url %}
     {% assign seo_image_raw = page.header-img | default: site.header-img %}
     {% if seo_image_raw contains 'http://' or seo_image_raw contains 'https://' %}
