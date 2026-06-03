@@ -13,6 +13,17 @@ layout: default
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-heading" >
+                    {% assign post_text = page.content | strip_html | strip_newlines %}
+                    {% assign char_count = post_text | size %}
+                    {% assign reading_speed = site.reading_speed_chars_per_min | default: 700 %}
+                    {% assign read_minutes = char_count | divided_by: reading_speed %}
+                    {% assign read_remainder = char_count | modulo: reading_speed %}
+                    {% if read_remainder > 0 %}
+                    {% assign read_minutes = read_minutes | plus: 1 %}
+                    {% endif %}
+                    {% if read_minutes < 1 %}
+                    {% assign read_minutes = 1 %}
+                    {% endif %}
                     <div class="tags">
                         {% for tag in page.tags %}
                         <a class="tag" href="{{ site.baseurl }}/tags/#{{ tag }}" title="{{ tag }}">{{ tag }}</a>
@@ -27,6 +38,7 @@ layout: default
                     {% comment %} endif {% endcomment %}
                     <span class="meta">
                         Posted by {% if page.author %}{{ page.author }}{% else %}{{ site.title }}{% endif %} on {{ page.date | date: "%B %-d, %Y" }}
+                        • ~ {{ read_minutes }} mins
                         {% if page['last-modified'] %}, last updated on {{ page['last-modified'] | date: "%B %-d, %Y" }}{% endif %}
                     </span>
                 </div>
