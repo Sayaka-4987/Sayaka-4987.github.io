@@ -3,6 +3,7 @@ layout:     post                         # 使用的布局（不需要改）
 title:      某个不知道什么时候停更的绿卡申请时间线          # 标题 
 subtitle:   如果不是因为 L1-B 签证允许双重倾向，我都不敢发这篇        # 副标题
 date:       2025-01-12 				    # 时间
+last-modified: 2026-06-05               # 最后更新日期（可选）
 author:     WYX 					    # 作者
 header-img: img/post-1280px-seattle-downtown-aerial-may-2024.jpg 	    # 这篇文章的标题背景图片
 catalog: true 						    # 是否归档
@@ -28,3 +29,5 @@ tags:								    # 标签
 2025/07/09 H1-B 抽签抽中，激活方式是 CP 激活
 
 2026/05/19 PERM approve
+
+2026/05/29 I-140 Petition filed
