@@ -2,7 +2,7 @@
 layout:     post                           # 使用的布局（不需要改）
 title:      Reaction《人活着，就是一场悲剧》                    # 标题 
 subtitle:   2021 年，我让早期 AI 给我的大学室友写了一部言情小说，我们笑到了 2026 年        # 副标题
-date:       2026-06-02                  # 时间
+date:       2026-06-05                  # 时间
 author:     WYX                         # 作者
 header-img: img/post-bg-sent-to-prison.jpg         # 这篇文章的标题背景图片
 catalog: true                             # 是否归档
