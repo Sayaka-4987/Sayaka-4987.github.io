@@ -24,19 +24,50 @@ header-img: "img/tag-bg.jpg"
 	<div class="row">
 		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <!-- 标签云 -->
-			{% assign sorted_tags = site.tags | sort %}
 			<div id='tag_cloud' class="tags">
-				{% for tag in sorted_tags %}
+				{% for tag in site.tags %}
 				<a href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">{{ tag[0] }}</a>
 				{% endfor %}
 			</div>
 
-			<div class="tag-sort-controls" style="margin: 16px 0 8px;">
-				<button type="button" class="btn btn-default btn-xs tag-sort-btn active" data-sort="count">按文章数</button>
-				<button type="button" class="btn btn-default btn-xs tag-sort-btn" data-sort="alpha">按标签名</button>
+			<div class="tag-sort-controls" style="margin: 16px 0 10px; display: flex; align-items: center; gap: 8px;">
+				<span style="font-size: 13px; color: #666;">排序</span>
+				<button type="button" class="tag-sort-btn active" data-sort="count" aria-label="按文章数排序" title="按文章数">
+					<i class="fa fa-signal" aria-hidden="true"></i>
+				</button>
+				<button type="button" class="tag-sort-btn" data-sort="alpha" aria-label="按标签名字母排序" title="按标签名">
+					<i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+				</button>
 			</div>
 
+			<style>
+				.tag-sort-btn {
+					width: 30px;
+					height: 30px;
+					border-radius: 999px;
+					border: 1px solid #d7d7d7;
+					background: #fff;
+					color: #777;
+					padding: 0;
+					line-height: 30px;
+					text-align: center;
+					transition: all .2s ease;
+				}
+
+				.tag-sort-btn:hover {
+					border-color: #5e5e5e;
+					color: #333;
+				}
+
+				.tag-sort-btn.active {
+					border-color: #333;
+					background: #333;
+					color: #fff;
+				}
+			</style>
+
             <!-- 标签列表 -->
+			{% assign sorted_tags = site.tags | sort %}
 			<div id="tag_list_container">
 			{% for tag in sorted_tags %}
 			<div class="one-tag-list" data-tag-name="{{ tag[0] | downcase }}" data-tag-label="{{ tag[0] }}" data-tag-count="{{ tag[1].size }}">
@@ -75,32 +106,14 @@ header-img: "img/tag-bg.jpg"
 <script>
 document.addEventListener('DOMContentLoaded', function () {
 	var listContainer = document.getElementById('tag_list_container');
-	var cloud = document.getElementById('tag_cloud');
 	var sortButtons = Array.prototype.slice.call(document.querySelectorAll('.tag-sort-btn'));
 
-	if (!listContainer || !cloud || sortButtons.length === 0) {
+	if (!listContainer || sortButtons.length === 0) {
 		return;
 	}
 
 	var getSections = function () {
 		return Array.prototype.slice.call(listContainer.querySelectorAll('.one-tag-list'));
-	};
-
-	var reorderCloud = function (sections) {
-		var links = Array.prototype.slice.call(cloud.querySelectorAll('a'));
-		var linkByLabel = {};
-
-		links.forEach(function (link) {
-			linkByLabel[link.getAttribute('title')] = link;
-		});
-
-		sections.forEach(function (section) {
-			var label = section.getAttribute('data-tag-label');
-			var link = linkByLabel[label];
-			if (link) {
-				cloud.appendChild(link);
-			}
-		});
 	};
 
 	var sortSections = function (mode) {
@@ -123,8 +136,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		sections.forEach(function (section) {
 			listContainer.appendChild(section);
 		});
-
-		reorderCloud(sections);
 	};
 
 	sortButtons.forEach(function (btn) {
