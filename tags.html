@@ -36,8 +36,7 @@ header-img: "img/tag-bg.jpg"
 			  	<span class="fa fa-tag listing-seperator" id="{{ tag[0] }}">
                     <span class="tag-text">{{ tag[0] }}</span>
                 </span>
-				{% assign sorted_posts = site.posts | sort: 'date' | reverse %}
-				{% for post in sorted_posts %}
+				{% for post in site.posts %}
 				{% if post.tags contains tag[0] %}
 				  <!-- <li class="listing-item">
 				  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
