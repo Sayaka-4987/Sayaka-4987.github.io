@@ -30,8 +30,7 @@ header-img: "img/tag-bg.jpg"
 				{% endfor %}
 			</div>
 
-			<div class="tag-sort-controls" style="margin: 16px 0 10px; display: flex; align-items: center; gap: 8px;">
-				<span style="font-size: 13px; color: #666;">排序</span>
+			<div class="tag-sort-controls" style="margin: 12px 0 10px; display: flex; justify-content: flex-end; align-items: center; gap: 8px;">
 				<button type="button" class="tag-sort-btn active" data-sort="count" aria-label="按文章数排序" title="按文章数">
 					<i class="fa fa-signal" aria-hidden="true"></i>
 				</button>
@@ -48,6 +47,7 @@ header-img: "img/tag-bg.jpg"
 					border: 1px solid #d7d7d7;
 					background: #fff;
 					color: #777;
+					opacity: .72;
 					padding: 0;
 					line-height: 30px;
 					text-align: center;
@@ -57,12 +57,14 @@ header-img: "img/tag-bg.jpg"
 				.tag-sort-btn:hover {
 					border-color: #5e5e5e;
 					color: #333;
+					opacity: 1;
 				}
 
 				.tag-sort-btn.active {
 					border-color: #333;
 					background: #333;
 					color: #fff;
+					opacity: 1;
 				}
 			</style>
 
