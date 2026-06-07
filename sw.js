@@ -6,8 +6,8 @@
  * Register service worker.
  * ========================================================== */
 
-const PRECACHE = 'precache-v2';
-const RUNTIME = 'runtime-v2';
+const PRECACHE = 'precache-v3';
+const RUNTIME = 'runtime-v3';
 const SW_DEBUG = false;
 const HOSTNAME_WHITELIST = [
   self.location.hostname,
@@ -102,7 +102,15 @@ self.addEventListener('install', e => {
  */
 self.addEventListener('activate',  event => {
   swLog('service worker activated.')
-  event.waitUntil(self.clients.claim());
+  event.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames
+          .filter(name => name !== PRECACHE && name !== RUNTIME)
+          .map(name => caches.delete(name))
+      )
+    }).then(() => self.clients.claim())
+  );
 });
 
 
@@ -130,7 +138,7 @@ self.addEventListener('fetch', event => {
     // Stale-while-revalidate 
     // similar to HTTP's stale-while-revalidate: https://www.mnot.net/blog/2007/12/12/stale
     // Upgrade from Jake's to Surma's: https://gist.github.com/surma/eb441223daaedf880801ad80006389f1
-    const cached = caches.match(event.request);
+    const cached = caches.open(RUNTIME).then(cache => cache.match(event.request));
     const fixedUrl = getFixedUrl(event.request);
     const fetched = fetch(fixedUrl, {cache: "no-store"});
     const fetchedCopy = fetched.then(resp => resp.clone());

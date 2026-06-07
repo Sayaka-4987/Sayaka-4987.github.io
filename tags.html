@@ -24,20 +24,27 @@ header-img: "img/tag-bg.jpg"
 	<div class="row">
 		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <!-- 标签云 -->
+			{% assign sorted_tags = site.tags | sort %}
 			<div id='tag_cloud' class="tags">
-				{% for tag in site.tags %}
+				{% for tag in sorted_tags %}
 				<a href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">{{ tag[0] }}</a>
 				{% endfor %}
 			</div>
 
+			<div class="tag-sort-controls" style="margin: 16px 0 8px;">
+				<button type="button" class="btn btn-default btn-xs tag-sort-btn active" data-sort="count">按文章数</button>
+				<button type="button" class="btn btn-default btn-xs tag-sort-btn" data-sort="alpha">按标签名</button>
+			</div>
+
             <!-- 标签列表 -->
-			{% for tag in site.tags %}
-			<div class="one-tag-list">
+			<div id="tag_list_container">
+			{% for tag in sorted_tags %}
+			<div class="one-tag-list" data-tag-name="{{ tag[0] | downcase }}" data-tag-label="{{ tag[0] }}" data-tag-count="{{ tag[1].size }}">
 			  	<span class="fa fa-tag listing-seperator" id="{{ tag[0] }}">
                     <span class="tag-text">{{ tag[0] }}</span>
                 </span>
-				{% for post in site.posts %}
-				{% if post.tags contains tag[0] %}
+				{% assign posts_in_tag = tag[1] | sort: 'date' | reverse %}
+				{% for post in posts_in_tag %}
 				  <!-- <li class="listing-item">
 				  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
 				  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
@@ -56,11 +63,78 @@ header-img: "img/tag-bg.jpg"
 				    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
 				</div>
 				<hr>
-				{% endif %}
 				{% endfor %}
 			</div>
 			{% endfor %}
+			</div>
 
 		</div>
 	</div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+	var listContainer = document.getElementById('tag_list_container');
+	var cloud = document.getElementById('tag_cloud');
+	var sortButtons = Array.prototype.slice.call(document.querySelectorAll('.tag-sort-btn'));
+
+	if (!listContainer || !cloud || sortButtons.length === 0) {
+		return;
+	}
+
+	var getSections = function () {
+		return Array.prototype.slice.call(listContainer.querySelectorAll('.one-tag-list'));
+	};
+
+	var reorderCloud = function (sections) {
+		var links = Array.prototype.slice.call(cloud.querySelectorAll('a'));
+		var linkByLabel = {};
+
+		links.forEach(function (link) {
+			linkByLabel[link.getAttribute('title')] = link;
+		});
+
+		sections.forEach(function (section) {
+			var label = section.getAttribute('data-tag-label');
+			var link = linkByLabel[label];
+			if (link) {
+				cloud.appendChild(link);
+			}
+		});
+	};
+
+	var sortSections = function (mode) {
+		var sections = getSections();
+
+		sections.sort(function (a, b) {
+			if (mode === 'count') {
+				var countA = parseInt(a.getAttribute('data-tag-count') || '0', 10);
+				var countB = parseInt(b.getAttribute('data-tag-count') || '0', 10);
+				if (countA !== countB) {
+					return countB - countA;
+				}
+			}
+
+			var nameA = a.getAttribute('data-tag-name') || '';
+			var nameB = b.getAttribute('data-tag-name') || '';
+			return nameA.localeCompare(nameB, 'zh-Hans-CN');
+		});
+
+		sections.forEach(function (section) {
+			listContainer.appendChild(section);
+		});
+
+		reorderCloud(sections);
+	};
+
+	sortButtons.forEach(function (btn) {
+		btn.addEventListener('click', function () {
+			sortButtons.forEach(function (item) { item.classList.remove('active'); });
+			btn.classList.add('active');
+			sortSections(btn.getAttribute('data-sort'));
+		});
+	});
+
+	sortSections('count');
+});
+</script>
