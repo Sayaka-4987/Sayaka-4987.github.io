@@ -1,7 +1,7 @@
 # Site settings
 # My friend said this word refers to the kind of thoughts you have
 # when you've had too much to drink, so I decided to use it.
-title: Schnap5idee 
+title: Schnap5idee
 SEOTitle: Blog by WYX
 header-img: img/post-bg-desk.jpg
 email: yuxiaowang2001@gmail.com
@@ -9,7 +9,7 @@ description: "wyx 的个人博客"
 keyword: Blog, Seattle, Beijing, AI, Machine Learning
 url: "https://sayaka-4987.github.io" # your host, for absolute URL
 plugins:
-    - jekyll-sitemap
+  - jekyll-sitemap
 baseurl: "" # for example, '/blog' if your blog hosted on 'host/blog'
 github_repo: "https://github.com/Sayaka-4987/Sayaka-4987.github.io/" # you code repository
 
@@ -28,14 +28,14 @@ linkedin_username: yuxiao-wang-042460245
 permalink: pretty
 paginate: 10
 future: true
-exclude: ["less", "node_modules", "Gruntfile.js", "package.json", "README.md"]
+exclude: [ "less", "node_modules", "Gruntfile.js", "package.json", "README.md" ]
 anchorjs: true # if you want to customize anchor. check out line:181 of `post.html`
 reading_speed_chars_per_min: 700 # Speed-reader mode: coffee-fueled ~700 chars/min
 
 # Gems
 # from PR#40, to support local preview for Jekyll 3.0
 gems:
-    - jekyll-sitemap
+  - jekyll-sitemap
 
 # Markdown settings
 # replace redcarpet to kramdown,
@@ -52,57 +52,24 @@ kramdown:
 
 # Utterances
 utterances:
-    enable: true # 是否开启 Utterances 评论
+  enable: true # Enable Utterances comments
     repo: Sayaka-4987/Sayaka-4987.github.io # owner/repo
-    issue_term: pathname # 与页面路径绑定评论
+  issue_term: pathname # Bind comments to page path
     theme: github-light
 
 # Analytics settings
 # Google Analytics
 ga_measurement_id: 'G-ZNKBRMX6BJ' # GA4 Measurement ID, format: G-XXXXXXXXXX
 # ga_track_id: 'UA-90855596-1'            # Format: UA-xxxxxx-xx
-# ga_domain: auto               # 默认的是 auto, 这里我是自定义了的域名，你如果没有自己的域名，需要改成auto
+# ga_domain: auto               # Default is auto. I use a custom domain here; if you don't have one, keep this as auto.
 
 # Featured Tags
-featured-tags: true # 是否使用首页标签
-featured-condition-size: 1 # 相同标签数量大于这个数，才会出现在首页
+featured-tags: true # Enable homepage featured tags
+featured-condition-size: 1 # A tag appears on homepage only if its count exceeds this value
 
 # Progressive Web Apps
 chrome-tab-theme-color: "#000000"
 service-worker: true
 
 # Friends
-friends: [
-    { 
-        title: "鬼焦原蛋白 Blog", 
-        href: "https://kogachnh2cooh.github.io/" 
-    },
-    { 
-        title: "ZXの花哨小玩意儿", 
-        href: "http://zxxx.cf/" 
-    },
-    { 
-        title: "ipLee 的博客", 
-        href: "https://ipchrislee.github.io/" 
-    },
-    { 
-        title: "不知名仙女（欣欣）的博客", 
-        href: "https://lilax.top/" 
-    },
-    { 
-        title: "一方の笔记本", 
-        href: "https://gnafiy.github.io/" 
-    },
-    { 
-        title: "Aoxin Blog", 
-        href: "https://www.aooxin.cn/" 
-    },
-    { 
-        title: "Lucas' Blog", 
-        href: "https://zllwhu.github.io/" 
-    },
-    {
-        title: "广告位招租，求交换友情链接！",
-        href: "",
-    },
-]
+friends: [ { title: "鬼焦原蛋白 Blog", href: "https://kogachnh2cooh.github.io/" }, { title: "ZXの花哨小玩意儿", href: "http://zxxx.cf/" }, { title: "ipLee 的博客", href: "https://ipchrislee.github.io/" }, { title: "不知名仙女（欣欣）的博客", href: "https://lilax.top/" }, { title: "一方の笔记本", href: "https://gnafiy.github.io/" }, { title: "Aoxin Blog", href: "https://www.aooxin.cn/" }, { title: "Lucas' Blog", href: "https://zllwhu.github.io/" }, { title: "广告位招租，求交换友情链接！", href: "" } ]
