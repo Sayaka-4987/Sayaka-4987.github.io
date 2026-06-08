@@ -1,10 +1,12 @@
 # Site settings
-title: Schnap5idee
+# My friend said this word refers to the kind of thoughts you have
+# when you've had too much to drink, so I decided to use it.
+title: Schnap5idee 
 SEOTitle: Blog by WYX
 header-img: img/post-bg-desk.jpg
 email: yuxiaowang2001@gmail.com
 description: "wyx 的个人博客"
-keyword: "wyx 的个人博客"
+keyword: Blog, Seattle, Beijing, AI, Machine Learning
 url: "https://sayaka-4987.github.io" # your host, for absolute URL
 plugins:
     - jekyll-sitemap
@@ -13,7 +15,7 @@ github_repo: "https://github.com/Sayaka-4987/Sayaka-4987.github.io/" # you code 
 
 # Sidebar settings
 sidebar: true # whether or not using Sidebar.
-sidebar-about-description: 'username = Yuxiao Wang<br><a href="https://www.youtube.com/watch?v=SMrYUa7c3oo">🎶</a> 想一睹奇迹与拂晓。'
+sidebar-about-description: 'username = Yuxiao Wang<br>pronouns = ["she", "her"]<br>A software engineer in Greater Seattle Area.<br><a href="https://www.youtube.com/watch?v=SMrYUa7c3oo">🎶</a> “想一睹奇迹与拂晓。”'
 sidebar-avatar: /img/avatar_dog_in_fire.png # use absolute URL, seeing it's used in both `/` and `/about/`
 
 # SNS settings
