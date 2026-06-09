@@ -53,9 +53,9 @@ kramdown:
 # Utterances
 utterances:
   enable: true # Enable Utterances comments
-    repo: Sayaka-4987/Sayaka-4987.github.io # owner/repo
+  repo: Sayaka-4987/Sayaka-4987.github.io # owner/repo
   issue_term: pathname # Bind comments to page path
-    theme: github-light
+  theme: github-light
 
 # Analytics settings
 # Google Analytics
