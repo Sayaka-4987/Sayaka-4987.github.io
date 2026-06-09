@@ -9,7 +9,7 @@ description: "wyx 的个人博客"
 keyword: Blog, Seattle, Beijing, AI, Machine Learning
 url: "https://sayaka-4987.github.io" # your host, for absolute URL
 plugins:
-  - jekyll-sitemap
+- jekyll-sitemap
 baseurl: "" # for example, '/blog' if your blog hosted on 'host/blog'
 github_repo: "https://github.com/Sayaka-4987/Sayaka-4987.github.io/" # you code repository
 
@@ -35,7 +35,7 @@ reading_speed_chars_per_min: 700 # Speed-reader mode: coffee-fueled ~700 chars/m
 # Gems
 # from PR#40, to support local preview for Jekyll 3.0
 gems:
-  - jekyll-sitemap
+- jekyll-sitemap
 
 # Markdown settings
 # replace redcarpet to kramdown,
@@ -44,8 +44,8 @@ gems:
 highlighter: rouge
 markdown: kramdown
 kramdown:
-    input: GFM # use Github Flavored Markdown !important
-    syntax_highlighter: rouge
+  input: GFM # use Github Flavored Markdown !important
+  syntax_highlighter: rouge
 
 # Disqus（https://disqus.com/）
 # disqus_username: Sayaka-4987
