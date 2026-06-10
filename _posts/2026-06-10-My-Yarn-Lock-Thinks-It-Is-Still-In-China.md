@@ -86,7 +86,7 @@ Run npm install --legacy-peer-deps
 
 当然，这只是第一层。
 
-后面还有 Node 18 终止服务导致的证书链失效，postcss 与 Node 20 的 exports 兼容性问题，一个不知何时丢失的 index.html、以及经典的 ERR_OSSL_EVP_UNSUPPORTED。
+后面还有 Node 18 终止服务导致的证书链失效，OpenSSL 和依赖链，postcss 与 Node 20 的 exports 兼容性问题，一个不知何时丢失的 index.html、以及经典的 ERR_OSSL_EVP_UNSUPPORTED。
 
 但是那些至少是常规版本升级的必经之路，而“镜像已死，但 lockfile 不知道”这种问题，喜剧效果更佳。
 
@@ -96,8 +96,8 @@ Run npm install --legacy-peer-deps
 
 | 时期       | 镜像                    | 状态     |
 | ---------- | ----------------------- | -------- |
-| ~2014–2021 | registry.npm.taobao.org | 已迁移   |
-| 2018–2024  | registry.nlark.com      | 已停服   |
+| 大约 2014–2021 | registry.npm.taobao.org | 已迁移   |
+| 大约 2018–2024  | registry.nlark.com      | 已停服   |
 | 2021–now   | registry.npmmirror.com  | 现行主流 |
 
 顺带提醒一下，如果你的项目里也有指向前两个域名的 lockfile，现在就应该更新，不要等到 CI 卡一个小时才想起来。快速排查命令：
@@ -120,7 +120,7 @@ cat .yarnrc 2>/dev/null
 
 ## 6. 更深一层的教训
 
-这个 bug 本身不复杂，但它涉及了一个容易被忽视的问题：lockfile 是快照，它有地理记忆。 
+这个 bug 本身不复杂，但它涉及了一个容易被忽视的问题：lockfile 是快照，它保存的不仅是时间，还有地理记忆。 
 
 它记录的不只是版本号和依赖关系，还有 resolved URL，也就是“这个包当时是从哪里下载的”，当你更换网络环境（搬家、换国家、换公司、换 CI 平台），lockfile 里的 URL 可能已经指向一个不存在的地方。 
 
