@@ -72,4 +72,4 @@ chrome-tab-theme-color: "#000000"
 service-worker: true
 
 # Friends
-friends: [ { title: "鬼焦原蛋白 Blog", href: "https://kogachnh2cooh.github.io/" }, { title: "ZXの花哨小玩意儿", href: "http://zxxx.cf/" }, { title: "ipLee 的博客", href: "https://ipchrislee.github.io/" }, { title: "不知名仙女（欣欣）的博客", href: "https://lilax.top/" }, { title: "一方の笔记本", href: "https://gnafiy.github.io/" }, { title: "Aoxin Blog", href: "https://www.aooxin.cn/" }, { title: "Lucas' Blog", href: "https://zllwhu.github.io/" }, { title: "广告位招租，求交换友情链接！", href: "" } ]
+friends: [ { title: "鬼焦原蛋白 Blog", href: "https://kogachnh2cooh.github.io/" }, { title: "ZXの花哨小玩意儿", href: "http://zxxx.cf/" }, { title: "ipLee 的博客", href: "https://ipchrislee.github.io/" }, { title: "不知名仙女（欣欣）的博客", href: "https://lilax.top/" }, { title: "一方の笔记本", href: "https://gnafiy.github.io/" }, { title: "Aoxin Blog", href: "https://www.aooxin.cn/" }, { title: "Lucas' Blog", href: "https://zllwhu.github.io/" }, { title: "一步一步", href: "https://liulixiang1988.github.io/" }, { title: "广告位招租，求交换友情链接！", href: "" } ]
