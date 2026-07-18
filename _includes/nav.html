@@ -19,10 +19,19 @@
                     <li>
                         <a href="{{ site.baseurl }}/">Home</a>
                     </li>
+                    <li>
+                        <a href="{{ '/tags.html' | prepend: site.baseurl }}">Tags</a>
+                    </li>
+                    <li>
+                        <a href="{{ '/about.html' | prepend: site.baseurl }}">About</a>
+                    </li>
                     {% for page in site.pages %}{% if page.title %}
+                    {% assign page_url = page.url | downcase %}
+                    {% if page_url != '/about.html' and page_url != '/tags.html' %}
                     <li>
                         <a href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
                     </li>
+                    {% endif %}
                     {% endif %}{% endfor %}
                     <li>
                         <a href="{{ '/Games/' | prepend: site.url }}">Games</a>
